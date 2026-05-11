@@ -59,7 +59,7 @@ const model = {
 			canvas.appendChild( rect )
 
 			// Style and position it
-			rect.setAttribute( 'class', 'rectangle' )
+			rect.setAttribute( 'class', 'rectangle entity' )
 			rect.style.top = shape.y + 'px'
 			rect.style.left = shape.x + 'px'
 			rect.style.width = shape.w + 'px'

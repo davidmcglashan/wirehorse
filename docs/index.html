@@ -9,9 +9,12 @@
 		<script type="text/javascript" src="js/default.js"></script>
 		<script type="text/javascript" src="js/model.js"></script>
 		<script type="text/javascript" src="js/toolbar.js"></script>
+		<script type="text/javascript" src="js/glass.js"></script>
+		<script type="text/javascript" src="js/selection.js"></script>
 	</head>
 	<body>
 		<div id="-canvas"></div>
+		<div id="-glass"></div>
 		<div id="-toolbar">
 			<strong>Wirehorse</strong>
 			<a href="javascript:void(0)" onclick="toolbar.reset()">Reset</a>
@@ -20,6 +23,7 @@
 		</div>
 		<script>
 			model.parse()
+			glass.init()
 		</script>
 	</body>
 </html>

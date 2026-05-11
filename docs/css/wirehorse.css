@@ -12,6 +12,12 @@ body {
 	background-color: #dddddd;
 }
 
+#-glass {
+	position: absolute;
+	inset: 0;
+	border: 1px solid red;
+}
+
 #-toolbar {
 	font-family: "Karla", sans-serif;
 	font-weight: 100;

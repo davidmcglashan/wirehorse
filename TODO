@@ -9,9 +9,12 @@ features
   - rectangles
 
 - UI
-  - shiddy toolbar
-  - reset storage
   - verb/cancel dialogs
+
+- selection
+  - multiselection
+
+- undo!
 
 - shapes
   - rectangle
@@ -34,7 +37,6 @@ features
   - amber
   - orange
 
-- toolbar
 - text parsing e.g. this is *bold*
 - saving
 - loading
