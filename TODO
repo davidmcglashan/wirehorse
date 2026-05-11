@@ -5,6 +5,10 @@ features
   - writer
   - autosave
   
+- resetting needs to do more
+  - scroll offsets
+  - selection.clear()
+
 - keyboard+drag to quickly add
   - rectangles
 
@@ -13,6 +17,8 @@ features
 
 - selection
   - multiselection
+
+- zoom in/out
 
 - undo!
 
