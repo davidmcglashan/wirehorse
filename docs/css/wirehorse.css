@@ -4,6 +4,12 @@ body {
 	font-style: normal;
 }
 
+#-canvas {
+	position: absolute;
+	inset: 0;
+	background-color: #dddddd;
+}
+
 .scribble {
 	font-family: "Redacted Script", cursive;
 	font-weight: 700;
@@ -11,8 +17,11 @@ body {
 }
 
 .rectangle {
-	width: 100px;
-	height: 100px;
-	background-color: #ddd;
-	border: 1px solid #888;
+	position: absolute;
+	border-style: solid;
+	border-width: 10px 10px 10px 10px;
+	border-radius: 10px;
+	border-image: url(../assets/button.svg) 12 12 12 12 round round;
+	display: flex;
+	flex-direction: column;
 }

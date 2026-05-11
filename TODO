@@ -1,5 +1,18 @@
 features
 --------
+- work with localstorage
+  - parser
+  - writer
+  - autosave
+  
+- keyboard+drag to quickly add
+  - rectangles
+
+- UI
+  - shiddy toolbar
+  - reset storage
+  - verb/cancel dialogs
+
 - shapes
   - rectangle
   - horizontal rule
@@ -33,3 +46,5 @@ features
 meta
 ----
 - License information
+  - https://chr15m.github.io/DoodleCSS/
+  - Google fonts
