@@ -1,0 +1,35 @@
+features
+--------
+- shapes
+  - rectangle
+  - horizontal rule
+  - text label
+  - text paragraph
+  - various icons
+  - icon and label
+  - combobox
+  - button
+  - fancy arrows
+
+- colour palette
+  - black
+  - white
+  - 4 greys
+  - blue
+  - red
+  - green
+  - amber
+  - orange
+
+- toolbar
+- text parsing e.g. this is *bold*
+- saving
+- loading
+- selecting
+- dragging
+- resizing
+- export to GIF
+
+meta
+----
+- License information

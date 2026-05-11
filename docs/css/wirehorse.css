@@ -1,0 +1,18 @@
+body {
+	font-family: "Balsamiq Sans", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+}
+
+.scribble {
+	font-family: "Redacted Script", cursive;
+	font-weight: 700;
+	font-style: normal;
+}
+
+.rectangle {
+	width: 100px;
+	height: 100px;
+	background-color: #ddd;
+	border: 1px solid #888;
+}
