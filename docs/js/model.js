@@ -6,21 +6,43 @@ const model = {
 		let current = localStorage['wirehorse.current']
 		if ( current ) {
 			current = JSON.parse( current )
-		} 
-		
-		// Quickly dump a default model into there!
-		else {
-			localStorage['wirehorse.current'] = JSON.stringify( defaultModel )
-			model.parse()
+		} else {
+			model.demo()
 			return
 		}
 
+		// Wipe the canvas
+		let canvas = document.getElementById( '-canvas' )
+		canvas.innerHTML = ''
+		
 		// Do something with the meta, e.g. page title
+		let elem = document.getElementById( '-title' )
+		elem.innerHTML = current.meta.title
 
 		// Iterate the shapes
 		current.shapes.forEach( shape => {
 			model.add[shape.type]( shape )
 		} )
+	},
+
+	/**
+	 * Implement the default or demo wireframe.
+	 */
+	demo: () => {
+		localStorage['wirehorse.current'] = JSON.stringify( defaultModel )
+		model.parse()
+	},
+
+	new: () => {
+		localStorage['wirehorse.current'] = JSON.stringify( 
+			{ 
+				meta: {
+					title: 'New wireframe'
+				},
+				shapes: []
+			}
+		)
+		model.parse()
 	},
 
 	/**

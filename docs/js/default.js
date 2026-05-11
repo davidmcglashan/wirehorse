@@ -29,4 +29,4 @@ const defaultModel = {
 			h: 30
 		}
 	]
-}
+};

@@ -1,13 +1,29 @@
 body {
-	font-family: "Balsamiq Sans", sans-serif;
-	font-weight: 400;
-	font-style: normal;
+	margin: 0;
+	padding: 0;
 }
 
 #-canvas {
+	font-family: "Balsamiq Sans", sans-serif;
+	font-weight: 400;
+	font-style: normal;
 	position: absolute;
 	inset: 0;
 	background-color: #dddddd;
+}
+
+#-toolbar {
+	font-family: "Karla", sans-serif;
+	font-weight: 100;
+	font-style: normal;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	padding: 0.5rem;
+	background-color: rgba(0,0,0,0.2);
+	display: flex;
+	gap: 1rem;
 }
 
 .scribble {
@@ -24,4 +40,9 @@ body {
 	border-image: url(../assets/button.svg) 12 12 12 12 round round;
 	display: flex;
 	flex-direction: column;
+}
+
+.selected {
+	outline-offset: 2px;
+	outline: 2px dotted #36c;
 }
