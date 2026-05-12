@@ -6,7 +6,8 @@ const glass = {
 	drag: {
 		offsetX: 0,
 		offsetY: 0,
-		pressed:false
+		pressed: false,
+		ready: false
 	},
 
 	/**
@@ -30,19 +31,20 @@ const glass = {
 	 * the mouse has been pressed
 	 */
 	mousePressed: ( event ) => {
-		glass.drag.x = event.clientX - glass.drag.offsetX
-		glass.drag.y = event.clientY - glass.drag.offsetY
-		glass.drag.pressed = true
-
-		glass.elem.setAttribute( 'class', 'dragging' )
+		if ( glass.drag.ready ) {
+			glass.drag.x = event.clientX - glass.drag.offsetX
+			glass.drag.y = event.clientY - glass.drag.offsetY
+			glass.drag.pressed = true
+		}
 	},
-
+	
 	mouseMoved: ( event ) => {
 		if ( glass.drag.pressed ) {
 			let x = event.clientX - glass.drag.x
 			let y = event.clientY - glass.drag.y
 			glass.canvas.style.transform = `translate(${x}px,${y}px)`
 			glass.drag.moving = true
+			glass.elem.setAttribute( 'class', 'dragging' )
 		}
 	},
 
@@ -83,6 +85,7 @@ const glass = {
 		}
 		if ( event.keyCode === 32 )  {
 			glass.elem.setAttribute( 'class', 'ready' )
+			glass.drag.ready = true
 		}
 	},
 
@@ -92,6 +95,7 @@ const glass = {
 	keyUp: ( event ) => {
 		if ( event.keyCode === 32 )  {
 			glass.elem.setAttribute( 'class', '' )
+			glass.drag.ready = false
 		}
 	}
 };
