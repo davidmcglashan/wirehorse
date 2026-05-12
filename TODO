@@ -21,7 +21,8 @@ features
   - multiselection
   - drag event to draw a <div>, get its bounds, work out what intersects it
 
-- zoom in/out
+- hold command to zoom in/out
+- mousewheel to scroll
 
 - undo!
 

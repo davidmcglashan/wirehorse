@@ -1,7 +1,8 @@
 const glass = {
 	elem: null,
 	canvas: null,
-	
+	scale: 1,
+
 	// Glass is responsible for scroll drags, which we track with this object.
 	drag: {
 		offsetX: 0,
@@ -22,6 +23,7 @@ const glass = {
 		glass.elem.addEventListener( 'mouseup', glass.mouseReleased )
 		glass.elem.addEventListener( 'mousemove', glass.mouseMoved )
 		glass.elem.addEventListener( 'mousedown', glass.mousePressed )
+		glass.elem.addEventListener( 'wheel', glass.scaling )
 
 		// glass can listen to some keyevents
 		document.addEventListener( 'keydown', glass.keyDown )
@@ -29,6 +31,9 @@ const glass = {
 
 		// Pull the scroll-drag offset out of the model's meta
 		if ( model.meta.ox ) {
+			glass.scale = model.meta.sc
+			glass.canvas.style.scale = `${glass.scale}`
+			
 			glass.canvas.style.transform = `translate(${model.meta.ox}px,${model.meta.oy}px)`
 			glass.drag.offsetX = model.meta.ox
 			glass.drag.offsetY = model.meta.oy
@@ -73,7 +78,7 @@ const glass = {
 			if ( glass.drag.type === 1 ) {
 				let dx = event.clientX - glass.drag.x
 				let dy = event.clientY - glass.drag.y
-				glass.canvas.style.transform = `translate(${dx}px,${dy}px)`
+				glass.canvas.style.transform = `translate(${dx}px,${dy}px) `
 				glass.elem.setAttribute( 'class', 'dragging' )
 			} 
 			
@@ -123,6 +128,20 @@ const glass = {
 
 		// Clear the selection if the click wasn't on an entity.
 		selection.clear()
+	},
+
+	/**
+	 * Scales the canvas as the mouse wheel turns
+	 */
+	scaling: ( event ) => {
+		event.preventDefault()
+
+		// Restrict scale
+		glass.scale += event.deltaY * -0.00125
+		glass.scale = Math.min( Math.max( 0.125, glass.scale ), 4)
+
+		// Apply scale transform
+		glass.canvas.style.scale = `${glass.scale}`
 	},
 
 	/**

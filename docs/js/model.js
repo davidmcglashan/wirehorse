@@ -39,9 +39,10 @@ const model = {
 			model.updateFromElem[shape.type]( shape )
 		} )
 
-		// Store the drag offset in the meta.
+		// Store the drag offset and scale in the meta.
 		model.meta.ox = glass.drag.offsetX
 		model.meta.oy = glass.drag.offsetY
+		model.meta.sc = glass.scale
 
 		// Dump all of that into localstorage
 		localStorage['wirehorse.current'] = JSON.stringify( 
