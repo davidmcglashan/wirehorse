@@ -1,4 +1,7 @@
 const model = {
+	meta: null,
+	shapes: null,
+
 	/**
 	 * Load the current model from localstorage
 	 */
@@ -16,13 +19,32 @@ const model = {
 		canvas.innerHTML = ''
 		
 		// Do something with the meta, e.g. page title
+		model.meta = current.meta
 		let elem = document.getElementById( '-title' )
 		elem.innerHTML = current.meta.title
 
 		// Iterate the shapes
+		model.shapes = current.shapes
 		current.shapes.forEach( shape => {
 			model.add[shape.type]( shape )
 		} )
+	},
+
+	/**
+	 * Save the current model into localstorage
+	 */
+	save: () => {
+		// Update the local model from the DOM
+		model.shapes.forEach( shape => {
+			model.updateFromElem[shape.type]( shape )
+		} )
+
+		// Dump all of that into localstorage
+		localStorage['wirehorse.current'] = JSON.stringify( 
+			{ 
+				meta: model.meta, 
+				shapes: model.shapes 
+			} )
 	},
 
 	/**
@@ -56,6 +78,7 @@ const model = {
 			// Put our new rectangle on the canvas
 			let canvas = document.getElementById( '-canvas' )
 			let rect = document.createElement( 'div' )
+			shape.elem = rect
 			canvas.appendChild( rect )
 
 			// Style and position it
@@ -70,6 +93,19 @@ const model = {
 			rect.style.alignItems = shape.halign
 			rect.style.justifyContent = shape.valign
 			rect.innerHTML = `<span>${shape.label}</span>`
+		}
+	},
+
+	/**
+	 * Functions for writing current DOM object state into models
+	 */
+	updateFromElem: {
+		rectangle: ( shape ) => {
+			let elem = shape.elem
+			shape.x = parseInt( elem.style.left, 10 )
+			shape.y = parseInt( elem.style.top, 10 )
+			shape.w = parseInt( elem.style.width, 10 )
+			shape.h = parseInt( elem.style.height, 10 )
 		}
 	}
 };

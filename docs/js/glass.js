@@ -7,7 +7,8 @@ const glass = {
 		offsetX: 0,
 		offsetY: 0,
 		pressed: false,
-		ready: false
+		ready: false,
+		type: 0
 	},
 
 	/**
@@ -28,23 +29,60 @@ const glass = {
 	},
 
 	/**
-	 * the mouse has been pressed
+	 * The mouse has been pressed. This means a click or drag depending
+	 * on what comes next.
 	 */
 	mousePressed: ( event ) => {
+		// If we're ready for a glass drag it means Space is being held and
+		// we should prepare to move the viewport around.
 		if ( glass.drag.ready ) {
 			glass.drag.x = event.clientX - glass.drag.offsetX
 			glass.drag.y = event.clientY - glass.drag.offsetY
 			glass.drag.pressed = true
+			glass.drag.type = 1
+		}
+
+		// If there's a selection we should prepare to move the selected
+		// entities around instead.
+		else if ( selection.yes() ) {
+			let elem = selection.storage[0]
+			if ( elem ) {
+				glass.drag.x = event.x
+				glass.drag.y = event.y
+			}
+			glass.drag.pressed = true
+			glass.drag.type = 2
 		}
 	},
 	
+	/**
+	 * The mouse is moving. If we're dragging something we need to update its position.
+	 */
 	mouseMoved: ( event ) => {
 		if ( glass.drag.pressed ) {
-			let x = event.clientX - glass.drag.x
-			let y = event.clientY - glass.drag.y
-			glass.canvas.style.transform = `translate(${x}px,${y}px)`
 			glass.drag.moving = true
-			glass.elem.setAttribute( 'class', 'dragging' )
+			
+			// If we're scroll dragging then we translate the distance from where we started to where we are now.
+			if ( glass.drag.type === 1 ) {
+				let dx = event.clientX - glass.drag.x
+				let dy = event.clientY - glass.drag.y
+				glass.canvas.style.transform = `translate(${dx}px,${dy}px)`
+				glass.elem.setAttribute( 'class', 'dragging' )
+			} 
+			
+			// If we're moving an element we change its top and left by the amount we've moved 
+			// since the last call.
+			else {
+				let elem = selection.storage[0]
+				if ( elem ) {
+					let dx = event.x - glass.drag.x
+					let dy = event.y - glass.drag.y
+					elem.style.top = `${elem.getBoundingClientRect().y + dy - glass.drag.offsetY}px`
+					elem.style.left = `${elem.getBoundingClientRect().x + dx - glass.drag.offsetX}px`
+					glass.drag.x = event.x
+					glass.drag.y = event.y
+				}
+			}
 		}
 	},
 
@@ -56,11 +94,13 @@ const glass = {
 
 		// If this is a drag then let it finish.
 		if ( glass.drag.moving ) {
-			glass.drag.moving = false
-			glass.drag.offsetX = event.clientX - glass.drag.x
-			glass.drag.offsetY = event.clientY - glass.drag.y
-			glass.elem.setAttribute( 'class', 'ready' )
-			return
+			if ( glass.drag.type === 1 ) {
+				glass.drag.moving = false
+				glass.drag.offsetX = event.clientX - glass.drag.x
+				glass.drag.offsetY = event.clientY - glass.drag.y
+				glass.elem.setAttribute( 'class', 'ready' )				
+				return
+			}
 		}
 
 		// Stop at the first entity and select it

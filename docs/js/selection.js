@@ -24,5 +24,12 @@ const selection = {
 		}
 
 		elem.classList.add( 'selected' )
+	},
+
+	/**
+	 * Returns true if there's an object selection at present.
+	 */
+	yes: () => {
+		return selection.storage.length > 0 
 	}
 };

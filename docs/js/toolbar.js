@@ -9,5 +9,9 @@ const toolbar = {
 		model.new()
 		let canvas = document.getElementById( '-canvas' )
 		canvas.style.transform = null
+	},
+
+	save: () => {
+		model.save()
 	}
 };
