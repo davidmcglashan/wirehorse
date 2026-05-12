@@ -20,6 +20,10 @@ const glass = {
 		glass.elem.addEventListener( 'mouseup', glass.mouseReleased )
 		glass.elem.addEventListener( 'mousemove', glass.mouseMoved )
 		glass.elem.addEventListener( 'mousedown', glass.mousePressed )
+
+		// glass can listen to some keyevents
+		document.addEventListener( 'keydown', glass.keyDown )
+		document.addEventListener( 'keyup', glass.keyUp )
 	},
 
 	/**
@@ -29,6 +33,8 @@ const glass = {
 		glass.drag.x = event.clientX - glass.drag.offsetX
 		glass.drag.y = event.clientY - glass.drag.offsetY
 		glass.drag.pressed = true
+
+		glass.elem.setAttribute( 'class', 'dragging' )
 	},
 
 	mouseMoved: ( event ) => {
@@ -51,6 +57,7 @@ const glass = {
 			glass.drag.moving = false
 			glass.drag.offsetX = event.clientX - glass.drag.x
 			glass.drag.offsetY = event.clientY - glass.drag.y
+			glass.elem.setAttribute( 'class', 'ready' )
 			return
 		}
 
@@ -66,4 +73,25 @@ const glass = {
 		// Clear the selection if the click wasn't on an entity.
 		selection.clear()
 	},
+
+	/**
+	 * 
+	 */
+	keyDown: ( event ) => {
+		if ( event.repeat ) {
+			return
+		}
+		if ( event.keyCode === 32 )  {
+			glass.elem.setAttribute( 'class', 'ready' )
+		}
+	},
+
+	/**
+	 * 
+	 */
+	keyUp: ( event ) => {
+		if ( event.keyCode === 32 )  {
+			glass.elem.setAttribute( 'class', '' )
+		}
+	}
 };

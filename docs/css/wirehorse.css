@@ -18,6 +18,12 @@ body {
 	inset: 0;
 	border: 1px solid red;
 }
+	#-glass.ready {
+		cursor: grab;
+	}
+	#-glass.dragging {
+		cursor: grabbing;
+	}
 
 #-toolbar {
 	font-family: "Karla", sans-serif;
