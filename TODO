@@ -16,7 +16,9 @@ features
   - verb/cancel dialogs
 
 - selection
+  - short drags should behave as clicks for selection
   - multiselection
+  - drag event to draw a <div>, get its bounds, work out what intersects it
 
 - zoom in/out
 

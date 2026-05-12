@@ -14,9 +14,9 @@ const selection = {
 	/**
 	 * Select the supplied elem. Pass in an optional 'true' for multi
 	 */
-	add: ( elem, params = { multiple: false } ) => {	
+	add: ( elem, params = { multi: false } ) => {	
 		// If this isn't a multi-select then clear all existing selection storage
-		if ( !params.multiple ) {
+		if ( !params.multi ) {
 			selection.clear()
 			selection.storage = [ elem ]
 		} else {

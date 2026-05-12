@@ -45,7 +45,7 @@ const glass = {
 	 */
 	mouseReleased: ( event ) => {
 		glass.drag.pressed = false
-		
+
 		// If this is a drag then let it finish.
 		if ( glass.drag.moving ) {
 			glass.drag.moving = false
@@ -58,7 +58,7 @@ const glass = {
 		let elems = document.elementsFromPoint( event.clientX, event.clientY )
 		for ( let elem of elems ) {
 			if ( elem.classList.contains( 'entity' ) ) {
-				selection.add( elem )
+				selection.add( elem, { multi: event.shiftKey } )
 				return
 			}
 		}
