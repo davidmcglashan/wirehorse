@@ -26,6 +26,13 @@ const glass = {
 		// glass can listen to some keyevents
 		document.addEventListener( 'keydown', glass.keyDown )
 		document.addEventListener( 'keyup', glass.keyUp )
+
+		// Pull the scroll-drag offset out of the model's meta
+		if ( model.meta.ox ) {
+			glass.canvas.style.transform = `translate(${model.meta.ox}px,${model.meta.oy}px)`
+			glass.drag.offsetX = model.meta.ox
+			glass.drag.offsetY = model.meta.oy
+		}
 	},
 
 	/**
@@ -98,9 +105,11 @@ const glass = {
 				glass.drag.moving = false
 				glass.drag.offsetX = event.clientX - glass.drag.x
 				glass.drag.offsetY = event.clientY - glass.drag.y
-				glass.elem.setAttribute( 'class', 'ready' )				
-				return
+				glass.elem.setAttribute( 'class', 'ready' )
 			}
+
+			toolbar.save()		
+			return
 		}
 
 		// Stop at the first entity and select it

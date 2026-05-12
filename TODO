@@ -14,6 +14,7 @@ features
 
 - UI
   - verb/cancel dialogs
+  - toolbar/palette for setting things on the right side of page
 
 - selection
   - short drags should behave as clicks for selection
