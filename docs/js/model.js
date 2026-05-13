@@ -39,17 +39,15 @@ const model = {
 		// Do something with the meta, e.g. page title
 		model.updateMeta ( current.mt, { dontSave:true } )
 
-		// Iterate the shapes
+		// Iterate the shapes via elementCreator to put them into the DOM
 		model.sh = current.sh
 		model.sh.forEach( shape => {
-			model.add[shape.ty]( shape )
+			model.elementCreator[shape.ty]( shape )
 		} )
 	},
 
 	/**
-	 * 
-	 * @param {*} key 
-	 * @returns 
+	 * Return the value of a meta item matching key.
 	 */
 	meta: ( key ) => {
 		return model.mt[key]
@@ -133,7 +131,13 @@ const model = {
 	/**
 	 * Functions for adding shapes to the canvas
 	 */
-	add: {
+	elementCreator: {
+		colours: {
+			wh: '#fff',
+			bk: '#000',
+			rd: '#f00'
+		},
+
 		/**
 		 * Adds a rectangle to the canvas
 		 */
@@ -146,14 +150,14 @@ const model = {
 			canvas.appendChild( rect )
 
 			// Style and position it
-			rect.setAttribute( 'class', 'rectangle entity' )
+			rect.setAttribute( 'class', 'rectangle entity border-' + shape.bo )
 			rect.style.top = shape.y + 'px'
 			rect.style.left = shape.x + 'px'
 			rect.style.width = shape.w + 'px'
 			rect.style.height = shape.h + 'px'
 
-			rect.style.backgroundColor = shape.bg
-			rect.style.color = shape.co
+			rect.style.backgroundColor = model.elementCreator.colours[shape.bg]
+			rect.style.color = model.elementCreator.colours[shape.co]
 			rect.style.alignItems = shape.ha
 			rect.style.justifyContent = shape.va
 			rect.innerHTML = `<span>${shape.tx}</span>`
@@ -172,7 +176,7 @@ const model = {
 			rect.style.top = shape.y + 'px'
 			rect.style.left = shape.x + 'px'
 
-			rect.style.color = shape.co
+			rect.style.color = model.elementCreator.colours[shape.co]
 			rect.innerHTML = shape.tx
 		},
 
@@ -191,29 +195,7 @@ const model = {
 			rect.style.width = shape.w + 'px'
 			rect.style.height = shape.h + 'px'
 
-			rect.style.backgroundColor = shape.bg
-			rect.style.color = shape.co
-			rect.innerHTML = `<div class="value">${shape.tx}</div><div class="caret">V</div>`
+			rect.innerHTML = `<div class="value border-bk">${shape.tx}</div><div class="caret">V</div>`
 		}
 	},
-
-	/**
-	 * Functions for writing current DOM object state into models
-	 */
-	xupdateFromElem: {
-		rec: ( shape ) => {
-			let elem = shape.elem
-			shape.x = parseInt( elem.style.left, 10 )
-			shape.y = parseInt( elem.style.top, 10 )
-			shape.w = parseInt( elem.style.width, 10 )
-			shape.h = parseInt( elem.style.height, 10 )
-		},
-		cmb: ( shape ) => { model.updateFromElem.rec( shape ) },
-
-		lbl: ( shape ) => {
-			let elem = shape.elem
-			shape.x = parseInt( elem.style.left, 10 )
-			shape.y = parseInt( elem.style.top, 10 )
-		}
-	}
 };

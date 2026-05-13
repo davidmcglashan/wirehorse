@@ -16,7 +16,6 @@ body {
 #-glass {
 	position: absolute;
 	inset: 0;
-	border: 1px solid red;
 }
 	#-glass.ready {
 		cursor: grab;
@@ -54,13 +53,17 @@ body {
 	border-style: solid;
 	border-width: 10px 10px 10px 10px;
 	border-radius: 10px;
-	border-image: url(../assets/button.svg) 12 12 12 12 round round;
+}
+
+.border-bk {
+	border-image: url(../assets/button.svg) 10 10 10 10 round round;
 }
 
 .combobox {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	background-color: #fff;
 }
 	.combobox .value {
 		width: 100%;

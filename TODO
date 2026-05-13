@@ -4,8 +4,6 @@ bugs
 
 features
 --------
-- update model which in turn updates the UI via listener
-
 - work with localstorage
   - parser
   - writer
@@ -28,10 +26,14 @@ features
   - drag event to draw a <div>, get its bounds, work out what intersects it
 
 - hold command to zoom in/out
-- mousewheel to scroll
+  - mousewheel to scroll
 
 - editors
 - undo!
+
+- alignment functions
+- alignment guides
+- inset guides
 
 - shapes
   - tabs
