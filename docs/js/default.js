@@ -7,6 +7,7 @@ const defaultModel = {
 	},
 	sh: [
 		{
+			id: '0',
 			ty: 'rec',
 			bg: '#f00',
 			co: '#fff',
@@ -19,6 +20,7 @@ const defaultModel = {
 			w: 300,
 			h: 100
 		},{
+			id: '1',
 			ty: 'cmb',
 			bg: '#fff',
 			co: '#000',
@@ -31,6 +33,7 @@ const defaultModel = {
 			w: 200,
 			h: 38
 		},{
+			id: '2',
 			ty: 'lbl',
 			co: '#333',
 			tx: 'My label',

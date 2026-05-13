@@ -112,13 +112,29 @@ const glass = {
 		if ( glass.drag.moving ) {
 			glass.drag.moving = false
 
+			// Scroll drags store the new offset values in the model meta.
 			if ( glass.drag.type === 1 ) {
-				glass.drag.offsetX = event.clientX - glass.drag.x
-				glass.drag.offsetY = event.clientY - glass.drag.y
 				glass.elem.setAttribute( 'class', 'ready' )
+				model.updateMeta( { ox: event.clientX - glass.drag.x, oy: event.clientY - glass.drag.y } )
+			} 
+			
+			// Object drags supply new x,y values for the shapes being moved.
+			else {
+				let elem = selection.storage[0]
+				if ( elem ) {
+					let dx = event.x - glass.drag.x
+					let dy = event.y - glass.drag.y
+					model.updateShape(
+						elem.getAttribute( 'data-id' ),
+						{
+							x: parseInt( elem.getBoundingClientRect().x + dx - glass.drag.offsetX, 10 ),
+							y: parseInt( elem.getBoundingClientRect().y + dy - glass.drag.offsetY, 10 )
+						} 
+					)
+				}
 			}
 
-			model.updateMeta( { ox: glass.drag.offsetX, oy: glass.drag.offsetY } )
+			// All drags return now because they don't invoke a selection.
 			return
 		}
 

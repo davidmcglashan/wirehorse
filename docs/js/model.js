@@ -2,6 +2,7 @@ const model = {
 	mt: {},
 	sh: [],
 	metadataListeners: [],
+	shapeListeners: [],
 
 	/**
 	 * Register a listener for the model's metadata. If any value changes the
@@ -9,6 +10,14 @@ const model = {
 	 */
 	registerMetadataListener: ( func ) => {
 		model.metadataListeners.push( func )
+	},
+	
+	/**
+	 * Register a listener for the model's metadata. If any value changes the
+	 * listener will have its passed in function invoked.
+	 */
+	registerShapeListener: ( func ) => {
+		model.shapeListeners.push( func )
 	},
 
 	/**
@@ -29,8 +38,6 @@ const model = {
 		
 		// Do something with the meta, e.g. page title
 		model.updateMeta ( current.mt, { dontSave:true } )
-		let elem = document.getElementById( '-title' )
-		elem.innerHTML = current.mt.title
 
 		// Iterate the shapes
 		model.sh = current.sh
@@ -55,15 +62,39 @@ const model = {
 		for ( const [key, value] of Object.entries( obj ) ) {
 			model.mt[key] = value
 		}
+		
+		// Fire the listeners
+		for ( listener of model.metadataListeners ) {
+			listener( obj )
+		}
 
 		// Save the model into the localstorage
 		if ( !params.dontSave ) {
 			model.save()
 		}
+	},
+
+	/**
+	 * Update the specified shape with the specified parameters
+	 */
+	updateShape: ( id, params ) => {
+		for ( let shape of model.sh ) {
+			if ( shape.id === id ) {
+				for ( const [key, value] of Object.entries( params ) ) {
+					shape[key] = value
+				}
+				break
+			}
+		}
 
 		// Fire the listeners
-		for ( listener of model.metadataListeners ) {
-			listener( obj )
+		for ( listener of model.shapeListeners ) {
+			listener( id, obj )
+		}
+
+		// Save the model into the localstorage
+		if ( !params.dontSave ) {
+			model.save()
 		}
 	},
 
@@ -71,11 +102,6 @@ const model = {
 	 * Save the current model into localstorage
 	 */
 	save: () => {
-		// Update the local model from the DOM
-		model.sh.forEach( shape => {
-			model.updateFromElem[shape.ty]( shape )
-		} )
-
 		// Dump all of that into localstorage
 		localStorage['wirehorse.current'] = JSON.stringify( 
 			{ 
@@ -115,6 +141,7 @@ const model = {
 			// Put our new rectangle on the canvas
 			let canvas = document.getElementById( '-canvas' )
 			let rect = document.createElement( 'div' )
+			rect.setAttribute( 'data-id', shape.id )
 			shape.elem = rect
 			canvas.appendChild( rect )
 
@@ -136,6 +163,7 @@ const model = {
 			// Put our new label on the canvas
 			let canvas = document.getElementById( '-canvas' )
 			let rect = document.createElement( 'div' )
+			rect.setAttribute( 'data-id', shape.id )
 			shape.elem = rect
 			canvas.appendChild( rect )
 
@@ -152,6 +180,7 @@ const model = {
 			// Put our new combobox on the canvas
 			let canvas = document.getElementById( '-canvas' )
 			let rect = document.createElement( 'div' )
+			rect.setAttribute( 'data-id', shape.id )
 			shape.elem = rect
 			canvas.appendChild( rect )
 
@@ -171,7 +200,7 @@ const model = {
 	/**
 	 * Functions for writing current DOM object state into models
 	 */
-	updateFromElem: {
+	xupdateFromElem: {
 		rec: ( shape ) => {
 			let elem = shape.elem
 			shape.x = parseInt( elem.style.left, 10 )
