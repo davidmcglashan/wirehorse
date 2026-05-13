@@ -31,10 +31,6 @@ const model = {
 			model.demo()
 			return
 		}
-
-		// Wipe the canvas
-		let canvas = document.getElementById( '-canvas' )
-		canvas.innerHTML = ''
 		
 		// Do something with the meta, e.g. page title
 		model.updateMeta ( current.mt, { dontSave:true } )
@@ -42,7 +38,7 @@ const model = {
 		// Iterate the shapes via elementCreator to put them into the DOM
 		model.sh = current.sh
 		model.sh.forEach( shape => {
-			model.elementCreator[shape.ty]( shape )
+			canvas.elementCreator[shape.ty]( shape )
 		} )
 	},
 
@@ -87,7 +83,7 @@ const model = {
 
 		// Fire the listeners
 		for ( listener of model.shapeListeners ) {
-			listener( id, obj )
+			listener( id, params )
 		}
 
 		// Save the model into the localstorage
@@ -126,76 +122,5 @@ const model = {
 			}
 		)
 		model.parse()
-	},
-
-	/**
-	 * Functions for adding shapes to the canvas
-	 */
-	elementCreator: {
-		colours: {
-			wh: '#fff',
-			bk: '#000',
-			rd: '#f00'
-		},
-
-		/**
-		 * Adds a rectangle to the canvas
-		 */
-		rec: ( shape ) => {
-			// Put our new rectangle on the canvas
-			let canvas = document.getElementById( '-canvas' )
-			let rect = document.createElement( 'div' )
-			rect.setAttribute( 'data-id', shape.id )
-			shape.elem = rect
-			canvas.appendChild( rect )
-
-			// Style and position it
-			rect.setAttribute( 'class', 'rectangle entity border-' + shape.bo )
-			rect.style.top = shape.y + 'px'
-			rect.style.left = shape.x + 'px'
-			rect.style.width = shape.w + 'px'
-			rect.style.height = shape.h + 'px'
-
-			rect.style.backgroundColor = model.elementCreator.colours[shape.bg]
-			rect.style.color = model.elementCreator.colours[shape.co]
-			rect.style.alignItems = shape.ha
-			rect.style.justifyContent = shape.va
-			rect.innerHTML = `<span>${shape.tx}</span>`
-		},
-
-		lbl: ( shape ) => {
-			// Put our new label on the canvas
-			let canvas = document.getElementById( '-canvas' )
-			let rect = document.createElement( 'div' )
-			rect.setAttribute( 'data-id', shape.id )
-			shape.elem = rect
-			canvas.appendChild( rect )
-
-			// Style and position it
-			rect.setAttribute( 'class', 'label entity' )
-			rect.style.top = shape.y + 'px'
-			rect.style.left = shape.x + 'px'
-
-			rect.style.color = model.elementCreator.colours[shape.co]
-			rect.innerHTML = shape.tx
-		},
-
-		cmb: ( shape ) => {
-			// Put our new combobox on the canvas
-			let canvas = document.getElementById( '-canvas' )
-			let rect = document.createElement( 'div' )
-			rect.setAttribute( 'data-id', shape.id )
-			shape.elem = rect
-			canvas.appendChild( rect )
-
-			// Style and position it
-			rect.setAttribute( 'class', 'combobox entity' )
-			rect.style.top = shape.y + 'px'
-			rect.style.left = shape.x + 'px'
-			rect.style.width = shape.w + 'px'
-			rect.style.height = shape.h + 'px'
-
-			rect.innerHTML = `<div class="value border-bk">${shape.tx}</div><div class="caret">V</div>`
-		}
 	},
 };

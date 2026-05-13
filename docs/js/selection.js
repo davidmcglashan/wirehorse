@@ -1,6 +1,10 @@
 const selection = {
 	storage: [],
 
+	init: () => {
+		document.addEventListener( 'keydown', selection.keyDown )
+	},
+
 	/**
 	 * Clears any prior selection.
 	 */
@@ -31,5 +35,46 @@ const selection = {
 	 */
 	yes: () => {
 		return selection.storage.length > 0 
+	},
+
+	/**
+	 * Detect keypresses and do things with the current selection.
+	 */
+	keyDown: ( event ) => {
+		if ( event.repeat || selection.storage.length === 0 ) {
+			return
+		}
+
+		// Down arrow means moving the selection downwards ...
+		if ( event.keyCode === 40 )  {
+			for ( let elem of selection.storage ) {
+				let newY = parseInt( elem.style.top, 10 ) + ( event.shiftKey ? 10 : 1 )
+				model.updateShape( elem.getAttribute( 'id' ), { y: newY } )
+			}
+		}
+
+		// Up arrow
+		if ( event.keyCode === 38 )  {
+			for ( let elem of selection.storage ) {
+				let newY = parseInt( elem.style.top, 10 ) - ( event.shiftKey ? 10 : 1 )
+				model.updateShape( elem.getAttribute( 'id' ), { y: newY } )
+			}
+		}
+
+		// Left arrow
+		if ( event.keyCode === 37 )  {
+			for ( let elem of selection.storage ) {
+				let newX = parseInt( elem.style.left, 10 ) - ( event.shiftKey ? 10 : 1 )
+				model.updateShape( elem.getAttribute( 'id' ), { x: newX } )
+			}
+		}
+
+		// Right arrow
+		if ( event.keyCode === 39 )  {
+			for ( let elem of selection.storage ) {
+				let newX = parseInt( elem.style.left, 10 ) + ( event.shiftKey ? 10 : 1 )
+				model.updateShape( elem.getAttribute( 'id' ), { x: newX } )
+			}
+		}
 	}
 };

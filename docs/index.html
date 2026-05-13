@@ -11,6 +11,7 @@
 		<script type="text/javascript" src="js/toolbar.js"></script>
 		<script type="text/javascript" src="js/glass.js"></script>
 		<script type="text/javascript" src="js/selection.js"></script>
+		<script type="text/javascript" src="js/canvas.js"></script>
 	</head>
 	<body>
 		<div id="-canvas"></div>
@@ -22,7 +23,9 @@
 			<span id="-title"><</span>
 		</div>
 		<script>
+			selection.init()
 			glass.init()
+			canvas.init()
 			toolbar.init()
 			model.parse()
 		</script>

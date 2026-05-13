@@ -31,8 +31,10 @@ const glass = {
 		model.registerMetadataListener( glass.viewChanged )
 	},
 
+	/**
+	 * Metadata listener method. Fires in case somewhere else has changed the scroll offset.
+	 */
 	viewChanged: ( meta ) => {
-		console.log( meta )
 		if ( meta.sc ) {
 			glass.canvas.style.scale = `${meta.sc}`
 		}
@@ -140,7 +142,7 @@ const glass = {
 					let dx = event.x - glass.drag.x - 3
 					let dy = event.y - glass.drag.y - 3
 					model.updateShape(
-						elem.getAttribute( 'data-id' ),
+						elem.getAttribute( 'id' ),
 						{
 							x: parseInt( elem.getBoundingClientRect().x + dx - glass.drag.offsetX, 10 ),
 							y: parseInt( elem.getBoundingClientRect().y + dy - glass.drag.offsetY, 10 )

@@ -7,7 +7,7 @@ const defaultModel = {
 	},
 	sh: [
 		{
-			id: '0',
+			id: 'shape-0',
 			ty: 'rec',
 			bg: 'rd',
 			co: 'wh',
@@ -20,7 +20,7 @@ const defaultModel = {
 			w: 300,
 			h: 100
 		},{
-			id: '1',
+			id: 'shape-1',
 			ty: 'cmb',
 			tx: 'Choose an option',
 			ha: 'center',
@@ -30,7 +30,7 @@ const defaultModel = {
 			w: 200,
 			h: 38
 		},{
-			id: '2',
+			id: 'shape-2',
 			ty: 'lbl',
 			co: '#333',
 			tx: 'My label',
