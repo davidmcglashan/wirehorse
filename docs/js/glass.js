@@ -69,6 +69,12 @@ const glass = {
 			glass.drag.pressed = true
 			glass.drag.type = 2
 		}
+
+		// Record the start x,y
+		if ( glass.drag.pressed ) {
+			glass.drag.startX = event.x
+			glass.drag.startY = event.y
+		}
 	},
 	
 	/**
@@ -76,6 +82,16 @@ const glass = {
 	 */
 	mouseMoved: ( event ) => {
 		if ( glass.drag.pressed ) {
+			// We're not _really_ moving until we've gone a few pixels or so.
+			if ( !glass.drag.moving ) {
+				let dx = Math.abs( event.x - glass.drag.startX )
+				let dy = Math.abs( event.y - glass.drag.startY )
+	
+				if ( dx < 5 && dy < 5 ) {
+					return
+				}				
+			}
+
 			glass.drag.moving = true
 			
 			// If we're scroll dragging then we translate the distance from where we started to where we are now.

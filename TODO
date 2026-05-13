@@ -21,8 +21,6 @@ features
   - toolbar/palette for setting things on the right side of page
 
 - selection
-  - short drags should behave as clicks for selection
-  - multiselection
   - drag event to draw a <div>, get its bounds, work out what intersects it
 
 - hold command to zoom in/out
