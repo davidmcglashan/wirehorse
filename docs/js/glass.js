@@ -89,15 +89,14 @@ const glass = {
 			// If we're moving an element we change its top and left by the amount we've moved 
 			// since the last call.
 			else {
-				let elem = selection.storage[0]
-				if ( elem ) {
+				for ( let elem of selection.storage ) {
 					let dx = event.x - glass.drag.x
 					let dy = event.y - glass.drag.y
 					elem.style.top = `${elem.getBoundingClientRect().y + dy - glass.drag.offsetY}px`
 					elem.style.left = `${elem.getBoundingClientRect().x + dx - glass.drag.offsetX}px`
-					glass.drag.x = event.x
-					glass.drag.y = event.y
 				}
+				glass.drag.x = event.x
+				glass.drag.y = event.y
 			}
 		}
 	},
@@ -120,8 +119,7 @@ const glass = {
 			
 			// Object drags supply new x,y values for the shapes being moved.
 			else {
-				let elem = selection.storage[0]
-				if ( elem ) {
+				for ( let elem of selection.storage ) {
 					let dx = event.x - glass.drag.x
 					let dy = event.y - glass.drag.y
 					model.updateShape(
