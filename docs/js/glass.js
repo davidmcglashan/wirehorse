@@ -1,7 +1,6 @@
 const glass = {
 	elem: null,
 	canvas: null,
-	scale: 1,
 
 	// Glass is responsible for scroll drags, which we track with this object.
 	drag: {
@@ -29,14 +28,19 @@ const glass = {
 		document.addEventListener( 'keydown', glass.keyDown )
 		document.addEventListener( 'keyup', glass.keyUp )
 
-		// Pull the scroll-drag offset out of the model's meta
-		if ( model.meta.ox ) {
-			glass.scale = model.meta.sc
-			glass.canvas.style.scale = `${glass.scale}`
-			
-			glass.canvas.style.transform = `translate(${model.meta.ox}px,${model.meta.oy}px)`
-			glass.drag.offsetX = model.meta.ox
-			glass.drag.offsetY = model.meta.oy
+		model.registerMetadataListener( glass.viewChanged )
+	},
+
+	viewChanged: ( meta ) => {
+		console.log( meta )
+		if ( meta.sc ) {
+			glass.canvas.style.scale = `${meta.sc}`
+		}
+
+		if ( meta.ox && meta.oy ) {
+			glass.canvas.style.transform = `translate(${meta.ox}px,${meta.oy}px)`
+			glass.drag.offsetX = meta.ox
+			glass.drag.offsetY = meta.oy
 		}
 	},
 
@@ -106,14 +110,15 @@ const glass = {
 
 		// If this is a drag then let it finish.
 		if ( glass.drag.moving ) {
+			glass.drag.moving = false
+
 			if ( glass.drag.type === 1 ) {
-				glass.drag.moving = false
 				glass.drag.offsetX = event.clientX - glass.drag.x
 				glass.drag.offsetY = event.clientY - glass.drag.y
 				glass.elem.setAttribute( 'class', 'ready' )
 			}
 
-			toolbar.save()		
+			model.updateMeta( { ox: glass.drag.offsetX, oy: glass.drag.offsetY } )
 			return
 		}
 
@@ -137,11 +142,10 @@ const glass = {
 		event.preventDefault()
 
 		// Restrict scale
-		glass.scale += event.deltaY * -0.00125
-		glass.scale = Math.min( Math.max( 0.125, glass.scale ), 4)
-
-		// Apply scale transform
-		glass.canvas.style.scale = `${glass.scale}`
+		let scale = model.meta( 'sc' )
+		scale += event.deltaY * -0.00125
+		scale = Math.min( Math.max( 0.125, scale ), 4)
+		model.updateMeta( { sc: scale } )
 	},
 
 	/**

@@ -1,5 +1,11 @@
+bugs
+----
+- scaling breaks dragging to move (needs to factor in scale amount anyway)
+
 features
 --------
+- update model which in turn updates the UI via listener
+
 - work with localstorage
   - parser
   - writer
@@ -24,9 +30,11 @@ features
 - hold command to zoom in/out
 - mousewheel to scroll
 
+- editors
 - undo!
 
 - shapes
+  - tabs
   - rectangle
   - horizontal rule
   - text label
