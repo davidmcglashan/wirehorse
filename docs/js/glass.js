@@ -172,11 +172,12 @@ const glass = {
 	scaling: ( event ) => {
 		event.preventDefault()
 
-		// Restrict scale
-		let scale = model.meta( 'sc' )
-		scale += event.deltaY * -0.00125
-		scale = Math.min( Math.max( 0.125, scale ), 4)
-		model.updateMeta( { sc: scale } )
+		if ( event.metaKey ) {
+			let scale = model.meta( 'sc' )
+			scale += event.deltaY * -0.00125
+			scale = Math.min( Math.max( 0.125, scale ), 4)
+			model.updateMeta( { sc: scale } )
+		}
 	},
 	
 	/**
