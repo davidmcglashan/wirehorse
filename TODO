@@ -14,8 +14,7 @@ features
 - selection
   - drag event to draw a <div>, get its bounds, work out what intersects it
 
-- hold command to zoom in/out
-  - mousewheel to scroll
+- mousewheel to scroll
 
 - editors
 - undo!
@@ -48,10 +47,6 @@ features
   - orange
 
 - text parsing e.g. this is *bold*
-- saving
-- loading
-- selecting
-- dragging
 - resizing
 - export to GIF
 
