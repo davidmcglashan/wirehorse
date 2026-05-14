@@ -11,6 +11,8 @@ const toolbar = {
 	},
 
 	reset: () => {
+		selection.clear()
+		canvas.reset()
 		model.demo()
 	},
 

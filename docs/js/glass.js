@@ -4,8 +4,6 @@ const glass = {
 
 	// Glass is responsible for scroll drags, which we track with this object.
 	drag: {
-		offsetX: 0,
-		offsetY: 0,
 		pressed: false,
 		ready: false,
 		type: 0
@@ -41,8 +39,6 @@ const glass = {
 
 		if ( meta.ox && meta.oy ) {
 			glass.canvas.style.transform = `translate(${meta.ox}px,${meta.oy}px)`
-			glass.drag.offsetX = meta.ox
-			glass.drag.offsetY = meta.oy
 		}
 	},
 
@@ -51,31 +47,25 @@ const glass = {
 	 * on what comes next.
 	 */
 	mousePressed: ( event ) => {
-		// If we're ready for a glass drag it means Space is being held and
-		// we should prepare to move the viewport around.
+		// If we're ready for a glass drag it means Space is being held and we should prepare to move the
+		// viewport around. The x/y location is therefore the current page location with the current offset subtracted
+		// multiplied by the scale factor.
 		if ( glass.drag.ready ) {
-			glass.drag.x = event.clientX - glass.drag.offsetX
-			glass.drag.y = event.clientY - glass.drag.offsetY
 			glass.drag.pressed = true
 			glass.drag.type = 1
 		}
-
+		
 		// If there's a selection we should prepare to move the selected
 		// entities around instead.
 		else if ( selection.yes() ) {
-			let elem = selection.storage[0]
-			if ( elem ) {
-				glass.drag.x = event.x
-				glass.drag.y = event.y
-			}
 			glass.drag.pressed = true
 			glass.drag.type = 2
 		}
-
+		
 		// Record the start x,y
 		if ( glass.drag.pressed ) {
-			glass.drag.startX = event.x
-			glass.drag.startY = event.y
+			glass.drag.x = event.pageX
+			glass.drag.y = event.pageY
 		}
 	},
 	
@@ -84,22 +74,25 @@ const glass = {
 	 */
 	mouseMoved: ( event ) => {
 		if ( glass.drag.pressed ) {
+			let scale = model.meta( 'sc' )
+			
 			// We're not _really_ moving until we've gone a few pixels or so.
 			if ( !glass.drag.moving ) {
-				let dx = Math.abs( event.x - glass.drag.startX )
-				let dy = Math.abs( event.y - glass.drag.startY )
-	
+				let dx = Math.abs( event.pageX - glass.drag.x )
+				let dy = Math.abs( event.pageY - glass.drag.y )
+				
 				if ( dx < 5 && dy < 5 ) {
 					return
 				}				
 			}
-
+			
 			glass.drag.moving = true
 			
 			// If we're scroll dragging then we translate the distance from where we started to where we are now.
 			if ( glass.drag.type === 1 ) {
-				let dx = event.clientX - glass.drag.x
-				let dy = event.clientY - glass.drag.y
+				let dx = model.meta('ox') + ( event.pageX - glass.drag.x ) / scale
+				let dy = model.meta('oy') + ( event.pageY - glass.drag.y ) / scale
+				
 				glass.canvas.style.transform = `translate(${dx}px,${dy}px) `
 				glass.elem.setAttribute( 'class', 'dragging' )
 			} 
@@ -108,14 +101,16 @@ const glass = {
 			// since the last call. The 3s here are to overcome the margin:3 every entity has in order
 			// to look nice.
 			else {
+				let dx = event.pageX - glass.drag.x
+				let dy = event.pageY - glass.drag.y
+
 				for ( let elem of selection.storage ) {
-					let dx = event.x - glass.drag.x - 3
-					let dy = event.y - glass.drag.y - 3
-					elem.style.top = `${elem.getBoundingClientRect().y + dy - glass.drag.offsetY}px`
-					elem.style.left = `${elem.getBoundingClientRect().x + dx - glass.drag.offsetX}px`
+					elem.style.left = `${parseFloat( elem.style.left, 10 ) + (dx/scale)}px`
+					elem.style.top = `${parseFloat( elem.style.top, 10 ) + (dy/scale)}px`
 				}
-				glass.drag.x = event.x
-				glass.drag.y = event.y
+
+				glass.drag.x = event.pageX
+				glass.drag.y = event.pageY
 			}
 		}
 	},
@@ -128,26 +123,29 @@ const glass = {
 
 		// If this is a drag then let it finish.
 		if ( glass.drag.moving ) {
+			let scale = model.meta('sc')
+			
 			glass.drag.moving = false
 
 			// Scroll drags store the new offset values in the model meta.
 			if ( glass.drag.type === 1 ) {
 				glass.elem.setAttribute( 'class', 'ready' )
-				model.updateMeta( { ox: event.clientX - glass.drag.x, oy: event.clientY - glass.drag.y } )
+				model.updateMeta( { 
+					ox: model.meta('ox') + ( event.pageX - glass.drag.x ) / scale, 
+					oy: model.meta('oy') + ( event.pageY - glass.drag.y ) / scale
+				} )
 			} 
 			
 			// Object drags supply new x,y values for the shapes being moved.
 			else {
+				let dx = event.pageX - glass.drag.x
+				let dy = event.pageY - glass.drag.y
+
 				for ( let elem of selection.storage ) {
-					let dx = event.x - glass.drag.x - 3
-					let dy = event.y - glass.drag.y - 3
-					model.updateShape(
-						elem.getAttribute( 'id' ),
-						{
-							x: parseInt( elem.getBoundingClientRect().x + dx - glass.drag.offsetX, 10 ),
-							y: parseInt( elem.getBoundingClientRect().y + dy - glass.drag.offsetY, 10 )
-						} 
-					)
+					model.updateShape( elem.getAttribute( 'id' ), {
+						x: parseFloat( elem.style.left, 10 ) + dx/scale,
+						y: parseFloat( elem.style.top, 10 ) + dy/scale 
+					} )
 				}
 			}
 
@@ -156,7 +154,7 @@ const glass = {
 		}
 
 		// Stop at the first entity and select it
-		let elems = document.elementsFromPoint( event.clientX, event.clientY )
+		let elems = document.elementsFromPoint( event.pageX, event.pageY )
 		for ( let elem of elems ) {
 			if ( elem.classList.contains( 'entity' ) ) {
 				selection.add( elem, { multi: event.shiftKey } )
@@ -180,7 +178,7 @@ const glass = {
 		scale = Math.min( Math.max( 0.125, scale ), 4)
 		model.updateMeta( { sc: scale } )
 	},
-
+	
 	/**
 	 * 
 	 */

@@ -6,6 +6,12 @@ const canvas = {
 		model.registerShapeListener( canvas.shapeUpdate )
 	},
 
+	reset: () => {
+		canvas.elem.innerHTML = ''
+		canvas.elem.style.scale = '1'
+		canvas.elem.style.transform = 'translate(0px,0px)'
+	},
+
 	/**
 	 * Called when somewhere else has changed a shape so we can update the canvas.
 	 */

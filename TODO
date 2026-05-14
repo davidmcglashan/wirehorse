@@ -1,17 +1,8 @@
 bugs
 ----
-- scaling breaks dragging to move (needs to factor in scale amount anyway)
 
 features
 --------
-- work with localstorage
-  - parser
-  - writer
-  - autosave
-  
-- resetting needs to do more
-  - scroll offsets
-  - selection.clear()
 
 - keyboard+drag to quickly add
   - rectangles
