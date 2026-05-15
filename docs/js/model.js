@@ -69,12 +69,20 @@ const model = {
 	},
 
 	/**
-	 * Update the specified shape with the specified parameters
+	 * Update the specified shape with the specified parameters. Returns a record object which
+	 * can be used to log and undo the change.
 	 */
 	updateShape: ( id, params ) => {
+		let record = {}
+
 		for ( let shape of model.sh ) {
 			if ( shape.id === id ) {
 				for ( const [key, value] of Object.entries( params ) ) {
+					// Record what the value was and is becoming.
+					record['_'+key] = shape[key]
+					record[key] = value
+
+					// Now effect the change.
 					shape[key] = value
 				}
 				break
@@ -90,6 +98,8 @@ const model = {
 		if ( !params.dontSave ) {
 			model.save()
 		}
+
+		return record
 	},
 
 	/**

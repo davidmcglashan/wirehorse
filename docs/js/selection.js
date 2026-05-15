@@ -45,36 +45,47 @@ const selection = {
 			return
 		}
 
+		let changes = {}
+
 		// Down arrow means moving the selection downwards ...
 		if ( event.keyCode === 40 )  {
 			for ( let elem of selection.storage ) {
+				let id = elem.getAttribute( 'id' )
 				let newY = parseInt( elem.style.top, 10 ) + ( event.shiftKey ? 10 : 1 )
-				model.updateShape( elem.getAttribute( 'id' ), { y: newY } )
+				changes[id] = model.updateShape( id, { y: newY } )
 			}
-		}
+			undo.pushShape( changes )
+		} 
 
 		// Up arrow
-		if ( event.keyCode === 38 )  {
+		else if ( event.keyCode === 38 )  {
 			for ( let elem of selection.storage ) {
+				let id = elem.getAttribute( 'id' )
 				let newY = parseInt( elem.style.top, 10 ) - ( event.shiftKey ? 10 : 1 )
-				model.updateShape( elem.getAttribute( 'id' ), { y: newY } )
+				changes[id] = model.updateShape( id, { y: newY } )
 			}
+			undo.pushShape( changes )
 		}
 
 		// Left arrow
-		if ( event.keyCode === 37 )  {
+		else if ( event.keyCode === 37 )  {
 			for ( let elem of selection.storage ) {
+				let id = elem.getAttribute( 'id' )
 				let newX = parseInt( elem.style.left, 10 ) - ( event.shiftKey ? 10 : 1 )
-				model.updateShape( elem.getAttribute( 'id' ), { x: newX } )
+				changes[id] = model.updateShape( id, { x: newX } )
 			}
+			undo.pushShape( changes )
 		}
 
 		// Right arrow
-		if ( event.keyCode === 39 )  {
+		else if ( event.keyCode === 39 )  {
 			for ( let elem of selection.storage ) {
+				let id = elem.getAttribute( 'id' )
 				let newX = parseInt( elem.style.left, 10 ) + ( event.shiftKey ? 10 : 1 )
-				model.updateShape( elem.getAttribute( 'id' ), { x: newX } )
+				changes[id] = model.updateShape( id, { x: newX } )
 			}
+			undo.pushShape( changes )
 		}
+		
 	}
 };

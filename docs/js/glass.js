@@ -141,12 +141,15 @@ const glass = {
 				let dx = event.pageX - glass.drag.x
 				let dy = event.pageY - glass.drag.y
 
+				let changes = {}
 				for ( let elem of selection.storage ) {
-					model.updateShape( elem.getAttribute( 'id' ), {
+					let id = elem.getAttribute( 'id' )
+					changes[id] = model.updateShape( id, {
 						x: parseFloat( elem.style.left, 10 ) + dx/scale,
 						y: parseFloat( elem.style.top, 10 ) + dy/scale 
 					} )
 				}
+				undo.pushShape( changes )
 			}
 
 			// All drags return now because they don't invoke a selection.

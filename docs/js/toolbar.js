@@ -1,6 +1,15 @@
 const toolbar = {
 	init: () => {
 		model.registerMetadataListener( toolbar.update )
+
+		// Listen to CMD+Z for undo
+		document.addEventListener( 'keydown', function( event ) {
+			event.preventDefault()
+
+			if ( event.metaKey && event.key == 'z' ) {
+				undo.undoShape()
+			} 
+		} )
 	},
 
 	update: ( meta ) => {
