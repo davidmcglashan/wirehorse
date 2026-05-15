@@ -1,27 +1,25 @@
 bugs
 ----
 
-features
+backlog
 --------
 
-- keyboard+drag to quickly add
-  - rectangles
-
-- UI
-  - verb/cancel dialogs
-  - toolbar/palette for setting things on the right side of page
-
-- selection
-  - drag event to draw a <div>, get its bounds, work out what intersects it
-
+- get undo in place for movements
+- toolbar/palette for setting xywh on the right side of page
+- resizing
 - mousewheel to scroll
-
-- editors
-- undo!
-
-- alignment functions
+- plain text editor for rectangle's label text
+- border colour
+- background colour
+- text alignment lcrtmb
+- text parsing e.g. this is *bold*
+- keyboard+drag to quickly add rectangles
+- export to GIF
 - alignment guides
 - inset guides
+- alignment functions
+- selection drag event to draw a <div>, get its bounds, work out what intersects it
+- shape palette/quick adder
 
 - shapes
   - tabs
@@ -46,9 +44,6 @@ features
   - amber
   - orange
 
-- text parsing e.g. this is *bold*
-- resizing
-- export to GIF
 
 meta
 ----
