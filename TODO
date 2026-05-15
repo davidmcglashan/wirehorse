@@ -4,7 +4,7 @@ bugs
 backlog
 --------
 
-- get undo in place for movements
+- redo with Shift_cmd_z
 - toolbar/palette for setting xywh on the right side of page
 - resizing
 - mousewheel to scroll
