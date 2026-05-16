@@ -1,6 +1,7 @@
 const glass = {
 	elem: null,
 	canvas: null,
+	caret: null,
 
 	// Glass is responsible for scroll drags, which we track with this object.
 	drag: {
@@ -16,6 +17,7 @@ const glass = {
 		// Have the glass listen to mouse events
 		glass.elem = document.getElementById( '-glass' )
 		glass.canvas = document.getElementById( '-canvas' )
+		glass.caret = document.getElementById( '-caret' )
 
 		glass.elem.addEventListener( 'mouseup', glass.mouseReleased )
 		glass.elem.addEventListener( 'mousemove', glass.mouseMoved )
@@ -52,14 +54,16 @@ const glass = {
 		// multiplied by the scale factor.
 		if ( glass.drag.ready ) {
 			glass.drag.pressed = true
-			glass.drag.type = 1
+			glass.drag.mode = 0
 		}
 		
-		// If there's a selection we should prepare to move the selected
-		// entities around instead.
+		// If there's a selection we should prepare to move or resize
+		// the selected entities instead.
 		else if ( selection.yes() ) {
 			glass.drag.pressed = true
-			glass.drag.type = 2
+			if ( !event.altKey ) {
+				glass.drag.mode = 1
+			}
 		}
 		
 		// Record the start x,y
@@ -70,9 +74,88 @@ const glass = {
 	},
 	
 	/**
-	 * The mouse is moving. If we're dragging something we need to update its position.
+	 * React to mouse motion events -- either drags or selection caret tracking.
 	 */
 	mouseMoved: ( event ) => {
+		// We're dragging something to handle all of that ...
+		if ( glass.drag.pressed ) {
+			glass.mouseDragged( event )
+		}
+		
+		// If there's a single selection we should display the caret in an appropriate location
+		// relative to its DOM element.
+		else if ( selection.yes() === 1 && event.altKey ) {
+			glass.elem.setAttribute( 'class', '' )
+
+			let elem = document.getElementById( selection.ids()[0] )
+			let rect = elem.getBoundingClientRect()
+			let x = 0
+			let y = 0
+			let e,w,n,s = false
+
+			// Work out where to draw the caret
+			if ( event.pageX < rect.x ) { 
+				x = rect.x - 6
+				w = true
+			} else if ( event.pageX > rect.x + rect.width ) { 
+				x = rect.x + rect.width + 6
+				e = true
+			} else { 
+				x = rect.x + rect.width/2 
+			}
+
+			if ( event.pageY < rect.y ) { 
+				y = rect.y - 6
+				n = true
+			} else if ( event.pageY > rect.y + rect.height ) { 
+				y = rect.y + rect.height + 6
+				s = true
+			} else { 
+				y = rect.y + rect.height/2 
+			}
+
+			glass.caret.style.left = `${x-16}px`
+			glass.caret.style.top = `${y-16}px`
+
+			// Work out what the next drag mode will be.
+			if ( n && !s && !e && !w ) 	{ glass.drag.mode = 2	}	// north
+			if ( n && !s && e && !w ) 	{ glass.drag.mode = 3	}	// north-east
+			if ( !n && !s && e && !w ) 	{ glass.drag.mode = 4	}	// east
+			if ( !n && s && e && !w ) 	{ glass.drag.mode = 5	}	// south-east
+			if ( !n && s && !e && !w ) 	{ glass.drag.mode = 6	}	// south
+			if ( !n && s && !e && w ) 	{ glass.drag.mode = 7	}	// south-west
+			if ( !n && !s && !e && w ) 	{ glass.drag.mode = 8	}	// west
+			if ( n && !s && !e && w ) 	{ glass.drag.mode = 9	}	// north-west
+
+			// Change the mouse pointer to the appropriate cursor
+			switch ( glass.drag.mode ) {
+				case 2:
+				case 6:
+					glass.elem.setAttribute( 'class', 'caret-ns' )
+					break
+				case 4:
+				case 8:
+					glass.elem.setAttribute( 'class', 'caret-ew' )
+					break
+				case 3:
+				case 7:
+					glass.elem.setAttribute( 'class', 'caret-nesw' )
+					break
+				case 5:
+				case 9:
+					glass.elem.setAttribute( 'class', 'caret-nwse' )
+					break
+			}
+			if ( !n && !s && ( e || w ) ) {
+			}
+
+		}
+	},
+
+	/**
+	 * If we're dragging something we need to update its position.
+	 */
+	mouseDragged: ( event ) => {
 		if ( glass.drag.pressed ) {
 			let scale = model.meta( 'sc' )
 			
@@ -89,24 +172,55 @@ const glass = {
 			glass.drag.moving = true
 			
 			// If we're scroll dragging then we translate the distance from where we started to where we are now.
-			if ( glass.drag.type === 1 ) {
+			if ( glass.drag.mode === 0 ) {
 				let dx = model.meta('ox') + ( event.pageX - glass.drag.x ) / scale
 				let dy = model.meta('oy') + ( event.pageY - glass.drag.y ) / scale
 				
 				glass.canvas.style.transform = `translate(${dx}px,${dy}px) `
 				glass.elem.setAttribute( 'class', 'dragging' )
 			} 
-			
-			// If we're moving an element we change its top and left by the amount we've moved 
-			// since the last call. The 3s here are to overcome the margin:3 every entity has in order
-			// to look nice.
+
+			// We're moving or resizing something.
 			else {
+				// Calculate the amount moved since the last call. 
 				let dx = event.pageX - glass.drag.x
 				let dy = event.pageY - glass.drag.y
+				let m = glass.drag.mode
 
-				for ( let elem of selection.storage ) {
-					elem.style.left = `${parseFloat( elem.style.left, 10 ) + (dx/scale)}px`
-					elem.style.top = `${parseFloat( elem.style.top, 10 ) + (dy/scale)}px`
+				// These drag modes affect the x position
+				if ( m === 1 || m > 6 ) {
+					for ( let elem of selection.storage ) {
+						elem.style.left = `${parseFloat( elem.style.left, 10 ) + (dx/scale)}px`
+					}
+				}
+				// These drag modes affect the width - the second lot negatively
+				if ( m === 3 || m === 4 || m === 5 ) {
+					for ( let elem of selection.storage ) {
+						elem.style.width = `${parseFloat( elem.style.width, 10 ) + (dx/scale)}px`
+					}
+				}
+				if ( m === 7 || m === 8 || m === 9 ) {
+					for ( let elem of selection.storage ) {
+						elem.style.width = `${parseFloat( elem.style.width, 10 ) - (dx/scale)}px`
+					}
+				}
+
+				// These drag modes affect the y position
+				if ( m === 1 || m === 2 || m === 3 || m === 9 ) {
+					for ( let elem of selection.storage ) {
+						elem.style.top = `${parseFloat( elem.style.top, 10 ) + (dy/scale)}px`
+					}
+				}
+				// These drag modes affect the height - the second lot negatively
+				if ( m === 2 || m === 3 || m === 9 ) {
+					for ( let elem of selection.storage ) {
+						elem.style.height = `${parseFloat( elem.style.height, 10 ) - (dy/scale)}px`
+					}
+				}
+				if ( m === 5 || m === 6 || m === 7 ) {
+					for ( let elem of selection.storage ) {
+						elem.style.height = `${parseFloat( elem.style.height, 10 ) + (dy/scale)}px`
+					}
 				}
 
 				glass.drag.x = event.pageX
@@ -128,7 +242,7 @@ const glass = {
 			glass.drag.moving = false
 
 			// Scroll drags store the new offset values in the model meta.
-			if ( glass.drag.type === 1 ) {
+			if ( glass.drag.mode === 0 ) {
 				glass.elem.setAttribute( 'class', 'ready' )
 				model.updateMeta( { 
 					ox: model.meta('ox') + ( event.pageX - glass.drag.x ) / scale, 
@@ -146,7 +260,9 @@ const glass = {
 					let id = elem.getAttribute( 'id' )
 					changes[id] = model.updateShape( id, {
 						x: parseFloat( elem.style.left, 10 ) + dx/scale,
-						y: parseFloat( elem.style.top, 10 ) + dy/scale 
+						y: parseFloat( elem.style.top, 10 ) + dy/scale ,
+						w: parseFloat( elem.style.width, 10 ) + dx/scale,
+						h: parseFloat( elem.style.height, 10 ) + dy/scale 
 					} )
 				}
 				undo.pushShape( changes )
@@ -191,10 +307,8 @@ const glass = {
 			return
 		}
 		if ( event.keyCode === 32 )  {
-			event.preventDefault()
 			glass.elem.setAttribute( 'class', 'ready' )
 			glass.drag.ready = true
-			return
 		}
 
 		// Minus and Plus to adjust the zoom/scale.
@@ -208,15 +322,21 @@ const glass = {
 		// Zero to reset the zoom/scale.
 		else if ( event.metaKey && event.keyCode === 48 ) {
 			model.updateMeta( { sc: 1 } )
-		}	
+		}
+
+		// Option/Alt forces the caret to appear
+		else if ( selection.yes() === 1 && event.altKey ) {
+			glass.caret.setAttribute( 'class', '' )
+		}
 	},
 
 	/**
 	 * 
 	 */
 	keyUp: ( event ) => {
+		glass.caret.setAttribute( 'class', 'hidden' )
+		glass.elem.setAttribute( 'class', '' )
 		if ( event.keyCode === 32 )  {
-			glass.elem.setAttribute( 'class', '' )
 			glass.drag.ready = false
 		}
 	}

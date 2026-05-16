@@ -52,10 +52,10 @@ const selection = {
 	},
 
 	/**
-	 * Returns true if there's an object selection at present.
+	 * Returns true if there's any object selection at present.
 	 */
 	yes: () => {
-		return selection.storage.length > 0 
+		return selection.storage.length
 	},
 
 	/**
