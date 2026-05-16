@@ -63,6 +63,17 @@ const selection = {
 	},
 
 	/**
+	 * Returns the ids of all the currently selected entities.
+	 */
+	ids: () => {
+		let ret = []
+		for ( let elem of selection.storage ) {
+			ret.push( elem.getAttribute( 'id' ) )
+		}
+		return ret
+	},
+
+	/**
 	 * Detect keypresses and do things with the current selection.
 	 */
 	keyDown: ( event ) => {

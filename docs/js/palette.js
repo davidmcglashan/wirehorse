@@ -6,6 +6,37 @@ const palette = {
 	 */
 	init: () => {
 		selection.registerListener( palette.selectionChanged );
+		model.registerShapeListener( palette.shapeChanged );
+	},
+
+	/**
+	 * React to a shape being changed. Palette only cares about shape changes
+	 * where the changing shape is a part of the current selection.
+	 */
+	shapeChanged: ( id, params ) => {
+		// What is the current selection?
+		let sids = selection.ids()
+
+		// No selection means nothing to do.
+		if ( sids.length === 0 ) {
+			return
+		}
+
+		// Is the currently selected shape changing?
+		if ( sids.length === 1 && sids[0] === id ) {
+			palette.singleSelection( id )
+			return
+		}
+
+		// Is the changing shape a part of the current multiselection?
+		if ( sids.length > 1 ) {
+			for ( let sid of sids ) {
+				if ( sid === id ) {
+					palette.multiSelection( sids )
+					return
+				}
+			}
+		}
 	},
 
 	/**
