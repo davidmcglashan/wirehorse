@@ -191,8 +191,10 @@ const glass = {
 			return
 		}
 		if ( event.keyCode === 32 )  {
+			event.preventDefault()
 			glass.elem.setAttribute( 'class', 'ready' )
 			glass.drag.ready = true
+			return
 		}
 
 		// Minus and Plus to adjust the zoom/scale.

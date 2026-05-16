@@ -30,5 +30,10 @@ const toolbar = {
 
 	new: () => {
 		model.new()
+	},
+
+	palette: () => {
+		let elem = document.getElementById( '-palette' )
+		elem.classList.toggle( 'hidden' )
 	}
 };

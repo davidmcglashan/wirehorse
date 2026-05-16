@@ -4,12 +4,12 @@ bugs
 backlog
 --------
 
-- keys for setting zoom: in/out/actual
 - toolbar/palette for setting xywh on the right side of page
 - resizing with a mouse drag
 - mousewheel to scroll
 - plain text editor for rectangle's label text
 - border colour
+  - can the SVG be written to <head><style> with javascript with injected colours?
 - background colour
 - text alignment lcrtmb
 - text parsing e.g. this is *bold*

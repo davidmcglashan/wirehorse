@@ -35,7 +35,21 @@ body {
 	padding: 0.5rem;
 	background-color: rgba(0,0,0,0.2);
 	display: flex;
-	gap: 1rem;
+	justify-content: space-between;
+}
+	#-toolbar > div {
+		display: flex;
+		gap: 1rem;
+	}
+
+#-palette {
+	position: absolute;
+	inset: 0 0 0 0;
+	left: unset;
+	width: 200px;
+	border-left: 1px solid #888;
+	background-color: #fff;
+	box-shadow: -4px 0px 8px rgba(0,0,0,0.1);
 }
 
 .scribble {
@@ -92,4 +106,8 @@ body {
 .selected {
 	outline-offset: 5px;
 	outline: 4px dotted #36c;
+}
+
+.hidden {
+	display: none;
 }

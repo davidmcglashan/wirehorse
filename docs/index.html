@@ -17,11 +17,17 @@
 	<body>
 		<div id="-canvas"></div>
 		<div id="-glass"></div>
+		<div id="-palette"></div>
 		<div id="-toolbar">
-			<strong>Wirehorse</strong>
-			<a href="javascript:void(0)" onclick="toolbar.reset()">Reset</a>
-			<a href="javascript:void(0)" onclick="toolbar.new()">New</a>
-			<span id="-title"><</span>
+			<div>
+				<strong>Wirehorse</strong>
+				<a href="javascript:void(0)" onclick="toolbar.reset()">Reset</a>
+				<a href="javascript:void(0)" onclick="toolbar.new()">New</a>
+				<span id="-title"><</span>
+			</div>
+			<div>
+				<a href="javascript:void(0)" onclick="toolbar.palette()"><strong>[_]]]</strong></a>
+			</div>
 		</div>
 		<script>
 			selection.init()
