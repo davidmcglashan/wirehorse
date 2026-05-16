@@ -194,6 +194,19 @@ const glass = {
 			glass.elem.setAttribute( 'class', 'ready' )
 			glass.drag.ready = true
 		}
+
+		// Minus and Plus to adjust the zoom/scale.
+		else if ( event.metaKey && ( event.keyCode === 187 || event.keyCode === 189 ) ) {
+			let scale = model.meta( 'sc' )
+			scale += event.keyCode === 187 ? 0.1 : -0.1
+			scale = Math.min( Math.max( 0.125, scale ), 4)
+			model.updateMeta( { sc: scale } )
+		}
+
+		// Zero to reset the zoom/scale.
+		else if ( event.metaKey && event.keyCode === 48 ) {
+			model.updateMeta( { sc: 1 } )
+		}	
 	},
 
 	/**
