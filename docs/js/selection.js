@@ -1,5 +1,14 @@
 const selection = {
 	storage: [],
+	listeners: [],
+
+	/**
+	 * Register a listener for selection events. When selection changes the
+	 * listener will have its passed in function invoked.
+	 */
+	registerListener: ( func ) => {
+		selection.listeners.push( func )
+	},
 
 	init: () => {
 		document.addEventListener( 'keydown', selection.keyDown )
@@ -13,6 +22,21 @@ const selection = {
 			elem.classList.remove( 'selected' )
 		}
 		selection.storage = []
+		selection.fireListeners()
+	},
+
+	/**
+	 * Notify any listeners of a change of selection event. This sends an array
+	 * of selected shape IDs to the listening function.
+	 */
+	fireListeners: () => {
+		let ids = []
+		for ( let elem of selection.storage ) {
+			ids.push( elem.getAttribute( 'id' ) )
+		}
+		for ( listener of selection.listeners ) {
+			listener( ids )
+		}
 	},
 
 	/**
@@ -28,6 +52,7 @@ const selection = {
 		}
 
 		elem.classList.add( 'selected' )
+		selection.fireListeners()
 	},
 
 	/**
@@ -86,6 +111,5 @@ const selection = {
 			}
 			undo.pushShape( changes )
 		}
-		
 	}
 };

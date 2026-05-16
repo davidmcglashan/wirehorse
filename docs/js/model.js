@@ -69,6 +69,17 @@ const model = {
 	},
 
 	/**
+	 * Return the model for a shape with this id
+	 */
+	shape: ( id ) => {
+		for ( let shape of model.sh ) {
+			if ( shape.id === id ) {
+				return shape
+			}
+		}
+	},
+
+	/**
 	 * Update the specified shape with the specified parameters. Returns a record object which
 	 * can be used to log and undo the change.
 	 */

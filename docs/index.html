@@ -13,11 +13,30 @@
 		<script type="text/javascript" src="js/selection.js"></script>
 		<script type="text/javascript" src="js/canvas.js"></script>
 		<script type="text/javascript" src="js/undo.js"></script>
+		<script type="text/javascript" src="js/palette.js"></script>
 	</head>
 	<body>
 		<div id="-canvas"></div>
 		<div id="-glass"></div>
-		<div id="-palette"></div>
+		<div id="-palette">
+			<div id="-no-selection" class="message">No Selection!</div>
+			<div id="-con-x" class="hidden">
+				<label for="-fld-x">X</label>
+				<input id="-fld-x" type="number">
+			</div>
+			<div id="-con-y" class="hidden">
+				<label for="-fld-y">Y</label>
+				<input id="-fld-y" type="number">
+			</div>
+			<div id="-con-w" class="hidden">
+				<label for="-fld-w">Width</label>
+				<input id="-fld-w" type="number">
+			</div>
+			<div id="-con-h" class="hidden">
+				<label for="-fld-h">Height</label>
+				<input id="-fld-h" type="number">
+			</div>
+		</div>
 		<div id="-toolbar">
 			<div>
 				<strong>Wirehorse</strong>
@@ -34,6 +53,7 @@
 			glass.init()
 			canvas.init()
 			toolbar.init()
+			palette.init()
 			model.parse()
 		</script>
 	</body>

@@ -5,6 +5,7 @@ backlog
 --------
 
 - toolbar/palette for setting xywh on the right side of page
+- selection keylisteners possibly belong in canvas?
 - resizing with a mouse drag
 - mousewheel to scroll
 - plain text editor for rectangle's label text

@@ -43,14 +43,43 @@ body {
 	}
 
 #-palette {
+	font-family: "Karla", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+
 	position: absolute;
 	inset: 0 0 0 0;
 	left: unset;
 	width: 200px;
+	padding: 3rem 0.5rem;
+
 	border-left: 1px solid #888;
 	background-color: #fff;
 	box-shadow: -4px 0px 8px rgba(0,0,0,0.1);
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
 }
+	#-palette div {
+		display: flex;
+		flex-direction: row;
+		justify-content: right;
+		align-items: baseline;
+		gap: 0.5rem;
+	}
+	#-palette div * {
+		width: fit-content;
+		max-width: 8rem;
+	}
+	#-palette input {
+		font-family: "Karla", sans-serif;
+		font-weight: 400;
+		font-style: normal;
+		font-size: inherit;
+	}
+	#-palette .message {
+		justify-content: center;
+	}
 
 .scribble {
 	font-family: "Redacted Script", cursive;
@@ -108,6 +137,8 @@ body {
 	outline: 4px dotted #36c;
 }
 
-.hidden {
+.hidden,
+#-palette.hidden,
+#-palette div.hidden {
 	display: none;
 }
