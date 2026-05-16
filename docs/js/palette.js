@@ -122,7 +122,13 @@ const palette = {
 		}
 	},
 
+	/**
+	 * Render the UI for a multiple selection. Currently this hides everything!
+	 */
 	multiSelection: ( ids ) => {
-
+		for ( field of palette.fields ) {
+			let container = document.getElementById( `-con-${field}` )
+			container.classList.add( 'hidden' )
+		}
 	}
 };

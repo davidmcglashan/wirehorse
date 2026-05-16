@@ -4,7 +4,6 @@ bugs
 backlog
 --------
 
-- selection keylisteners possibly belong in canvas?
 - resizing with a mouse drag
 - mousewheel to scroll
 - plain text editor for rectangle's label text
@@ -21,6 +20,7 @@ backlog
 - proper tracking of min values to stop shapes become zero width/height
 - selection drag event to draw a <div>, get its bounds, work out what intersects it
 - shape palette/quick adder
+- cut copy paste duplicate
 
 - shapes
   - tabs
