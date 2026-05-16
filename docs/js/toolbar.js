@@ -6,7 +6,10 @@ const toolbar = {
 		document.addEventListener( 'keydown', function( event ) {
 			event.preventDefault()
 
-			if ( event.metaKey && event.key == 'z' ) {
+			// Undo and Redo bound to (Shift+)Cmd+Z
+			if ( event.metaKey && event.shiftKey && event.key == 'z' ) {
+				undo.redoShape()
+			} else if ( event.metaKey && event.key == 'z' ) {
 				undo.undoShape()
 			} 
 		} )

@@ -1,11 +1,18 @@
 const undo = {
+	// History is where changes are stored in chronological order. 
 	history: [],
 
+	// Future is a shorter-lived history used when undos have occurred so the user
+	// can 'redo' their undos again. Subsequent pushed changes then erase this future-history.
+	future: [],
+
 	/**
-	 * Push a new change to shape(s) onto the history queue.
+	 * Push a new change to shape(s) onto the history queue. This action
+	 * erases any future history from previous undos.
 	 */
 	pushShape: ( change ) => {
 		undo.history.push( { type: 'shape', changes: change } )
+		undo.future = []
 	},
 
 	/**
@@ -16,6 +23,9 @@ const undo = {
 		if ( !recent ) {
 			return
 		}
+
+		// Remember this change for redos!
+		undo.future.push( recent )
 
 		// Iterate the recent changes for all the entities that changed.
 		for ( const [id,log] of Object.entries( recent.changes ) ) {
@@ -31,6 +41,22 @@ const undo = {
 
 			// Update the model with the outgoing values. This should fire listeners!
 			model.updateShape( id, mod )
+		}
+	},
+
+	/**
+	 * Redo the previous undo!
+	 */
+	redoShape: () => {
+		let recent = undo.future.pop()
+		if ( !recent ) {
+			return
+		}
+
+		// Redos are straightforward since the recent object already describes the change
+		// we want to (re)make to each entity.
+		for ( const [id,log] of Object.entries( recent.changes ) ) {
+			model.updateShape( id, log )
 		}
 	}
 };

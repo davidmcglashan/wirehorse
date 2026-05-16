@@ -4,9 +4,9 @@ bugs
 backlog
 --------
 
-- redo with Shift_cmd_z
+- keys for setting zoom: in/out/actual
 - toolbar/palette for setting xywh on the right side of page
-- resizing
+- resizing with a mouse drag
 - mousewheel to scroll
 - plain text editor for rectangle's label text
 - border colour
