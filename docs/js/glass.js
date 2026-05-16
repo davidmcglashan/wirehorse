@@ -22,7 +22,7 @@ const glass = {
 		glass.elem.addEventListener( 'mouseup', glass.mouseReleased )
 		glass.elem.addEventListener( 'mousemove', glass.mouseMoved )
 		glass.elem.addEventListener( 'mousedown', glass.mousePressed )
-		glass.elem.addEventListener( 'wheel', glass.scaling )
+		glass.elem.addEventListener( 'wheel', glass.wheelTurned )
 
 		// glass can listen to some keyevents
 		document.addEventListener( 'keydown', glass.keyDown )
@@ -286,16 +286,26 @@ const glass = {
 	},
 
 	/**
-	 * Scales the canvas as the mouse wheel turns
+	 * Respond to mouse wheel events to scroll or zoom the display
 	 */
-	scaling: ( event ) => {
+	wheelTurned: ( event ) => {
 		event.preventDefault()
 
+		// If command is down we be zooming
 		if ( event.metaKey ) {
 			let scale = model.meta( 'sc' )
 			scale += event.deltaY * -0.00125
 			scale = Math.min( Math.max( 0.125, scale ), 4)
 			model.updateMeta( { sc: scale } )
+		}
+
+		// Otherwise it's a scroll. Meta listeners only fire oif both ox and oy are
+		// present in the payload since they need to know how to do the translation in 
+		// both directions ...
+		else {
+			let ox = model.meta( 'ox' ) + event.deltaX
+			let oy = model.meta( 'oy' ) + event.deltaY
+			model.updateMeta( { ox:ox, oy:oy } )
 		}
 	},
 	

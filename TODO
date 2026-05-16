@@ -4,7 +4,6 @@ bugs
 backlog
 --------
 
-- mousewheel to scroll
 - plain text editor for rectangle's label text
 - border colour
   - can the SVG be written to <head><style> with javascript with injected colours?
@@ -14,13 +13,17 @@ backlog
 - text alignment lcrtmb
 - text parsing e.g. this is *bold*
 - keyboard+drag to quickly add rectangles
-- export to GIF
+- locking shapes for selection immunity
+- export to clipboard
 - alignment guides
 - inset guides
 - alignment functions
+- double-click a shape to recentre and re-zoom the display around it
 - proper tracking of min values to stop shapes become zero width/height
 - selection drag event to draw a <div>, get its bounds, work out what intersects it
 - shape palette/quick adder
+  - fluid keyboard use
+  - adds at the mouse location
 - cut copy paste duplicate
 
 - shapes
