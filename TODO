@@ -4,7 +4,6 @@ bugs
 backlog
 --------
 
-- toolbar/palette for setting xywh on the right side of page
 - selection keylisteners possibly belong in canvas?
 - resizing with a mouse drag
 - mousewheel to scroll
@@ -19,6 +18,7 @@ backlog
 - alignment guides
 - inset guides
 - alignment functions
+- proper tracking of min values to stop shapes become zero width/height
 - selection drag event to draw a <div>, get its bounds, work out what intersects it
 - shape palette/quick adder
 

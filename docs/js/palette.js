@@ -7,6 +7,39 @@ const palette = {
 	init: () => {
 		selection.registerListener( palette.selectionChanged );
 		model.registerShapeListener( palette.shapeChanged );
+
+		// Put a key listener on each input
+		for ( field of palette.fields ) {
+			let input = document.getElementById( `-fld-${field}` )
+			input.addEventListener( 'keydown', palette.keyDown )
+			input.addEventListener( 'input', palette.inputChanged )
+		}
+	},
+
+	/**
+	 * Respond to keypresses in the input fields.
+	 */
+	keyDown: ( event ) => {
+		// This stops e.g. the canvas reacting to arrow key presses in the text field and moving
+		// the shapes around.
+		event.stopPropagation()
+	},
+
+	inputChanged: ( event ) => {
+		// Determine if the value in the input is different to one the shape has.
+		let sids = selection.ids()
+		if ( sids.length === 1 ) {
+			let shape = model.shape( sids[0] )
+			let field = event.srcElement.id.substring(5)
+			let modelValue = shape[field]
+			let inputValue = event.srcElement.value | 0
+
+			if ( modelValue !== inputValue ) {
+				let mod = {}
+				mod[field] = inputValue 
+				model.updateShape( sids[0], mod )
+			}
+		}
 	},
 
 	/**
@@ -79,7 +112,7 @@ const palette = {
 			let input = document.getElementById( `-fld-${field}` )
 
 			let value = shape[field]
-			if ( value ) {
+			if ( value || value === 0 ) {
 				container.classList.remove( 'hidden' )
 				input.value = value
 			} else {

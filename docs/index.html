@@ -30,11 +30,11 @@
 			</div>
 			<div id="-con-w" class="hidden">
 				<label for="-fld-w">Width</label>
-				<input id="-fld-w" type="number">
+				<input id="-fld-w" type="number" min="4">
 			</div>
 			<div id="-con-h" class="hidden">
 				<label for="-fld-h">Height</label>
-				<input id="-fld-h" type="number">
+				<input id="-fld-h" type="number" min="4">
 			</div>
 		</div>
 		<div id="-toolbar">
@@ -49,11 +49,11 @@
 			</div>
 		</div>
 		<script>
+			palette.init()
 			selection.init()
 			glass.init()
 			canvas.init()
 			toolbar.init()
-			palette.init()
 			model.parse()
 		</script>
 	</body>

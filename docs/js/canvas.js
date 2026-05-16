@@ -23,12 +23,10 @@ const canvas = {
 		}
 
 		// Make the change.
-		if ( params.y ) {
-			elem.style.top = params.y + 'px'
-		}
-		if ( params.x ) {
-			elem.style.left = params.x + 'px'
-		}
+		if ( params.x || params.x === 0 ) { elem.style.left 	= params.x + 'px' }
+		if ( params.y || params.y === 0 ) { elem.style.top 		= params.y + 'px' }
+		if ( params.w ) { elem.style.width 	= params.w + 'px' }
+		if ( params.h ) { elem.style.height	= params.h + 'px' }		
 	},
 
 	/**
