@@ -43,6 +43,10 @@ body {
 		border-radius: 1rem;
 		background-color: rgba(51, 102, 204,0.5);
 	}
+	#-glass input {
+		position: absolute;
+	}
+
 #-toolbar {
 	font-family: "Karla", sans-serif;
 	font-weight: 100;
@@ -89,12 +93,6 @@ body {
 	#-palette div * {
 		width: fit-content;
 		max-width: 8rem;
-	}
-	#-palette input {
-		font-family: "Karla", sans-serif;
-		font-weight: 400;
-		font-style: normal;
-		font-size: inherit;
 	}
 	#-palette .message {
 		justify-content: center;
@@ -154,6 +152,13 @@ body {
 .selected {
 	outline-offset: 5px;
 	outline: 4px dotted #36c;
+}
+
+input {
+	font-family: "Karla", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+	font-size: inherit;
 }
 
 .hidden,

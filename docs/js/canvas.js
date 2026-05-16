@@ -24,10 +24,13 @@ const canvas = {
 		}
 
 		// Make the change.
-		if ( params.x || params.x === 0 ) { elem.style.left 	= params.x + 'px' }
-		if ( params.y || params.y === 0 ) { elem.style.top 		= params.y + 'px' }
-		if ( params.w ) { elem.style.width 	= params.w + 'px' }
-		if ( params.h ) { elem.style.height	= params.h + 'px' }		
+		canvas.elementCreator.xywh( params, elem )
+
+		// InnerHTML changes require the whole model.
+		if ( params.tx ) {
+			let shape = model.shape( id )
+			canvas.elementCreator.innerHTML[shape.ty]( params, elem )
+		}
 	},
 
 	/**
@@ -92,60 +95,84 @@ const canvas = {
 		},
 
 		/**
+		 * Creates the basic <div> for a canvas entity.
+		 */
+		div: ( shape ) => {
+			let elem = document.createElement( 'div' )
+			elem.setAttribute( 'id', shape.id )
+			shape.elem = elem
+			canvas.elem.appendChild( elem )
+
+			return elem
+		},
+
+		/**
+		 * Position the canvas entity
+		 */
+		xywh: ( shape, elem ) => {
+			if ( shape.x || shape.x === 0 ) { elem.style.left 	= shape.x + 'px' }
+			if ( shape.y || shape.y === 0 ) { elem.style.top 	= shape.y + 'px' }
+			if ( shape.w ) { elem.style.width 	= shape.w + 'px' }
+			if ( shape.h ) { elem.style.height	= shape.h + 'px' }		
+		},
+
+		colour: ( shape, elem ) => {
+			if ( shape.bg ) {
+				elem.style.backgroundColor = canvas.elementCreator.colours[shape.bg]
+			}
+			if ( shape.co ) {
+				elem.style.color = canvas.elementCreator.colours[shape.co]
+			}
+		},
+
+		/**
 		 * Adds a rectangle to the canvas
 		 */
 		rec: ( shape ) => {
 			// Put our new rectangle on the canvas
-			let rect = document.createElement( 'div' )
-			rect.setAttribute( 'id', shape.id )
-			shape.elem = rect
-			canvas.elem.appendChild( rect )
+			let div = canvas.elementCreator.div( shape )
 
 			// Style and position it
-			rect.setAttribute( 'class', 'rectangle entity border-' + shape.bo )
-			rect.style.top = shape.y + 'px'
-			rect.style.left = shape.x + 'px'
-			rect.style.width = shape.w + 'px'
-			rect.style.height = shape.h + 'px'
+			div.setAttribute( 'class', 'rectangle entity border-' + shape.bo )
+			canvas.elementCreator.xywh( shape, div )
+			canvas.elementCreator.colour( shape, div )
+			canvas.elementCreator.innerHTML[shape.ty]( shape, div )
 
-			rect.style.backgroundColor = canvas.elementCreator.colours[shape.bg]
-			rect.style.color = canvas.elementCreator.colours[shape.co]
-			rect.style.alignItems = shape.ha
-			rect.style.justifyContent = shape.va
-			rect.innerHTML = `<span>${shape.tx}</span>`
+			div.style.alignItems = shape.ha
+			div.style.justifyContent = shape.va
 		},
 
 		lbl: ( shape ) => {
 			// Put our new label on the canvas
-			let rect = document.createElement( 'div' )
-			rect.setAttribute( 'id', shape.id )
-			shape.elem = rect
-			canvas.elem.appendChild( rect )
+			let div = canvas.elementCreator.div( shape )
 
 			// Style and position it
-			rect.setAttribute( 'class', 'label entity' )
-			rect.style.top = shape.y + 'px'
-			rect.style.left = shape.x + 'px'
-
-			rect.style.color = canvas.elementCreator.colours[shape.co]
-			rect.innerHTML = shape.tx
+			div.setAttribute( 'class', 'label entity' )
+			canvas.elementCreator.xywh( shape, div )
+			canvas.elementCreator.colour( shape, div )
+			canvas.elementCreator.innerHTML[shape.ty]( shape, div )
 		},
 
 		cmb: ( shape ) => {
 			// Put our new combobox on the canvas
-			let rect = document.createElement( 'div' )
-			rect.setAttribute( 'id', shape.id )
-			shape.elem = rect
-			canvas.elem.appendChild( rect )
+			let div = canvas.elementCreator.div( shape )
 
 			// Style and position it
-			rect.setAttribute( 'class', 'combobox entity' )
-			rect.style.top = shape.y + 'px'
-			rect.style.left = shape.x + 'px'
-			rect.style.width = shape.w + 'px'
-			rect.style.height = shape.h + 'px'
-
-			rect.innerHTML = `<div class="value border-bk">${shape.tx}</div><div class="caret">V</div>`
+			div.setAttribute( 'class', 'combobox entity' )
+			canvas.elementCreator.xywh( shape, div )
+			canvas.elementCreator.innerHTML[shape.ty]( shape, div )
+		},
+		
+		innerHTML: {
+			rec: ( shape, elem ) => {
+				elem.innerHTML = `<span>${shape.tx}</span>`
+			},
+			lbl: ( shape, elem ) => {
+				elem.innerHTML = shape.tx
+			},
+			cmb: ( shape, elem ) => {
+				elem.innerHTML = `<div class="value border-bk">${shape.tx}</div><div class="caret">V</div>`
+			},		
 		}
 	},
 };
