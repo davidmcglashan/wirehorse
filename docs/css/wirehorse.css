@@ -86,6 +86,7 @@ body {
 
 .label {
 	width: fit-content;
+	text-wrap: nowrap;
 }
 
 .selected {
