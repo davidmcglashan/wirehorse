@@ -171,7 +171,18 @@ const canvas = {
 				elem.innerHTML = shape.tx
 			},
 			cmb: ( shape, elem ) => {
-				elem.innerHTML = `<div class="value border-bk">${shape.tx}</div><div class="caret">V</div>`
+				let lines = shape.tx.split('\n')
+				let html = `<div class="value border-bk">${lines[0]}</div><div class="caret">V</div>`
+
+				if ( lines.length > 1 ) {
+					lines.pop
+					html += '<ul class="dropdown border-bk">'
+					for ( let i=1; i<lines.length; i++) {
+						html += `<li>${lines[i]}</li>`
+					}
+					html += '</ul>'
+				}
+				elem.innerHTML = html
 			},		
 		}
 	},

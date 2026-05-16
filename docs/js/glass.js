@@ -71,6 +71,11 @@ const glass = {
 				glass.editor.style.left = `${event.pageX-16}px`
 				glass.editor.value = shape['tx']
 
+				// Special jazz for textareas
+				if ( editor === 'textarea' ) {
+					glass.editor.rows = 8
+				}
+
 				// Give it a focus listener
 				glass.editor.addEventListener( 'focusout', function( event ) {
 					glass.removeEditor()
@@ -78,11 +83,18 @@ const glass = {
 				
 				// And a key listener for escape and enter.
 				glass.editor.addEventListener( 'keydown', function( event ) {
+					// This stops e.g. the canvas reacting to arrow key presses in the text field and moving
+					// the shapes around.
+					event.stopPropagation()
+
 					if ( event.keyCode === 27 ) {
 						glass.removeEditor()
 					}
 					if ( event.keyCode === 13 ) {
-						glass.removeEditor( { commit:true, id:shape.id } )
+						if ( editor === 'textarea' && event.shiftKey ) {
+						} else {
+							glass.removeEditor( { commit:true, id:shape.id } )
+						}
 					}
 				} )
 				

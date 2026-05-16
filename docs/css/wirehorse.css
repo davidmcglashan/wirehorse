@@ -43,8 +43,10 @@ body {
 		border-radius: 1rem;
 		background-color: rgba(51, 102, 204,0.5);
 	}
-	#-glass input {
+	#-glass input,
+	#-glass textarea {
 		position: absolute;
+		min-width: 24rem;
 	}
 
 #-toolbar {
@@ -109,6 +111,7 @@ body {
 	margin: 3px;
 }
 
+ul.dropdown,
 .combobox .value,
 .rectangle {
 	border-style: solid;
@@ -126,17 +129,27 @@ body {
 
 .combobox {
 	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	background-color: #fff;
+	flex-direction: column;
+	justify-content: flex-start;
+	gap: 0.5rem;
 }
 	.combobox .value {
-		width: 100%;
+		background-color: #fff;
 	}
 	.combobox .caret {
 		position: absolute;
 		right: 15px;
 		top: 10px;
+	}
+	.combobox ul.dropdown {
+		margin: 0;
+		background-color: #fff;
+		padding-inline-start: 0;
+		list-style-type: none;
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
 	}
 
 .rectangle {
@@ -154,6 +167,7 @@ body {
 	outline: 4px dotted #36c;
 }
 
+textarea,
 input {
 	font-family: "Karla", sans-serif;
 	font-weight: 400;

@@ -1,10 +1,10 @@
 bugs
 ----
+- setting a text value with the inline editor to '' doesn't make it to the model
 
 backlog
 --------
 
-- plain text editor for rectangle's label text
 - border colour
   - can the SVG be written to <head><style> with javascript with injected colours?
 - mouse leaving the window mid-drag
@@ -18,6 +18,7 @@ backlog
 - export to clipboard
 - alignment guides
 - inset guides
+- some shapes could be 'fit-content' for their width and height
 - alignment functions
 - double-click a shape to recentre and re-zoom the display around it
 - proper tracking of min values to stop shapes become zero width/height
