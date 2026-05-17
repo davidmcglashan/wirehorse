@@ -57,6 +57,11 @@ const glass = {
 	 * Causes a text editing UI component to appear for a double-clicked element
 	 */
 	invokeEditor: ( event ) => {
+		// The current state of drag operations can refust this editor opening
+		if ( !glass.drag.editorPermitted ) {
+			return
+		}
+
 		if ( selection.yes() === 1 ) {
 			let shape = model.shape( selection.ids()[0] )
 
@@ -122,6 +127,8 @@ const glass = {
 	 * on what comes next.
 	 */
 	mousePressed: ( event ) => {
+		glass.drag.editorPermitted = true
+		
 		// If we're ready for a glass drag it means Space is being held and we should prepare to move the
 		// viewport around. The x/y location is therefore the current page location with the current offset subtracted
 		// multiplied by the scale factor.
@@ -219,9 +226,6 @@ const glass = {
 					glass.elem.setAttribute( 'class', 'caret-nwse' )
 					break
 			}
-			if ( !n && !s && ( e || w ) ) {
-			}
-
 		}
 	},
 
@@ -243,6 +247,7 @@ const glass = {
 			}
 			
 			glass.drag.moving = true
+			glass.drag.editorPermitted = false
 			
 			// If we're scroll dragging then we translate the distance from where we started to where we are now.
 			if ( glass.drag.mode === 0 ) {
