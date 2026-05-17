@@ -7,6 +7,8 @@ bugs
 backlog
 --------
 - redo needs to work with delete and duplicate
+- Cmd+A to select all
+- selection rectangle on glass and encompassing the max bounds of each selected shape (remove the CSS)
 - reordering
 - shape palette/quick adder
   - fluid keyboard use
@@ -14,44 +16,32 @@ backlog
 - some kind of 'what keys does this shape support' map derived from default.js
 - disabled
 - locking shapes for selection immunity
-- text alignment lcrtmb
-  - icons and buttons in palette
+- controls with icons and buttons in palette
+  - font size
+  - text alignment lcrtmb 
+  - bold
+  - italic
 - keyboard+drag to quickly add rectangles
 - Press Enter with a single selection to invoke the glass editor
 - export to clipboard
 - alignment guides
 - inset guides
 - some shapes could be 'fit-content' for their width and height
-- alignment functions
 - text parsing e.g. this is *bold*
-- double-click a shape to recentre and re-zoom the display around it
+- option+double-click a shape to recentre and re-zoom the display around it
 - proper tracking of min values to stop shapes become zero width/height
 - selection drag event to draw a <div>, get its bounds, work out what intersects it
 - cut copy paste
 
 - shapes
   - tabs
-  - rectangle
+  - breadcrumbs
   - horizontal rule
-  - text label
   - text paragraph
   - various icons
   - icon and label
-  - combobox
-  - button
   - tables
   - fancy arrows
-
-- colour palette
-  - black
-  - white
-  - 4 greys
-  - blue
-  - red
-  - green
-  - amber
-  - orange
-
 
 meta
 ----
