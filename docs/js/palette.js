@@ -50,7 +50,7 @@ const palette = {
 			if ( modelValue !== inputValue ) {
 				let mod = {}
 				mod[field] = inputValue 
-				model.updateShape( sids[0], mod )
+				undo.pushShape( model.updateShape( sids[0], mod ) )
 			}
 		}
 	},

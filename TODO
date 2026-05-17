@@ -1,7 +1,5 @@
 bugs
 ----
-- text changes don't fire undos
-- colour changes don't fire undos
 - setting a text value with the inline editor to '' doesn't make it to the model
 - mouse leaving the window mid-drag
 - round away the floats appearing in the palette inputs
@@ -10,30 +8,22 @@ bugs
 
 backlog
 --------
-
-- you're going to have to write your own colour picker :(
-  - colour palette field is a button styled in the current selection
-  - clicking it invokes the 4x4 palette
-  - clicking a 4x4 updates the button which in turn updates the model
-  - might need a lightbox div to detect clickaways
-- background colour
-- border colour
-  - can the SVG be written to <head><style> with javascript with injected colours?
 - combobox caret
 - SVGs
 - hover and focus affordances in palette
 - some kind of 'what keys does this shape support' map derived from default.js
 - disabled
+- locking shapes for selection immunity
 - text alignment lcrtmb
   - icons and buttons in palette
-- text parsing e.g. this is *bold*
 - keyboard+drag to quickly add rectangles
-- locking shapes for selection immunity
+- Press Enter with a single selection to invoke the glass editor
 - export to clipboard
 - alignment guides
 - inset guides
 - some shapes could be 'fit-content' for their width and height
 - alignment functions
+- text parsing e.g. this is *bold*
 - double-click a shape to recentre and re-zoom the display around it
 - proper tracking of min values to stop shapes become zero width/height
 - selection drag event to draw a <div>, get its bounds, work out what intersects it

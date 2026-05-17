@@ -7,12 +7,24 @@ const undo = {
 	future: [],
 
 	/**
-	 * Push a new change to shape(s) onto the history queue. This action
+	 * Push a new change to mutiple shapes onto the history queue. This action
+	 * erases any future history from previous undos.
+	 */
+	pushMulti: ( changes ) => {
+		undo.history.push( { type: 'shape', changes: changes } )
+		undo.future = []
+	},
+
+	/**
+	 * Push a new change to a single shape onto the history queue. This action
 	 * erases any future history from previous undos.
 	 */
 	pushShape: ( change ) => {
-		undo.history.push( { type: 'shape', changes: change } )
-		undo.future = []
+		// Single changes are actually just multi changes but with only
+		// one entry!
+		let multi = {}
+		multi[change.id] = change
+		undo.pushMulti( multi )
 	},
 
 	/**

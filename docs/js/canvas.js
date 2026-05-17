@@ -62,7 +62,7 @@ const canvas = {
 				let newY = parseInt( elem.style.top, 10 ) + ( event.shiftKey ? 10 : 1 )
 				changes[id] = model.updateShape( id, { y: newY } )
 			}
-			undo.pushShape( changes )
+			undo.pushMulti( changes )
 		} 
 
 		// Up arrow
@@ -72,7 +72,7 @@ const canvas = {
 				let newY = parseInt( elem.style.top, 10 ) - ( event.shiftKey ? 10 : 1 )
 				changes[id] = model.updateShape( id, { y: newY } )
 			}
-			undo.pushShape( changes )
+			undo.pushMulti( changes )
 		}
 
 		// Left arrow
@@ -82,7 +82,7 @@ const canvas = {
 				let newX = parseInt( elem.style.left, 10 ) - ( event.shiftKey ? 10 : 1 )
 				changes[id] = model.updateShape( id, { x: newX } )
 			}
-			undo.pushShape( changes )
+			undo.pushMulti( changes )
 		}
 
 		// Right arrow
@@ -92,7 +92,7 @@ const canvas = {
 				let newX = parseInt( elem.style.left, 10 ) + ( event.shiftKey ? 10 : 1 )
 				changes[id] = model.updateShape( id, { x: newX } )
 			}
-			undo.pushShape( changes )
+			undo.pushMulti( changes )
 		}
 	},
 

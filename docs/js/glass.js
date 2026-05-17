@@ -110,7 +110,7 @@ const glass = {
 	removeEditor: ( params = {commit:false} ) => {
 		// Update the model?
 		if ( params.commit ) {
-			model.updateShape( params.id, { tx:glass.editor.value } )
+			undo.pushShape( model.updateShape( params.id, { tx:glass.editor.value } ) )
 		}
 		
 		// Remove the UI component
@@ -339,7 +339,7 @@ const glass = {
 						h: parseFloat( elem.style.height, 10 ) + dy/scale 
 					} )
 				}
-				undo.pushShape( changes )
+				undo.pushMulti( changes )
 			}
 
 			// All drags return now because they don't invoke a selection.
