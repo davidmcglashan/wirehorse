@@ -92,11 +92,18 @@ const glass = {
 					// the shapes around.
 					event.stopPropagation()
 
+					// Escape dismisses the editor with no save!
 					if ( event.keyCode === 27 ) {
 						glass.removeEditor()
 					}
+
+					// Enter behaves differently on textareas which require shift+Enter to commit
 					if ( event.keyCode === 13 ) {
-						if ( event.shiftKey ) {
+						if ( editor === 'textarea' ) {
+							if ( event.shiftKey ) {
+								glass.removeEditor( { commit:true, id:shape.id } )
+							}
+						} else {
 							glass.removeEditor( { commit:true, id:shape.id } )
 						}
 					}

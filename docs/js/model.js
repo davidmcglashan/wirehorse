@@ -18,8 +18,9 @@ const model = {
 
 		rd: { hex: 'c00', name: 'Red' },
 		or: { hex: 'f80', name: 'Orange' },
-		yl: { hex: 'ff0', name: 'Yellow' },
-		gr: { hex: '0a0', name: 'Green' },
+		py: { hex: 'ffffdd', name: 'Yellow 1' },
+		yl: { hex: 'ff0', name: 'Yellow 2' },
+		gr: { hex: '93C572', name: 'Green' },
 		bl: { hex: '36c', name: 'Blue' },
 		id: { hex: '505', name: 'Indigo' },
 		vi: { hex: 'f0f', name: 'Violet' },
