@@ -5,10 +5,10 @@ bugs
 - round away the floats appearing in the palette inputs
 - update the caret position during drags
 - click-drag invokes the world's slowest double-click editor!
+- double click in an editor invoked from a rectangle behaves weirdly (doesn't in labels ... ?)
 
 backlog
 --------
-- combobox caret
 - SVGs
 - hover and focus affordances in palette
 - some kind of 'what keys does this shape support' map derived from default.js
@@ -61,3 +61,4 @@ meta
 - License information
   - https://chr15m.github.io/DoodleCSS/
   - Google fonts
+  - SVG Repo - zest interface icons collection

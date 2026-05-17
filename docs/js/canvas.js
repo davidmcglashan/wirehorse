@@ -186,7 +186,7 @@ const canvas = {
 			},
 			cmb: ( shape, elem ) => {
 				let lines = shape.tx.split('\n')
-				let html = `<div class="value border-bk">${lines[0]}</div><div class="caret">V</div>`
+				let html = `<div class="value border-bk">${lines[0]}</div><div class="caret"></div>`
 
 				if ( lines.length > 1 ) {
 					lines.pop

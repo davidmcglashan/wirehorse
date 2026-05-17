@@ -91,8 +91,7 @@ const glass = {
 						glass.removeEditor()
 					}
 					if ( event.keyCode === 13 ) {
-						if ( editor === 'textarea' && event.shiftKey ) {
-						} else {
+						if ( event.shiftKey ) {
 							glass.removeEditor( { commit:true, id:shape.id } )
 						}
 					}

@@ -139,9 +139,13 @@ ul.dropdown,
 		background-color: #fff;
 	}
 	.combobox .caret {
+		background-image: url('../assets/dropdown-arrow-svgrepo-com.svg');
+		background-size: contain;
 		position: absolute;
-		right: 15px;
-		top: 10px;
+		right: 0;
+		top: 3px;
+		width: 2rem;
+		height: 2rem;
 	}
 	.combobox ul.dropdown {
 		margin: 0;
