@@ -115,7 +115,7 @@ ul.dropdown,
 .combobox .value,
 .rectangle {
 	border-style: solid;
-	border-width: 10px 10px 10px 10px;
+	border-width: 8px;
 	border-radius: 5px;
 	border-image-outset: 3px;
 	border-image-repeat: round;

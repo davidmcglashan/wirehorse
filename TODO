@@ -1,17 +1,22 @@
 bugs
 ----
 - setting a text value with the inline editor to '' doesn't make it to the model
+- mouse leaving the window mid-drag
+- round away the floats appearing in the palette inputs
+- update the caret position during drags
 
 backlog
 --------
 
+- background colour
 - border colour
   - can the SVG be written to <head><style> with javascript with injected colours?
-- mouse leaving the window mid-drag
-- round away the floats appearing in the palette inputs
-- update the caret position during drags
-- background colour
+- combobox caret
+- SVGs
+- some kind of 'what keys does this shape support' map derived from default.js
+- disabled
 - text alignment lcrtmb
+  - icons and buttons in palette
 - text parsing e.g. this is *bold*
 - keyboard+drag to quickly add rectangles
 - locking shapes for selection immunity

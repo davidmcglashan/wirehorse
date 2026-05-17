@@ -28,7 +28,7 @@ const defaultModel = {
 			x: 400,
 			y: 30,
 			w: 200,
-			h: 38
+			h: 30
 		},{
 			id: 'shape-2',
 			ty: 'lbl',
