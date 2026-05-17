@@ -115,7 +115,7 @@ const model = {
 
 		// Tidy up the id, remove the DOM element, and put it in the model.
 		model.sh.push( newShape )
-		newShape.id = `shape-${model.sh.length}`
+		newShape.id = model.nextShapeId()
 		newShape.elem = null
 		newShape.x += 20
 		newShape.y += 20
@@ -128,6 +128,26 @@ const model = {
 		// Save the model and return the new shape
 		model.save()
 		return newShape
+	},
+
+	nextShapeId: () => {
+		// Quickly gather the in-use ids
+		let inUse = []
+		for ( let shape of model.sh ) {
+			inUse[shape.id] = shape.id
+		}
+
+		let i = 0
+		do {
+			let shape = inUse[`shape-${i}`]
+			if ( shape ) {
+				i++
+			} else {
+				break
+			} 
+		} while ( true )
+
+		return `shape-${i}`
 	},
 
 	/**

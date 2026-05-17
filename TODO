@@ -6,7 +6,7 @@ bugs
 
 backlog
 --------
-- undo needs to work with duplicate
+- undo needs to work with delete
 - reordering
 - shape palette/quick adder
   - fluid keyboard use
