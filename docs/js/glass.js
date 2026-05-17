@@ -388,8 +388,8 @@ const glass = {
 		// present in the payload since they need to know how to do the translation in 
 		// both directions ...
 		else {
-			let ox = model.meta( 'ox' ) + event.deltaX
-			let oy = model.meta( 'oy' ) + event.deltaY
+			let ox = model.meta( 'ox' ) - event.deltaX
+			let oy = model.meta( 'oy' ) - event.deltaY
 			model.updateMeta( { ox:ox, oy:oy } )
 		}
 	},
