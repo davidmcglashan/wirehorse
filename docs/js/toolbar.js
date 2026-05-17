@@ -5,13 +5,13 @@ const toolbar = {
 		// Listen to CMD+Z for undo
 		document.addEventListener( 'keydown', function( event ) {
 			// Undo and Redo bound to (Shift+)Cmd+Z
-			if ( event.metaKey && event.shiftKey && event.key == 'z' ) {
+			if ( event.metaKey && event.shiftKey && event.key == 90 ) {
 				event.preventDefault()
-				undo.redoShape()
-			} else if ( event.metaKey && event.key == 'z' ) {
+				undo.performRedo()
+			} else if ( event.metaKey && event.keyCode == 90 ) {
 				event.preventDefault()
-				undo.undoShape()
-			} 
+				undo.performUndo()
+			} 			
 		} )
 	},
 

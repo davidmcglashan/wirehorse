@@ -30,6 +30,14 @@ const canvas = {
 	shapeUpdate: ( id, params ) => {
 		// Get the element.
 		let elem = document.getElementById( id )
+
+		// If the update was a delete we can get rid of the element.
+		if ( params.deleted ) {
+			elem.remove()
+			return
+		}
+
+		// If there's no element then try to create a new one.
 		if ( !elem && params.ty ) {
 			elem = canvas.elementCreator[params.ty]( params )
 		}
@@ -54,22 +62,34 @@ const canvas = {
 		}
 
 		let changes = {}
+		
+		// Backspace for delete!
+		if ( event.keyCode == 8 ) {
+			for ( let elem of selection.storage ) {
+				let id = elem.getAttribute( 'id' )
+				model.removeShape( id )
+			}
+		} 
 
 		// Cmd-D to duplicate!
-		if ( event.keyCode === 68 && event.metaKey ) {
+		else if ( event.keyCode === 68 && event.metaKey ) {
 			if ( selection.yes() ) {
 				event.preventDefault()
 				clones = []
 
 				// Do the cloning
 				for ( let elem of selection.storage ) {
-					clones.push( model.cloneShape( elem.getAttribute( 'id' ) ).elem )
+					// Do the clone and push to the creation queue.
+					clones.push( model.cloneShape( elem.getAttribute( 'id' ) ) )
 				}
+				
+				// Give undo something to (un)do.
+				undo.pushNewShapes( clones )
 
-				// Now select the new objects
+				// Now select the new object(s).
 				selection.clear()
 				for ( let clone of clones ) {
-					selection.add( clone, { multi:true } )
+					selection.add( clone.elem, { multi:true } )
 				}
 			}
 		}

@@ -106,28 +106,48 @@ const model = {
 	 */
 	cloneShape: ( id ) => {
 		let src = model.shape( id )
-		let dst = {}
+		let newShape = {}
 
 		// Quickly copy everything
 		for ( let [key,value] of Object.entries( src ) ) {
-			dst[key] = value
+			newShape[key] = value
 		}
 
 		// Tidy up the id, remove the DOM element, and put it in the model.
-		model.sh.push( dst )
-		dst.id = `shape-${model.sh.length}`
-		dst.elem = null
-		dst.x += 20
-		dst.y += 20
+		model.sh.push( newShape )
+		newShape.id = `shape-${model.sh.length}`
+		newShape.elem = null
+		newShape.x += 20
+		newShape.y += 20
 
 		// Fire the listeners
 		for ( listener of model.shapeListeners ) {
-			listener( dst.id, dst )
+			listener( newShape.id, newShape )
 		}
 
 		// Save the model and return the new shape
 		model.save()
-		return dst
+		return newShape
+	},
+
+	/**
+	 * Remove the shape with this id
+	 */
+	removeShape: ( id ) => {
+		for ( let i=0; i < model.sh.length; i++ ) {
+			if ( model.sh[i].id === id ) {
+				model.sh.splice( i, 1 );
+				break
+			}
+		}
+
+		// Fire the listeners
+		for ( listener of model.shapeListeners ) {
+			listener( id, { deleted:true } )
+		}
+
+		// Save the model and return the new shape
+		model.save()
 	},
 
 	/**

@@ -64,7 +64,7 @@ const palette = {
 		let sids = selection.ids()
 
 		// No selection means nothing to do.
-		if ( sids.length === 0 ) {
+		if ( sids.length === 0 || params.deleted ) {
 			return
 		}
 

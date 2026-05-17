@@ -28,9 +28,18 @@ const undo = {
 	},
 
 	/**
+	 * Push a new shape creation event into the history. This action
+	 * erases any future history from previous undos.
+	 */
+	pushNewShapes: ( shapes ) => {
+		undo.history.push( { type: 'newShapes', changes: shapes } )
+		undo.future = []
+	},
+
+	/**
 	 * Performs an undo!
 	 */
-	undoShape: () => {
+	performUndo: () => {
 		let recent = undo.history.pop()
 		if ( !recent ) {
 			return
@@ -39,27 +48,41 @@ const undo = {
 		// Remember this change for redos!
 		undo.future.push( recent )
 
-		// Iterate the recent changes for all the entities that changed.
-		for ( const [id,log] of Object.entries( recent.changes ) ) {
-			
-			// Construct a new update object by looking for the old value when the change 
-			// first occurred and using it as the new value for a new update to the model.
-			let mod = {}
-			for ( const [key,value] of Object.entries( log ) ) {
-				if ( key.charAt(0) === '_' ) {
-					mod[key.substring(1)] = value
-				}
+		// New shapes are simply removed from the model
+		if ( recent.type === 'newShapes' ) {
+			for ( const change of recent.changes ) {
+				model.removeShape( change.id )
 			}
-
-			// Update the model with the outgoing values. This should fire listeners!
-			model.updateShape( id, mod )
 		}
+
+		// Shape edits are reversed into edits
+		else if ( recent.type === 'shape' ) {
+			// Iterate the recent changes for all the entities that changed.
+			for ( const [id,log] of Object.entries( recent.changes ) ) {
+				
+				// Construct a new update object by looking for the old value when the change 
+				// first occurred and using it as the new value for a new update to the model.
+				let mod = {}
+				for ( const [key,value] of Object.entries( log ) ) {
+					if ( key.charAt(0) === '_' ) {
+						mod[key.substring(1)] = value
+					}
+				}
+
+				// Update the model with the outgoing values. This should fire listeners!
+				model.updateShape( id, mod )
+			}
+		}
+	},
+
+	performNewShapeUndo: ( recent ) => {
+
 	},
 
 	/**
 	 * Redo the previous undo!
 	 */
-	redoShape: () => {
+	performRedo: () => {
 		let recent = undo.future.pop()
 		if ( !recent ) {
 			return

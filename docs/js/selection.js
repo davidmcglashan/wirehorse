@@ -2,6 +2,20 @@ const selection = {
 	storage: [],
 	listeners: [],
 
+	init: () => {
+		model.registerShapeListener( selection.shapeUpdated )
+	},
+
+	/**
+	 * Listen to updates to shapes. Naively, this will clear the selection if a shape
+	 * is deleted, assuming it was selected at that point in time!
+	 */
+	shapeUpdated: ( id, shape ) => {
+		if ( shape.deleted ) {
+			selection.clear()
+		}
+	},
+
 	/**
 	 * Register a listener for selection events. When selection changes the
 	 * listener will have its passed in function invoked.
