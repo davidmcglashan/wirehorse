@@ -30,8 +30,8 @@ const canvas = {
 	shapeUpdate: ( id, params ) => {
 		// Get the element.
 		let elem = document.getElementById( id )
-		if ( !elem ) {
-			return
+		if ( !elem && params.ty ) {
+			elem = canvas.elementCreator[params.ty]( params )
 		}
 
 		// Make the change.
@@ -55,8 +55,27 @@ const canvas = {
 
 		let changes = {}
 
+		// Cmd-D to duplicate!
+		if ( event.keyCode === 68 && event.metaKey ) {
+			if ( selection.yes() ) {
+				event.preventDefault()
+				clones = []
+
+				// Do the cloning
+				for ( let elem of selection.storage ) {
+					clones.push( model.cloneShape( elem.getAttribute( 'id' ) ).elem )
+				}
+
+				// Now select the new objects
+				selection.clear()
+				for ( let clone of clones ) {
+					selection.add( clone, { multi:true } )
+				}
+			}
+		}
+
 		// Down arrow means moving the selection downwards ...
-		if ( event.keyCode === 40 )  {
+		else if ( event.keyCode === 40 )  {
 			for ( let elem of selection.storage ) {
 				let id = elem.getAttribute( 'id' )
 				let newY = parseInt( elem.style.top, 10 ) + ( event.shiftKey ? 10 : 1 )
@@ -154,6 +173,8 @@ const canvas = {
 
 			div.style.alignItems = shape.ha
 			div.style.justifyContent = shape.va
+
+			return div
 		},
 
 		lbl: ( shape ) => {
@@ -165,6 +186,8 @@ const canvas = {
 			canvas.elementCreator.xywh( shape, div )
 			canvas.elementCreator.colour( shape, div )
 			canvas.elementCreator.innerHTML[shape.ty]( shape, div )
+
+			return div
 		},
 
 		cmb: ( shape ) => {
@@ -175,6 +198,8 @@ const canvas = {
 			div.setAttribute( 'class', 'combobox entity' )
 			canvas.elementCreator.xywh( shape, div )
 			canvas.elementCreator.innerHTML[shape.ty]( shape, div )
+
+			return div
 		},
 		
 		innerHTML: {

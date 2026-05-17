@@ -102,6 +102,35 @@ const model = {
 	},
 
 	/**
+	 * Create a clone of the shape with this id
+	 */
+	cloneShape: ( id ) => {
+		let src = model.shape( id )
+		let dst = {}
+
+		// Quickly copy everything
+		for ( let [key,value] of Object.entries( src ) ) {
+			dst[key] = value
+		}
+
+		// Tidy up the id, remove the DOM element, and put it in the model.
+		model.sh.push( dst )
+		dst.id = `shape-${model.sh.length}`
+		dst.elem = null
+		dst.x += 20
+		dst.y += 20
+
+		// Fire the listeners
+		for ( listener of model.shapeListeners ) {
+			listener( dst.id, dst )
+		}
+
+		// Save the model and return the new shape
+		model.save()
+		return dst
+	},
+
+	/**
 	 * Update the specified shape with the specified parameters. Returns a record object which
 	 * can be used to log and undo the change.
 	 */
