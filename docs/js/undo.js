@@ -91,23 +91,36 @@ const undo = {
 		}
 	},
 
-	performNewShapeUndo: ( recent ) => {
-
-	},
-
 	/**
 	 * Redo the previous undo!
 	 */
-	performRedo: () => {
-		let recent = undo.future.pop()
-		if ( !recent ) {
+	performRedo: () => {		
+		// Get the next thing to be redone
+		let redo = undo.future.pop()
+		if ( !redo ) {
 			return
 		}
 
-		// Redos are straightforward since the recent object already describes the change
+		// New shapes are added back from the model
+		if ( redo.type === 'newShapes' ) {
+			for ( const change of redo.changes ) {
+				model.addShape( change )
+			}
+		}
+		
+		// Removed shapes are re-removed to the model
+		else if ( redo.type === 'removeShapes' ) {
+			for ( const change of redo.changes ) {
+				model.removeShape( change.id )
+			}
+		}
+
+		// Redos are straightforward since the recent future already describes the change
 		// we want to (re)make to each entity.
-		for ( const [id,log] of Object.entries( recent.changes ) ) {
-			model.updateShape( id, log )
+		else  if ( redo.type === 'shape ') {
+			for ( const [id,log] of Object.entries( redo.changes ) ) {
+				model.updateShape( id, log )
+			}
 		}
 	}
 };

@@ -5,10 +5,10 @@ const toolbar = {
 		// Listen to CMD+Z for undo
 		document.addEventListener( 'keydown', function( event ) {
 			// Undo and Redo bound to (Shift+)Cmd+Z
-			if ( event.metaKey && event.shiftKey && event.key == 90 ) {
+			if ( event.metaKey && event.shiftKey && event.keyCode === 90 ) {
 				event.preventDefault()
 				undo.performRedo()
-			} else if ( event.metaKey && event.keyCode == 90 ) {
+			} else if ( event.metaKey && event.keyCode === 90 ) {
 				event.preventDefault()
 				undo.performUndo()
 			} 			

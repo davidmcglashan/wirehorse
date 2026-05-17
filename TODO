@@ -3,10 +3,10 @@ bugs
 - mouse leaving the window mid-drag
 - update the caret position during drags
 - double click in an editor invoked from a rectangle behaves weirdly (doesn't in labels ... ?)
+- redo doesn't resequence history properly. You can't move freely backwards and forwards ...
 
 backlog
 --------
-- redo needs to work with delete and duplicate
 - Cmd+A to select all
 - selection rectangle on glass and encompassing the max bounds of each selected shape (remove the CSS)
 - reordering
