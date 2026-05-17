@@ -7,8 +7,6 @@ bugs
 
 backlog
 --------
-- Cmd+A to select all
-- selection rectangle on glass and encompassing the max bounds of each selected shape (remove the CSS)
 - reordering
 - shape palette/quick adder
   - fluid keyboard use
@@ -21,6 +19,7 @@ backlog
   - text alignment lcrtmb 
   - bold
   - italic
+- selection rectangle on glass and encompassing the max bounds of each selected shape (remove the CSS)
 - keyboard+drag to quickly add rectangles
 - Press Enter with a single selection to invoke the glass editor
 - export to clipboard

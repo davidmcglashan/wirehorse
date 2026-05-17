@@ -62,9 +62,19 @@ const canvas = {
 		}
 
 		let changes = {}
-		
+
+		// Cmd+A to select everything
+		if ( event.metaKey && event.keyCode == 65 ) {
+			event.preventDefault()
+			selection.clear()
+
+			for ( let shape of model.sh ) {
+				selection.add( shape.elem, { multi:true } )
+			}
+		}
+
 		// Backspace for delete!
-		if ( event.keyCode == 8 ) {
+		else if ( event.keyCode == 8 ) {
 			let removed = []
 			for ( let elem of selection.storage ) {
 				let id = elem.getAttribute( 'id' )
