@@ -65,17 +65,20 @@ const canvas = {
 		
 		// Backspace for delete!
 		if ( event.keyCode == 8 ) {
+			let removed = []
 			for ( let elem of selection.storage ) {
 				let id = elem.getAttribute( 'id' )
-				model.removeShape( id )
+				removed.push( model.removeShape( id ) )
 			}
+			// Give undo something to (un)do.
+			undo.pushRemovedShapes( removed )
 		} 
 
 		// Cmd-D to duplicate!
 		else if ( event.keyCode === 68 && event.metaKey ) {
 			if ( selection.yes() ) {
 				event.preventDefault()
-				clones = []
+				let clones = []
 
 				// Do the cloning
 				for ( let elem of selection.storage ) {

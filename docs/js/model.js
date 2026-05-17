@@ -130,6 +130,22 @@ const model = {
 		return newShape
 	},
 
+	/**
+	 * Add a shape to the model
+	 */
+	addShape: ( newShape ) => {
+		model.sh.push( newShape )
+		newShape.elem = null
+
+		// Fire the listeners
+		for ( listener of model.shapeListeners ) {
+			listener( newShape.id, newShape )
+		}
+
+		// Save the model and return the new shape
+		model.save()
+	},
+
 	nextShapeId: () => {
 		// Quickly gather the in-use ids
 		let inUse = []
@@ -154,8 +170,11 @@ const model = {
 	 * Remove the shape with this id
 	 */
 	removeShape: ( id ) => {
+		let removed = null
+
 		for ( let i=0; i < model.sh.length; i++ ) {
 			if ( model.sh[i].id === id ) {
+				removed = model.sh[i]
 				model.sh.splice( i, 1 );
 				break
 			}
@@ -165,10 +184,11 @@ const model = {
 		for ( listener of model.shapeListeners ) {
 			listener( id, { deleted:true } )
 		}
-
-		// Save the model and return the new shape
+		
+		// Save the model and return the shape being removed
 		model.save()
-	},
+		return removed
+	},	
 
 	/**
 	 * Update the specified shape with the specified parameters. Returns a record object which

@@ -37,6 +37,15 @@ const undo = {
 	},
 
 	/**
+	 * Push a new shape removal event into the history. This action
+	 * erases any future history from previous undos.
+	 */
+	pushRemovedShapes: ( shapes ) => {
+		undo.history.push( { type: 'removeShapes', changes: shapes } )
+		undo.future = []
+	},
+
+	/**
 	 * Performs an undo!
 	 */
 	performUndo: () => {
@@ -52,6 +61,13 @@ const undo = {
 		if ( recent.type === 'newShapes' ) {
 			for ( const change of recent.changes ) {
 				model.removeShape( change.id )
+			}
+		}
+
+		// Removed shapes are re-added to the model
+		else if ( recent.type === 'removeShapes' ) {
+			for ( const change of recent.changes ) {
+				model.addShape( change )
 			}
 		}
 
