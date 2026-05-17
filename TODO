@@ -4,6 +4,7 @@ bugs
 - mouse leaving the window mid-drag
 - round away the floats appearing in the palette inputs
 - update the caret position during drags
+- click-drag invokes the world's slowest double-click editor!
 
 backlog
 --------

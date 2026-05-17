@@ -4,6 +4,27 @@ const model = {
 	metadataListeners: [],
 	shapeListeners: [],
 
+	// These are the 15 standard colours we're using
+	colours: {
+		wh: { hex: 'fff', name: 'White' },
+		bk: { hex: '222', name: 'Black' },
+
+		g1: { hex: 'f4f4f4', name: 'Grey 1' },
+		g2: { hex: 'e8e8e8', name: 'Grey 2' },
+		g3: { hex: 'ddd', name: 'Grey 3' },
+		g4: { hex: 'ccc', name: 'Grey 4' },
+		g5: { hex: '999', name: 'Grey 5' },
+		g6: { hex: '666', name: 'Grey 6' },
+
+		rd: { hex: 'c00', name: 'Red' },
+		or: { hex: 'f80', name: 'Orange' },
+		yl: { hex: 'ff0', name: 'Yellow' },
+		gr: { hex: '0a0', name: 'Green' },
+		bl: { hex: '36c', name: 'Blue' },
+		id: { hex: '505', name: 'Indigo' },
+		vi: { hex: 'f0f', name: 'Violet' },
+	},
+
 	/**
 	 * Register a listener for the model's metadata. If any value changes the
 	 * listener will have its passed in function invoked.

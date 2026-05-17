@@ -9,10 +9,10 @@ const defaultModel = {
 		{
 			id: 'shape-0',
 			ty: 'rec',
-			bg: 'rd',
-			co: 'wh',
+			bg: 'g1',
+			co: 'bk',
 			tx: 'Hello Horse',
-			bo: 'bk',
+			bo: 'g2',
 			ha: 'center',
 			va: 'center',
 			x: 100,
@@ -32,7 +32,7 @@ const defaultModel = {
 		},{
 			id: 'shape-2',
 			ty: 'lbl',
-			co: '#333',
+			co: 'bk',
 			tx: 'My label',
 			sz: '16',
 			x: 500,

@@ -5,6 +5,17 @@ const canvas = {
 		canvas.elem = document.getElementById( '-canvas' )
 		model.registerShapeListener( canvas.shapeUpdate )
 		document.addEventListener( 'keydown', canvas.keyDown )
+
+		// Inject a <style> node into the document the various coloured SVGs in
+		let style = document.createElement( 'style' )
+		let head = document.getElementsByTagName( 'head' )[0]
+		head.appendChild( style )
+
+		let css = ''
+		for ( let [key,colour] of Object.entries(model.colours) ) {
+			css += `.border-${key}{border-image-source: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22120.1%22%20height%3D%2261.3%22%20viewBox%3D%220%200%20112.6%2057.5%22%3E%3Cpath%20fill%3D%22none%22%20stroke%3D%22%23${colour.hex}%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%223%22%20d%3D%22M15.5%202h16.7c5%20.2%2012.7%201%2019.1.7%204.3.5%208.6-.3%2013%20.3%206.1%200%2012.3-1%2018.4-.7%205.9.4%2010.1.5%2017.6.4%207.4-.5%2010.7%200%2010.2%207.3q-.3%209-.1%2016c0%208.7%201.3%2025-.6%2027.6-3%203.8-10%201-14.3%201.2-4-.2-9.6%201-13.5%200-5-.7-8.3.7-13.2.3-5%200-9.7-.8-14.5.3a64%2064%200%200%201-19.2-.5c-5.9-.9-10%200-15.9-.1-4.7%200-15%201.8-16.6%200S2.2%2043%202.2%2039.1c-.4-9.2-.5-15.6.1-24.8.1-1.6-1.1-8.4%200-10.2C4.7.5%2011.6%202.5%2015.5%202%22%2F%3E%3C%2Fsvg%3E');}`
+		}
+		style.innerHTML = css
 	},
 
 	reset: () => {
@@ -88,12 +99,6 @@ const canvas = {
 	 * Functions for adding shapes to the canvas
 	 */
 	elementCreator: {
-		colours: {
-			wh: '#fff',
-			bk: '#000',
-			rd: '#f00'
-		},
-
 		/**
 		 * Creates the basic <div> for a canvas entity.
 		 */
@@ -118,10 +123,11 @@ const canvas = {
 
 		colour: ( shape, elem ) => {
 			if ( shape.bg ) {
-				elem.style.backgroundColor = canvas.elementCreator.colours[shape.bg]
+				elem.style.backgroundColor = `#${model.colours[shape.bg].hex}`
 			}
 			if ( shape.co ) {
-				elem.style.color = canvas.elementCreator.colours[shape.co]
+				console.log( shape.co )
+				elem.style.color = `#${model.colours[shape.co].hex}`
 			}
 		},
 
