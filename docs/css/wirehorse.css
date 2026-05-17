@@ -100,7 +100,12 @@ body {
 	#-palette .message {
 		justify-content: center;
 	}
-
+	[data-type="colour"] {
+		border: 1px solid #aaa;
+		border-radius: 8px;
+		min-width: 4rem;
+		min-height: 1.75rem;
+	}
 .scribble {
 	font-family: "Redacted Script", cursive;
 	font-weight: 700;
@@ -117,16 +122,12 @@ ul.dropdown,
 .rectangle {
 	border-style: solid;
 	border-width: 8px;
-	border-radius: 5px;
+	border-radius: 2px;
 	border-image-outset: 3px;
 	border-image-repeat: round;
 	border-image-slice: 12 12 12 12;
 	border-image-width: 10px;
 }
-
-/* .border-bk {
-	border-image-source: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22120.1%22%20height%3D%2261.3%22%20viewBox%3D%220%200%20112.6%2057.5%22%3E%3Cpath%20fill%3D%22none%22%20stroke%3D%22%23111111%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%223%22%20d%3D%22M15.5%202h16.7c5%20.2%2012.7%201%2019.1.7%204.3.5%208.6-.3%2013%20.3%206.1%200%2012.3-1%2018.4-.7%205.9.4%2010.1.5%2017.6.4%207.4-.5%2010.7%200%2010.2%207.3q-.3%209-.1%2016c0%208.7%201.3%2025-.6%2027.6-3%203.8-10%201-14.3%201.2-4-.2-9.6%201-13.5%200-5-.7-8.3.7-13.2.3-5%200-9.7-.8-14.5.3a64%2064%200%200%201-19.2-.5c-5.9-.9-10%200-15.9-.1-4.7%200-15%201.8-16.6%200S2.2%2043%202.2%2039.1c-.4-9.2-.5-15.6.1-24.8.1-1.6-1.1-8.4%200-10.2C4.7.5%2011.6%202.5%2015.5%202%22%2F%3E%3C%2Fsvg%3E');
-} */
 
 .combobox {
 	display: flex;
@@ -181,3 +182,29 @@ input {
 #-palette div.hidden {
 	display: none;
 }
+
+.lightbox {
+	position: absolute;
+	inset: 0;
+	background-color: rgba(0,0,0,0.25);
+}
+	.lightbox .picker {
+		position: absolute;
+		background-color: #fff;
+		border: 1px solid #aaa;
+		border-radius: 5px;
+		box-shadow: 0px 4px 8px rgba(0,0,0,0.25);
+		padding: 0.5rem;
+		width: fit-content;
+		height: fit-content;
+		display: flex;
+		flex-wrap: wrap;
+		max-width: 8.3rem;
+		gap: 0.1rem;
+	}
+	.lightbox .picker input[type="button"] {
+		width: 2rem;
+		height: 2rem;
+		border: 1px solid #aaa;
+		border-radius: 3px;
+	}

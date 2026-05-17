@@ -36,7 +36,8 @@ const canvas = {
 
 		// Make the change.
 		canvas.elementCreator.xywh( params, elem )
-
+		canvas.elementCreator.colour( params, elem )
+		
 		// InnerHTML changes require the whole model.
 		if ( params.tx ) {
 			let shape = model.shape( id )
@@ -126,7 +127,6 @@ const canvas = {
 				elem.style.backgroundColor = `#${model.colours[shape.bg].hex}`
 			}
 			if ( shape.co ) {
-				console.log( shape.co )
 				elem.style.color = `#${model.colours[shape.co].hex}`
 			}
 		},

@@ -1,5 +1,7 @@
 bugs
 ----
+- text changes don't fire undos
+- colour changes don't fire undos
 - setting a text value with the inline editor to '' doesn't make it to the model
 - mouse leaving the window mid-drag
 - round away the floats appearing in the palette inputs
@@ -9,11 +11,17 @@ bugs
 backlog
 --------
 
+- you're going to have to write your own colour picker :(
+  - colour palette field is a button styled in the current selection
+  - clicking it invokes the 4x4 palette
+  - clicking a 4x4 updates the button which in turn updates the model
+  - might need a lightbox div to detect clickaways
 - background colour
 - border colour
   - can the SVG be written to <head><style> with javascript with injected colours?
 - combobox caret
 - SVGs
+- hover and focus affordances in palette
 - some kind of 'what keys does this shape support' map derived from default.js
 - disabled
 - text alignment lcrtmb

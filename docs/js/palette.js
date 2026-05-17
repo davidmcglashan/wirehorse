@@ -1,5 +1,5 @@
 const palette = {
-	fields: [ 'x','y','w','h' ],
+	fields: [ 'x','y','w','h','bg','co','bo' ],
 
 	/**
 	 * Prepare the palette for use.
@@ -8,11 +8,24 @@ const palette = {
 		selection.registerListener( palette.selectionChanged );
 		model.registerShapeListener( palette.shapeChanged );
 
+		// Inject a <style> node into the document the various coloured SVGs in
+		let style = document.createElement( 'style' )
+		let head = document.getElementsByTagName( 'head' )[0]
+		head.appendChild( style )
+
+		let css = ''
+		for ( let [key,colour] of Object.entries(model.colours) ) {
+			css += `.button-${key}{ background-color: #${colour.hex};}`
+		}
+		style.innerHTML = css
+
 		// Put a key listener on each input
 		for ( field of palette.fields ) {
 			let input = document.getElementById( `-fld-${field}` )
-			input.addEventListener( 'keydown', palette.keyDown )
-			input.addEventListener( 'input', palette.inputChanged )
+			if ( input ) {
+				input.addEventListener( 'keydown', palette.keyDown )
+				input.addEventListener( 'input', palette.inputChanged )
+			}
 		}
 	},
 
@@ -98,7 +111,9 @@ const palette = {
 	noSelection: () => {
 		for ( field of palette.fields ) {
 			let container = document.getElementById( `-con-${field}` )
-			container.classList.add( 'hidden' )
+			if ( container ) {
+				container.classList.add( 'hidden' )
+			}
 		}
 	},
 
@@ -110,14 +125,24 @@ const palette = {
 		for ( field of palette.fields ) {
 			let container = document.getElementById( `-con-${field}` )
 			let input = document.getElementById( `-fld-${field}` )
+			let type = input.getAttribute( 'data-type' )
 
+			// Does the model have a value for this field?
 			let value = shape[field]
 			if ( value || value === 0 ) {
 				container.classList.remove( 'hidden' )
-				input.value = value
-			} else {
+
+				if ( type === 'colour' ) {
+					input.setAttribute( 'onclick',`javascript:palette.colourPicker('${field}')` )
+					input.setAttribute( 'class', `button-${value}` )
+				} else {
+					input.value = value
+				}
+			} 
+			
+			// no value so hide the container (and the control with it)
+			else {
 				container.classList.add( 'hidden' )
-				input.value = value
 			}
 		}
 	},
@@ -130,5 +155,44 @@ const palette = {
 			let container = document.getElementById( `-con-${field}` )
 			container.classList.add( 'hidden' )
 		}
-	}
+	},
+
+	/**
+	 * Spins up a colour picker on the UI
+	 */
+	colourPicker: ( field ) => {
+		let lightbox = document.createElement( 'div' )
+		lightbox.setAttribute( 'class', 'lightbox' )
+		document.getElementsByTagName( 'body' )[0].appendChild( lightbox )
+		lightbox.addEventListener( 'mouseup', function( event ) {
+			lightbox.remove()
+		} )
+
+		let picker = document.createElement( 'div' )
+		picker.setAttribute( 'class', 'picker' )
+		lightbox.appendChild( picker )
+		picker.addEventListener( 'mouseup', function( event ) {
+			event.stopPropagation()
+		} )
+
+		let input = document.getElementById( `-fld-${field}` ).getBoundingClientRect()
+		picker.style.top = `${input.y + input.height+3}px`
+		picker.style.right = '0.5rem'
+
+		for ( let [key,colour] of Object.entries(model.colours) ) {
+			let button = document.createElement( 'input' )
+			button.setAttribute( 'type', 'button' )
+			button.setAttribute( 'class', `button-${key}` )
+			picker.appendChild( button )
+
+			button.addEventListener( 'click', function( event ) {
+				for ( let shape of selection.ids() ) {
+					let mod = {}
+					mod[field] = key
+					undo.pushShape( model.updateShape( shape, mod ) )
+				}
+				lightbox.remove()
+			} )
+		}
+	},
 };
