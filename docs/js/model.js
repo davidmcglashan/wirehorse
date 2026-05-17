@@ -107,7 +107,7 @@ const model = {
 	updateShape: ( id, params ) => {
 		let record = {}
 		record.id = id
-		
+
 		for ( let shape of model.sh ) {
 			if ( shape.id === id ) {
 				for ( const [key, value] of Object.entries( params ) ) {

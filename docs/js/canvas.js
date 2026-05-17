@@ -39,7 +39,7 @@ const canvas = {
 		canvas.elementCreator.colour( params, elem )
 
 		// InnerHTML changes require the whole model.
-		if ( params.tx ) {
+		if ( params.tx || params.tx === '' ) {
 			let shape = model.shape( id )
 			canvas.elementCreator.innerHTML[shape.ty]( params, elem )
 		}
