@@ -125,16 +125,17 @@ const palette = {
 		for ( field of palette.fields ) {
 			let container = document.getElementById( `-con-${field}` )
 			let input = document.getElementById( `-fld-${field}` )
-			let type = input.getAttribute( 'data-type' )
 
 			// Does the model have a value for this field?
 			let value = shape[field]
 			if ( value || value === 0 ) {
 				container.classList.remove( 'hidden' )
 
-				if ( type === 'colour' ) {
+				if ( input.getAttribute( 'data-type' ) === 'colour' ) {
 					input.setAttribute( 'onclick',`javascript:palette.colourPicker('${field}')` )
 					input.setAttribute( 'class', `button-${value}` )
+				} else if ( input.getAttribute( 'type' ) === 'number' ) {
+					input.value = parseInt( value, 10 )
 				} else {
 					input.value = value
 				}
