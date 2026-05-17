@@ -37,7 +37,7 @@ const canvas = {
 		// Make the change.
 		canvas.elementCreator.xywh( params, elem )
 		canvas.elementCreator.colour( params, elem )
-		
+
 		// InnerHTML changes require the whole model.
 		if ( params.tx ) {
 			let shape = model.shape( id )
@@ -128,6 +128,14 @@ const canvas = {
 			}
 			if ( shape.co ) {
 				elem.style.color = `#${model.colours[shape.co].hex}`
+			}
+
+			// Borders are done with classes, not styles, so this takes a bit of prog.
+			if ( shape.bo ) {
+				for ( let [key,colour] of Object.entries(model.colours) ) {
+					elem.classList.remove( `border-${key}`)
+				}
+				elem.classList.add( `border-${shape.bo}` )
 			}
 		},
 
