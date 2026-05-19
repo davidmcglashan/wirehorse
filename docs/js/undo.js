@@ -28,20 +28,11 @@ const undo = {
 	},
 
 	/**
-	 * Push a new shape creation event into the history. This action
-	 * erases any future history from previous undos.
+	 * Push a bulk shape event into the history. This action erases any future history
+	 * from previous undos.
 	 */
-	pushNewShapes: ( shapes ) => {
-		undo.history.push( { type: 'newShapes', changes: shapes } )
-		undo.future = []
-	},
-
-	/**
-	 * Push a new shape removal event into the history. This action
-	 * erases any future history from previous undos.
-	 */
-	pushRemovedShapes: ( shapes ) => {
-		undo.history.push( { type: 'removeShapes', changes: shapes } )
+	pushBulkShapes: ( type, shapes ) => {
+		undo.history.push( { type: type, changes: shapes } )
 		undo.future = []
 	},
 

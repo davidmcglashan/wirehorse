@@ -37,6 +37,19 @@ const canvas = {
 			return
 		}
 
+		// Bring the shape to the front?
+		if ( params.toFront ) {
+			canvas.elem.appendChild( elem )
+		}
+
+		// Move the shape backwards through the DOM.
+		if ( params.back ) {
+			let previous = elem.previousSibling
+			if ( previous ) {
+				canvas.elem.insertBefore( elem, previous )
+			}
+		}
+		
 		// If there's no element then try to create a new one.
 		if ( !elem && params.ty ) {
 			elem = canvas.elementCreator[params.ty]( params )
@@ -51,6 +64,60 @@ const canvas = {
 			let shape = model.shape( id )
 			canvas.elementCreator.innerHTML[shape.ty]( params, elem )
 		}
+	},
+
+	/**
+	 * Bring the current selection to the front
+	 */
+	bringSelectionToFront: ( event ) => {
+		// Selection isn't probably in 'layer' order, so we must do some consolidation first.
+		let sids = {}
+		for ( let sid of selection.ids() ) {
+			sids[sid] = 1
+		}
+
+		// Now iterate the model back-to-front to get the sids in order.
+		let sidsInOrder = []
+		for ( let shape of model.sh ) {
+			if ( sids[shape.id] === 1 ) {
+				sidsInOrder.push( shape.id )
+			}
+		}
+
+		// The model to move these shapes forward. This will fire listeners and return an
+		// object we can send to the undo manager.
+		let changes = {}
+		for ( let sid of sidsInOrder ) {
+			changes[sid] = model.shapeToFront( sid )
+		}
+		undo.pushBulkShapes( 'toFront', changes )
+	},
+
+	/**
+	 * Move the selection back through the current layers
+	 */
+	moveSelectionBack: ( event ) => {
+		// Selection isn't probably in 'layer' order, so we must do some consolidation first.
+		let sids = {}
+		for ( let sid of selection.ids() ) {
+			sids[sid] = 1
+		}
+
+		// Now iterate the model back-to-front to get the sids in order.
+		let sidsInOrder = []
+		for ( let shape of model.sh ) {
+			if ( sids[shape.id] === 1 ) {
+				sidsInOrder.push( shape.id )
+			}
+		}
+
+		// The model to move these shapes forward. This will fire listeners and return an
+		// object we can send to the undo manager.
+		let changes = {}
+		for ( let sid of sidsInOrder ) {
+			changes[sid] = model.shapeBack( sid )
+		}
+		undo.pushBulkShapes( 'moveBack', changes )
 	},
 
 	/**
@@ -81,7 +148,7 @@ const canvas = {
 				removed.push( model.removeShape( id ) )
 			}
 			// Give undo something to (un)do.
-			undo.pushRemovedShapes( removed )
+			undo.pushBulkShapes( 'removeShapes', removed )
 		} 
 
 		// Cmd-D to duplicate!
@@ -97,7 +164,7 @@ const canvas = {
 				}
 				
 				// Give undo something to (un)do.
-				undo.pushNewShapes( clones )
+				undo.pushBulkShapes( 'newShapes', clones )
 
 				// Now select the new object(s).
 				selection.clear()

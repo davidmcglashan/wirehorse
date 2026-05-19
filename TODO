@@ -19,6 +19,7 @@ backlog
   - text alignment lcrtmb 
   - bold
   - italic
+- is it quicker/more responsive to use a scroll/pan rather than a translate()?
 - selection rectangle on glass and encompassing the max bounds of each selected shape (remove the CSS)
 - keyboard+drag to quickly add rectangles
 - Press Enter with a single selection to invoke the glass editor

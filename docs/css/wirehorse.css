@@ -3,6 +3,7 @@ body {
 	padding: 0;
 	background-color: #ffffff;
 	overflow: hidden;
+	font-size: 11pt;
 }
 
 #-canvas {
@@ -93,9 +94,9 @@ body {
 		align-items: baseline;
 		gap: 0.5rem;
 	}
-	#-palette div * {
+	#-palette div input {
 		width: fit-content;
-		max-width: 8rem;
+		max-width: 5rem;
 	}
 	#-palette .message {
 		justify-content: center;
@@ -105,6 +106,27 @@ body {
 		border-radius: 8px;
 		min-width: 4rem;
 		min-height: 1.75rem;
+	}
+	#-palette .toolbar {
+		border: 1px solid #aaa;
+		border-radius: 4px;
+		justify-content: space-evenly;
+		margin: 1rem 0;
+	}
+	#-palette .toolbar a {
+		padding: 4px 8px 0 8px;
+	}
+	#-palette .toolbar a:hover {
+		background-color: #ccc;
+	}
+	#-palette .toolbar a:hover svg {
+		stroke: #fff;
+	}
+	#-palette .toolbar a.flip img {
+		transform: rotate(180deg);
+	}
+	#-palette .toolbar img {
+		max-width: 2rem;
 	}
 .scribble {
 	font-family: "Redacted Script", cursive;

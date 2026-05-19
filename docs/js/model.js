@@ -131,6 +131,64 @@ const model = {
 	},
 
 	/**
+	 * Send the shape with id to the front.
+	 */
+	shapeToFront: ( id ) => {
+		// Do the move by removing and pushing onto the end of the shapes array.
+		let movedToFront = null
+		let i;
+
+		for ( i=0; i < model.sh.length; i++ ) {
+			if ( model.sh[i].id === id ) {
+				movedToFront = model.sh[i]
+				model.sh.splice( i, 1 );
+				break
+			}
+		}
+		model.sh.push( movedToFront )
+
+		// Fire the listeners
+		for ( listener of model.shapeListeners ) {
+			listener( id, { toFront:true } )
+		}
+		
+		// Save the model and return the shape being removed
+		model.save()
+		return { id: movedToFront.id, from: i }
+	},
+
+	/**
+	 * Move the shape with id back behind its neighbour.
+	 */
+	shapeBack: ( id ) => {
+		// Do the move by rearranging the shapes array.
+		let movedBack = null
+		let i;
+
+		for ( i=0; i < model.sh.length; i++ ) {
+			if ( model.sh[i].id === id ) {
+				// If we're already at the back then there's nothing to do!
+				if ( i === 0 ) {
+					return
+				}
+				movedBack = model.sh[i]
+				model.sh.splice( i, 1 );
+				break
+			}
+		}
+		model.sh.splice( i-1, 0, movedBack )
+
+		// Fire the listeners
+		for ( listener of model.shapeListeners ) {
+			listener( id, { back:true } )
+		}
+		
+		// Save the model and return the shape being removed
+		model.save()
+		return { id: movedBack.id, from: i }
+	},
+
+	/**
 	 * Add a shape to the model
 	 */
 	addShape: ( newShape ) => {

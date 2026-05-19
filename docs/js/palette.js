@@ -1,5 +1,6 @@
 const palette = {
 	fields: [ 'x','y','w','h','bg','co','bo' ],
+	toolbars: ['arrange'],
 
 	/**
 	 * Prepare the palette for use.
@@ -109,10 +110,17 @@ const palette = {
 	},
 
 	noSelection: () => {
-		for ( field of palette.fields ) {
+		for ( let field of palette.fields ) {
 			let container = document.getElementById( `-con-${field}` )
 			if ( container ) {
 				container.classList.add( 'hidden' )
+			}
+		}
+
+		for ( let toolbar of palette.toolbars ) {
+			let elem = document.getElementById( `-toolbar-${toolbar}` )
+			if ( elem ) {
+				elem.classList.add( 'hidden' )
 			}
 		}
 	},
@@ -144,6 +152,13 @@ const palette = {
 			// no value so hide the container (and the control with it)
 			else {
 				container.classList.add( 'hidden' )
+			}
+		}
+
+		for ( let toolbar of palette.toolbars ) {
+			let elem = document.getElementById( `-toolbar-${toolbar}` )
+			if ( elem ) {
+				elem.classList.remove( 'hidden' )
 			}
 		}
 	},
