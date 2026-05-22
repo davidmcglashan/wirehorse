@@ -8,9 +8,6 @@ bugs
 backlog
 --------
 - shape palette/quick adder
-  - fluid keyboard use
-  - adds at the mouse location
-  - a button is a rect so maybe some presets in here?
 - some kind of 'what keys does this shape support' map derived from default.js
 - disabled
 - locking shapes for selection immunity

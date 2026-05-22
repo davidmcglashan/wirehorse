@@ -50,7 +50,6 @@ const model = {
 		if ( current ) {
 			current = JSON.parse( current )
 		} else {
-			model.demo()
 			return
 		}
 		
@@ -180,11 +179,17 @@ const model = {
 	},
 
 	/**
-	 * Add a shape to the model
+	 * Add a shape to the model. New shapes will be assigned new ids if they
+	 * don't have them already.
 	 */
 	addShape: ( newShape ) => {
 		model.sh.push( newShape )
 		newShape.elem = null
+
+		// Make sure the new shape has an id.
+		if ( !newShape.id ) {
+			newShape.id = model.nextShapeId()
+		}
 
 		// Fire the listeners
 		for ( listener of model.shapeListeners ) {
@@ -193,6 +198,7 @@ const model = {
 
 		// Save the model and return the new shape
 		model.save()
+		return newShape
 	},
 
 	nextShapeId: () => {
@@ -284,14 +290,6 @@ const model = {
 				mt: model.mt, 
 				sh: model.sh 
 			} )
-	},
-
-	/**
-	 * Implement the default or demo wireframe.
-	 */
-	demo: () => {
-		localStorage['wirehorse.current'] = JSON.stringify( defaultModel )
-		model.parse()
 	},
 
 	new: () => {

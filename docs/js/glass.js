@@ -74,7 +74,11 @@ const glass = {
 				// Position the input on the glass near the mouse click
 				glass.editor.style.top = `${event.pageY+16}px`
 				glass.editor.style.left = `${event.pageX-16}px`
-				glass.editor.value = shape['tx']
+				if ( shape['tx'] ) {
+					glass.editor.value = shape['tx']
+				} else {
+					glass.editor.value = ''
+				}
 
 				// Special jazz for textareas
 				if ( editor === 'textarea' ) {

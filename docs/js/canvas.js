@@ -282,7 +282,9 @@ const canvas = {
 		
 		innerHTML: {
 			rec: ( shape, elem ) => {
-				elem.innerHTML = `<span>${shape.tx}</span>`
+				if ( shape.tx ) {
+					elem.innerHTML = `<span>${shape.tx}</span>`
+				}
 			},
 			lbl: ( shape, elem ) => {
 				elem.innerHTML = shape.tx

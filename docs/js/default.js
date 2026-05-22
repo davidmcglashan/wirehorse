@@ -1,26 +1,36 @@
-const defaultModel = {
-	mt: {
-		tt: 'Default wireframe',
-		ox: 0,
-		oy: 0,
-		sc: 1
-	},
-	sh: [
-		{
-			id: 'shape-0',
+const defaults = {
+	rectangle: {
+		name: 'Rectangle',
+		model: {
 			ty: 'rec',
 			bg: 'g1',
 			co: 'bk',
-			tx: 'Hello Horse',
 			bo: 'g2',
 			ha: 'center',
 			va: 'center',
-			x: 100,
-			y: 100,
 			w: 300,
 			h: 100
-		},{
-			id: 'shape-1',
+		}
+	},
+
+	blue_button: {
+		name: 'Blue Button',
+		model: {
+			ty: 'rec',
+			tx: 'Button',
+			bg: 'bl',
+			co: 'wh',
+			bo: 'bl',
+			ha: 'center',
+			va: 'center',
+			w: 100,
+			h: 16
+		}
+	},
+
+	combobox: {
+		name: 'Combobox',
+		model: {
 			ty: 'cmb',
 			tx: 'Choose an option',
 			ha: 'center',
@@ -29,14 +39,18 @@ const defaultModel = {
 			y: 30,
 			w: 200,
 			h: 30
-		},{
-			id: 'shape-2',
+		}
+	},
+
+	label: {
+		name: 'Label',
+		model: {
 			ty: 'lbl',
 			co: 'bk',
-			tx: 'My label',
+			tx: 'New label',
 			sz: '16',
 			x: 500,
 			y: 130
 		}
-	]
+	}
 };
