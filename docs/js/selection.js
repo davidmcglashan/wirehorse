@@ -81,5 +81,26 @@ const selection = {
 			ret.push( elem.getAttribute( 'id' ) )
 		}
 		return ret
+	},
+
+	/**
+	 * Returns the ids of all the currently selected entities in Z-order.
+	 */
+	idsInZOrder: () => {
+		// Selection isn't probably in Z-order, so we must do some consolidation first.
+		let sids = {}
+		for ( let sid of selection.ids() ) {
+			sids[sid] = 1
+		}
+
+		// Now iterate the model back-to-front to get the sids in order.
+		let sidsInOrder = []
+		for ( let shape of model.sh ) {
+			if ( sids[shape.id] === 1 ) {
+				sidsInOrder.push( shape.id )
+			}
+		}
+
+		return sidsInOrder
 	}
 };

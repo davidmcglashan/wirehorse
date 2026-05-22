@@ -131,61 +131,50 @@ const model = {
 	},
 
 	/**
-	 * Send the shape with id to the front.
+	 * Relayers a shape. Mode is one of 'f','b','2f,'2b'
 	 */
-	shapeToFront: ( id ) => {
-		// Do the move by removing and pushing onto the end of the shapes array.
-		let movedToFront = null
+	relayerShape: ( id, mode ) => {
+		let movedShape = null
 		let i;
-
+		
+		// The move is done in two parts. First we find and remove the 
+		// shape matching id from the shapes array.
 		for ( i=0; i < model.sh.length; i++ ) {
 			if ( model.sh[i].id === id ) {
-				movedToFront = model.sh[i]
+				movedShape = model.sh[i]
 				model.sh.splice( i, 1 );
 				break
 			}
 		}
-		model.sh.push( movedToFront )
 
-		// Fire the listeners
-		for ( listener of model.shapeListeners ) {
-			listener( id, { toFront:true } )
-		}
-		
-		// Save the model and return the shape being removed
-		model.save()
-		return { id: movedToFront.id, from: i }
-	},
-
-	/**
-	 * Move the shape with id back behind its neighbour.
-	 */
-	shapeBack: ( id ) => {
-		// Do the move by rearranging the shapes array.
-		let movedBack = null
-		let i;
-
-		for ( i=0; i < model.sh.length; i++ ) {
-			if ( model.sh[i].id === id ) {
-				// If we're already at the back then there's nothing to do!
-				if ( i === 0 ) {
-					return
-				}
-				movedBack = model.sh[i]
-				model.sh.splice( i, 1 );
+		// Now we insert it in the shapes array at the intended destination.
+		// Care is taken to stop dst being out of bounds for the array.
+		let dst = 0 // This is already the value for '2b'
+		switch ( mode ) {
+			case '2f':
+				dst = model.sh.length
 				break
-			}
-		}
-		model.sh.splice( i-1, 0, movedBack )
+			case 'f':
+				dst = i+1
+				break
+			case 'b':
+				dst = i-1
+				break
+		} 
+		model.sh.splice( 
+				Math.max( 0, Math.min( dst, model.sh.length ) ), 
+				0, 
+				movedShape
+			)
 
 		// Fire the listeners
 		for ( listener of model.shapeListeners ) {
-			listener( id, { back:true } )
+			listener( id, { relayer:true } )
 		}
 		
-		// Save the model and return the shape being removed
+		// Save the model and return an object which can be used by the undo manager
 		model.save()
-		return { id: movedBack.id, from: i }
+		return { id: movedShape.id, from: i }
 	},
 
 	/**

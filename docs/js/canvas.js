@@ -38,21 +38,14 @@ const canvas = {
 		}
 
 		// Bring the shape to the front?
-		if ( params.toFront ) {
-			canvas.elem.appendChild( elem )
-		}
-
-		// Move the shape backwards through the DOM.
-		if ( params.back ) {
-			let previous = elem.previousSibling
-			if ( previous ) {
-				canvas.elem.insertBefore( elem, previous )
-			}
+		if ( params.relayer ) {
+			canvas.relayer()
 		}
 		
 		// If there's no element then try to create a new one.
 		if ( !elem && params.ty ) {
 			elem = canvas.elementCreator[params.ty]( params )
+			canvas.relayer()
 		}
 
 		// Make the change.
@@ -67,28 +60,28 @@ const canvas = {
 	},
 
 	/**
+	 * Relayering the canvas simply updates the z-index of every child element
+	 * to be its position in the model shapes array.
+	 */
+	relayer: () => {
+		let z = 1
+		for ( let shape of model.sh ) {
+			shape.elem.style.zIndex = z
+			z += 1
+		}
+	},
+
+	/**
 	 * Bring the current selection to the front
 	 */
 	bringSelectionToFront: ( event ) => {
-		// Selection isn't probably in 'layer' order, so we must do some consolidation first.
-		let sids = {}
-		for ( let sid of selection.ids() ) {
-			sids[sid] = 1
-		}
-
-		// Now iterate the model back-to-front to get the sids in order.
-		let sidsInOrder = []
-		for ( let shape of model.sh ) {
-			if ( sids[shape.id] === 1 ) {
-				sidsInOrder.push( shape.id )
-			}
-		}
+		let sids = selection.idsInZOrder()
 
 		// The model to move these shapes forward. This will fire listeners and return an
 		// object we can send to the undo manager.
 		let changes = {}
-		for ( let sid of sidsInOrder ) {
-			changes[sid] = model.shapeToFront( sid )
+		for ( let sid of sids ) {
+			changes[sid] = model.relayerShape( sid, event.shiftKey ? '2f' : 'f' )
 		}
 		undo.pushBulkShapes( 'toFront', changes )
 	},
@@ -97,25 +90,13 @@ const canvas = {
 	 * Move the selection back through the current layers
 	 */
 	moveSelectionBack: ( event ) => {
-		// Selection isn't probably in 'layer' order, so we must do some consolidation first.
-		let sids = {}
-		for ( let sid of selection.ids() ) {
-			sids[sid] = 1
-		}
-
-		// Now iterate the model back-to-front to get the sids in order.
-		let sidsInOrder = []
-		for ( let shape of model.sh ) {
-			if ( sids[shape.id] === 1 ) {
-				sidsInOrder.push( shape.id )
-			}
-		}
+		let sids = selection.idsInZOrder()
 
 		// The model to move these shapes forward. This will fire listeners and return an
 		// object we can send to the undo manager.
 		let changes = {}
-		for ( let sid of sidsInOrder ) {
-			changes[sid] = model.shapeBack( sid )
+		for ( let sid of sids ) {
+			changes[sid] = model.relayerShape( sid, event.shiftKey ? '2b' : 'b' )
 		}
 		undo.pushBulkShapes( 'moveBack', changes )
 	},
