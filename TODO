@@ -10,6 +10,7 @@ backlog
 - shape palette/quick adder
   - fluid keyboard use
   - adds at the mouse location
+  - a button is a rect so maybe some presets in here?
 - some kind of 'what keys does this shape support' map derived from default.js
 - disabled
 - locking shapes for selection immunity
@@ -19,8 +20,13 @@ backlog
   - bold
   - italic
 - is it quicker/more responsive to use a scroll/pan rather than a translate()?
-- selection rectangle on glass and encompassing the max bounds of each selected shape (remove the CSS)
-- keyboard+drag to quickly add rectangles
+- selection rectangle on glass and encompassing the max bounds of each selected shape
+  - remove the CSS
+  - suppose this element would intercept glass mouseevents which might be useful for a 'click on the selection' kind of thing?
+- keyboard+drag to quickly add 
+  - rectangles with 'r'
+  - text with 't'
+  - labels with 'l'
 - Press Enter with a single selection to invoke the glass editor
 - export to clipboard
 - alignment guides

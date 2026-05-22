@@ -83,8 +83,8 @@ const canvas = {
 			sids.reverse()
 		}
 
-		// The model to move these shapes forward. This will fire listeners and return an
-		// object we can send to the undo manager.
+		// Tell the model to move these shapes forward. This will fire listeners and
+		// return an object we can send to the undo manager.
 		let changes = []
 		for ( let sid of sids ) {
 			changes.push( model.relayerShape( sid, (event.shiftKey ? '2' : '') + direction ) )
@@ -95,7 +95,6 @@ const canvas = {
 		if ( direction === 'f' ) {
 			changes.reverse()
 		}
-
 		undo.pushBulkShapes( 'relayerShapes', changes )
 	},
 
