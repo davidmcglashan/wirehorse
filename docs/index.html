@@ -48,7 +48,24 @@
 				<label for="-fld-bo">Border</label>
 				<input id="-fld-bo" type="button" data-type="colour" value=" ">
 			</div>
+			<div id="-toolbar-font" class="toolbar hidden">
+				<span class="label">Font</span>
+				<input id="-fld-fz" type="number" min="9" max="32">
+				<a href="javascript:void(0)" onclick="canvas.relayerSelection(event,'b')"><img src="assets/bold-svgrepo-com.svg"></a>
+				<a href="javascript:void(0)" onclick="canvas.relayerSelection(event,'b')"><img src="assets/italic-svgrepo-com.svg"></a>
+				<a href="javascript:void(0)" onclick="canvas.relayerSelection(event,'b')"><img src="assets/underline-svgrepo-com.svg"></a>
+			</div>
+			<div id="-toolbar-text-align" class="toolbar hidden">
+				<span class="label">Text Alignment</span>
+				<a href="javascript:void(0)" onclick="canvas.relayerSelection(event,'b')"><img src="assets/align-left-svgrepo-com.svg"></a>
+				<a href="javascript:void(0)" onclick="canvas.relayerSelection(event,'b')"><img src="assets/align-center-svgrepo-com.svg"></a>
+				<a href="javascript:void(0)" onclick="canvas.relayerSelection(event,'b')"><img src="assets/align-right-svgrepo-com.svg"></a>
+				<a href="javascript:void(0)" onclick="canvas.relayerSelection(event,'b')"><img src="assets/align-top-svgrepo-com.svg"></a>
+				<a href="javascript:void(0)" onclick="canvas.relayerSelection(event,'b')"><img src="assets/align-middle-svgrepo-com.svg"></a>
+				<a href="javascript:void(0)" onclick="canvas.relayerSelection(event,'b')"><img src="assets/align-bottom-svgrepo-com.svg"></a>
+			</div>
 			<div id="-toolbar-arrange" class="toolbar hidden">
+				<span class="label">Arrange Shapes</span>
 				<a href="javascript:void(0)" onclick="canvas.relayerSelection(event,'b')"><img src="assets/send-to-back-svgrepo-com.svg"></a>
 				<a href="javascript:void(0)" onclick="canvas.relayerSelection(event,'f')"><img src="assets/bring-to-front-svgrepo-com.svg"></a>
 			</div>

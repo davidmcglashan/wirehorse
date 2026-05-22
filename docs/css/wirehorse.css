@@ -136,13 +136,24 @@ body {
 		min-height: 1.75rem;
 	}
 	#-palette .toolbar {
+		position: relative;
+		padding: 1.1rem 0.1rem 0.25rem 0.1rem;
 		border: 1px solid #aaa;
 		border-radius: 4px;
 		justify-content: space-evenly;
-		margin: 1rem 0;
+		align-items: center;
+		gap: 0.1rem;
 	}
-	#-palette .toolbar a {
-		padding: 4px 8px 0 8px;
+	#-palette .toolbar span {
+		position: absolute;
+		left: 0.25rem;
+		top: 0.1rem;
+		text-transform: uppercase;
+		font-size: 80%;
+		color: #888;
+	}
+	#-palette .toolbar input {
+		flex: 1;
 	}
 	#-palette .toolbar a:hover {
 		background-color: #ccc;
@@ -154,7 +165,7 @@ body {
 		transform: rotate(180deg);
 	}
 	#-palette .toolbar img {
-		max-width: 2rem;
+		max-width: 1.5rem;
 	}
 .scribble {
 	font-family: "Redacted Script", cursive;

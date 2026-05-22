@@ -2,7 +2,7 @@ const palette = {
 	config: {
 		rec: {
 			fields: [ 'x','y','w','h','bg','co','bo' ],
-			toolbars: ['arrange','font']
+			toolbars: ['arrange','font','text-align']
 		},
 		cmb: {
 			fields: [ 'x','y','w','co' ],
@@ -15,7 +15,7 @@ const palette = {
 	},
 
 	fields: [ 'x','y','w','h','bg','co','bo' ],
-	toolbars: ['arrange'],
+	toolbars: ['arrange','text-align','font'],
 
 	/**
 	 * Prepare the palette for use.
@@ -146,10 +146,16 @@ const palette = {
 	singleSelection: ( id ) => {
 		let shape = model.shape( id )
 		let deflt = palette.config[shape.ty]
-		
+
+		// Quickly hide everything and let the config restore anything
+		// that needs to be visible.
 		for ( let field of palette.fields ) {
 			let container = document.getElementById( `-con-${field}` )
-			container.classList.add( 'hidden' )
+			container?.classList.add( 'hidden' )
+		}
+		for ( let toolbar of palette.toolbars ) {
+			let elem = document.getElementById( `-toolbar-${toolbar}` )
+			elem?.classList.add( 'hidden' )
 		}
 
 		for ( let field of deflt.fields ) {
@@ -171,11 +177,9 @@ const palette = {
 			}
 		} 
 
-		for ( let toolbar of palette.toolbars ) {
+		for ( let toolbar of deflt.toolbars ) {
 			let elem = document.getElementById( `-toolbar-${toolbar}` )
-			if ( elem ) {
-				elem.classList.remove( 'hidden' )
-			}
+			elem?.classList.remove( 'hidden' )
 		}
 	},
 
