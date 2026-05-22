@@ -62,6 +62,13 @@ const undo = {
 			}
 		}
 
+		// Relayered shapes are restored to their original z-index
+		else if ( recent.type === 'relayerShapes' ) {
+			for ( const change of recent.changes ) {
+				model.relayerShape( change.id, 'moveTo', change.from )
+			}
+		}
+
 		// Shape edits are reversed into edits
 		else if ( recent.type === 'shape' ) {
 			// Iterate the recent changes for all the entities that changed.

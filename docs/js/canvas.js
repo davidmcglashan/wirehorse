@@ -74,31 +74,29 @@ const canvas = {
 	/**
 	 * Bring the current selection to the front
 	 */
-	bringSelectionToFront: ( event ) => {
+	relayerSelection: ( event, direction ) => {
 		let sids = selection.idsInZOrder()
+
+		// If moving forwards we need to reverse the array to move the front-most element
+		// first or the selected elements will just replace each other when they're moved.
+		if ( direction === 'f' ) {
+			sids.reverse()
+		}
 
 		// The model to move these shapes forward. This will fire listeners and return an
 		// object we can send to the undo manager.
-		let changes = {}
+		let changes = []
 		for ( let sid of sids ) {
-			changes[sid] = model.relayerShape( sid, event.shiftKey ? '2f' : 'f' )
+			changes.push( model.relayerShape( sid, (event.shiftKey ? '2' : '') + direction ) )
 		}
-		undo.pushBulkShapes( 'toFront', changes )
-	},
 
-	/**
-	 * Move the selection back through the current layers
-	 */
-	moveSelectionBack: ( event ) => {
-		let sids = selection.idsInZOrder()
-
-		// The model to move these shapes forward. This will fire listeners and return an
-		// object we can send to the undo manager.
-		let changes = {}
-		for ( let sid of sids ) {
-			changes[sid] = model.relayerShape( sid, event.shiftKey ? '2b' : 'b' )
+		// If moving forwards we need to again reverse the changes so the undo manager
+		// executes them in the right order.
+		if ( direction === 'f' ) {
+			changes.reverse()
 		}
-		undo.pushBulkShapes( 'moveBack', changes )
+
+		undo.pushBulkShapes( 'relayerShapes', changes )
 	},
 
 	/**

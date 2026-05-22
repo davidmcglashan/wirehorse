@@ -133,7 +133,7 @@ const model = {
 	/**
 	 * Relayers a shape. Mode is one of 'f','b','2f,'2b'
 	 */
-	relayerShape: ( id, mode ) => {
+	relayerShape: ( id, mode, dst=0 ) => {
 		let movedShape = null
 		let i;
 		
@@ -149,18 +149,20 @@ const model = {
 
 		// Now we insert it in the shapes array at the intended destination.
 		// Care is taken to stop dst being out of bounds for the array.
-		let dst = 0 // This is already the value for '2b'
-		switch ( mode ) {
-			case '2f':
-				dst = model.sh.length
-				break
-			case 'f':
-				dst = i+1
-				break
-			case 'b':
-				dst = i-1
-				break
-		} 
+		if ( dst === 0 ) {
+			switch ( mode ) {
+				case '2f':
+					dst = model.sh.length
+					break
+				case 'f':
+					dst = i+1
+					break
+				case 'b':
+					dst = i-1
+					break
+			}
+		}
+		
 		model.sh.splice( 
 				Math.max( 0, Math.min( dst, model.sh.length ) ), 
 				0, 
