@@ -35,8 +35,7 @@ const defaults = {
 			tx: 'Choose an option',
 			ha: 'center',
 			va: 'center',
-			x: 400,
-			y: 30,
+			co: 'bk',
 			w: 200,
 			h: 30
 		}
@@ -47,10 +46,7 @@ const defaults = {
 		model: {
 			ty: 'lbl',
 			co: 'bk',
-			tx: 'New label',
-			sz: '16',
-			x: 500,
-			y: 130
+			tx: 'New label'
 		}
 	}
 };

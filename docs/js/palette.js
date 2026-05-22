@@ -1,4 +1,19 @@
 const palette = {
+	config: {
+		rec: {
+			fields: [ 'x','y','w','h','bg','co','bo' ],
+			toolbars: ['arrange','font']
+		},
+		cmb: {
+			fields: [ 'x','y','w','co' ],
+			toolbars: ['arrange']
+		},
+		lbl: {
+			fields: [ 'x','y','co' ],
+			toolbars: ['arrange','font'],
+		}
+	},
+
 	fields: [ 'x','y','w','h','bg','co','bo' ],
 	toolbars: ['arrange'],
 
@@ -130,30 +145,31 @@ const palette = {
 	 */
 	singleSelection: ( id ) => {
 		let shape = model.shape( id )
-		for ( field of palette.fields ) {
+		let deflt = palette.config[shape.ty]
+		
+		for ( let field of palette.fields ) {
 			let container = document.getElementById( `-con-${field}` )
-			let input = document.getElementById( `-fld-${field}` )
+			container.classList.add( 'hidden' )
+		}
 
+		for ( let field of deflt.fields ) {
+			// Show the container for this field
+			let container = document.getElementById( `-con-${field}` )
+			container.classList.remove( 'hidden' )
+			
 			// Does the model have a value for this field?
 			let value = shape[field]
-			if ( value || value === 0 ) {
-				container.classList.remove( 'hidden' )
-
-				if ( input.getAttribute( 'data-type' ) === 'colour' ) {
-					input.setAttribute( 'onclick',`javascript:palette.colourPicker('${field}')` )
-					input.setAttribute( 'class', `button-${value}` )
-				} else if ( input.getAttribute( 'type' ) === 'number' ) {
-					input.value = parseInt( value, 10 )
-				} else {
-					input.value = value
-				}
-			} 
 			
-			// no value so hide the container (and the control with it)
-			else {
-				container.classList.add( 'hidden' )
+			let input = document.getElementById( `-fld-${field}` )
+			if ( input.getAttribute( 'data-type' ) === 'colour' ) {
+				input.setAttribute( 'onclick',`javascript:palette.colourPicker('${field}')` )
+				input.setAttribute( 'class', `button-${value}` )
+			} else if ( input.getAttribute( 'type' ) === 'number' ) {
+				input.value = parseInt( value, 10 )
+			} else {
+				input.value = value
 			}
-		}
+		} 
 
 		for ( let toolbar of palette.toolbars ) {
 			let elem = document.getElementById( `-toolbar-${toolbar}` )
