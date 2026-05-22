@@ -7,15 +7,15 @@ bugs
 
 backlog
 --------
-- shape palette/quick adder
-- some kind of 'what keys does this shape support' map derived from default.js
-- disabled
-- locking shapes for selection immunity
 - controls with icons and buttons in palette
   - font size
   - text alignment lcrtmb 
   - bold
   - italic
+- export to clipboard
+- load and save
+- locking shapes for selection immunity
+- disabled
 - is it quicker/more responsive to use a scroll/pan rather than a translate()?
 - selection rectangle on glass and encompassing the max bounds of each selected shape
   - remove the CSS
@@ -25,7 +25,6 @@ backlog
   - text with 't'
   - labels with 'l'
 - Press Enter with a single selection to invoke the glass editor
-- export to clipboard
 - alignment guides
 - inset guides
 - some shapes could be 'fit-content' for their width and height

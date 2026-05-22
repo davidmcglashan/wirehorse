@@ -157,9 +157,11 @@ const toolbar = {
 		newShape.y = 100
 
 		// Now send that to the model
-		let newId = model.addShape( newShape )
-		selection.add( newId.elem )
+		model.addShape( newShape )
+		selection.add( newShape.elem )
 		toolbar.hideDropdown()
+
+		undo.pushBulkShapes( 'newShapes', [ newShape ] )
 	},
 
 	update: ( meta ) => {
