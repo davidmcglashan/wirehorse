@@ -23,6 +23,7 @@ const defaults = {
 			bo: 'bl',
 			ha: 'center',
 			va: 'center',
+			fz: 11,
 			w: 100,
 			h: 16
 		}
@@ -35,6 +36,7 @@ const defaults = {
 			tx: 'Choose an option',
 			ha: 'center',
 			va: 'center',
+			fz: 11,
 			co: 'bk',
 			w: 200,
 			h: 30
@@ -46,7 +48,8 @@ const defaults = {
 		model: {
 			ty: 'lbl',
 			co: 'bk',
-			tx: 'New label'
+			tx: 'New label',
+			fz: 11,
 		}
 	}
 };

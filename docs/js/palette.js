@@ -14,7 +14,7 @@ const palette = {
 		}
 	},
 
-	fields: [ 'x','y','w','h','bg','co','bo' ],
+	fields: [ 'x','y','w','h','bg','co','bo','fz','fb','fi','fu' ],
 	toolbars: ['arrange','text-align','font'],
 
 	/**
@@ -69,6 +69,34 @@ const palette = {
 				undo.pushShape( model.updateShape( sids[0], mod ) )
 			}
 		}
+	},
+
+	/**
+	 * Switches a shape property between true and false for the current selection. Used
+	 * for bold, italic, underline, etc. ...
+	 */
+	toggleSelection: ( event, field ) => {
+		let sids = selection.ids()
+		if ( sids.length === 0 ) {
+			return
+		}
+
+		// Flip the UI element first.
+		let input = document.getElementById( `-fld-${field}` )
+		input.classList.toggle( 'selected' )
+		
+		// Now pass its current state down into the selected elements.
+		let changes = []
+		let value = input.classList.contains( 'selected' )
+		
+		for ( let sid of sids ) {
+			let shape = model.shape( sid )
+			let mod = {}
+			mod[field] = value 
+			changes[sid] = model.updateShape( sid, mod )
+		}
+
+		undo.pushMulti( changes )
 	},
 
 	/**
@@ -152,7 +180,30 @@ const palette = {
 		for ( let field of palette.fields ) {
 			let container = document.getElementById( `-con-${field}` )
 			container?.classList.add( 'hidden' )
+			
+			// Does the model have a value for this field?
+			let value = shape[field]			
+			let input = document.getElementById( `-fld-${field}` )
+
+			// What kind of ipnut are we dealing with. <a> is a toggling icon button
+			if ( input.tagName === 'A' ) {
+				input.setAttribute( 'class', value === true ? 'selected' : '' )
+			} 
+			
+			// Colour pickers need a bit of additional set up
+			else if ( input.getAttribute( 'data-type' ) === 'colour' ) {
+				input.setAttribute( 'onclick',`javascript:palette.colourPicker('${field}')` )
+				input.setAttribute( 'class', `button-${value}` )
+			} 
+			
+			// Number inputs get their values rounded so we don't see flaots in the UI.
+			else if ( input.getAttribute( 'type' ) === 'number' ) {
+				input.value = parseInt( value, 10 )
+			} else {
+				input.value = value
+			}
 		}
+
 		for ( let toolbar of palette.toolbars ) {
 			let elem = document.getElementById( `-toolbar-${toolbar}` )
 			elem?.classList.add( 'hidden' )
@@ -162,19 +213,6 @@ const palette = {
 			// Show the container for this field
 			let container = document.getElementById( `-con-${field}` )
 			container.classList.remove( 'hidden' )
-			
-			// Does the model have a value for this field?
-			let value = shape[field]
-			
-			let input = document.getElementById( `-fld-${field}` )
-			if ( input.getAttribute( 'data-type' ) === 'colour' ) {
-				input.setAttribute( 'onclick',`javascript:palette.colourPicker('${field}')` )
-				input.setAttribute( 'class', `button-${value}` )
-			} else if ( input.getAttribute( 'type' ) === 'number' ) {
-				input.value = parseInt( value, 10 )
-			} else {
-				input.value = value
-			}
 		} 
 
 		for ( let toolbar of deflt.toolbars ) {

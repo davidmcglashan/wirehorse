@@ -50,6 +50,7 @@ const canvas = {
 
 		// Make the change.
 		canvas.elementCreator.xywh( params, elem )
+		canvas.elementCreator.font( params, elem )
 		canvas.elementCreator.colour( params, elem )
 
 		// InnerHTML changes require the whole model.
@@ -219,6 +220,31 @@ const canvas = {
 			if ( shape.h ) { elem.style.height	= shape.h + 'px' }		
 		},
 
+		font: ( shape, elem ) => {
+			if ( shape.fz ) {
+				elem.style.fontSize = `${shape.fz}pt`
+			}
+			if ( shape.fb === true ) {
+				elem.style.fontWeight = '600'
+			}
+			if ( shape.fb === false ) {
+				elem.style.fontWeight = '400'
+			}
+			if ( shape.fi === true ) {
+				elem.style.fontStyle = 'italic'
+			}
+			if ( shape.fi === false ) {
+				elem.style.fontStyle = 'unset'
+			}
+
+			if ( shape.fu === true ) {
+				elem.style.textDecoration = 'underline'
+			}
+			if ( shape.fu === false ) {
+				elem.style.textDecoration = 'none'
+			}
+		},
+
 		colour: ( shape, elem ) => {
 			if ( shape.bg ) {
 				elem.style.backgroundColor = `#${model.colours[shape.bg].hex}`
@@ -246,6 +272,7 @@ const canvas = {
 			// Style and position it
 			div.setAttribute( 'class', 'rectangle entity border-' + shape.bo )
 			canvas.elementCreator.xywh( shape, div )
+			canvas.elementCreator.font( shape, div )
 			canvas.elementCreator.colour( shape, div )
 			canvas.elementCreator.innerHTML[shape.ty]( shape, div )
 
@@ -262,6 +289,7 @@ const canvas = {
 			// Style and position it
 			div.setAttribute( 'class', 'label entity' )
 			canvas.elementCreator.xywh( shape, div )
+			canvas.elementCreator.font( shape, div )
 			canvas.elementCreator.colour( shape, div )
 			canvas.elementCreator.innerHTML[shape.ty]( shape, div )
 
@@ -275,6 +303,7 @@ const canvas = {
 			// Style and position it
 			div.setAttribute( 'class', 'combobox entity' )
 			canvas.elementCreator.xywh( shape, div )
+			canvas.elementCreator.font( shape, div )
 			canvas.elementCreator.innerHTML[shape.ty]( shape, div )
 
 			return div
