@@ -14,6 +14,7 @@
 		<script type="text/javascript" src="js/canvas.js"></script>
 		<script type="text/javascript" src="js/undo.js"></script>
 		<script type="text/javascript" src="js/palette.js"></script>
+		<script type="text/javascript" src="js/io.js"></script>
 	</head>
 	<body>
 		<div id="-canvas"></div>
@@ -72,17 +73,52 @@
 		</div>
 		<div id="-toolbar">
 			<div>
-				<strong>Wirehorse</strong>
-				<a href="javascript:void(0)" onclick="toolbar.new()">New</a>
+				<strong><a href="javascript:void(0)" onclick="toolbar.openMainDropdown()">Wirehorse</a></strong>
 				<span id="-title"><</span>
 			</div>
 			<div>
 				<input type="text" id="-search" placeholder="Press / to add something">
-				<ul id="-dropdown" class="hidden">
-				</ul>
+				<ul id="-search-dropdown" class="hidden"></ul>
 			</div>
 			<div>
-				<a href="javascript:void(0)" onclick="toolbar.palette()"><strong>[_]]]</strong></a>
+				<a href="javascript:void(0)" onclick="toolbar.palette()">
+					<img src="assets/sidebar-right-svgrepo-com.svg">
+				</a>
+			</div>
+			<div id="-main-dropdown" class="hidden" onclick="event.stopPropagation()">
+				<div>
+					<img src="assets/plus-file-svgrepo-com.svg">
+					<div>
+						<strong>New Wireframe</strong>
+						<span>Start over with a blank canvas &mdash; <a href="javascript:void(0)" onclick="toolbar.new()">Do it!</a></span>
+					</div>
+				</div>
+				<div>
+					<img src="assets/upload-svgrepo-com.svg">
+					<div>
+						<strong>Open a file</strong>
+						<span>Click the file picker below to import a JSON file from your local disk</span>
+						<input type="file">
+					</div>
+				</div>
+				<div>
+					<img src="assets/floppy-disk-svgrepo-com.svg">
+					<div>
+						<strong>Save Wireframe</strong>
+						<span>Save the current wireframe in your Downloads folder with the name ...</span>
+						<input type="text" value="new-wireframe.json">
+						<a href="javascript:void(0)" onclick="io.save()">Save</a>
+					</div>
+				</div>
+				<div>
+					<img src="assets/potion-svgrepo-com.svg">
+					<ul>
+						<li><strong>Wirehorse v0.1</strong></li>
+						<li>&copy; 2026 David McGlashan</li>
+						<li>
+							<a href="https://wirehorse.mcglashan.net/">wirehorse.mcglashan.net</a> &mdash; <a href="https://github.com/davidmcglashan/wirehorse">github.com/davidmcglashan/wirehorse</a>  &mdash; CC0 1.0 Universal</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 		<script>

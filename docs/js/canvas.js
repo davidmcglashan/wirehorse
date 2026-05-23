@@ -275,7 +275,6 @@ const canvas = {
 		},
 
 		alignment: ( shape, elem ) => {
-			console.log( shape )
 			if ( shape.ha ) {
 				elem.style.alignItems = canvas.ha[shape.ha]
 			}

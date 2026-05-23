@@ -1,5 +1,6 @@
 bugs
 ----
+- comboboxes are broken
 - some palette undoes e.g. bold don't retransmit to the canvas (but do to the model)
 - mouse leaving the window mid-drag
 - update the caret position during drags
@@ -8,10 +9,20 @@ bugs
 
 backlog
 --------
-- export to clipboard
-- load and save
+- little dropdown with
+  - load from JSON
+  - rename & save to JSON
+  - update the filename into the title
+- insert a component from file e.g. zatpark window, modal window
+  - some JSON editing
+  - remember recently used 
+- breadcrumbs
+- text paragraph
+- horizontal rule
+- tabs
+- opacity
+- export to clipboard as a PNG
 - locking shapes for selection immunity
-- disabled
 - is it quicker/more responsive to use a scroll/pan rather than a translate()?
 - selection rectangle on glass and encompassing the max bounds of each selected shape
   - remove the CSS
@@ -21,6 +32,11 @@ backlog
   - text with 't'
   - labels with 'l'
 - Press Enter with a single selection to invoke the glass editor
+- other shapes
+  - various icons
+  - icon and label
+  - tables
+  - fancy arrows
 - alignment guides
 - inset guides
 - some shapes could be 'fit-content' for their width and height
@@ -29,16 +45,6 @@ backlog
 - proper tracking of min values to stop shapes become zero width/height
 - selection drag event to draw a <div>, get its bounds, work out what intersects it
 - cut copy paste
-
-- shapes
-  - tabs
-  - breadcrumbs
-  - horizontal rule
-  - text paragraph
-  - various icons
-  - icon and label
-  - tables
-  - fancy arrows
 
 meta
 ----

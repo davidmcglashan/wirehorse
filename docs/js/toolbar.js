@@ -1,12 +1,14 @@
 const toolbar = {
 	search: null,
-	dropdown: null,
+	searchDropdown: null,
+	mainDropdown: null,
 
 	init: () => {
 		model.registerMetadataListener( toolbar.update )
 		
 		toolbar.search = document.getElementById( '-search' )
-		toolbar.dropdown = document.getElementById( '-dropdown' )
+		toolbar.searchDropdown = document.getElementById( '-search-dropdown' )
+		toolbar.mainDropdown = document.getElementById( '-main-dropdown' )
 
 		// Listen to CMD+Z for undo
 		document.addEventListener( 'keydown', function( event ) {
@@ -35,7 +37,7 @@ const toolbar = {
 
 		// Let it manage what happens to focus changes (show/hide the dropdown)
 		toolbar.search.addEventListener( 'focus', function( event ) {
-			toolbar.dropdown.classList.remove( 'hidden' )
+			toolbar.searchDropdown.classList.remove( 'hidden' )
 		} )
 
 		// An event listener to manage the dropdown 
@@ -44,7 +46,7 @@ const toolbar = {
 		// Populate the dropdown with all the default shapes
 		for ( let [key,def] of Object.entries( defaults ) ) {
 			let li = document.createElement( 'li' )
-			toolbar.dropdown.appendChild( li )
+			toolbar.searchDropdown.appendChild( li )
 			def.elem = li
 
 			let a = document.createElement( 'a' )
@@ -56,9 +58,22 @@ const toolbar = {
 		}
 	},
 
-	hideDropdown: () => {
+	openMainDropdown: () => {
+		let lightbox = document.createElement( 'div' )
+		lightbox.setAttribute( 'class', 'lightbox' )
+		document.getElementsByTagName( 'body' )[0].appendChild( lightbox )
+		lightbox.addEventListener( 'mouseup', function( event ) {
+			lightbox.remove()
+			toolbar.mainDropdown.classList.add( 'hidden' )
+		} )
+
+		toolbar.mainDropdown.classList.remove( 'hidden' )
+		document.getElementsByTagName( 'body' )[0].appendChild( toolbar.mainDropdown )
+	},
+
+	hideSearchDropdown: () => {
 		toolbar.search.blur()
-		toolbar.dropdown.classList.add( 'hidden' )
+		toolbar.searchDropdown.classList.add( 'hidden' )
 		toolbar.search.value = ''
 	},
 
@@ -71,7 +86,7 @@ const toolbar = {
 
 		// Escape and TAB dismiss the drop-down
 		if ( event.keyCode === 9 || event.keyCode === 27 ) {
-			toolbar.hideDropdown()
+			toolbar.hideSearchDropdown()
 			return
 		}
 
@@ -159,7 +174,7 @@ const toolbar = {
 		// Now send that to the model
 		model.addShape( newShape )
 		selection.add( newShape.elem )
-		toolbar.hideDropdown()
+		toolbar.hideSearchDropdown()
 
 		undo.pushBulkShapes( 'newShapes', [ newShape ] )
 	},
@@ -171,8 +186,21 @@ const toolbar = {
 		}
 	},
 
+	/**
+	 * Start over with a blank canvas.
+	 */
 	new: () => {
+		// Flush out the model
 		model.new()
+
+		// Reset the UI
+		toolbar.mainDropdown.classList.add( 'hidden' )
+		let lightbox = document.querySelectorAll( '.lightbox' )[0]
+		lightbox.remove()
+
+		canvas.reset()
+		selection.clear()
+		undo.clear()
 	},
 
 	palette: () => {

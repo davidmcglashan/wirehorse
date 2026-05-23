@@ -292,11 +292,17 @@ const model = {
 			} )
 	},
 
+	/**
+	 * Replace the model with a new empty version.
+	 */
 	new: () => {
 		localStorage['wirehorse.current'] = JSON.stringify( 
 			{ 
 				mt: {
-					title: 'New wireframe'
+					tt: 'new-wireframe.json',
+					ox: 0,
+					oy: 0,
+					sc: 1
 				},
 				sh: []
 			}

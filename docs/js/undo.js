@@ -120,5 +120,13 @@ const undo = {
 				model.updateShape( id, log )
 			}
 		}
+	},
+
+	/**
+	 * Forget the entire undo history.
+	 */
+	clear: () => {
+		undo.history = []
+		undo.future = []
 	}
 };
