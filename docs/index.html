@@ -51,18 +51,18 @@
 			<div id="-toolbar-font" class="toolbar hidden">
 				<span class="label">Font</span>
 				<input id="-fld-fz" type="number" min="9" max="32">
-				<a id="-fld-fb" href="javascript:void(0)" onclick="palette.toggleSelection(event,'fb')"><img src="assets/bold-svgrepo-com.svg"></a>
-				<a id="-fld-fi" href="javascript:void(0)" onclick="palette.toggleSelection(event,'fi')"><img src="assets/italic-svgrepo-com.svg"></a>
-				<a id="-fld-fu" href="javascript:void(0)" onclick="palette.toggleSelection(event,'fu')"><img src="assets/underline-svgrepo-com.svg"></a>
+				<a data-type="toggle" id="-fld-fb" href="javascript:void(0)" onclick="palette.toggleField('fb')"><img src="assets/bold-svgrepo-com.svg"></a>
+				<a data-type="toggle" id="-fld-fi" href="javascript:void(0)" onclick="palette.toggleField('fi')"><img src="assets/italic-svgrepo-com.svg"></a>
+				<a data-type="toggle" id="-fld-fu" href="javascript:void(0)" onclick="palette.toggleField('fu')"><img src="assets/underline-svgrepo-com.svg"></a>
 			</div>
 			<div id="-toolbar-text-align" class="toolbar hidden">
 				<span class="label">Text Alignment</span>
-				<a href="javascript:void(0)" onclick="canvas.relayerSelection(event,'b')"><img src="assets/align-left-svgrepo-com.svg"></a>
-				<a href="javascript:void(0)" onclick="canvas.relayerSelection(event,'b')"><img src="assets/align-center-svgrepo-com.svg"></a>
-				<a href="javascript:void(0)" onclick="canvas.relayerSelection(event,'b')"><img src="assets/align-right-svgrepo-com.svg"></a>
-				<a href="javascript:void(0)" onclick="canvas.relayerSelection(event,'b')"><img src="assets/align-top-svgrepo-com.svg"></a>
-				<a href="javascript:void(0)" onclick="canvas.relayerSelection(event,'b')"><img src="assets/align-middle-svgrepo-com.svg"></a>
-				<a href="javascript:void(0)" onclick="canvas.relayerSelection(event,'b')"><img src="assets/align-bottom-svgrepo-com.svg"></a>
+				<a data-type="switch" id="-fld-ha:l" href="javascript:void(0)" onclick="palette.setField('ha','l')"><img src="assets/align-left-svgrepo-com.svg"></a>
+				<a data-type="switch" id="-fld-ha:c" href="javascript:void(0)" onclick="palette.setField('ha','c')"><img src="assets/align-center-svgrepo-com.svg"></a>
+				<a data-type="switch" id="-fld-ha:r" href="javascript:void(0)" onclick="palette.setField('ha','r')"><img src="assets/align-right-svgrepo-com.svg"></a>
+				<a data-type="switch" id="-fld-va:t" href="javascript:void(0)" onclick="palette.setField('va','t')"><img src="assets/align-top-svgrepo-com.svg"></a>
+				<a data-type="switch" id="-fld-va:m" href="javascript:void(0)" onclick="palette.setField('va','m')"><img src="assets/align-middle-svgrepo-com.svg"></a>
+				<a data-type="switch" id="-fld-va:b" href="javascript:void(0)" onclick="palette.setField('va','b')"><img src="assets/align-bottom-svgrepo-com.svg"></a>
 			</div>
 			<div id="-toolbar-arrange" class="toolbar hidden">
 				<span class="label">Arrange Shapes</span>

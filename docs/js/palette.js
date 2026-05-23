@@ -14,7 +14,7 @@ const palette = {
 		}
 	},
 
-	fields: [ 'x','y','w','h','bg','co','bo','fz','fb','fi','fu' ],
+	fields: [ 'x','y','w','h','bg','co','bo','fz','fb','fi','fu','ha','va' ],
 	toolbars: ['arrange','text-align','font'],
 
 	/**
@@ -75,7 +75,7 @@ const palette = {
 	 * Switches a shape property between true and false for the current selection. Used
 	 * for bold, italic, underline, etc. ...
 	 */
-	toggleSelection: ( event, field ) => {
+	toggleField: ( field ) => {
 		let sids = selection.ids()
 		if ( sids.length === 0 ) {
 			return
@@ -89,6 +89,39 @@ const palette = {
 		let changes = []
 		let value = input.classList.contains( 'selected' )
 		
+		for ( let sid of sids ) {
+			let shape = model.shape( sid )
+			let mod = {}
+			mod[field] = value 
+			changes[sid] = model.updateShape( sid, mod )
+		}
+
+		undo.pushMulti( changes )
+	},
+
+	/**
+	 * Switches a shape property between true and false for the current selection. Used
+	 * for bold, italic, underline, etc. ...
+	 */
+	setField: ( field, value ) => {
+		let sids = selection.ids()
+		if ( sids.length === 0 ) {
+			return
+		}
+
+		// Remove selection from all the other switches for this field.
+		for ( let input of document.querySelectorAll( '#-palette a[data-type="switch"]' ) ) {
+			if ( input.getAttribute( 'id' ).startsWith( `-fld-${field}:` ) ) {
+				input.classList.remove( 'selected' )
+			}
+		}
+
+		// Now select the one we want.
+		let input = document.getElementById( `-fld-${field}:${value}` )
+		input.classList.toggle( 'selected' )
+		
+		// Now pass its current state down into the selected elements.
+		let changes = []		
 		for ( let sid of sids ) {
 			let shape = model.shape( sid )
 			let mod = {}
@@ -133,6 +166,11 @@ const palette = {
 	 * React to the selection of shapes being changed.
 	 */
 	selectionChanged: ( ids ) => {
+		// Turn off all the switches
+		for ( let field of document.querySelectorAll( '#-palette a[data-type="switch"]') ) {
+			field.classList.remove( 'selected' )
+		}
+
 		// If there's a selection at all ...
 		let elem = document.getElementById( '-no-selection' )
 		if ( ids.length === 0 ) {
@@ -185,9 +223,23 @@ const palette = {
 			let value = shape[field]			
 			let input = document.getElementById( `-fld-${field}` )
 
-			// What kind of ipnut are we dealing with. <a> is a toggling icon button
-			if ( input.tagName === 'A' ) {
+			// Some inputs include a permitted value in their id. If we don't find
+			// one of these then move on.
+			if ( !input ) {
+				input = document.getElementById( `-fld-${field}:${value}` )
+				if ( !input ) {
+					continue
+				}
+			}
+
+			// What kind of ipnut are we dealing with. <a> can be a toggling icon button
+			if ( input.tagName === 'A' && input.getAttribute( 'data-type' ) === 'toggle' ) {
 				input.setAttribute( 'class', value === true ? 'selected' : '' )
+			} 
+
+			// What kind of ipnut are we dealing with. <a> can be a toggling icon button
+			else if ( input.tagName === 'A' && input.getAttribute( 'data-type' ) === 'switch' ) {
+				input.setAttribute( 'class', 'selected' )
 			} 
 			
 			// Colour pickers need a bit of additional set up

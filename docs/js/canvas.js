@@ -1,6 +1,17 @@
 const canvas = {
 	elem: null,
 
+	ha: {
+		l: 'start',
+		c: 'center',
+		r: 'end'
+	},
+	va: {
+		t: 'start',
+		m: 'center',
+		b: 'end'
+	},
+
 	init: () => {
 		canvas.elem = document.getElementById( '-canvas' )
 		model.registerShapeListener( canvas.shapeUpdate )
@@ -52,6 +63,7 @@ const canvas = {
 		canvas.elementCreator.xywh( params, elem )
 		canvas.elementCreator.font( params, elem )
 		canvas.elementCreator.colour( params, elem )
+		canvas.elementCreator.alignment( params, elem )
 
 		// InnerHTML changes require the whole model.
 		if ( params.tx || params.tx === '' ) {
@@ -262,6 +274,16 @@ const canvas = {
 			}
 		},
 
+		alignment: ( shape, elem ) => {
+			console.log( shape )
+			if ( shape.ha ) {
+				elem.style.alignItems = canvas.ha[shape.ha]
+			}
+			if ( shape.va ) {
+				elem.style.justifyContent = canvas.va[shape.va]
+			}
+		},
+
 		/**
 		 * Adds a rectangle to the canvas
 		 */
@@ -274,10 +296,8 @@ const canvas = {
 			canvas.elementCreator.xywh( shape, div )
 			canvas.elementCreator.font( shape, div )
 			canvas.elementCreator.colour( shape, div )
+			canvas.elementCreator.alignment( shape, div )
 			canvas.elementCreator.innerHTML[shape.ty]( shape, div )
-
-			div.style.alignItems = shape.ha
-			div.style.justifyContent = shape.va
 
 			return div
 		},

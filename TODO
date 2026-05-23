@@ -1,5 +1,6 @@
 bugs
 ----
+- some palette undoes e.g. bold don't retransmit to the canvas (but do to the model)
 - mouse leaving the window mid-drag
 - update the caret position during drags
 - double click in an editor invoked from a rectangle behaves weirdly (doesn't in labels ... ?)
@@ -7,11 +8,6 @@ bugs
 
 backlog
 --------
-- controls with icons and buttons in palette
-  - font size
-  - text alignment lcrtmb 
-  - bold
-  - italic
 - export to clipboard
 - load and save
 - locking shapes for selection immunity

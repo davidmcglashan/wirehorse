@@ -6,8 +6,8 @@ const defaults = {
 			bg: 'g1',
 			co: 'bk',
 			bo: 'g2',
-			ha: 'center',
-			va: 'center',
+			ha: 'c',
+			va: 'm',
 			w: 300,
 			h: 100
 		}
@@ -21,8 +21,8 @@ const defaults = {
 			bg: 'bl',
 			co: 'wh',
 			bo: 'bl',
-			ha: 'center',
-			va: 'center',
+			ha: 'c',
+			va: 'm',
 			fz: 11,
 			w: 100,
 			h: 16
@@ -34,8 +34,8 @@ const defaults = {
 		model: {
 			ty: 'cmb',
 			tx: 'Choose an option',
-			ha: 'center',
-			va: 'center',
+			ha: 'c',
+			va: 'm',
 			fz: 11,
 			co: 'bk',
 			w: 200,
