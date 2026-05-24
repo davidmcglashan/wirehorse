@@ -34,24 +34,26 @@ const toolbar = {
 		toolbar.searchInput.addEventListener( 'keydown', toolbar.keydown )
 		toolbar.searchInput.addEventListener( 'input', toolbar.searching )
 
-		// Let it manage what happens to focus changes (show/hide the dropdown)
-		// toolbar.search.addEventListener( 'focus', function( event ) {
-		// 	event.preventDefault()
-		// 	toolbar.openSearchDropdown()
-		// } )
-
 		// Populate the dropdown with all the default shapes
-		for ( let [key,def] of Object.entries( defaults ) ) {
+		for ( let i in defaults.entries ) {
+			let entry = defaults.entries[i]
 			let li = document.createElement( 'li' )
 			toolbar.searchList.appendChild( li )
-			def.elem = li
+			entry.elem = li
 
 			let a = document.createElement( 'a' )
 			a.setAttribute( 'href', 'javascript:void(0)' )
-			a.setAttribute( 'onclick', `javascript:toolbar.add('${key}')` )
+			a.setAttribute( 'onclick', `javascript:toolbar.add(${i})` )
 			li.appendChild( a )
-
-			a.innerHTML = def.name
+			
+			// If this is an icon, include the icon!
+			if ( entry.model.ty === 'ic' ) {
+				let icon = model.icons[ entry.model.ic ]
+				let img = document.createElement( 'img' )
+				img.setAttribute( 'src', `assets/${icon.asset}` )
+				li.appendChild( img )
+			}
+			a.innerHTML = entry.name
 		}
 	},
 
@@ -80,7 +82,7 @@ const toolbar = {
 	 */
 	openSearchDropdown: () => {
 		// Straighten the appearance of the options.
-		for ( let [key,def] of Object.entries( defaults ) ) {
+		for ( let def of defaults.entries ) {
 			def.elem.classList.remove( 'hidden' )
 			def.elem.classList.remove( 'selected' )
 		}
@@ -131,7 +133,9 @@ const toolbar = {
 
 		// Enter will submit the selected shape.
 		else if ( event.keyCode === 13 ) {
-			for ( let [key,def] of Object.entries( defaults ) ) {
+			for ( let i in defaults.entries ) {
+				let def = defaults.entries[i]
+
 				if ( def.elem.checkVisibility() && def.elem.classList.contains( 'selected' ) ) {
 					toolbar.add( key )
 					return
@@ -145,36 +149,36 @@ const toolbar = {
 			let next = false
 			let done = false
 
-			// Iterate the <li> elements in the list. For the 'up' key we do this
-			// in reverse.
-			let iterate = Object.entries( defaults ) 
-			if ( event.keyCode === 38 ) {
-				iterate.reverse()
-			}
+			// // Iterate the <li> elements in the list. For the 'up' key we do this
+			// // in reverse.
+			// let iterate = Object.entries( defaults.entries ) 
+			// if ( event.keyCode === 38 ) {
+			// 	iterate.reverse()
+			// }
 
-			for ( let [key,def] of iterate ) {
-				// Only bother with the visible ones.
-				if ( def.elem.checkVisibility() ) {
-					if ( next ) {
-						def.elem.classList.add( 'selected' )
-						next = false
-						done = true
-					} else if ( def.elem.classList.contains( 'selected' ) ) {
-						next = true
-						def.elem.classList.remove( 'selected' )
-					}
-				}
-			}
+			// for ( let [key,def] of iterate ) {
+			// 	// Only bother with the visible ones.
+			// 	if ( def.elem.checkVisibility() ) {
+			// 		if ( next ) {
+			// 			def.elem.classList.add( 'selected' )
+			// 			next = false
+			// 			done = true
+			// 		} else if ( def.elem.classList.contains( 'selected' ) ) {
+			// 			next = true
+			// 			def.elem.classList.remove( 'selected' )
+			// 		}
+			// 	}
+			// }
 
-			// If nothing was done select the first visible element again
-			if ( !done ) {
-				for ( let [key,def] of iterate ) {
-					if ( def.elem.checkVisibility() ) {
-						def.elem.classList.add( 'selected' )
-						return
-					}
-				}
-			}
+			// // If nothing was done select the first visible element again
+			// if ( !done ) {
+			// 	for ( let [key,def] of iterate ) {
+			// 		if ( def.elem.checkVisibility() ) {
+			// 			def.elem.classList.add( 'selected' )
+			// 			return
+			// 		}
+			// 	}
+			// }
 		}
 	},
 
@@ -186,7 +190,9 @@ const toolbar = {
 		let term = toolbar.searchInput.value.toLowerCase()
 		let first = null
 
-		for ( let [key,def] of Object.entries( defaults ) ) {
+		for ( let i in defaults.entries ) {
+			let def = defaults.entries[i]
+
 			if ( def.name.toLowerCase().indexOf( term ) !== -1 ) {
 				def.elem.classList.remove( 'hidden' )
 				if ( !first ) {
@@ -202,9 +208,9 @@ const toolbar = {
 	/**
 	 * Add a new shape to the model.
 	 */
-	add: ( key ) => {
+	add: ( index ) => {
 		// Our new shape is a shallow clone of the default.
-		let newShape = { ...defaults[key].model } 
+		let newShape = { ...defaults.entries[index].model } 
 
 		// It needs an x and a y.
 		newShape.x = 100

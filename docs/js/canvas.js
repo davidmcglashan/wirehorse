@@ -315,6 +315,18 @@ const canvas = {
 			return div
 		},
 
+		ic: ( shape ) => {
+			// Put our new label on the canvas
+			let div = canvas.elementCreator.div( shape )
+
+			// Style and position it
+			div.setAttribute( 'class', 'icon entity' )
+			canvas.elementCreator.xywh( shape, div )
+			canvas.elementCreator.innerHTML[shape.ty]( shape, div )
+
+			return div
+		},
+
 		cmb: ( shape ) => {
 			// Put our new combobox on the canvas
 			let div = canvas.elementCreator.div( shape )
@@ -336,6 +348,9 @@ const canvas = {
 			},
 			lbl: ( shape, elem ) => {
 				elem.innerHTML = shape.tx
+			},
+			ic: ( shape, elem ) => {
+				elem.innerHTML = `<img src="assets/${model.icons[shape.ic].asset}">`
 			},
 			cmb: ( shape, elem ) => {
 				let lines = shape.tx.split('\n')

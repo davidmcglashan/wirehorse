@@ -8,16 +8,20 @@ bugs
 
 backlog
 --------
-- various icons
-- icon and label
 - breadcrumbs
-- text paragraph
-- horizontal rule
 - tabs
+- horizontal rule
+- more icons
+- coloured icons 
+  - either inline the SVGs or stackoverflow suggests masking and change background 
+    colour https://stackoverflow.com/questions/24933430/img-src-svg-changing-the-styles-with-css
+- icon and label
+- text paragraph
 - opacity
 - export to clipboard as a PNG
   - everything
   - selected items
+- groups of components
 - insert a component from file e.g. zatpark window, modal window
   - some JSON editing
   - remember recently used 

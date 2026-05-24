@@ -26,6 +26,11 @@ const model = {
 		vi: { hex: 'f0f', name: 'Violet' },
 	},
 
+	icons: [
+		{ name: 'Question Mark', asset: 'circled-question-svgrepo-com.svg' },
+		{ name: 'Circled Plus', asset: 'circled-plus-svgrepo-com.svg' },
+	],
+
 	/**
 	 * Register a listener for the model's metadata. If any value changes the
 	 * listener will have its passed in function invoked.
