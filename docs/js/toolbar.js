@@ -1,13 +1,15 @@
 const toolbar = {
-	search: null,
 	searchDropdown: null,
+	searchInput: null,
+	searchList: null,
 	mainDropdown: null,
 
 	init: () => {
 		model.registerMetadataListener( toolbar.update )
 		
-		toolbar.search = document.getElementById( '-search' )
 		toolbar.searchDropdown = document.getElementById( '-search-dropdown' )
+		toolbar.searchInput = document.getElementById( '-search-input' )
+		toolbar.searchList = document.getElementById( '-search-list' )
 		toolbar.mainDropdown = document.getElementById( '-main-dropdown' )
 
 		// Listen to CMD+Z for undo
@@ -24,29 +26,24 @@ const toolbar = {
 			// '/' activates the add/search box.
 			else if ( event.keyCode === 191 )	{
 				event.preventDefault()
-				toolbar.search.focus()
-				for ( let [key,def] of Object.entries( defaults ) ) {
-					def.elem.classList.remove( 'hidden' )
-					def.elem.classList.remove( 'selected' )
-				}
+				toolbar.openSearchDropdown()
 			}
 		} )
 
 		// Give search its own keylistener
-		toolbar.search.addEventListener( 'keydown', toolbar.keydown )
+		toolbar.searchInput.addEventListener( 'keydown', toolbar.keydown )
+		toolbar.searchInput.addEventListener( 'input', toolbar.searching )
 
 		// Let it manage what happens to focus changes (show/hide the dropdown)
-		toolbar.search.addEventListener( 'focus', function( event ) {
-			toolbar.searchDropdown.classList.remove( 'hidden' )
-		} )
-
-		// An event listener to manage the dropdown 
-		toolbar.search.addEventListener( 'input', toolbar.searching )
+		// toolbar.search.addEventListener( 'focus', function( event ) {
+		// 	event.preventDefault()
+		// 	toolbar.openSearchDropdown()
+		// } )
 
 		// Populate the dropdown with all the default shapes
 		for ( let [key,def] of Object.entries( defaults ) ) {
 			let li = document.createElement( 'li' )
-			toolbar.searchDropdown.appendChild( li )
+			toolbar.searchList.appendChild( li )
 			def.elem = li
 
 			let a = document.createElement( 'a' )
@@ -67,6 +64,7 @@ const toolbar = {
 			toolbar.mainDropdown.classList.add( 'hidden' )
 		} )
 
+		// Move the dropdown above our new lightbox.
 		toolbar.mainDropdown.classList.remove( 'hidden' )
 		document.body.appendChild( toolbar.mainDropdown )
 	},
@@ -77,10 +75,45 @@ const toolbar = {
 		lightbox.remove()
 	},
 
+	/**
+	 * Open the search dropdown for adding new shapes.
+	 */
+	openSearchDropdown: () => {
+		// Straighten the appearance of the options.
+		for ( let [key,def] of Object.entries( defaults ) ) {
+			def.elem.classList.remove( 'hidden' )
+			def.elem.classList.remove( 'selected' )
+		}
+		
+		// Put a lightbox under the adder.
+		let lightbox = document.createElement( 'div' )
+		lightbox.setAttribute( 'class', 'lightbox' )
+		document.body.appendChild( lightbox )
+		lightbox.addEventListener( 'mouseup', function( event ) {
+			lightbox.remove()
+			toolbar.searchDropdown.classList.add( 'hidden' )
+		} )
+
+		let rect = document.getElementById('-search-button').getBoundingClientRect()
+		toolbar.searchDropdown.style.left = `${rect.x}px`
+
+		// Move the dropdown above our new lightbox.
+		toolbar.searchDropdown.classList.remove( 'hidden' )
+		document.body.appendChild( toolbar.searchDropdown )
+		toolbar.searchInput.focus()
+	},
+
+	/**
+	 * Hides the search dropdown and resets its state ready for its next use.
+	 */
 	hideSearchDropdown: () => {
-		toolbar.search.blur()
 		toolbar.searchDropdown.classList.add( 'hidden' )
-		toolbar.search.value = ''
+		toolbar.searchInput.blur()
+		toolbar.searchInput.value = ''
+
+		// Find and remove the lightbox.
+		let lightbox = document.querySelectorAll( '.lightbox' )[0]
+		lightbox.remove()
 	},
 
 	/**
@@ -150,7 +183,7 @@ const toolbar = {
 	 * the options matching their search term.
 	 */
 	searching: ( event ) => {
-		let term = toolbar.search.value.toLowerCase()
+		let term = toolbar.searchInput.value.toLowerCase()
 		let first = null
 
 		for ( let [key,def] of Object.entries( defaults ) ) {

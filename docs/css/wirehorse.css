@@ -6,6 +6,13 @@ body {
 	font-size: 11pt;
 }
 
+a {
+	text-decoration: none;
+}
+a:hover, a:focus {
+	text-decoration: underline;
+}
+
 #-canvas {
 	font-family: "Balsamiq Sans", sans-serif;
 	font-weight: 400;
@@ -52,13 +59,11 @@ body {
 
 #-toolbar {
 	font-family: "Karla", sans-serif;
-	font-style: normal;
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
-	padding: 0.25rem;
-	padding-left: 0.5rem;
+	padding: 0.5rem 1rem 0.25rem 1rem;
 	background-color: rgba(0,0,0,0.2);
 	backdrop-filter: blur(8px);
 	display: flex;
@@ -70,14 +75,19 @@ body {
 		gap: 1rem;
 	}
 	#-toolbar img {
-		max-width: 2rem;
-		position: absolute;
-		top: 2px;
-		right: 2px;
+		max-width: 1.5rem;
+		vertical-align: middle;
+		margin-top: -0.2rem;
 	}
 
 #-search-dropdown {
 	position: absolute;
+	top: 2.5rem;
+	width: 20rem;
+}
+
+#-search-list {
+	font-family: "Karla", sans-serif;
 	padding-inline-start: 0;
 	border: 1px solid #ddd;
 	list-style-type: none;
@@ -87,18 +97,19 @@ body {
 	box-shadow: 0px 4px 8px rgba(0,0,0,0.25);
 	display: flex;
 	flex-direction: column;
-	min-width: 12rem;
+	margin-top: 0.5rem;
+	overflow: hidden;
 }
-	#-search-dropdown a {
+	#-search-list a {
 		display: block;
 		padding: 0.5rem;
 		text-decoration: none;
 		color: #000;
 	}
-	#-search-dropdown li.selected {
+	#-search-list li.selected {
 		outline: none;
 	}
-	#-search-dropdown li.selected a, #-search-dropdown a:hover, #-search-dropdown a:focus {
+	#-search-list li.selected a, #-search-list a:hover, #-search-list a:focus {
 		background-color: #36c;
 		color: #fff;
 		text-decoration: underline;
@@ -128,12 +139,6 @@ body {
 	#-main-dropdown span {
 		color: #999;
 		display: block;
-	}
-	#-main-dropdown a {
-		text-decoration: none;
-	}
-	#-main-dropdown a:hover {
-		text-decoration: underline;
 	}
 	#-main-dropdown img {
 		max-width: 2rem;
@@ -216,9 +221,6 @@ body {
 
 	#-palette .toolbar a:hover {
 		background-color: #ccc;
-	}
-	#-palette .toolbar a:hover svg {
-		stroke: #fff;
 	}
 	#-palette .toolbar a.flip img {
 		transform: rotate(180deg);
@@ -303,7 +305,7 @@ input {
 
 .hidden,
 #-main-dropdown.hidden,
-#-toolbar ul.hidden,
+#-search-dropdown.hidden,
 #-palette.hidden,
 #-palette div.hidden {
 	display: none;

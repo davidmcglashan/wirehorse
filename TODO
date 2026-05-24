@@ -8,8 +8,6 @@ bugs
 
 backlog
 --------
-- inject version
-- inject (c) date
 - various icons
 - icon and label
 - breadcrumbs
@@ -43,6 +41,8 @@ backlog
 - proper tracking of min values to stop shapes become zero width/height
 - selection drag event to draw a <div>, get its bounds, work out what intersects it
 - cut copy paste
+- inject version
+- inject (c) date
 
 meta
 ----

@@ -77,8 +77,10 @@
 				<span id="-title"><</span>
 			</div>
 			<div>
-				<input type="text" id="-search" placeholder="Press / to add something">
-				<ul id="-search-dropdown" class="hidden"></ul>
+				<a href="javascript:void(0)" id="-search-button" onclick="toolbar.openSearchDropdown()">
+					<img src="assets/circled-plus-svgrepo-com.svg">
+					Press '/' to add something
+				</a>
 			</div>
 			<div>
 				<a href="javascript:void(0)" onclick="toolbar.palette()">
@@ -113,13 +115,18 @@
 				<div>
 					<img src="assets/potion-svgrepo-com.svg">
 					<ul>
-						<li><strong>Wirehorse v0.1</strong></li>
+						<li><strong>Wirehorse v0.2.0</strong></li>
 						<li>&copy; 2026 David McGlashan</li>
 						<li>
-							<a href="https://wirehorse.mcglashan.net/">wirehorse.mcglashan.net</a> &mdash; <a href="https://github.com/davidmcglashan/wirehorse">github.com/davidmcglashan/wirehorse</a>  &mdash; CC0 1.0 Universal</li>
+							<a href="https://wirehorse.mcglashan.net/">wirehorse.mcglashan.net</a> &mdash; <a href="https://github.com/davidmcglashan/wirehorse">github.com/davidmcglashan/wirehorse</a>  &mdash; CC0 1.0 Universal
+						</li>
 					</ul>
 				</div>
 			</div>
+		</div>
+		<div id="-search-dropdown" class="hidden">
+			<input type="text" id="-search-input">
+			<ul id="-search-list"></ul>
 		</div>
 		<script>
 			palette.init()
