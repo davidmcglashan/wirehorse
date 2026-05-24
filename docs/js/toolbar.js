@@ -61,14 +61,20 @@ const toolbar = {
 	openMainDropdown: () => {
 		let lightbox = document.createElement( 'div' )
 		lightbox.setAttribute( 'class', 'lightbox' )
-		document.getElementsByTagName( 'body' )[0].appendChild( lightbox )
+		document.body.appendChild( lightbox )
 		lightbox.addEventListener( 'mouseup', function( event ) {
 			lightbox.remove()
 			toolbar.mainDropdown.classList.add( 'hidden' )
 		} )
 
 		toolbar.mainDropdown.classList.remove( 'hidden' )
-		document.getElementsByTagName( 'body' )[0].appendChild( toolbar.mainDropdown )
+		document.body.appendChild( toolbar.mainDropdown )
+	},
+
+	hideMainDropdown: () => {
+		toolbar.mainDropdown.classList.add( 'hidden' )
+		let lightbox = document.querySelectorAll( '.lightbox' )[0]
+		lightbox.remove()
 	},
 
 	hideSearchDropdown: () => {
@@ -183,6 +189,8 @@ const toolbar = {
 		if ( meta.tt ) {
 			let elem = document.getElementById( '-title' )
 			elem.innerHTML = meta.tt
+			elem = document.getElementById( '-save-input' )
+			elem.value = meta.tt
 		}
 	},
 
@@ -203,8 +211,27 @@ const toolbar = {
 		undo.clear()
 	},
 
+	/**
+	 * Toggle the palette's visibility
+	 */
 	palette: () => {
 		let elem = document.getElementById( '-palette' )
 		elem.classList.toggle( 'hidden' )
+	},
+
+	/**
+	 * Load a new wireframe from a file.
+	 */
+	load: () => {
+		let input = document.getElementById( '-load-input' )
+		io.loadModel( input.files[0], toolbar.hideMainDropdown )
+	},
+
+	/**
+	 * Save the current wireframe model to disk.
+	 */
+	save: () => {
+		let filename = document.getElementById( '-save-input' ).value
+		io.writeModel( filename, toolbar.hideMainDropdown )
 	}
 };

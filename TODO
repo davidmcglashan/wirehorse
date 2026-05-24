@@ -16,6 +16,8 @@ backlog
 - insert a component from file e.g. zatpark window, modal window
   - some JSON editing
   - remember recently used 
+- inject version
+- inject (c) date
 - breadcrumbs
 - text paragraph
 - horizontal rule

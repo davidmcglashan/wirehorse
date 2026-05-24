@@ -85,7 +85,7 @@
 					<img src="assets/sidebar-right-svgrepo-com.svg">
 				</a>
 			</div>
-			<div id="-main-dropdown" class="hidden" onclick="event.stopPropagation()">
+			<div id="-main-dropdown" class="hidden">
 				<div>
 					<img src="assets/plus-file-svgrepo-com.svg">
 					<div>
@@ -98,7 +98,7 @@
 					<div>
 						<strong>Open a file</strong>
 						<span>Click the file picker below to import a JSON file from your local disk</span>
-						<input type="file">
+						<input type="file" id="-load-input" onchange="toolbar.load()">
 					</div>
 				</div>
 				<div>
@@ -106,8 +106,8 @@
 					<div>
 						<strong>Save Wireframe</strong>
 						<span>Save the current wireframe in your Downloads folder with the name ...</span>
-						<input type="text" value="new-wireframe.json">
-						<a href="javascript:void(0)" onclick="io.save()">Save</a>
+						<input id="-save-input" type="text" value="new-wireframe.json">
+						<a href="javascript:void(0)" onclick="toolbar.save()">Save</a>
 					</div>
 				</div>
 				<div>

@@ -289,7 +289,7 @@ const palette = {
 	colourPicker: ( field ) => {
 		let lightbox = document.createElement( 'div' )
 		lightbox.setAttribute( 'class', 'lightbox' )
-		document.getElementsByTagName( 'body' )[0].appendChild( lightbox )
+		document.body.appendChild( lightbox )
 		lightbox.addEventListener( 'mouseup', function( event ) {
 			lightbox.remove()
 		} )
