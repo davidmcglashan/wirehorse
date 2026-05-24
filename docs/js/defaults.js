@@ -34,8 +34,6 @@ const defaults = {
 		model: {
 			ty: 'cmb',
 			tx: 'Choose an option',
-			ha: 'c',
-			va: 'm',
 			fz: 11,
 			co: 'bk',
 			w: 200,

@@ -1,6 +1,5 @@
 bugs
 ----
-- comboboxes are broken
 - some palette undoes e.g. bold don't retransmit to the canvas (but do to the model)
 - mouse leaving the window mid-drag
 - update the caret position during drags
@@ -9,21 +8,22 @@ bugs
 
 backlog
 --------
-- little dropdown with
-  - load from JSON
-  - rename & save to JSON
-  - update the filename into the title
-- insert a component from file e.g. zatpark window, modal window
-  - some JSON editing
-  - remember recently used 
 - inject version
 - inject (c) date
+- various icons
+- icon and label
 - breadcrumbs
 - text paragraph
 - horizontal rule
 - tabs
 - opacity
 - export to clipboard as a PNG
+  - everything
+  - selected items
+- insert a component from file e.g. zatpark window, modal window
+  - some JSON editing
+  - remember recently used 
+- drag without selecting first
 - locking shapes for selection immunity
 - is it quicker/more responsive to use a scroll/pan rather than a translate()?
 - selection rectangle on glass and encompassing the max bounds of each selected shape
@@ -34,14 +34,10 @@ backlog
   - text with 't'
   - labels with 'l'
 - Press Enter with a single selection to invoke the glass editor
-- other shapes
-  - various icons
-  - icon and label
-  - tables
-  - fancy arrows
+- tables
+- fancy arrows
 - alignment guides
 - inset guides
-- some shapes could be 'fit-content' for their width and height
 - text parsing e.g. this is *bold*
 - option+double-click a shape to recentre and re-zoom the display around it
 - proper tracking of min values to stop shapes become zero width/height
