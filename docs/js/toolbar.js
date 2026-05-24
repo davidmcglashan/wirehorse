@@ -45,15 +45,15 @@ const toolbar = {
 			a.setAttribute( 'href', 'javascript:void(0)' )
 			a.setAttribute( 'onclick', `javascript:toolbar.add(${i})` )
 			li.appendChild( a )
+			a.innerHTML = entry.name
 			
 			// If this is an icon, include the icon!
 			if ( entry.model.ty === 'ic' ) {
 				let icon = model.icons[ entry.model.ic ]
 				let img = document.createElement( 'img' )
 				img.setAttribute( 'src', `assets/${icon.asset}` )
-				li.appendChild( img )
+				a.appendChild( img )
 			}
-			a.innerHTML = entry.name
 		}
 	},
 
@@ -128,7 +128,11 @@ const toolbar = {
 		// Escape and TAB dismiss the drop-down
 		if ( event.keyCode === 9 || event.keyCode === 27 ) {
 			toolbar.hideSearchDropdown()
-			return
+		}
+
+		// Backspace needs to fire the searching function
+		if ( event.keyCode === 127 ) {
+			toolbar.searching()
 		}
 
 		// Enter will submit the selected shape.
@@ -137,7 +141,7 @@ const toolbar = {
 				let def = defaults.entries[i]
 
 				if ( def.elem.checkVisibility() && def.elem.classList.contains( 'selected' ) ) {
-					toolbar.add( key )
+					toolbar.add( i )
 					return
 				}
 			}
@@ -149,36 +153,36 @@ const toolbar = {
 			let next = false
 			let done = false
 
-			// // Iterate the <li> elements in the list. For the 'up' key we do this
-			// // in reverse.
-			// let iterate = Object.entries( defaults.entries ) 
-			// if ( event.keyCode === 38 ) {
-			// 	iterate.reverse()
-			// }
+			// Iterate the <li> elements in the list. For the 'up' key we do this
+			// in reverse.
+			let iterate = defaults.entries
+			if ( event.keyCode === 38 ) {
+				iterate = iterate.toReversed()
+			}
 
-			// for ( let [key,def] of iterate ) {
-			// 	// Only bother with the visible ones.
-			// 	if ( def.elem.checkVisibility() ) {
-			// 		if ( next ) {
-			// 			def.elem.classList.add( 'selected' )
-			// 			next = false
-			// 			done = true
-			// 		} else if ( def.elem.classList.contains( 'selected' ) ) {
-			// 			next = true
-			// 			def.elem.classList.remove( 'selected' )
-			// 		}
-			// 	}
-			// }
+			for ( let def of iterate ) {
+				// Only bother with the visible ones.
+				if ( def.elem.checkVisibility() ) {
+					if ( next ) {
+						def.elem.classList.add( 'selected' )
+						next = false
+						done = true
+					} else if ( def.elem.classList.contains( 'selected' ) ) {
+						next = true
+						def.elem.classList.remove( 'selected' )
+					}
+				}
+			}
 
-			// // If nothing was done select the first visible element again
-			// if ( !done ) {
-			// 	for ( let [key,def] of iterate ) {
-			// 		if ( def.elem.checkVisibility() ) {
-			// 			def.elem.classList.add( 'selected' )
-			// 			return
-			// 		}
-			// 	}
-			// }
+			// If nothing was done select the first visible element again
+			if ( !done ) {
+				for ( let def of iterate ) {
+					if ( def.elem.checkVisibility() ) {
+						def.elem.classList.add( 'selected' )
+						return
+					}
+				}
+			}
 		}
 	},
 
@@ -192,6 +196,7 @@ const toolbar = {
 
 		for ( let i in defaults.entries ) {
 			let def = defaults.entries[i]
+			def.elem.classList.remove( 'selected' )
 
 			if ( def.name.toLowerCase().indexOf( term ) !== -1 ) {
 				def.elem.classList.remove( 'hidden' )

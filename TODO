@@ -9,25 +9,35 @@ bugs
 backlog
 --------
 - breadcrumbs
-- tabs
+  - CSV options
+  - always rendered in grey/blue/small uppercase
 - horizontal rule
+- tabs
+  - two horizontal lines
+  - text area, one line per option, selected one starts with >
+  - trim all the strings
 - more icons
-- coloured icons 
+  - resizable like a font
+  - coloured icons 
   - either inline the SVGs or stackoverflow suggests masking and change background 
     colour https://stackoverflow.com/questions/24933430/img-src-svg-changing-the-styles-with-css
-- icon and label
 - text paragraph
 - opacity
 - export to clipboard as a PNG
   - everything
   - selected items
 - groups of components
+  - select one, select all - just need groups with their members described in the model
 - insert a component from file e.g. zatpark window, modal window
   - some JSON editing
   - remember recently used 
 - drag without selecting first
 - locking shapes for selection immunity
-- is it quicker/more responsive to use a scroll/pan rather than a translate()?
+- fancy arrows
+  - drawn on the glass to always be on top? 
+  - glass is a canvas, not a <div>
+  - this might help with the selection do-over
+  - arrows woud be added to an arrows collection, not a shapes one?
 - selection rectangle on glass and encompassing the max bounds of each selected shape
   - remove the CSS
   - suppose this element would intercept glass mouseevents which might be useful for a 'click on the selection' kind of thing?
@@ -37,14 +47,18 @@ backlog
   - labels with 'l'
 - Press Enter with a single selection to invoke the glass editor
 - tables
-- fancy arrows
+  - csv
+  - [ ]/[x] for checkboxes
+  - _foo_ for hyperlinks
 - alignment guides
 - inset guides
 - text parsing e.g. this is *bold*
+- is it quicker/more responsive to use a scroll/pan rather than a translate()?
 - option+double-click a shape to recentre and re-zoom the display around it
 - proper tracking of min values to stop shapes become zero width/height
 - selection drag event to draw a <div>, get its bounds, work out what intersects it
 - cut copy paste
+- icon and label
 - inject version
 - inject (c) date
 
