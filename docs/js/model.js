@@ -26,10 +26,14 @@ const model = {
 		vi: { hex: 'f0f', name: 'Violet' },
 	},
 
-	icons: [
-		{ name: 'Question Mark', asset: 'circled-question-svgrepo-com.svg' },
-		{ name: 'Circled Plus', asset: 'circled-plus-svgrepo-com.svg' },
-	],
+	icons: {
+		ctdn: { name: 'Caret Down', asset: 'dropdown-arrow-svgrepo-com.svg' },
+		crpl: { name: 'Circled Plus', asset: 'circled-plus-svgrepo-com.svg' },
+		save: { name: 'Floppy Disk', asset: 'floppy-disk-svgrepo-com.svg' },
+		newf: { name: 'New File', asset: 'plus-file-svgrepo-com.svg' },
+		qmrk: { name: 'Question Mark', asset: 'circled-question-svgrepo-com.svg' },
+		upld: { name: 'Upload', asset: 'upload-svgrepo-com.svg' },
+	},
 
 	/**
 	 * Register a listener for the model's metadata. If any value changes the

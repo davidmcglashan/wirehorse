@@ -297,12 +297,13 @@ ul.dropdown,
 	flex-direction: column;
 }
 
-.icon {
+#-canvas .icon {
 	width: 16px;
+	mask-size: contain;
+	mask-repeat: no-repeat;
+	aspect-ratio: 1;
 }
-	.icon img {
-		width: 100%;
-	}
+
 .label {
 	width: fit-content;
 	text-wrap: nowrap;

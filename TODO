@@ -17,10 +17,6 @@ backlog
   - text area, one line per option, selected one starts with >
   - trim all the strings
 - more icons
-  - resizable like a font
-  - coloured icons 
-  - either inline the SVGs or stackoverflow suggests masking and change background 
-    colour https://stackoverflow.com/questions/24933430/img-src-svg-changing-the-styles-with-css
 - text paragraph
 - opacity
 - export to clipboard as a PNG
@@ -31,6 +27,10 @@ backlog
 - insert a component from file e.g. zatpark window, modal window
   - some JSON editing
   - remember recently used 
+- play with the main dropdown
+  - accidental horizontal layout looked cool!
+  - light grey panel for the credits and acks
+  - include the font and icon meta
 - drag without selecting first
 - locking shapes for selection immunity
 - fancy arrows

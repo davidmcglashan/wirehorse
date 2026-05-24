@@ -60,7 +60,8 @@ const defaults = {
 					model: {
 						ty: 'ic',
 						ic: i,
-						w: 16
+						w: 16,
+						bg: 'bk'
 					}
 				}
 			)

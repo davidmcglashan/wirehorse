@@ -9,7 +9,7 @@ const palette = {
 			toolbars: ['arrange']
 		},
 		ic: {
-			fields: [ 'x','y','w' ],
+			fields: [ 'x','y','w','bg' ],
 			toolbars: ['arrange']
 		},
 		lbl: {
@@ -35,7 +35,7 @@ const palette = {
 
 		let css = ''
 		for ( let [key,colour] of Object.entries(model.colours) ) {
-			css += `.button-${key}{ background-color: #${colour.hex};}`
+			css += `.button-${key}{ background-color: #${colour.hex};}\n`
 		}
 		style.innerHTML = css
 
