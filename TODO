@@ -1,5 +1,6 @@
 bugs
 ----
+- multiselection currently boned (icons)
 - some palette undoes e.g. bold don't retransmit to the canvas (but do to the model)
 - mouse leaving the window mid-drag
 - update the caret position during drags
@@ -8,9 +9,6 @@ bugs
 
 backlog
 --------
-- breadcrumbs
-  - CSV options
-  - always rendered in grey/blue/small uppercase
 - horizontal rule
 - tabs
   - two horizontal lines

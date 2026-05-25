@@ -15,7 +15,11 @@ const palette = {
 		lbl: {
 			fields: [ 'x','y','co' ],
 			toolbars: ['arrange','font'],
-		}
+		},
+		bcb: {
+			fields: [ 'x','y' ],
+			toolbars: ['arrange']
+		},
 	},
 
 	fields: [ 'x','y','w','h','bg','co','bo','fz','fb','fi','fu','ha','va' ],

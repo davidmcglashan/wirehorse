@@ -14,7 +14,8 @@ const glass = {
 	editorMap: {
 		lbl: 'input',
 		rec: 'input',
-		cmb: 'textarea'
+		cmb: 'textarea',
+		bcb: 'input'
 	},
 
 	/**

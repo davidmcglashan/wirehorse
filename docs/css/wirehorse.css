@@ -297,6 +297,20 @@ ul.dropdown,
 	flex-direction: column;
 }
 
+.breadcrumbs {
+	text-transform: uppercase;
+	font-size: 0.75rem;
+	display: flex;
+	gap: 0.5rem;
+}
+	.breadcrumbs span {
+		color: #36c;
+	}
+	.breadcrumbs span:last-child,
+	.breadcrumbs span.divider {
+		color: #999;
+	}
+
 #-canvas .icon {
 	width: 16px;
 	mask-size: contain;

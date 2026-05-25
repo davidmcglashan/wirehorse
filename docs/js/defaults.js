@@ -43,6 +43,13 @@ const defaults = {
 				tx: 'New label',
 				fz: 11,
 			}
+		},{
+			name: 'Breadcrumbs',
+			model: {
+				ty: 'bcb',
+				tx: 'home,section,page',
+				fz: 11,
+			}
 		},
 	],
 

@@ -3,6 +3,10 @@ Wireframing from the horse stable
 
 ## Version history
 
+### v0.2.3
+* New breadcrumbs shape
+* Added house icon
+
 ### v0.2.2
 * Added a few more icons.
 * Icons can now be coloured, but the selection outline doesn't show.

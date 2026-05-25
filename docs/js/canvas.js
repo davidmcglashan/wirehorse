@@ -33,7 +33,6 @@ const canvas = {
 		css = ''
 
 		for ( let [key,icon] of Object.entries(model.icons) ) {
-			console.log( key, icon )
 			css += `.icon-${key}{mask: url('assets/${icon.asset}');}\n`
 		}
 		style.innerHTML = css
@@ -332,6 +331,19 @@ const canvas = {
 			// Style and position it
 			div.setAttribute( 'class', `icon icon-${shape.ic} entity` )
 			canvas.elementCreator.xywh( shape, div )
+			canvas.elementCreator.colour( shape, div )
+			canvas.elementCreator.innerHTML[shape.ty]( shape, div )
+
+			return div
+		},
+
+		bcb: ( shape ) => {
+			// Put our new label on the canvas
+			let div = canvas.elementCreator.div( shape )
+
+			// Style and position it
+			div.setAttribute( 'class', `breadcrumbs entity` )
+			canvas.elementCreator.xywh( shape, div )
 			canvas.elementCreator.innerHTML[shape.ty]( shape, div )
 
 			return div
@@ -376,6 +388,20 @@ const canvas = {
 				}
 				elem.innerHTML = html
 			},		
+			bcb: ( shape, elem ) => {
+				let sections = shape.tx.split( ',' )
+				let len = sections.length
+				let html = ''
+
+				for ( let i in sections ) {
+					html += `<span>${sections[i]}</span>`
+					if ( i < len-1 ) {
+						html += '<span class="divider">|  </span>'
+					}
+				}
+
+				elem.innerHTML = html
+			},
 		}
 	},
 };
