@@ -20,6 +20,10 @@ const palette = {
 			fields: [ 'x','y' ],
 			toolbars: ['arrange']
 		},
+		hr: {
+			fields: [ 'x','y','w','bo' ],
+			toolbars: ['arrange']
+		},
 	},
 
 	fields: [ 'x','y','w','h','bg','co','bo','fz','fb','fi','fu','ha','va' ],

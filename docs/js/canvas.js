@@ -24,6 +24,7 @@ const canvas = {
 		let css = ''
 		for ( let [key,colour] of Object.entries(model.colours) ) {
 			css += `.border-${key}{border-image-source: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22120.1%22%20height%3D%2261.3%22%20viewBox%3D%220%200%20112.6%2057.5%22%3E%3Cpath%20fill%3D%22none%22%20stroke%3D%22%23${colour.hex}%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%223%22%20d%3D%22M15.5%202h16.7c5%20.2%2012.7%201%2019.1.7%204.3.5%208.6-.3%2013%20.3%206.1%200%2012.3-1%2018.4-.7%205.9.4%2010.1.5%2017.6.4%207.4-.5%2010.7%200%2010.2%207.3q-.3%209-.1%2016c0%208.7%201.3%2025-.6%2027.6-3%203.8-10%201-14.3%201.2-4-.2-9.6%201-13.5%200-5-.7-8.3.7-13.2.3-5%200-9.7-.8-14.5.3a64%2064%200%200%201-19.2-.5c-5.9-.9-10%200-15.9-.1-4.7%200-15%201.8-16.6%200S2.2%2043%202.2%2039.1c-.4-9.2-.5-15.6.1-24.8.1-1.6-1.1-8.4%200-10.2C4.7.5%2011.6%202.5%2015.5%202%22%2F%3E%3C%2Fsvg%3E');}\n`
+			css += `.hr-${key}{border-image-source: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22642.1%22%20height%3D%225.4%22%20viewBox%3D%220%200%20642.1%205.4%22%3E%3Cpath%20fill%3D%22none%22%20stroke%3D%22%23${colour.hex}%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%223%22%20d%3D%22M1.7%202.7q7.5-.2%2034%20.4a1197%201197%200%200%200%2058.9.5l24.2.1a1168%201168%200%200%200%2045-.6q6%200%2017.3-.6%2011.5-.4%2016-.4t13%20.7%2029.1.2%2030.3-.1%2031.8.3a3411%203411%200%200%200%2069.6-.7q10-.3%2024.2-.1t52.1%200h54.5q16.5%200%2038.5-.4t33.7-.4%2029.9.7a416%20416%200%200%200%2036.6.2%22%2F%3E%3C%2Fsvg%3E');}\n`
 		}
 		style.innerHTML = css
 
@@ -300,7 +301,7 @@ const canvas = {
 			let div = canvas.elementCreator.div( shape )
 
 			// Style and position it
-			div.setAttribute( 'class', 'rectangle entity border-' + shape.bo )
+			div.setAttribute( 'class', `rectangle entity border-${shape.bo}` )
 			canvas.elementCreator.xywh( shape, div )
 			canvas.elementCreator.font( shape, div )
 			canvas.elementCreator.colour( shape, div )
@@ -318,6 +319,19 @@ const canvas = {
 			div.setAttribute( 'class', 'label entity' )
 			canvas.elementCreator.xywh( shape, div )
 			canvas.elementCreator.font( shape, div )
+			canvas.elementCreator.colour( shape, div )
+			canvas.elementCreator.innerHTML[shape.ty]( shape, div )
+
+			return div
+		},
+
+		hr: ( shape ) => {
+			// Put our new label on the canvas
+			let div = canvas.elementCreator.div( shape )
+
+			// Style and position it
+			div.setAttribute( 'class', `hr hr-${shape.bg} entity` )
+			canvas.elementCreator.xywh( shape, div )
 			canvas.elementCreator.colour( shape, div )
 			canvas.elementCreator.innerHTML[shape.ty]( shape, div )
 
@@ -370,6 +384,9 @@ const canvas = {
 			},
 			lbl: ( shape, elem ) => {
 				elem.innerHTML = shape.tx
+			},
+			hr: ( shape, elem ) => {
+				elem.innerHTML = ''
 			},
 			ic: ( shape, elem ) => {
 				elem.innerHTML = ``

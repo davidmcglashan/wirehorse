@@ -9,7 +9,6 @@ bugs
 
 backlog
 --------
-- horizontal rule
 - tabs
   - two horizontal lines
   - text area, one line per option, selected one starts with >
@@ -17,6 +16,7 @@ backlog
 - more icons
 - text paragraph
 - opacity
+- alias a field on the palette to change the label name e.g. {'bg': 'Colour'}
 - export to clipboard as a PNG
   - everything
   - selected items

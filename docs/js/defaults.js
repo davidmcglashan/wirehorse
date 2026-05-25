@@ -50,7 +50,14 @@ const defaults = {
 				tx: 'home,section,page',
 				fz: 11,
 			}
-		},
+		},{
+			name: 'Horizontal rule',
+			model: {
+				ty: 'hr',
+				w: 128,
+				bo: 'g5'
+			}
+		}
 	],
 
 	/**
