@@ -15,7 +15,8 @@ const glass = {
 		lbl: 'input',
 		rec: 'input',
 		cmb: 'textarea',
-		bcb: 'input'
+		bcb: 'input',
+		tab: 'textarea'
 	},
 
 	/**

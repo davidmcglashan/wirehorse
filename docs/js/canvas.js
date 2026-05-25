@@ -276,7 +276,7 @@ const canvas = {
 			}
 
 			// Borders are done with classes, not styles, so this takes a bit of prog.
-			if ( shape.bo ) {
+			if ( shape.ty !== 'hr' && shape.bo ) {
 				for ( let [key,colour] of Object.entries(model.colours) ) {
 					elem.classList.remove( `border-${key}`)
 				}
@@ -330,9 +330,21 @@ const canvas = {
 			let div = canvas.elementCreator.div( shape )
 
 			// Style and position it
-			div.setAttribute( 'class', `hr hr-${shape.bg} entity` )
+			div.setAttribute( 'class', `hr hr-${shape.bo} entity` )
 			canvas.elementCreator.xywh( shape, div )
 			canvas.elementCreator.colour( shape, div )
+			canvas.elementCreator.innerHTML[shape.ty]( shape, div )
+
+			return div
+		},
+
+		tab: ( shape ) => {
+			// Put our new label on the canvas
+			let div = canvas.elementCreator.div( shape )
+
+			// Style and position it
+			div.setAttribute( 'class', `tabs hr-g3 entity` )
+			canvas.elementCreator.xywh( shape, div )
 			canvas.elementCreator.innerHTML[shape.ty]( shape, div )
 
 			return div
@@ -391,6 +403,19 @@ const canvas = {
 			ic: ( shape, elem ) => {
 				elem.innerHTML = ``
 			},
+			tab: ( shape, elem ) => {
+				let lines = shape.tx.split('\n')
+				let html = '<ul>'
+				for ( let i=0; i<lines.length; i++) {
+					if ( lines[i].startsWith('>') ) {
+						html += `<li class="selected hr-bk">${lines[i].substring(1)}</li>`
+					} else {
+						html += `<li>${lines[i]}</li>`
+					}
+				}
+				html += '</ul>'
+				elem.innerHTML = html
+			},	
 			cmb: ( shape, elem ) => {
 				let lines = shape.tx.split('\n')
 				let html = `<div class="value border-bk">${lines[0]}</div><div class="caret"></div>`
@@ -404,7 +429,7 @@ const canvas = {
 					html += '</ul>'
 				}
 				elem.innerHTML = html
-			},		
+			},	
 			bcb: ( shape, elem ) => {
 				let sections = shape.tx.split( ',' )
 				let len = sections.length

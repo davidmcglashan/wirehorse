@@ -57,6 +57,13 @@ const defaults = {
 				w: 128,
 				bo: 'g5'
 			}
+		},{
+			name: 'Tabs',
+			model: {
+				ty: 'tab',
+				tx: '>one\ntwo\nthree',
+				w: 512
+			}
 		}
 	],
 

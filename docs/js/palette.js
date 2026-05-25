@@ -24,6 +24,10 @@ const palette = {
 			fields: [ 'x','y','w','bo' ],
 			toolbars: ['arrange']
 		},
+		tab: {
+			fields: [ 'x','y','w' ],
+			toolbars: ['arrange']
+		},
 	},
 
 	fields: [ 'x','y','w','h','bg','co','bo','fz','fb','fi','fu','ha','va' ],

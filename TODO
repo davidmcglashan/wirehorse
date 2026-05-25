@@ -9,14 +9,11 @@ bugs
 
 backlog
 --------
-- tabs
-  - two horizontal lines
-  - text area, one line per option, selected one starts with >
-  - trim all the strings
 - more icons
 - text paragraph
 - opacity
 - alias a field on the palette to change the label name e.g. {'bg': 'Colour'}
+- show the current colour value in the picker
 - export to clipboard as a PNG
   - everything
   - selected items
