@@ -12,7 +12,7 @@ const defaults = {
 				h: 100
 			}
 		},{
-			name: 'Blue Button',
+			name: 'Blue button',
 			model: {
 				ty: 'rec',
 				tx: 'Button',
