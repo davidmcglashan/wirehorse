@@ -98,7 +98,8 @@ a:hover, a:focus {
 	display: flex;
 	flex-direction: column;
 	margin-top: 0.5rem;
-	overflow: hidden;
+	overflow: hidden scroll;
+	max-height: 35rem;
 }
 	#-search-list a {
 		display: block;

@@ -81,7 +81,7 @@ const defaults = {
 					model: {
 						ty: 'ic',
 						ic: i,
-						w: 16,
+						w: 20,
 						bg: 'bk'
 					}
 				}

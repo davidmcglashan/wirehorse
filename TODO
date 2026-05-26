@@ -9,11 +9,27 @@ bugs
 
 backlog
 --------
-- more icons
+- filled square & circle icons from editing the SVGs of radio and check
 - text paragraph
 - opacity
+- checkbox
+- radiobox
+- scrollbar
+- rectangles should have 
+  - integrated scrollbars
+  - editor is dependent on size? or shift to force?
+- text input (as rec)
+- text area (as rec)
 - alias a field on the palette to change the label name e.g. {'bg': 'Colour'}
 - show the current colour value in the picker
+- selection rectangle on glass and encompassing the max bounds of each selected shape
+  - remove the CSS
+  - suppose this element would intercept glass mouseevents which might be useful for a 'click on the selection' kind of thing?
+- keyboard+drag to quickly add 
+  - rectangles with 'r'
+  - text with 't'
+  - labels with 'l'
+- Press Enter with a single selection to invoke the glass editor
 - export to clipboard as a PNG
   - everything
   - selected items
@@ -33,14 +49,6 @@ backlog
   - glass is a canvas, not a <div>
   - this might help with the selection do-over
   - arrows woud be added to an arrows collection, not a shapes one?
-- selection rectangle on glass and encompassing the max bounds of each selected shape
-  - remove the CSS
-  - suppose this element would intercept glass mouseevents which might be useful for a 'click on the selection' kind of thing?
-- keyboard+drag to quickly add 
-  - rectangles with 'r'
-  - text with 't'
-  - labels with 'l'
-- Press Enter with a single selection to invoke the glass editor
 - tables
   - csv
   - [ ]/[x] for checkboxes

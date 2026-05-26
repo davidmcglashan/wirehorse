@@ -165,6 +165,7 @@ const toolbar = {
 				if ( def.elem.checkVisibility() ) {
 					if ( next ) {
 						def.elem.classList.add( 'selected' )
+						def.elem.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })
 						next = false
 						done = true
 					} else if ( def.elem.classList.contains( 'selected' ) ) {

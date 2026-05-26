@@ -7,7 +7,7 @@ Wireframing from the horse stable
 * New breadcrumbs shape
 * New horizontal rule shape
 * New tabs shape
-* Added house icon
+* Added lots of new icons
 
 ### v0.2.2
 * Added a few more icons.
