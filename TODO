@@ -8,9 +8,7 @@ bugs
 backlog
 --------
 - Fix the editors
-  - "lorem" function
   - squiggle function
-  - HTML escaping in text editors
 - checkbox
 - radiobox
 - scrollbar
@@ -33,7 +31,8 @@ backlog
 - export to clipboard as a PNG
   - everything
   - selected items
-- Map (probably an SVG)
+- switch one component to another - merge the two objects {} and set the type
+- Map view component (probably an SVG)
 - rectangle with the X through it that can be colour changed
 - groups of components
   - select one, select all - just need groups with their members described in the model

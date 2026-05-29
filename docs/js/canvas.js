@@ -78,7 +78,7 @@ const canvas = {
 		// InnerHTML changes require the whole model.
 		if ( params.tx || params.tx === '' ) {
 			let shape = model.shape( id )
-			canvas.elementCreator.innerHTML[shape.ty]( params, elem )
+			canvas.elementCreator.safeInnerHTML( shape, elem )
 		}
 	},
 
@@ -306,7 +306,7 @@ const canvas = {
 			canvas.elementCreator.font( shape, div )
 			canvas.elementCreator.colour( shape, div )
 			canvas.elementCreator.alignment( shape, div )
-			canvas.elementCreator.innerHTML[shape.ty]( shape, div )
+			canvas.elementCreator.safeInnerHTML( shape, div )
 
 			return div
 		},
@@ -320,7 +320,7 @@ const canvas = {
 			canvas.elementCreator.xywh( shape, div )
 			canvas.elementCreator.font( shape, div )
 			canvas.elementCreator.colour( shape, div )
-			canvas.elementCreator.innerHTML[shape.ty]( shape, div )
+			canvas.elementCreator.safeInnerHTML( shape, div )
 
 			return div
 		},
@@ -333,7 +333,7 @@ const canvas = {
 			div.setAttribute( 'class', `hr hr-${shape.bo} entity` )
 			canvas.elementCreator.xywh( shape, div )
 			canvas.elementCreator.colour( shape, div )
-			canvas.elementCreator.innerHTML[shape.ty]( shape, div )
+			canvas.elementCreator.safeInnerHTML( shape, div )
 
 			return div
 		},
@@ -345,7 +345,7 @@ const canvas = {
 			// Style and position it
 			div.setAttribute( 'class', `tabs hr-g3 entity` )
 			canvas.elementCreator.xywh( shape, div )
-			canvas.elementCreator.innerHTML[shape.ty]( shape, div )
+			canvas.elementCreator.safeInnerHTML( shape, div )
 
 			return div
 		},
@@ -358,7 +358,7 @@ const canvas = {
 			div.setAttribute( 'class', `icon icon-${shape.ic} entity` )
 			canvas.elementCreator.xywh( shape, div )
 			canvas.elementCreator.colour( shape, div )
-			canvas.elementCreator.innerHTML[shape.ty]( shape, div )
+			canvas.elementCreator.safeInnerHTML( shape, div )
 
 			return div
 		},
@@ -370,7 +370,7 @@ const canvas = {
 			// Style and position it
 			div.setAttribute( 'class', `breadcrumbs entity` )
 			canvas.elementCreator.xywh( shape, div )
-			canvas.elementCreator.innerHTML[shape.ty]( shape, div )
+			canvas.elementCreator.safeInnerHTML( shape, div )
 
 			return div
 		},
@@ -383,66 +383,84 @@ const canvas = {
 			div.setAttribute( 'class', 'combobox entity' )
 			canvas.elementCreator.xywh( shape, div )
 			canvas.elementCreator.font( shape, div )
-			canvas.elementCreator.innerHTML[shape.ty]( shape, div )
+			canvas.elementCreator.safeInnerHTML( shape, div )
 
 			return div
 		},
-		
+
+		safeInnerHTML: ( shape, elem ) => {
+			elem.innerHTML = canvas.elementCreator.innerHTML[shape.ty]( shape, canvas.elementCreator.innerHTML.safe ) 
+		},
+
+		/**
+		 * Provides the inner HTML of components
+		 */
 		innerHTML: {
-			rec: ( shape, elem ) => {
+			/**
+			 * Safely convert a string into something that can be used in
+			 * a web page.
+			 */
+			safe: ( str ) => {
+				if ( !str ) {
+					return ''
+				}
+				return str.replaceAll( '<', '&lt;' )
+			},
+
+			rec: ( shape, safe ) => {
 				if ( shape.tx || shape.tx === '' ) {
-					elem.innerHTML = `<span>${shape.tx}</span>`
+					return `<span>${safe(shape.tx)}</span>`
 				}
 			},
-			lbl: ( shape, elem ) => {
-				elem.innerHTML = shape.tx
+			lbl: ( shape, safe ) => {
+				return safe(shape.tx)
 			},
-			hr: ( shape, elem ) => {
-				elem.innerHTML = ''
+			hr: ( shape, safe ) => {
+				return ''
 			},
-			ic: ( shape, elem ) => {
-				elem.innerHTML = ``
+			ic: ( shape, safe ) => {
+				return ''
 			},
-			tab: ( shape, elem ) => {
+			tab: ( shape, safe ) => {
 				let lines = shape.tx.split('\n')
 				let html = '<ul>'
 				for ( let i=0; i<lines.length; i++) {
 					if ( lines[i].startsWith('>') ) {
-						html += `<li class="selected hr-bk">${lines[i].substring(1)}</li>`
+						html += `<li class="selected hr-bk">${safe(lines[i].substring(1))}</li>`
 					} else {
-						html += `<li>${lines[i]}</li>`
+						html += `<li>${safe(lines[i])}</li>`
 					}
 				}
 				html += '</ul>'
-				elem.innerHTML = html
+				return html
 			},	
-			cmb: ( shape, elem ) => {
+			cmb: ( shape, safe ) => {
 				let lines = shape.tx.split('\n')
-				let html = `<div class="value border-bk">${lines[0]}</div><div class="caret"></div>`
+				let html = `<div class="value border-bk">${safe(lines[0])}</div><div class="caret"></div>`
 
 				if ( lines.length > 1 ) {
 					lines.pop
 					html += '<ul class="dropdown border-bk">'
 					for ( let i=1; i<lines.length; i++) {
-						html += `<li>${lines[i]}</li>`
+						html += `<li>${safe(lines[i])}</li>`
 					}
 					html += '</ul>'
 				}
-				elem.innerHTML = html
+				return html
 			},	
-			bcb: ( shape, elem ) => {
+			bcb: ( shape, safe ) => {
 				let sections = shape.tx.split( /[,\n\r]+/ )
 				let len = sections.length
 				let html = ''
 
 				for ( let i in sections ) {
-					html += `<span>${sections[i]}</span>`
+					html += `<span>${safe(sections[i])}</span>`
 					if ( i < len-1 ) {
-						html += '<span class="divider">|  </span>'
+						html += '<span class="divider">|</span>'
 					}
 				}
 
-				elem.innerHTML = html
+				return html
 			},
 		}
 	},
