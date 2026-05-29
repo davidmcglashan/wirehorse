@@ -58,13 +58,10 @@ const toolbar = {
 	},
 
 	openMainDropdown: () => {
-		let lightbox = document.createElement( 'div' )
-		lightbox.setAttribute( 'class', 'lightbox' )
-		document.body.appendChild( lightbox )
-		lightbox.addEventListener( 'mouseup', function( event ) {
-			lightbox.remove()
+		lightbox.open()
+		lightbox.callback = function() {
 			toolbar.mainDropdown.classList.add( 'hidden' )
-		} )
+		}
 
 		// Move the dropdown above our new lightbox.
 		toolbar.mainDropdown.classList.remove( 'hidden' )
@@ -73,8 +70,7 @@ const toolbar = {
 
 	hideMainDropdown: () => {
 		toolbar.mainDropdown.classList.add( 'hidden' )
-		let lightbox = document.querySelectorAll( '.lightbox' )[0]
-		lightbox.remove()
+		lightbox.close()
 	},
 
 	/**
@@ -88,13 +84,10 @@ const toolbar = {
 		}
 		
 		// Put a lightbox under the adder.
-		let lightbox = document.createElement( 'div' )
-		lightbox.setAttribute( 'class', 'lightbox' )
-		document.body.appendChild( lightbox )
-		lightbox.addEventListener( 'mouseup', function( event ) {
-			lightbox.remove()
+		lightbox.open()
+		lightbox.callback = function() {
 			toolbar.searchDropdown.classList.add( 'hidden' )
-		} )
+		}
 
 		let rect = document.getElementById('-search-button').getBoundingClientRect()
 		toolbar.searchDropdown.style.left = `${rect.x}px`
@@ -109,13 +102,11 @@ const toolbar = {
 	 * Hides the search dropdown and resets its state ready for its next use.
 	 */
 	hideSearchDropdown: () => {
+		// Tidy up the UI
 		toolbar.searchDropdown.classList.add( 'hidden' )
 		toolbar.searchInput.blur()
 		toolbar.searchInput.value = ''
-
-		// Find and remove the lightbox.
-		let lightbox = document.querySelectorAll( '.lightbox' )[0]
-		lightbox.remove()
+		lightbox.close()
 	},
 
 	/**
@@ -248,9 +239,7 @@ const toolbar = {
 
 		// Reset the UI
 		toolbar.mainDropdown.classList.add( 'hidden' )
-		let lightbox = document.querySelectorAll( '.lightbox' )[0]
-		lightbox.remove()
-
+		lightbox.close()
 		canvas.reset()
 		selection.clear()
 		undo.clear()

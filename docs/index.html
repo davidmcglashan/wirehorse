@@ -6,9 +6,11 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Redacted+Script:wght@300;400;700&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="css/wirehorse.css">
+		<script type="text/javascript" src="js/lightbox.js"></script>
 		<script type="text/javascript" src="js/defaults.js"></script>
 		<script type="text/javascript" src="js/model.js"></script>
 		<script type="text/javascript" src="js/toolbar.js"></script>
+		<script type="text/javascript" src="js/editor.js"></script>
 		<script type="text/javascript" src="js/glass.js"></script>
 		<script type="text/javascript" src="js/selection.js"></script>
 		<script type="text/javascript" src="js/canvas.js"></script>
@@ -128,7 +130,15 @@
 			<input type="text" id="-search-input">
 			<ul id="-search-list"></ul>
 		</div>
+		<div id="-lightbox" class="hidden" onclick="lightbox.close()"></div>
+		<div id="-editor" class="hidden">
+			<textarea id="story" name="story" rows="8" cols="33"></textarea>
+			<div class="edit-buttons">
+				<a href="javascript:void(0)" onclick="editor.save()"></a>
+			</div>
+		</div>
 		<script>
+			editor.init()
 			defaults.init()
 			palette.init()
 			glass.init()

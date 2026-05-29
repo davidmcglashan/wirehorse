@@ -1,22 +1,23 @@
 bugs
 ----
-- multiselection currently boned (icons)
 - some palette undoes e.g. bold don't retransmit to the canvas (but do to the model)
 - mouse leaving the window mid-drag
 - update the caret position during drags
-- double click in an editor invoked from a rectangle behaves weirdly (doesn't in labels ... ?)
 - redo doesn't resequence history properly. You can't move freely backwards and forwards ...
 
 backlog
 --------
-- text paragraph
-- opacity
+- Fix the editors
+  - "lorem" function
+  - squiggle function
+  - HTML escaping in text editors
 - checkbox
 - radiobox
 - scrollbar
 - rectangles should have 
   - integrated scrollbars
   - editor is dependent on size? or shift to force?
+- opacity
 - text input (as rec)
 - text area (as rec)
 - alias a field on the palette to change the label name e.g. {'bg': 'Colour'}
@@ -32,6 +33,8 @@ backlog
 - export to clipboard as a PNG
   - everything
   - selected items
+- Map (probably an SVG)
+- rectangle with the X through it that can be colour changed
 - groups of components
   - select one, select all - just need groups with their members described in the model
 - insert a component from file e.g. zatpark window, modal window

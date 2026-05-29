@@ -2,21 +2,12 @@ const glass = {
 	elem: null,
 	canvas: null,
 	caret: null,
-	editor: null,
 
 	// Glass is responsible for scroll drags, which we track with this object.
 	drag: {
 		pressed: false,
 		ready: false,
 		type: 0
-	},
-
-	editorMap: {
-		lbl: 'input',
-		rec: 'input',
-		cmb: 'textarea',
-		bcb: 'input',
-		tab: 'textarea'
 	},
 
 	/**
@@ -33,7 +24,7 @@ const glass = {
 		glass.elem.addEventListener( 'mousedown', glass.mousePressed )
 		glass.elem.addEventListener( 'wheel', glass.wheelTurned )
 
-		glass.elem.addEventListener( 'dblclick', glass.invokeEditor )
+		glass.elem.addEventListener( 'dblclick', editor.invokeEditor )
 
 		// glass can listen to some keyevents
 		document.addEventListener( 'keydown', glass.keyDown )
@@ -53,86 +44,6 @@ const glass = {
 		if ( meta.ox && meta.oy ) {
 			glass.canvas.style.transform = `translate(${meta.ox}px,${meta.oy}px)`
 		}
-	},
-
-	/**
-	 * Causes a text editing UI component to appear for a double-clicked element
-	 */
-	invokeEditor: ( event ) => {
-		// The current state of drag operations can refust this editor opening
-		if ( !glass.drag.editorPermitted ) {
-			return
-		}
-
-		if ( selection.yes() === 1 ) {
-			let shape = model.shape( selection.ids()[0] )
-
-			// Create a new text input to serve as the editor
-			let editor = glass.editorMap[ shape.ty ]
-			if ( editor ) {
-				glass.editor = document.createElement( editor )
-				glass.elem.appendChild( glass.editor )
-				
-				// Position the input on the glass near the mouse click
-				glass.editor.style.top = `${event.pageY+16}px`
-				glass.editor.style.left = `${event.pageX-16}px`
-				if ( shape['tx'] ) {
-					glass.editor.value = shape['tx']
-				} else {
-					glass.editor.value = ''
-				}
-
-				// Special jazz for textareas
-				if ( editor === 'textarea' ) {
-					glass.editor.rows = 8
-				}
-
-				// Give it a focus listener
-				glass.editor.addEventListener( 'focusout', function( event ) {
-					glass.removeEditor()
-				} )
-				
-				// And a key listener for escape and enter.
-				glass.editor.addEventListener( 'keydown', function( event ) {
-					// This stops e.g. the canvas reacting to arrow key presses in the text field and moving
-					// the shapes around.
-					event.stopPropagation()
-
-					// Escape dismisses the editor with no save!
-					if ( event.keyCode === 27 ) {
-						glass.removeEditor()
-					}
-
-					// Enter behaves differently on textareas which require shift+Enter to commit
-					if ( event.keyCode === 13 ) {
-						if ( editor === 'textarea' ) {
-							if ( event.shiftKey ) {
-								glass.removeEditor( { commit:true, id:shape.id } )
-							}
-						} else {
-							glass.removeEditor( { commit:true, id:shape.id } )
-						}
-					}
-				} )
-				
-				glass.editor.focus()
-				glass.editor.select()
-			}
-		}
-	},
-	
-	/**
-	 * Remove the glass editor, optionally committing its value to the model
-	 */
-	removeEditor: ( params = {commit:false} ) => {
-		// Update the model?
-		if ( params.commit ) {
-			undo.pushShape( model.updateShape( params.id, { tx:glass.editor.value } ) )
-		}
-		
-		// Remove the UI component
-		glass.editor.remove()
-		glass.editor = null
 	},
 
 	/**

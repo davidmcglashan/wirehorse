@@ -376,28 +376,58 @@ input {
 	display: none;
 }
 
-.lightbox {
+#-lightbox {
 	position: absolute;
 	inset: 0;
-	background-color: rgba(0,0,0,0.25);
+	background-color: rgba(0,0,0,0.35);
+	backdrop-filter: blur(1px);
 }
-	.lightbox .picker {
-		position: absolute;
-		background-color: #fff;
-		border: 1px solid #aaa;
+
+#-editor {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	width: 25rem;
+	height: fit-content;
+}
+	#-editor.hidden {
+		display: none;
+	}
+	#-editor .edit-buttons a {
+		background-color: #ddd;
+		border: 1px solid #666;
 		border-radius: 5px;
-		box-shadow: 0px 4px 8px rgba(0,0,0,0.25);
 		padding: 0.5rem;
-		width: fit-content;
-		height: fit-content;
-		display: flex;
-		flex-wrap: wrap;
-		max-width: 8.3rem;
-		gap: 0.1rem;
+		box-shadow: 0px 4px 8px rgba(0,0,0,0.25);
+		background-image: url('../assets/check-svgrepo-com.svg');
+		position: absolute;
+		width: 0.75rem;
+		height: 0.75rem;
+		background-size: contain;
 	}
-	.lightbox .picker input[type="button"] {
-		width: 2rem;
-		height: 2rem;
-		border: 1px solid #aaa;
-		border-radius: 3px;
+	#-editor textarea {
+		resize: none;
+		box-shadow: 0px 4px 8px rgba(0,0,0,0.25);
 	}
+	
+.picker {
+	position: absolute;
+	background-color: #fff;
+	border: 1px solid #aaa;
+	border-radius: 5px;
+	box-shadow: 0px 4px 8px rgba(0,0,0,0.25);
+	padding: 0.5rem;
+	width: fit-content;
+	height: fit-content;
+	display: flex;
+	flex-wrap: wrap;
+	max-width: 8.3rem;
+	gap: 0.1rem;
+}
+.picker input[type="button"] {
+	width: 2rem;
+	height: 2rem;
+	border: 1px solid #aaa;
+	border-radius: 3px;
+}

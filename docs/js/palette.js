@@ -295,7 +295,7 @@ const palette = {
 	multiSelection: ( ids ) => {
 		for ( field of palette.fields ) {
 			let container = document.getElementById( `-con-${field}` )
-			container.classList.add( 'hidden' )
+			container?.classList.add( 'hidden' )
 		}
 	},
 
@@ -303,19 +303,17 @@ const palette = {
 	 * Spins up a colour picker on the UI
 	 */
 	colourPicker: ( field ) => {
-		let lightbox = document.createElement( 'div' )
-		lightbox.setAttribute( 'class', 'lightbox' )
-		document.body.appendChild( lightbox )
-		lightbox.addEventListener( 'mouseup', function( event ) {
-			lightbox.remove()
-		} )
-
 		let picker = document.createElement( 'div' )
+		document.body.appendChild( picker )
 		picker.setAttribute( 'class', 'picker' )
-		lightbox.appendChild( picker )
 		picker.addEventListener( 'mouseup', function( event ) {
 			event.stopPropagation()
 		} )
+		
+		lightbox.open()
+		lightbox.callback = function() {
+			picker.remove()
+		}
 
 		let input = document.getElementById( `-fld-${field}` ).getBoundingClientRect()
 		picker.style.top = `${input.y + input.height+3}px`
@@ -333,7 +331,7 @@ const palette = {
 					mod[field] = key
 					undo.pushShape( model.updateShape( shape, mod ) )
 				}
-				lightbox.remove()
+				lightbox.close()
 			} )
 		}
 	},

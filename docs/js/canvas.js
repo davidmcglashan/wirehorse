@@ -390,7 +390,7 @@ const canvas = {
 		
 		innerHTML: {
 			rec: ( shape, elem ) => {
-				if ( shape.tx ) {
+				if ( shape.tx || shape.tx === '' ) {
 					elem.innerHTML = `<span>${shape.tx}</span>`
 				}
 			},
@@ -431,7 +431,7 @@ const canvas = {
 				elem.innerHTML = html
 			},	
 			bcb: ( shape, elem ) => {
-				let sections = shape.tx.split( ',' )
+				let sections = shape.tx.split( /[,\n\r]+/ )
 				let len = sections.length
 				let html = ''
 
