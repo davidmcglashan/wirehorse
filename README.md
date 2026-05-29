@@ -8,6 +8,9 @@ Wireframing from the horse stable
 * New horizontal rule shape
 * New tabs shape
 * Added lots of new icons
+* Improved the editor to be more robust
+* Typing 'lorem' in an editor fills the component with lorem ipsum text
+* Scribble font now an option for components
 
 ### v0.2.2
 * Added a few more icons.

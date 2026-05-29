@@ -6,7 +6,7 @@ const palette = {
 		},
 		cmb: {
 			fields: [ 'x','y','w','co' ],
-			toolbars: ['arrange']
+			toolbars: ['arrange','font']
 		},
 		ic: {
 			fields: [ 'x','y','w','bg' ],
@@ -18,7 +18,7 @@ const palette = {
 		},
 		bcb: {
 			fields: [ 'x','y' ],
-			toolbars: ['arrange']
+			toolbars: ['arrange','font']
 		},
 		hr: {
 			fields: [ 'x','y','w','bo' ],
@@ -26,11 +26,11 @@ const palette = {
 		},
 		tab: {
 			fields: [ 'x','y','w' ],
-			toolbars: ['arrange']
+			toolbars: ['arrange','font']
 		},
 	},
 
-	fields: [ 'x','y','w','h','bg','co','bo','fz','fb','fi','fu','ha','va' ],
+	fields: [ 'x','y','w','h','bg','co','bo','fz','fb','fi','fu','fs','ha','va' ],
 	toolbars: ['arrange','text-align','font'],
 
 	/**

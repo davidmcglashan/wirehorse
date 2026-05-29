@@ -265,6 +265,11 @@ const canvas = {
 			if ( shape.fu === false ) {
 				elem.style.textDecoration = 'none'
 			}
+			if ( shape.fs === true ) {
+				elem.classList.add( 'scribble' )
+			} else {
+				elem.classList.remove( 'scribble' )
+			}
 		},
 
 		colour: ( shape, elem ) => {
