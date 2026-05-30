@@ -418,7 +418,12 @@ const canvas = {
 				}
 			},
 			lbl: ( shape, safe ) => {
-				return safe(shape.tx)
+				let lines = shape.tx.split('\n')
+				let html = ''
+				for ( let i=0; i<lines.length; i++) {
+					html += `<p>${safe(lines[i])}</p>`
+				}
+				return html
 			},
 			hr: ( shape, safe ) => {
 				return ''

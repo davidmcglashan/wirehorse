@@ -13,7 +13,7 @@ const palette = {
 			toolbars: ['arrange']
 		},
 		lbl: {
-			fields: [ 'x','y','co' ],
+			fields: [ 'x','y','w','co' ],
 			toolbars: ['arrange','font'],
 		},
 		bcb: {
