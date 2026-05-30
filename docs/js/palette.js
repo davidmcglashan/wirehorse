@@ -272,7 +272,7 @@ const palette = {
 			
 			// Colour pickers need a bit of additional set up
 			else if ( input.getAttribute( 'data-type' ) === 'colour' ) {
-				input.setAttribute( 'onclick',`javascript:palette.colourPicker('${field}')` )
+				input.setAttribute( 'onclick',`javascript:palette.colourPicker('${field}','${shape[field]}')` )
 				input.setAttribute( 'class', `button-${value}` )
 			} 
 			
@@ -314,7 +314,7 @@ const palette = {
 	/**
 	 * Spins up a colour picker on the UI
 	 */
-	colourPicker: ( field ) => {
+	colourPicker: ( field, selected ) => {
 		let picker = document.createElement( 'div' )
 		document.body.appendChild( picker )
 		picker.setAttribute( 'class', 'picker' )
@@ -334,7 +334,7 @@ const palette = {
 		for ( let [key,colour] of Object.entries(model.colours) ) {
 			let button = document.createElement( 'input' )
 			button.setAttribute( 'type', 'button' )
-			button.setAttribute( 'class', `button-${key}` )
+			button.setAttribute( 'class', `button-${key} ${key === selected ? 'selected' : ''}` )
 			picker.appendChild( button )
 
 			button.addEventListener( 'click', function( event ) {
