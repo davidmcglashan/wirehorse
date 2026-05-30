@@ -344,8 +344,35 @@ ul.dropdown,
 		color: #999;
 	}
 
+.checkboxes.selected {
+	outline-offset: 2px;
+}
+	.checkboxes div.icon {
+		width: 1.5rem;
+		height: 1.5rem;
+		background-size: contain;
+	}
+	.checkboxes div.icon-chbx {
+		background-color: #333;
+	}
+	.checkboxes div.icon-ckbx {
+		background-color: #36c;
+	}
+	.checkboxes ul {
+		list-style-type: none;
+		padding-inline-start: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.1rem;
+	}
+	.checkboxes ul li {
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
+	}
+
 #-canvas .icon {
-	width: 16px;
 	mask-size: contain;
 	mask-repeat: no-repeat;
 	aspect-ratio: 1;

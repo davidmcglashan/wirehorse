@@ -36,6 +36,14 @@ const defaults = {
 				h: 30
 			}
 		},{
+			name: 'Checkboxes',
+			model: {
+				ty: 'chb',
+				co: 'bk',
+				tx: 'Checkbox',
+				fz: 11,
+			}
+		},{
 			name: 'Label',
 			model: {
 				ty: 'lbl',

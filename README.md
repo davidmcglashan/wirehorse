@@ -5,6 +5,7 @@ Wireframing from the horse stable
 
 ### v0.2.4
 * Labels have width support to behave like paragraphs
+* Checkboxes have been added
 
 ### v0.2.3
 * New breadcrumbs shape

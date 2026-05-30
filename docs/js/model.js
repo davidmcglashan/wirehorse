@@ -39,6 +39,8 @@ const model = {
 		area: { name: 'Area chart', asset: 'area-chart-svgrepo-com.svg' },
 		scch: { name: 'Scatter chart', asset: 'scatter-plot-chart-svgrepo-com.svg' },
 		chck: { name: 'Check / tick', asset: 'check-svgrepo-com.svg' },
+		chbx: { name: 'Checkbox', asset: 'checkbox-svgrepo-com.svg' },
+		ckbx: { name: 'Checked checkbox', asset: 'checked-checkbox-svgrepo-com.svg' },
 		lchv: { name: 'Left chevron', asset: 'left-chevron-svgrepo-com.svg' },
 		rchv: { name: 'Right chevron', asset: 'right-chevron-svgrepo-com.svg' },
 		dlch: { name: 'Double left chevron', asset: 'double-left-chevron-svgrepo-com.svg' },

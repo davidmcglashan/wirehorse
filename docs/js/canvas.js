@@ -330,6 +330,19 @@ const canvas = {
 			return div
 		},
 
+		chb: ( shape ) => {
+			// Put our new label on the canvas
+			let div = canvas.elementCreator.div( shape )
+
+			// Style and position it
+			div.setAttribute( 'class', 'checkboxes entity' )
+			canvas.elementCreator.xywh( shape, div )
+			canvas.elementCreator.font( shape, div )
+			canvas.elementCreator.colour( shape, div )
+			canvas.elementCreator.safeInnerHTML( shape, div )
+
+			return div
+		},
 		hr: ( shape ) => {
 			// Put our new label on the canvas
 			let div = canvas.elementCreator.div( shape )
@@ -440,6 +453,24 @@ const canvas = {
 					} else {
 						html += `<li>${safe(lines[i])}</li>`
 					}
+				}
+				html += '</ul>'
+				return html
+			},	
+			chb: ( shape, safe ) => {
+				let lines = shape.tx.split('\n')
+				let html = '<ul>'
+				for ( let i=0; i<lines.length; i++) {
+					html += '<li>'
+					let cut = 0
+					if ( lines[i].startsWith('[x]') ) {
+						html += '<div class="icon icon-ckbx"></div>'
+						cut = 3
+					} else if ( lines[i].startsWith('[ ]') ) {
+						html += '<div class="icon icon-chbx"></div>'
+						cut = 3
+					}
+					html += `${safe(lines[i].substring(cut))}</li>`
 				}
 				html += '</ul>'
 				return html

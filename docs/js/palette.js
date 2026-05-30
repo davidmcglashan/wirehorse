@@ -8,6 +8,10 @@ const palette = {
 			fields: [ 'x','y','w','co' ],
 			toolbars: ['arrange','font']
 		},
+		chb: {
+			fields: [ 'x','y','w','co' ],
+			toolbars: ['arrange','font'],
+		},
 		ic: {
 			fields: [ 'x','y','w','bg' ],
 			toolbars: ['arrange']
