@@ -40,7 +40,7 @@ const defaults = {
 			model: {
 				ty: 'chb',
 				co: 'bk',
-				tx: 'Checkbox',
+				tx: '[x] Checkbox',
 				fz: 11,
 			}
 		},{
@@ -49,6 +49,14 @@ const defaults = {
 				ty: 'lbl',
 				co: 'bk',
 				tx: 'New label',
+				fz: 11,
+			}
+		},{
+			name: 'Radio button',
+			model: {
+				ty: 'rad',
+				co: 'bk',
+				tx: '(x) Radio',
 				fz: 11,
 			}
 		},{

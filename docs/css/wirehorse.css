@@ -344,9 +344,11 @@ ul.dropdown,
 		color: #999;
 	}
 
+.radiobuttons.selected
 .checkboxes.selected {
 	outline-offset: 2px;
 }
+	.radiobuttons div.icon,
 	.checkboxes div.icon {
 		width: 1.5rem;
 		height: 1.5rem;
@@ -358,6 +360,13 @@ ul.dropdown,
 	.checkboxes div.icon-ckbx {
 		background-color: #36c;
 	}
+	.radiobuttons div.icon-rado {
+		background-color: #333;
+	}
+	.radiobuttons div.icon-crad {
+		background-color: #36c;
+	}
+	.radiobuttons ul,
 	.checkboxes ul {
 		list-style-type: none;
 		padding-inline-start: 0;
@@ -366,6 +375,7 @@ ul.dropdown,
 		flex-direction: column;
 		gap: 0.1rem;
 	}
+	.radiobuttons ul li,
 	.checkboxes ul li {
 		display: flex;
 		align-items: center;

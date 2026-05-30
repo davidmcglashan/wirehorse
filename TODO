@@ -7,9 +7,7 @@ bugs
 
 backlog
 --------
-- checkbox
 - Press Enter with a single selection to invoke the glass editor
-- radiobox
 - scrollbar
 - rectangles should have 
   - integrated scrollbars
@@ -20,6 +18,7 @@ backlog
 - alias a field on the palette to change the label name e.g. {'bg': 'Colour'}
 - show the current colour value in the picker
 ----- v0.3
+- lots of repeated code in the entity creator
 - selection rectangle on glass and encompassing the max bounds of each selected shape
   - remove the CSS
   - suppose this element would intercept glass mouseevents which might be useful for a 'click on the selection' kind of thing?

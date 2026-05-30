@@ -329,13 +329,25 @@ const canvas = {
 
 			return div
 		},
-
 		chb: ( shape ) => {
 			// Put our new label on the canvas
 			let div = canvas.elementCreator.div( shape )
 
 			// Style and position it
 			div.setAttribute( 'class', 'checkboxes entity' )
+			canvas.elementCreator.xywh( shape, div )
+			canvas.elementCreator.font( shape, div )
+			canvas.elementCreator.colour( shape, div )
+			canvas.elementCreator.safeInnerHTML( shape, div )
+
+			return div
+		},
+		rad: ( shape ) => {
+			// Put our new label on the canvas
+			let div = canvas.elementCreator.div( shape )
+
+			// Style and position it
+			div.setAttribute( 'class', 'radiobuttons entity' )
 			canvas.elementCreator.xywh( shape, div )
 			canvas.elementCreator.font( shape, div )
 			canvas.elementCreator.colour( shape, div )
@@ -468,6 +480,24 @@ const canvas = {
 						cut = 3
 					} else if ( lines[i].startsWith('[ ]') ) {
 						html += '<div class="icon icon-chbx"></div>'
+						cut = 3
+					}
+					html += `${safe(lines[i].substring(cut))}</li>`
+				}
+				html += '</ul>'
+				return html
+			},	
+			rad: ( shape, safe ) => {
+				let lines = shape.tx.split('\n')
+				let html = '<ul>'
+				for ( let i=0; i<lines.length; i++) {
+					html += '<li>'
+					let cut = 0
+					if ( lines[i].startsWith('(x)') ) {
+						html += '<div class="icon icon-crad"></div>'
+						cut = 3
+					} else if ( lines[i].startsWith('( )') ) {
+						html += '<div class="icon icon-rado"></div>'
 						cut = 3
 					}
 					html += `${safe(lines[i].substring(cut))}</li>`
