@@ -1,7 +1,7 @@
 const palette = {
 	config: {
 		rec: {
-			fields: [ 'x','y','w','h','bg','co','bo' ],
+			fields: [ 'x','y','w','h','bg','co','bo','op' ],
 			toolbars: ['arrange','font','text-align']
 		},
 		cmb: {
@@ -42,7 +42,7 @@ const palette = {
 		},
 	},
 
-	fields: [ 'x','y','w','h','bg','co','bo','fz','fb','fi','fu','fs','ha','va' ],
+	fields: [ 'x','y','w','h','bg','co','bo','fz','fb','fi','fu','fs','ha','va','op' ],
 	toolbars: ['arrange','text-align','font'],
 
 	/**

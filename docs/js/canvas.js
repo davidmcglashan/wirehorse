@@ -299,6 +299,10 @@ const canvas = {
 				}
 				elem.classList.add( `border-${shape.bo}` )
 			}
+
+			if ( shape.op ) {
+				elem.style.opacity = shape.op/100
+			}
 		},
 
 		alignment: ( shape, elem ) => {

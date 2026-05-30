@@ -300,6 +300,9 @@ ul.dropdown,
 	flex-direction: column;
 }
 
+.vertical-scrollbar {
+	background-color: #fff;
+}
 	.vertical-scrollbar div {
 		position: absolute;
 		width: 1rem;
