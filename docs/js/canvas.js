@@ -379,7 +379,17 @@ const canvas = {
 
 			return div
 		},
+		vs: ( shape ) => {
+			// Put our new label on the canvas
+			let div = canvas.elementCreator.div( shape )
 
+			// Style and position it
+			div.setAttribute( 'class', `vertical-scrollbar border-bk entity` )
+			canvas.elementCreator.xywh( shape, div )
+			canvas.elementCreator.safeInnerHTML( shape, div )
+
+			return div
+		},
 		tab: ( shape ) => {
 			// Put our new label on the canvas
 			let div = canvas.elementCreator.div( shape )
@@ -464,6 +474,9 @@ const canvas = {
 			},
 			hr: ( shape, safe ) => {
 				return ''
+			},
+			vs: ( shape, safe ) => {
+				return '<div class="up"></div><div class="bar"></div><div class="down"></div>'
 			},
 			ic: ( shape, safe ) => {
 				return ''

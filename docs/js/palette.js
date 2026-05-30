@@ -36,6 +36,10 @@ const palette = {
 			fields: [ 'x','y','w' ],
 			toolbars: ['arrange','font']
 		},
+		vs: {
+			fields: [ 'x','y','h' ],
+			toolbars: ['arrange']
+		},
 	},
 
 	fields: [ 'x','y','w','h','bg','co','bo','fz','fb','fi','fu','fs','ha','va' ],

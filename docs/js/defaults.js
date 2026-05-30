@@ -74,6 +74,12 @@ const defaults = {
 				bo: 'g5'
 			}
 		},{
+			name: 'Vertical scrollbar',
+			model: {
+				ty: 'vs',
+				h: 128
+			}
+		},{
 			name: 'Tabs',
 			model: {
 				ty: 'tab',

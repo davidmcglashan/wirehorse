@@ -255,6 +255,7 @@ a:hover, a:focus {
 
 ul.dropdown,
 .combobox .value,
+.vertical-scrollbar,
 .rectangle {
 	border-style: solid;
 	border-width: 8px;
@@ -299,6 +300,31 @@ ul.dropdown,
 	flex-direction: column;
 }
 
+	.vertical-scrollbar div {
+		position: absolute;
+		width: 1rem;
+		height: 1rem;
+		left: -8px;
+	}
+	.vertical-scrollbar div.up {
+		background-image: url('../assets/dropdown-arrow-svgrepo-com.svg');
+		background-size: contain;
+		top: -8px;
+		rotate: 180deg
+	}
+	.vertical-scrollbar div.bar {
+		top: 0.5rem;
+		height: 50%;
+		background-color: #999;
+		border-radius: 1rem;
+		width: 0.5rem;
+		left: -0.25rem;
+	}
+	.vertical-scrollbar div.down {
+		background-image: url('../assets/dropdown-arrow-svgrepo-com.svg');
+		background-size: contain;
+		bottom: -8px;
+	}
 .tabs,
 .tabs ul li.selected,
 .hr {
