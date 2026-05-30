@@ -115,7 +115,7 @@ const palette = {
 		
 		// Now pass its current state down into the selected elements.
 		let changes = []
-		let value = input.classList.contains( 'selected' )
+		let value = input.classList.contains( 'selected' ) ? 'yes' : 'no'
 		
 		for ( let sid of sids ) {
 			let shape = model.shape( sid )
@@ -262,7 +262,7 @@ const palette = {
 
 			// What kind of ipnut are we dealing with. <a> can be a toggling icon button
 			if ( input.tagName === 'A' && input.getAttribute( 'data-type' ) === 'toggle' ) {
-				input.setAttribute( 'class', value === true ? 'selected' : '' )
+				input.setAttribute( 'class', value === 'yes' ? 'selected' : '' )
 			} 
 
 			// What kind of ipnut are we dealing with. <a> can be a toggling icon button

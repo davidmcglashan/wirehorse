@@ -69,17 +69,14 @@ const canvas = {
 			canvas.relayer()
 		}
 
-		// Make the change.
+		// Make the change. Some of the markup changes require the entire model to be present
+		// and not just the changeset, so we replace params with the full thing.
+		params = model.shape( id )
 		canvas.elementCreator.xywh( params, elem )
 		canvas.elementCreator.font( params, elem )
 		canvas.elementCreator.colour( params, elem )
 		canvas.elementCreator.alignment( params, elem )
-
-		// InnerHTML changes require the whole model.
-		if ( params.tx || params.tx === '' ) {
-			let shape = model.shape( id )
-			canvas.elementCreator.safeInnerHTML( shape, elem )
-		}
+		canvas.elementCreator.safeInnerHTML( params, elem )
 	},
 
 	/**
@@ -258,28 +255,25 @@ const canvas = {
 			if ( shape.fz ) {
 				elem.style.fontSize = `${shape.fz}pt`
 			}
-			if ( shape.fb === true ) {
+			if ( shape.fb === 'yes' || shape.fs === 'yes' ) {
 				elem.style.fontWeight = '600'
-			}
-			if ( shape.fb === false ) {
+			} else {
 				elem.style.fontWeight = '400'
 			}
-			if ( shape.fi === true ) {
+			if ( shape.fi === 'yes' ) {
 				elem.style.fontStyle = 'italic'
-			}
-			if ( shape.fi === false ) {
+			} else {
 				elem.style.fontStyle = 'unset'
 			}
 
-			if ( shape.fu === true ) {
+			if ( shape.fu === 'yes' ) {
 				elem.style.textDecoration = 'underline'
-			}
-			if ( shape.fu === false ) {
+			} else {
 				elem.style.textDecoration = 'none'
 			}
-			if ( shape.fs === true ) {
+			if ( shape.fs === 'yes' ) {
 				elem.classList.add( 'scribble' )
-			} else if ( shape.fs === false ) {
+			} else {
 				elem.classList.remove( 'scribble' )
 			}
 		},
