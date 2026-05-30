@@ -28,8 +28,9 @@ const undo = {
 	},
 
 	/**
-	 * Push a bulk shape event into the history. This action erases any future history
-	 * from previous undos.
+	 * Push a bulk shape event into the history. Bulk shape events are large-scale model changes for things
+	 * like: new shape, delete shape, relayer shape. For smaller property changes you want the other funcs.
+	 * This action erases any future history from previous undos.
 	 */
 	pushBulkShapes: ( type, shapes ) => {
 		undo.history.push( { type: type, changes: shapes } )
@@ -73,7 +74,6 @@ const undo = {
 		else if ( recent.type === 'shape' ) {
 			// Iterate the recent changes for all the entities that changed.
 			for ( const [id,log] of Object.entries( recent.changes ) ) {
-				
 				// Construct a new update object by looking for the old value when the change 
 				// first occurred and using it as the new value for a new update to the model.
 				let mod = {}
@@ -98,8 +98,9 @@ const undo = {
 		if ( !redo ) {
 			return
 		}
-
-		// New shapes are added back from the model
+		undo.history.push( redo )
+		
+		// New shapes are) added back from the model
 		if ( redo.type === 'newShapes' ) {
 			for ( const change of redo.changes ) {
 				model.addShape( change )
@@ -115,7 +116,7 @@ const undo = {
 
 		// Redos are straightforward since the recent future already describes the change
 		// we want to (re)make to each entity.
-		else  if ( redo.type === 'shape ') {
+		else  if ( redo.type === 'shape' ) {
 			for ( const [id,log] of Object.entries( redo.changes ) ) {
 				model.updateShape( id, log )
 			}
