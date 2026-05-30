@@ -279,7 +279,7 @@ const canvas = {
 			}
 			if ( shape.fs === true ) {
 				elem.classList.add( 'scribble' )
-			} else {
+			} else if ( shape.fs === false ) {
 				elem.classList.remove( 'scribble' )
 			}
 		},
