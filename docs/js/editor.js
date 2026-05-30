@@ -44,12 +44,12 @@ const editor = {
 		if ( !editor.canOpen ) {
 			return
 		}
+		editor.canOpen = false
 
 		// Only show an editor if there's a single shape selectede.
 		if ( selection.yes() === 1 ) {
 			let shape = model.shape( selection.ids()[0] )
 			editor.shapeId = shape['id']
-
 			lightbox.open()
 			lightbox.callback = editor.removeEditor
 			editor.elem.classList.remove( 'hidden' )
@@ -57,14 +57,14 @@ const editor = {
 			// Position the input on the glass near the mouse click
 			editor.elem.style.top = `${event.pageY+16}px`
 			editor.elem.style.left = `${event.pageX-16}px`
-
+			
 			let value = shape['tx']
 			if ( value ) {
 				editor.textarea.value = value
 			} else {
 				editor.textarea.value = ''
 			}
-
+			
 			// Get keyboard focus and selet all the text ready for quick edits.
 			editor.textarea.focus()
 			editor.textarea.select()
@@ -74,7 +74,7 @@ const editor = {
 	/**
 	 * Remove the glass editor, optionally committing its value to the model
 	 */
-	save: () => {
+	save: ( event ) => {
 		undo.pushShape( model.updateShape( editor.shapeId, { tx:editor.textarea.value } ) )
 		lightbox.close()
 	},
@@ -84,5 +84,6 @@ const editor = {
 	 */
 	removeEditor: () => {
 		editor.elem.classList.add( 'hidden' )
+		editor.canOpen = true
 	},
 };

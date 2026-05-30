@@ -142,16 +142,16 @@ const canvas = {
 		}
 
 		// Enter to invoke the editor
-		else if ( event.keyCode === 13 ) {
-			if ( selection.yes() === 1 ) {
-				// We can pass in an 'event' object based on the selection's location.
-				let rect = selection.first().getBoundingClientRect()
-				editor.invokeEditor({
-					pageX: rect.x+32,
-					pageY: rect.y+16
-				})
-			}
-		}
+		// else if ( event.keyCode === 13 && editor.canOpen ) {
+		// 	if ( selection.yes() === 1 ) {
+		// 		// We can pass in an 'event' object based on the selection's location.
+		// 		let rect = selection.first().getBoundingClientRect()
+		// 		editor.invokeEditor({
+		// 			pageX: rect.x+32,
+		// 			pageY: rect.y+16
+		// 		})
+		// 	}
+		// }
 
 		// Backspace for delete!
 		else if ( event.keyCode === 8 ) {

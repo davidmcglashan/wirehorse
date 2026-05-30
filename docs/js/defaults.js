@@ -60,6 +60,34 @@ const defaults = {
 				fz: 11,
 			}
 		},{
+			name: 'Text input',
+			model: {
+				ty: 'rec',
+				tx: 'Value',
+				bg: 'wh',
+				co: 'bk',
+				bo: 'bk',
+				ha: 'l',
+				va: 'm',
+				fz: 11,
+				w: 200,
+				h: 16
+			}
+		},{
+			name: 'Text area',
+			model: {
+				ty: 'rec',
+				tx: 'Value',
+				bg: 'wh',
+				co: 'bk',
+				bo: 'bk',
+				ha: 'l',
+				va: 't',
+				fz: 11,
+				w: 200,
+				h: 80
+			}
+		},{
 			name: 'Breadcrumbs',
 			model: {
 				ty: 'bcb',

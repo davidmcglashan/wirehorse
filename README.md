@@ -8,6 +8,7 @@ Wireframing from the horse stable
 * Checkboxes & radio buttons have been added
 * New scrollbar shape
 * Rectangles can now have opacity between 0 and 100
+* Implemented text fields and text areas as defaulted rectangles
 
 ### v0.2.3
 * New breadcrumbs shape

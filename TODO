@@ -1,6 +1,6 @@
 bugs
 ----
-- new rectangles have 'undefined' labels
+- Enter is re-invoking the editor!
 - moving squiggle text undoes the CSS and makes the text english again
 - some palette undoes e.g. bold don't retransmit to the canvas (but do to the model)
 - mouse leaving the window mid-drag
@@ -9,8 +9,6 @@ bugs
 
 backlog
 --------
-- text input (as rec)
-- text area (as rec)
 - alias a field on the palette to change the label name e.g. {'bg': 'Colour'}
 - show the current colour value in the picker
 ----- v0.3
