@@ -318,6 +318,8 @@ const glass = {
 		if ( event.repeat ) {
 			return
 		}
+
+		// Space prepares to hand-drag scroll the canvas around.
 		if ( event.keyCode === 32 )  {
 			glass.elem.setAttribute( 'class', 'ready' )
 			glass.drag.ready = true

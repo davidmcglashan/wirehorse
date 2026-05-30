@@ -73,6 +73,13 @@ const selection = {
 	},
 
 	/**
+	 * Returns the first selected DOM element.
+	 */
+	first: () => {
+		return selection.storage[0]
+	},
+
+	/**
 	 * Returns the ids of all the currently selected entities.
 	 */
 	ids: () => {
