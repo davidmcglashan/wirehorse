@@ -251,6 +251,10 @@ const canvas = {
 			if ( shape.h ) { elem.style.height	= shape.h + 'px' }		
 		},
 
+		/**
+		 * Set the font's appearance. These are tricky since they have CSS or HTML
+		 * values to be set when they're not present in the model.
+		 */
 		font: ( shape, elem ) => {
 			if ( shape.fz ) {
 				elem.style.fontSize = `${shape.fz}pt`
