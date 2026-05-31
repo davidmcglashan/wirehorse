@@ -44,6 +44,7 @@ const selection = {
 		for ( let elem of selection.storage ) {
 			ids.push( elem.getAttribute( 'id' ) )
 		}
+
 		for ( listener of selection.listeners ) {
 			listener( ids )
 		}

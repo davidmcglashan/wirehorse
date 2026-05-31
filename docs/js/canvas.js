@@ -188,6 +188,7 @@ const canvas = {
 				changes[id] = model.updateShape( id, { y: newY } )
 			}
 			undo.pushMulti( changes )
+			glass.selectionChanged( selection.ids() )
 		} 
 
 		// Up arrow
@@ -198,6 +199,7 @@ const canvas = {
 				changes[id] = model.updateShape( id, { y: newY } )
 			}
 			undo.pushMulti( changes )
+			glass.selectionChanged( selection.ids() )
 		}
 
 		// Left arrow
@@ -208,6 +210,7 @@ const canvas = {
 				changes[id] = model.updateShape( id, { x: newX } )
 			}
 			undo.pushMulti( changes )
+			glass.selectionChanged( selection.ids() )
 		}
 
 		// Right arrow
@@ -218,6 +221,7 @@ const canvas = {
 				changes[id] = model.updateShape( id, { x: newX } )
 			}
 			undo.pushMulti( changes )
+			glass.selectionChanged( selection.ids() )
 		}
 	},
 

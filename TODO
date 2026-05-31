@@ -8,11 +8,6 @@ backlog
 --------
 
 ----- v0.3
-- selection rectangle on glass and encompassing the max bounds of each selected shape
-  - glass is now a <canvas>?
-  - remove the selection CSS (from elements! still need the class)
-  - suppose this element would intercept glass mouseevents which might be useful for a 'click on the selection' kind of thing?
-  - redo the drag carets on the selection border
 - keyboard+drag to quickly add 
   - rectangles with 'r'
   - text with 't'

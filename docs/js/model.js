@@ -166,6 +166,21 @@ const model = {
 	},
 
 	/**
+	 * Return the model for a shapes with these ids.
+	 */
+	shapes: ( ids ) => {
+		let ret = []
+		for ( let shape of model.sh ) {
+			for ( let id of ids ) {
+				if ( shape.id === id ) {
+					ret.push( shape )
+				}
+			}
+		}
+		return ret
+	},
+
+	/**
 	 * Create a clone of the shape with this id
 	 */
 	cloneShape: ( id ) => {

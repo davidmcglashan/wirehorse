@@ -21,6 +21,21 @@ a:hover, a:focus {
 	inset: 0;
 }
 
+#-selection {
+	outline-offset: 5px;
+	outline: 2px solid #36c;
+	position: absolute;
+}
+	#-selection.multiple {
+		outline-offset: 10px;
+		outline: 1px dashed #36c;
+	}
+	#-selection>div {
+		outline-offset: 5px;
+		outline: 2px solid #36c;
+		position: absolute;
+	}
+
 #-glass {
 	position: absolute;
 	inset: 0;
