@@ -122,6 +122,13 @@ const undo = {
 			}
 		}
 
+		// Relayered shapes are recalled with their original instruction
+		else if ( redo.type === undo.types.RELAYER_SHAPES ) {
+			for ( const change of redo.changes ) {
+				model.relayerShape( change.id, change.mode )
+			}
+		}
+
 		// Redos are straightforward since the recent future already describes the change
 		// we want to (re)make to each entity.
 		else  if ( redo.type === undo.types.SHAPE_EDIT ) {

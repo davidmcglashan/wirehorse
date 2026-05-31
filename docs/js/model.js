@@ -240,7 +240,7 @@ const model = {
 		
 		// Save the model and return an object which can be used by the undo manager
 		model.save()
-		return { id: movedShape.id, from: i }
+		return { id: movedShape.id, from: i, mode: mode }
 	},
 
 	/**

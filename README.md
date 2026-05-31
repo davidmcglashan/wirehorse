@@ -3,6 +3,9 @@ Wireframing from the horse stable
 
 ## Version history
 
+### v0.3.0
+* Moving shapes forwards and backwards can noe be undone and redone
+
 ### v0.2.4
 * Labels have width support to behave like paragraphs
 * Checkboxes & radio buttons have been added
