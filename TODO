@@ -8,8 +8,6 @@ backlog
 --------
 
 ----- v0.3
-- lots of the little strings should be constants
-- separate CSS into Ui and entity
 - selection rectangle on glass and encompassing the max bounds of each selected shape
   - glass is now a <canvas>?
   - remove the selection CSS (from elements! still need the class)
@@ -19,6 +17,7 @@ backlog
   - rectangles with 'r'
   - text with 't'
   - labels with 'l'
+- lots of the little strings should be constants
 ----- v0.4
 - export to clipboard as a PNG
   - everything
