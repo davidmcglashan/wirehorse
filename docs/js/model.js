@@ -123,7 +123,8 @@ const model = {
 		// Iterate the shapes via elementCreator to put them into the DOM
 		model.sh = current.sh
 		model.sh.forEach( shape => {
-			canvas.elementCreator[shape.ty]( shape )
+			canvas.elementCreator.make( shape )
+			canvas.elementCreator.style( shape )
 		} )
 	},
 

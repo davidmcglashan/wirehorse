@@ -65,18 +65,14 @@ const canvas = {
 		
 		// If there's no element then try to create a new one.
 		if ( !elem && params.ty ) {
-			elem = canvas.elementCreator[params.ty]( params )
+			elem = canvas.elementCreator.make( params )
 			canvas.relayer()
 		}
 
 		// Make the change. Some of the markup changes require the entire model to be present
 		// and not just the changeset, so we replace params with the full thing.
 		params = model.shape( id )
-		canvas.elementCreator.xywh( params, elem )
-		canvas.elementCreator.font( params, elem )
-		canvas.elementCreator.colour( params, elem )
-		canvas.elementCreator.alignment( params, elem )
-		canvas.elementCreator.safeInnerHTML( params, elem )
+		canvas.elementCreator.style( params )
 	},
 
 	/**
@@ -115,7 +111,7 @@ const canvas = {
 		if ( direction === 'f' ) {
 			changes.reverse()
 		}
-		undo.pushBulkShapes( 'relayerShapes', changes )
+		undo.pushBulkShapes( undo.types.RELAYER_SHAPES, changes )
 	},
 
 	/**
@@ -158,7 +154,7 @@ const canvas = {
 				removed.push( model.removeShape( id ) )
 			}
 			// Give undo something to (un)do.
-			undo.pushBulkShapes( 'removeShapes', removed )
+			undo.pushBulkShapes( undo.types.REMOVE_SHAPES, removed )
 		} 
 
 		// Cmd-D to duplicate!
@@ -174,7 +170,7 @@ const canvas = {
 				}
 				
 				// Give undo something to (un)do.
-				undo.pushBulkShapes( 'newShapes', clones )
+				undo.pushBulkShapes( undo.types.ADD_NEW_SHAPES, clones )
 
 				// Now select the new object(s).
 				selection.clear()
@@ -230,220 +226,140 @@ const canvas = {
 	 */
 	elementCreator: {
 		/**
-		 * Creates the basic <div> for a canvas entity.
-		 */
-		div: ( shape ) => {
-			let elem = document.createElement( 'div' )
-			elem.setAttribute( 'id', shape.id )
-			shape.elem = elem
-			canvas.elem.appendChild( elem )
-
-			return elem
-		},
-
-		/**
 		 * Position the canvas entity
 		 */
-		xywh: ( shape, elem ) => {
-			if ( shape.x || shape.x === 0 ) { elem.style.left 	= shape.x + 'px' }
-			if ( shape.y || shape.y === 0 ) { elem.style.top 	= shape.y + 'px' }
-			if ( shape.w ) { elem.style.width 	= shape.w + 'px' }
-			if ( shape.h ) { elem.style.height	= shape.h + 'px' }		
+		xywh: ( shape ) => {
+			if ( shape.x || shape.x === 0 ) { 
+				shape.elem.style.left = shape.x + 'px' 
+			}
+			if ( shape.y || shape.y === 0 ) { 
+				shape.elem.style.top = shape.y + 'px' 
+			}
+			if ( shape.w ) { 
+				shape.elem.style.width = shape.w + 'px' 
+			}
+			if ( shape.h ) { 
+				shape.elem.style.height	= shape.h + 'px' 
+			}		
 		},
 
 		/**
 		 * Set the font's appearance. These are tricky since they have CSS or HTML
 		 * values to be set when they're not present in the model.
 		 */
-		font: ( shape, elem ) => {
+		font: ( shape ) => {
 			if ( shape.fz ) {
-				elem.style.fontSize = `${shape.fz}pt`
+				shape.elem.style.fontSize = `${shape.fz}pt`
 			}
 			if ( shape.fb === 'yes' || shape.fs === 'yes' ) {
-				elem.style.fontWeight = '600'
+				shape.elem.style.fontWeight = '600'
 			} else {
-				elem.style.fontWeight = '400'
+				shape.elem.style.fontWeight = '400'
 			}
 			if ( shape.fi === 'yes' ) {
-				elem.style.fontStyle = 'italic'
+				shape.elem.style.fontStyle = 'italic'
 			} else {
-				elem.style.fontStyle = 'unset'
+				shape.elem.style.fontStyle = 'unset'
 			}
 
 			if ( shape.fu === 'yes' ) {
-				elem.style.textDecoration = 'underline'
+				shape.elem.style.textDecoration = 'underline'
 			} else {
-				elem.style.textDecoration = 'none'
+				shape.elem.style.textDecoration = 'none'
 			}
 			if ( shape.fs === 'yes' ) {
-				elem.classList.add( 'scribble' )
+				shape.elem.classList.add( 'scribble' )
 			} else {
-				elem.classList.remove( 'scribble' )
+				shape.elem.classList.remove( 'scribble' )
 			}
 		},
 
-		colour: ( shape, elem ) => {
+		colour: ( shape ) => {
 			if ( shape.bg ) {
-				elem.style.backgroundColor = `#${model.colours[shape.bg].hex}`
+				shape.elem.style.backgroundColor = `#${model.colours[shape.bg].hex}`
 			}
 			if ( shape.co ) {
-				elem.style.color = `#${model.colours[shape.co].hex}`
+				shape.elem.style.color = `#${model.colours[shape.co].hex}`
 			}
 
 			// Borders are done with classes, not styles, so this takes a bit of prog.
 			if ( shape.ty !== 'hr' && shape.bo ) {
 				for ( let [key,colour] of Object.entries(model.colours) ) {
-					elem.classList.remove( `border-${key}`)
+					shape.elem.classList.remove( `border-${key}`)
 				}
-				elem.classList.add( `border-${shape.bo}` )
+				shape.elem.classList.add( `border-${shape.bo}` )
 			}
 
 			if ( shape.op ) {
-				elem.style.opacity = shape.op/100
+				shape.elem.style.opacity = shape.op/100
 			}
 		},
 
-		alignment: ( shape, elem ) => {
+		alignment: ( shape ) => {
 			if ( shape.ha ) {
-				elem.style.alignItems = canvas.ha[shape.ha]
+				shape.elem.style.alignItems = canvas.ha[shape.ha]
 			}
 			if ( shape.va ) {
-				elem.style.justifyContent = canvas.va[shape.va]
+				shape.elem.style.justifyContent = canvas.va[shape.va]
 			}
 		},
 
 		/**
-		 * Adds a rectangle to the canvas
+		 * Creates the basic <div> for a canvas entity.
 		 */
-		rec: ( shape ) => {
-			// Put our new rectangle on the canvas
-			let div = canvas.elementCreator.div( shape )
-
-			// Style and position it
-			div.setAttribute( 'class', `rectangle entity border-${shape.bo}` )
-			canvas.elementCreator.xywh( shape, div )
-			canvas.elementCreator.font( shape, div )
-			canvas.elementCreator.colour( shape, div )
-			canvas.elementCreator.alignment( shape, div )
-			canvas.elementCreator.safeInnerHTML( shape, div )
-
-			return div
+		make: ( shape ) => {
+			let elem = document.createElement( 'div' )
+			elem.setAttribute( 'id', shape.id )
+			shape.elem = elem
+			canvas.elem.appendChild( elem )
 		},
 
-		lbl: ( shape ) => {
-			// Put our new label on the canvas
-			let div = canvas.elementCreator.div( shape )
-
+		style: ( shape ) => {
 			// Style and position it
-			div.setAttribute( 'class', 'label entity' )
-			canvas.elementCreator.xywh( shape, div )
-			canvas.elementCreator.font( shape, div )
-			canvas.elementCreator.colour( shape, div )
-			canvas.elementCreator.safeInnerHTML( shape, div )
+			shape.elem.setAttribute( 'class', `entity entity-${shape.ty}` )
+			canvas.elementCreator.xywh( shape )
+			canvas.elementCreator.font( shape )
+			canvas.elementCreator.colour( shape )
+			canvas.elementCreator.alignment( shape )
+			canvas.elementCreator.safeInnerHTML( shape )
 
-			return div
+			// Allow additional config from each shape type.
+			let func = canvas.elementCreator[shape.ty]
+			if ( func ) {
+				func( shape )
+			}
 		},
-		chb: ( shape ) => {
-			// Put our new label on the canvas
-			let div = canvas.elementCreator.div( shape )
 
-			// Style and position it
-			div.setAttribute( 'class', 'checkboxes entity' )
-			canvas.elementCreator.xywh( shape, div )
-			canvas.elementCreator.font( shape, div )
-			canvas.elementCreator.colour( shape, div )
-			canvas.elementCreator.safeInnerHTML( shape, div )
-
-			return div
-		},
-		rad: ( shape ) => {
-			// Put our new label on the canvas
-			let div = canvas.elementCreator.div( shape )
-
-			// Style and position it
-			div.setAttribute( 'class', 'radiobuttons entity' )
-			canvas.elementCreator.xywh( shape, div )
-			canvas.elementCreator.font( shape, div )
-			canvas.elementCreator.colour( shape, div )
-			canvas.elementCreator.safeInnerHTML( shape, div )
-
-			return div
-		},
-		hr: ( shape ) => {
-			// Put our new label on the canvas
-			let div = canvas.elementCreator.div( shape )
-
-			// Style and position it
-			div.setAttribute( 'class', `hr hr-${shape.bo} entity` )
-			canvas.elementCreator.xywh( shape, div )
-			canvas.elementCreator.colour( shape, div )
-			canvas.elementCreator.safeInnerHTML( shape, div )
-
-			return div
-		},
+		/**
+		 * Vertical scrollbars have a hard-coded border-bk class.
+		 */
 		vs: ( shape ) => {
-			// Put our new label on the canvas
-			let div = canvas.elementCreator.div( shape )
-
-			// Style and position it
-			div.setAttribute( 'class', `vertical-scrollbar border-bk entity` )
-			canvas.elementCreator.xywh( shape, div )
-			canvas.elementCreator.safeInnerHTML( shape, div )
-
-			return div
+			shape.elem.classList.add( 'border-bk' )
 		},
+
+		/**
+		 * Horizontal rules use a custom border class.
+		 */
+		hr: ( shape ) => {
+			shape.elem.classList.add( `hr-${shape.bo}` )
+		},
+
+		/**
+		 * Tabs have a hard-coded grey border class.
+		 */
 		tab: ( shape ) => {
-			// Put our new label on the canvas
-			let div = canvas.elementCreator.div( shape )
-
-			// Style and position it
-			div.setAttribute( 'class', `tabs hr-g3 entity` )
-			canvas.elementCreator.xywh( shape, div )
-			canvas.elementCreator.safeInnerHTML( shape, div )
-
-			return div
+			shape.elem.classList.add( `hr-g3` )
 		},
 
+		/**
+		 * Icons use classes to configure their appearance
+		 */
 		ic: ( shape ) => {
-			// Put our new label on the canvas
-			let div = canvas.elementCreator.div( shape )
-
-			// Style and position it
-			div.setAttribute( 'class', `icon icon-${shape.ic} entity` )
-			canvas.elementCreator.xywh( shape, div )
-			canvas.elementCreator.colour( shape, div )
-			canvas.elementCreator.safeInnerHTML( shape, div )
-
-			return div
+			shape.elem.classList.add( `icon-${shape.ic}`)
 		},
 
-		bcb: ( shape ) => {
-			// Put our new label on the canvas
-			let div = canvas.elementCreator.div( shape )
-
-			// Style and position it
-			div.setAttribute( 'class', `breadcrumbs entity` )
-			canvas.elementCreator.xywh( shape, div )
-			canvas.elementCreator.safeInnerHTML( shape, div )
-
-			return div
-		},
-
-		cmb: ( shape ) => {
-			// Put our new combobox on the canvas
-			let div = canvas.elementCreator.div( shape )
-
-			// Style and position it
-			div.setAttribute( 'class', 'combobox entity' )
-			canvas.elementCreator.xywh( shape, div )
-			canvas.elementCreator.font( shape, div )
-			canvas.elementCreator.safeInnerHTML( shape, div )
-
-			return div
-		},
-
-		safeInnerHTML: ( shape, elem ) => {
-			elem.innerHTML = canvas.elementCreator.innerHTML[shape.ty]( shape, canvas.elementCreator.innerHTML.safe ) 
+		safeInnerHTML: ( shape ) => {
+			shape.elem.innerHTML = canvas.elementCreator.innerHTML[shape.ty]( shape, canvas.elementCreator.innerHTML.safe ) 
 		},
 
 		/**
@@ -503,10 +419,10 @@ const canvas = {
 					html += '<li>'
 					let cut = 0
 					if ( lines[i].startsWith('[x]') ) {
-						html += '<div class="icon icon-ckbx"></div>'
+						html += '<div class="entity-ic icon-ckbx"></div>'
 						cut = 3
 					} else if ( lines[i].startsWith('[ ]') ) {
-						html += '<div class="icon icon-chbx"></div>'
+						html += '<div class="entity-ic icon-chbx"></div>'
 						cut = 3
 					}
 					html += `${safe(lines[i].substring(cut))}</li>`
@@ -521,10 +437,10 @@ const canvas = {
 					html += '<li>'
 					let cut = 0
 					if ( lines[i].startsWith('(x)') ) {
-						html += '<div class="icon icon-crad"></div>'
+						html += '<div class="entity-ic icon-crad"></div>'
 						cut = 3
 					} else if ( lines[i].startsWith('( )') ) {
-						html += '<div class="icon icon-rado"></div>'
+						html += '<div class="entity-ic icon-rado"></div>'
 						cut = 3
 					}
 					html += `${safe(lines[i].substring(cut))}</li>`

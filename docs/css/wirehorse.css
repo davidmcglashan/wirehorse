@@ -255,9 +255,9 @@ a:hover, a:focus {
 }
 
 ul.dropdown,
-.combobox .value,
-.vertical-scrollbar,
-.rectangle {
+.entity-cmb .value,
+.entity-vs,
+.entity-rec {
 	border-style: solid;
 	border-width: 8px;
 	border-radius: 2px;
@@ -267,16 +267,16 @@ ul.dropdown,
 	border-image-width: 10px;
 }
 
-.combobox {
+.entity-cmb {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 	gap: 0.5rem;
 }
-	.combobox .value {
+	.entity-cmb .value {
 		background-color: #fff;
 	}
-	.combobox .caret {
+	.entity-cmb .caret {
 		background-image: url('../assets/dropdown-arrow-svgrepo-com.svg');
 		background-size: contain;
 		position: absolute;
@@ -285,7 +285,7 @@ ul.dropdown,
 		width: 2rem;
 		height: 2rem;
 	}
-	.combobox ul.dropdown {
+	.entity-cmb ul.dropdown {
 		margin: 0;
 		background-color: #fff;
 		padding-inline-start: 0;
@@ -296,27 +296,27 @@ ul.dropdown,
 		gap: 1rem;
 	}
 
-.rectangle {
+.entity-rec {
 	display: flex;
 	flex-direction: column;
 }
 
-.vertical-scrollbar {
+.entity-vs {
 	background-color: #fff;
 }
-	.vertical-scrollbar div {
+	.entity-vs div {
 		position: absolute;
 		width: 1rem;
 		height: 1rem;
 		left: -8px;
 	}
-	.vertical-scrollbar div.up {
+	.entity-vs div.up {
 		background-image: url('../assets/dropdown-arrow-svgrepo-com.svg');
 		background-size: contain;
 		top: -8px;
 		rotate: 180deg
 	}
-	.vertical-scrollbar div.bar {
+	.entity-vs div.bar {
 		top: 0.5rem;
 		height: 50%;
 		background-color: #999;
@@ -324,14 +324,14 @@ ul.dropdown,
 		width: 0.5rem;
 		left: -0.25rem;
 	}
-	.vertical-scrollbar div.down {
+	.entity-vs div.down {
 		background-image: url('../assets/dropdown-arrow-svgrepo-com.svg');
 		background-size: contain;
 		bottom: -8px;
 	}
-.tabs,
-.tabs ul li.selected,
-.hr {
+.entity-tab,
+.entity-tab ul li.selected,
+.entity-hr {
 	border-style: solid;
 	border-width: 0px 0px 5px 0px;
 	border-image-repeat: round;
@@ -340,7 +340,7 @@ ul.dropdown,
 	border-image-outset: 0 20px 0 20px;
 }
 
-.tabs ul {
+.entity-tab ul {
 	list-style-type: none;
 	padding-inline-start: 0;
 	margin: 0;
@@ -351,53 +351,53 @@ ul.dropdown,
 	font-size: 90%;
 	gap: 2rem;
 }
-	.tabs ul li {
+	.entity-tab ul li {
 		color: #36c;
 		padding: 0.5rem 0.25rem;
 	}
-	.tabs ul li.selected {
+	.entity-tab ul li.selected {
 		outline: none;
 		color: #999;
 		border-image-outset: 0 20px 3px 20px;
 	}
-.breadcrumbs {
+.entity-bcb {
 	text-transform: uppercase;
 	font-size: 0.75rem;
 	display: flex;
 	gap: 0.5rem;
 }
-	.breadcrumbs span {
+	.entity-bcb span {
 		color: #36c;
 	}
-	.breadcrumbs span:last-child,
-	.breadcrumbs span.divider {
+	.entity-bcb span:last-child,
+	.entity-bcb span.divider {
 		color: #999;
 	}
 
-.radiobuttons.selected
-.checkboxes.selected {
+.entity-rad.selected
+.entity-chb.selected {
 	outline-offset: 2px;
 }
-	.radiobuttons div.icon,
-	.checkboxes div.icon {
+	.entity-rad div.entity-ic,
+	.entity-chb div.entity-ic {
 		width: 1.5rem;
 		height: 1.5rem;
 		background-size: contain;
 	}
-	.checkboxes div.icon-chbx {
+	.entity-chb div.icon-chbx {
 		background-color: #333;
 	}
-	.checkboxes div.icon-ckbx {
+	.entity-chb div.icon-ckbx {
 		background-color: #36c;
 	}
-	.radiobuttons div.icon-rado {
+	.entity-rad div.icon-rado {
 		background-color: #333;
 	}
-	.radiobuttons div.icon-crad {
+	.entity-rad div.icon-crad {
 		background-color: #36c;
 	}
-	.radiobuttons ul,
-	.checkboxes ul {
+	.entity-rad ul,
+	.entity-chb ul {
 		list-style-type: none;
 		padding-inline-start: 0;
 		margin: 0;
@@ -405,23 +405,23 @@ ul.dropdown,
 		flex-direction: column;
 		gap: 0.1rem;
 	}
-	.radiobuttons ul li,
-	.checkboxes ul li {
+	.entity-rad ul li,
+	.entity-chb ul li {
 		display: flex;
 		align-items: center;
 		gap: 0.25rem;
 	}
 
-#-canvas .icon {
+#-canvas .entity-ic {
 	mask-size: contain;
 	mask-repeat: no-repeat;
 	aspect-ratio: 1;
 }
 
-.label {
+.entity-lbl {
 	width: fit-content;
 }
-	.label p {
+	.entity-lbl p {
 		margin-block-start: 0;
 		margin: 0 0 0.01rem 0;
 	}

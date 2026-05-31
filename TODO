@@ -8,8 +8,9 @@ backlog
 --------
 
 ----- v0.3
-- lots of repeated code in the entity creator
+- relayer ops can be undone but not redone
 - lots of the little strings should be constants
+- separate CSS into Ui and entity
 - selection rectangle on glass and encompassing the max bounds of each selected shape
   - remove the CSS
   - suppose this element would intercept glass mouseevents which might be useful for a 'click on the selection' kind of thing?

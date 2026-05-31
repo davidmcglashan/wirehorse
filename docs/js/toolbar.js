@@ -218,7 +218,7 @@ const toolbar = {
 		selection.add( newShape.elem )
 		toolbar.hideSearchDropdown()
 
-		undo.pushBulkShapes( 'newShapes', [ newShape ] )
+		undo.pushBulkShapes( undo.types.ADD_NEW_SHAPES, [ newShape ] )
 	},
 
 	update: ( meta ) => {

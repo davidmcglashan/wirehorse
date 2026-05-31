@@ -6,12 +6,20 @@ const undo = {
 	// can 'redo' their undos again. Subsequent pushed changes then erase this future-history.
 	future: [],
 
+	// Define the types of operation that can be undone and redone.
+	types: {
+		SHAPE_EDIT: 	'shape',
+		ADD_NEW_SHAPES: 'newShapes',
+		REMOVE_SHAPES:	'removeShapes',
+		RELAYER_SHAPES:	'relayerShapes'
+	},
+
 	/**
 	 * Push a new change to mutiple shapes onto the history queue. This action
 	 * erases any future history from previous undos.
 	 */
 	pushMulti: ( changes ) => {
-		undo.history.push( { type: 'shape', changes: changes } )
+		undo.history.push( { type: undo.types.SHAPE_EDIT, changes: changes } )
 		undo.future = []
 	},
 
@@ -50,28 +58,28 @@ const undo = {
 		undo.future.push( recent )
 
 		// New shapes are simply removed from the model
-		if ( recent.type === 'newShapes' ) {
+		if ( recent.type === undo.types.ADD_NEW_SHAPES ) {
 			for ( const change of recent.changes ) {
 				model.removeShape( change.id )
 			}
 		}
 
 		// Removed shapes are re-added to the model
-		else if ( recent.type === 'removeShapes' ) {
+		else if ( recent.type === undo.types.REMOVE_SHAPES ) {
 			for ( const change of recent.changes ) {
 				model.addShape( change )
 			}
 		}
 
 		// Relayered shapes are restored to their original z-index
-		else if ( recent.type === 'relayerShapes' ) {
+		else if ( recent.type === undo.types.RELAYER_SHAPES ) {
 			for ( const change of recent.changes ) {
 				model.relayerShape( change.id, 'moveTo', change.from )
 			}
 		}
 
 		// Shape edits are reversed into edits
-		else if ( recent.type === 'shape' ) {
+		else if ( recent.type === undo.types.SHAPE_EDIT ) {
 			// Iterate the recent changes for all the entities that changed.
 			for ( const [id,log] of Object.entries( recent.changes ) ) {
 				// Construct a new update object by looking for the old value when the change 
@@ -101,14 +109,14 @@ const undo = {
 		undo.history.push( redo )
 		
 		// New shapes are) added back from the model
-		if ( redo.type === 'newShapes' ) {
+		if ( redo.type === undo.types.ADD_NEW_SHAPES ) {
 			for ( const change of redo.changes ) {
 				model.addShape( change )
 			}
 		}
 		
 		// Removed shapes are re-removed to the model
-		else if ( redo.type === 'removeShapes' ) {
+		else if ( redo.type === undo.types.REMOVE_SHAPES ) {
 			for ( const change of redo.changes ) {
 				model.removeShape( change.id )
 			}
@@ -116,7 +124,7 @@ const undo = {
 
 		// Redos are straightforward since the recent future already describes the change
 		// we want to (re)make to each entity.
-		else  if ( redo.type === 'shape' ) {
+		else  if ( redo.type === undo.types.SHAPE_EDIT ) {
 			for ( const [id,log] of Object.entries( redo.changes ) ) {
 				model.updateShape( id, log )
 			}
