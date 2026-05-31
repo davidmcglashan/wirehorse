@@ -2,12 +2,13 @@ bugs
 ----
 - Enter is re-invoking the editor!
 - mouse leaving the window mid-drag
-- update the caret position during drags
 
 backlog
 --------
 
 ----- v0.3
+- corner carets that can be dragged to resize
+  - remove the old caret code
 - keyboard+drag to quickly add 
   - rectangles with 'r'
   - text with 't'

@@ -21,8 +21,18 @@
 	</head>
 	<body>
 		<div id="-canvas"></div>
-		<div id="-selection"></div>
 		<div id="-glass"></div>
+		<div id="-selection" data-drag-mode="1">
+			<div class="handle n" data-drag-mode="2"></div>
+			<div class="handle ne" data-drag-mode="3"></div>
+			<div class="handle e" data-drag-mode="4"></div>
+			<div class="handle se" data-drag-mode="5"></div>
+			<div class="handle s" data-drag-mode="6"></div>
+			<div class="handle sw" data-drag-mode="7"></div>
+			<div class="handle w" data-drag-mode="8"></div>
+			<div class="handle nw" data-drag-mode="9"></div>
+			<div id="-selection-subs"></div>
+		</div>
 		<div id="-palette">
 			<div id="-no-selection" class="message">No Selection!</div>
 			<div id="-con-x" class="hidden">

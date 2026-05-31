@@ -30,12 +30,62 @@ a:hover, a:focus {
 		outline-offset: 10px;
 		outline: 1px dashed #36c;
 	}
-	#-selection>div {
-		outline-offset: 5px;
-		outline: 2px solid #36c;
+	#-selection-subs {
+		position:absolute;
+		offset: 0;
+	}
+		#-selection-subs>div {
+			outline-offset: 5px;
+			outline: 2px solid #36c;
+			position: absolute;
+		}
+	#-selection .handle {
+		border: 1px solid #36c;
+		background-color: #36c;
+		width: 0.5rem;
+		height: 0.5rem;
 		position: absolute;
 	}
-
+	#-selection .handle.ne {
+		top: -10px;
+		right: -10px;
+		cursor: nesw-resize;
+	}
+	#-selection .handle.n {
+		top: -10px;
+		right: calc(50% - 5px);
+		cursor: ns-resize;
+	}
+	#-selection .handle.nw {
+		top: -10px;
+		left: -10px;
+		cursor: nwse-resize;
+	}
+	#-selection .handle.w {
+		top: calc(50% - 5px);
+		left: -10px;
+		cursor: ew-resize;
+	}
+	#-selection .handle.e {
+		top: calc(50% - 5px);
+		right: -10px;
+		cursor: ew-resize;
+	}
+	#-selection .handle.sw {
+		bottom: -10px;
+		left: -10px;
+		cursor: nesw-resize;
+	}
+	#-selection .handle.s {
+		bottom: -10px;
+		right: calc(50% - 5px);
+		cursor: ns-resize;
+	}
+	#-selection .handle.se {
+		bottom: -10px;
+		right: -10px;
+		cursor: nwse-resize;
+	}
 #-glass {
 	position: absolute;
 	inset: 0;
