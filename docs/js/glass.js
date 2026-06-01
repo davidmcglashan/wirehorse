@@ -1,5 +1,6 @@
 const glass = {
 	elem: null,
+	dragRect: null,
 	canvas: null,
 	selem: null,
 	selemsubs: null,
@@ -8,6 +9,7 @@ const glass = {
 	dragmodes: {
 		MOVE_CANVAS:	0,
 		MOVE_SHAPES:	1,
+		
 		RESIZE_N: 		2,
 		RESIZE_NE: 		3,
 		RESIZE_E: 		4,
@@ -15,7 +17,9 @@ const glass = {
 		RESIZE_S: 		6,
 		RESIZE_SW: 		7,
 		RESIZE_W: 		8,
-		RESIZE_NW: 		9
+		RESIZE_NW: 		9,
+
+		DRAW_RECTANGLE:	10
 	},
 
 	// Glass is responsible for scroll drags, which we track with this object.
@@ -31,6 +35,7 @@ const glass = {
 	init: () => {
 		// Wire everything up.
 		glass.elem = document.getElementById( '-glass' )
+		glass.dragRect = document.getElementById( '-drag-rect' )
 		glass.canvas = document.getElementById( '-canvas' )
 		glass.selem = document.getElementById( '-selection' )
 		glass.selemsubs = document.getElementById( '-selection-subs' )
@@ -38,7 +43,7 @@ const glass = {
 		// Have the glass and selection <div>s listen to the same mouse events
 		for ( let elem of [ glass.elem, glass.selem ] ) {
 			elem.addEventListener( 'mouseup', glass.mouseReleased )
-			elem.addEventListener( 'mousemove', glass.mouseMoved )
+			elem.addEventListener( 'mousemove', glass.mouseDragged )
 			elem.addEventListener( 'mousedown', glass.mousePressed )
 			elem.addEventListener( 'wheel', glass.wheelTurned )
 			elem.addEventListener( 'dblclick', editor.invokeEditor )
@@ -138,13 +143,11 @@ const glass = {
 		// multiplied by the scale factor.
 		if ( glass.drag.ready ) {
 			glass.drag.pressed = true
-			glass.drag.mode = glass.dragmodes.MOVE_CANVAS
 		}
 		
 		// If there's a selection we should prepare to move or resize
 		// the selected entities instead.
 		else if ( selection.yes() ) {
-			
 			// The drag mode we want is encoded in the HTML as data attr on the element, should we find one ...
 			let elems = document.elementsFromPoint( event.pageX, event.pageY )
 			for ( let elem of elems ) {
@@ -163,24 +166,12 @@ const glass = {
 			glass.drag.y = event.pageY
 		}
 	},
-	
-	/**
-	 * React to mouse motion events -- either drags or selection caret tracking.
-	 */
-	mouseMoved: ( event ) => {
-		// We're dragging something to handle all of that ...
-		if ( glass.drag.pressed ) {
-			glass.mouseDragged( event )
-		}
-	},
 
 	/**
 	 * If we're dragging something we need to update its position.
 	 */
 	mouseDragged: ( event ) => {
 		if ( glass.drag.pressed ) {
-			let scale = model.meta( 'sc' )
-			
 			// We're not _really_ moving until we've gone a few pixels or so.
 			if ( !glass.drag.moving ) {
 				let dx = Math.abs( event.pageX - glass.drag.x )
@@ -191,18 +182,42 @@ const glass = {
 				}				
 			}
 			
+			let scale = model.meta( 'sc' )
+
+			// Tidy up the UI as we perform the drag
 			glass.drag.moving = true
 			glass.drag.editorPermitted = false
 			glass.selem.classList.add( 'hidden' )
-
+			
 			// If we're scroll dragging then we translate the distance from where we started to where we are now.
-			if ( glass.drag.mode === 0 ) {
+			if ( glass.drag.mode === glass.dragmodes.MOVE_CANVAS ) {
 				let dx = model.meta('ox') + ( event.pageX - glass.drag.x ) / scale
 				let dy = model.meta('oy') + ( event.pageY - glass.drag.y ) / scale
 				
 				glass.canvas.style.transform = `translate(${dx}px,${dy}px) `
 				glass.elem.setAttribute( 'class', 'dragging' )
 			} 
+
+			// Are we drawing a rectangle?
+			else if ( glass.drag.mode === glass.dragmodes.DRAW_RECTANGLE ) {
+				glass.dragRect.setAttribute( 'class', 'entity entity-rec border-bk' )
+
+				// Calculate the amount moved since the last call. 
+				if ( event.pageX < glass.drag.x ) {
+					glass.dragRect.style.left = `${event.pageX}px`
+					glass.dragRect.style.width = `${glass.drag.x - event.pageX - 18}px`
+				} else {
+					glass.dragRect.style.left = `${glass.drag.x}px`
+					glass.dragRect.style.width = `${event.pageX - glass.drag.x - 18}px`
+				}
+				if ( event.pageY < glass.drag.y ) {
+					glass.dragRect.style.top = `${event.pageY}px`
+					glass.dragRect.style.height = `${glass.drag.y - event.pageY - 18}px`
+				} else {
+					glass.dragRect.style.top = `${glass.drag.y}px`
+					glass.dragRect.style.height = `${event.pageY - glass.drag.y - 18}px`
+				}
+			}
 
 			// We're moving or resizing something.
 			else {
@@ -274,6 +289,30 @@ const glass = {
 				} )
 			} 
 			
+			// Are we drawing a rectangle?
+			else if ( glass.drag.mode === glass.dragmodes.DRAW_RECTANGLE ) {
+				let newShape = {
+					ty: 'rec',
+					bg: 'wh',
+					co: 'bk',
+					bo: 'bk',
+					ha: 'c',
+					va: 'm',
+					tx: '',
+					x: ( event.pageX < glass.drag.x ? event.pageX : glass.drag.x ) - model.meta('ox'),
+					y: ( event.pageY < glass.drag.y ? event.pageY : glass.drag.y ) - model.meta('oy'),
+					w: ( event.pageX < glass.drag.x ? glass.drag.x - event.pageX - 18 : event.pageX - glass.drag.x - 18 ),
+					h: ( event.pageY < glass.drag.y ? glass.drag.y - event.pageY - 18 : event.pageY - glass.drag.y - 18 )
+				}
+				model.addShape( newShape )
+				undo.pushBulkShapes( undo.types.ADD_NEW_SHAPES, [ newShape ] )
+				glass.drag.ready = false
+
+				// Update the UI to select the new shape
+				selection.add( newShape.elem )
+				glass.dragRect.setAttribute( 'class', 'hidden')
+			}
+
 			// Object drags supply new x,y values for the shapes being moved.
 			else {
 				let dx = event.pageX - glass.drag.x
@@ -348,6 +387,15 @@ const glass = {
 		if ( event.keyCode === 32 )  {
 			glass.elem.setAttribute( 'class', 'ready' )
 			glass.selem.classList.add( 'hidden' )
+			glass.drag.mode = glass.dragmodes.MOVE_CANVAS
+			glass.drag.ready = true
+		}
+
+		// 'R' prepares to draw a rectangle.
+		else if ( event.keyCode === 82 )  {
+			glass.elem.setAttribute( 'class', 'ready-xhair' )
+			glass.selem.classList.add( 'hidden' )
+			glass.drag.mode = glass.dragmodes.DRAW_RECTANGLE
 			glass.drag.ready = true
 		}
 

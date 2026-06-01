@@ -7,10 +7,7 @@ backlog
 --------
 
 ----- v0.3
-- corner carets that can be dragged to resize
-  - remove the old caret code
 - keyboard+drag to quickly add 
-  - rectangles with 'r'
   - text with 't'
   - labels with 'l'
 - lots of the little strings should be constants

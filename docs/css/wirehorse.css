@@ -93,6 +93,9 @@ a:hover, a:focus {
 	#-glass.ready {
 		cursor: grab;
 	}
+	#-glass.ready-xhair {
+		cursor: crosshair;
+	}
 	#-glass.dragging {
 		cursor: grabbing;
 	}
@@ -120,6 +123,15 @@ a:hover, a:focus {
 	#-glass textarea {
 		position: absolute;
 		min-width: 24rem;
+	}
+
+#-drag-rect.select {
+	background-color: rgba(0,0,0,0.25);
+	border: 1px solid #666;
+	position: absolute;
+}
+	#-drag-rect.entity-rec {
+		background-color: #fff;;
 	}
 
 #-toolbar {
