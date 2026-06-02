@@ -44,6 +44,7 @@ const palette = {
 
 	fields: [ 'x','y','w','h','bg','co','bo','fz','fb','fi','fu','fs','ha','va','op' ],
 	toolbars: ['arrange','text-align','font'],
+	multiToolbars: [ 'shape-align' ],
 
 	/**
 	 * Prepare the palette for use.
@@ -232,6 +233,13 @@ const palette = {
 				elem.classList.add( 'hidden' )
 			}
 		}
+
+		for ( let toolbar of palette.multiToolbars ) {
+			let elem = document.getElementById( `-toolbar-${toolbar}` )
+			if ( elem ) {
+				elem.classList.add( 'hidden' )
+			}
+		}
 	},
 
 	/**
@@ -309,6 +317,11 @@ const palette = {
 			let container = document.getElementById( `-con-${field}` )
 			container?.classList.add( 'hidden' )
 		}
+
+		for ( let toolbar of palette.multiToolbars ) {
+			let elem = document.getElementById( `-toolbar-${toolbar}` )
+			elem?.classList.remove( 'hidden' )
+		}
 	},
 
 	/**
@@ -347,4 +360,56 @@ const palette = {
 			} )
 		}
 	},
+
+	/**
+	 * Align all the shapes in the current selection
+	 */
+	align: ( alignment ) => {
+		const config = {
+			l: { op: Math.min, 
+				get: ( shape ) => { return shape.x }, 
+				set: ( shape, mod, value ) => { mod.x = value } 
+			},
+			c: { op: Math.min, 
+				get: ( shape ) => { return shape.x + shape.w/2 }, 
+				set: ( shape, mod, value ) => { mod.x = value - shape.w/2 } 
+			},
+			r: { op: Math.max, 
+				get: ( shape ) => { return shape.x + shape.w }, 
+				set: ( shape, mod, value ) => { mod.x = value - shape.w } 
+			},
+			t: { op: Math.min, 
+				get: ( shape ) => { return shape.y }, 
+				set: ( shape, mod, value ) => { mod.y = value } 
+			},
+			m: { op: Math.min, 
+				get: ( shape ) => { return shape.y + shape.h/2 }, 
+				set: ( shape, mod, value ) => { mod.y = value - shape.h/2 } 
+			},
+			b: { op: Math.max, 
+				get: ( shape ) => { return shape.y + shape.h }, 
+				set: ( shape, mod, value ) => { mod.y = value - shape.h } 
+			}
+		}
+
+		let c = config[alignment]
+
+		let ids = selection.ids()
+		let value = c.get( model.shape(ids[0]) )
+
+		// First pass is to find the value that satisifes the config.
+		for ( let id of ids ) {
+		 	value = c.op( value, c.get( model.shape(id) ) )
+		}
+
+		// Second pass is to set that value onto all the shapes.
+		let changes = {}
+		for ( let id of ids ) {
+			let shape = model.shape(id)
+			let mod = {}
+			c.set( shape, mod, value )
+			changes[id] = model.updateShape( id, mod )
+		}
+		undo.pushMulti( changes )
+	}
 };

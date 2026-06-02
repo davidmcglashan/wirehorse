@@ -54,6 +54,7 @@ const glass = {
 		document.addEventListener( 'keyup', glass.keyUp )
 
 		model.registerMetadataListener( glass.viewChanged )
+		model.registerShapeListener( glass.viewChanged )
 		selection.registerListener( glass.selectionChanged )
 	},
 

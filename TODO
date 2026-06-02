@@ -2,10 +2,12 @@ bugs
 ----
 - Enter is re-invoking the editor!
 - mouse leaving the window mid-drag
+- selection after shape updates omits shapes sometimes
 
 backlog
 --------
-- Arrange and align features
+- Horizontal and vertical arrange features - space & distribute
+- All shapes are going to need default W and H values to be aligned properly
 - Select dragger
 - Text resizing they don’t have widths which is fine but setting one should be easy
 - Text fields wrap as they approach the palette

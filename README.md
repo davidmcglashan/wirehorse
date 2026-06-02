@@ -7,6 +7,7 @@ Wireframing from the horse stable
 * Moving shapes forwards and backwards can now be undone and redone
 * Re-implemented selection mechanics making it easier to see and find selected shapes
 * Press 'R' and drag to add a new rectangle shape
+* Horizontal and vertical alignment
 
 ### v0.2.4
 * Labels have width support to behave like paragraphs
