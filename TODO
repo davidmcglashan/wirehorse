@@ -5,8 +5,24 @@ bugs
 
 backlog
 --------
-
------ v0.3
+- Shift+Enter or click away to submit editor
+- Arrange and align features
+- Select dragger
+- Text resizing they don’t have widths which is fine but setting one should be easy
+- Text fields wrap as they approach the palette
+- See selection box while resizing and after edits etc. 
+- Blue button height 13
+- New elements in centre of screen
+- Cmd B for bold etc. 
+- grey borders for form components
+- Cmd+R rects to account for scale
+- Filter icon
+- Up down arrows icon for table sorting
+- Table component 
+  - Ellipsis
+  - Hyperlink
+  - Activity status
+  - Checkbox rows
 - keyboard+drag to quickly add 
   - text with 't'
   - labels with 'l'
