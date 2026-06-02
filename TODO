@@ -5,7 +5,6 @@ bugs
 
 backlog
 --------
-- Shift+Enter or click away to submit editor
 - Arrange and align features
 - Select dragger
 - Text resizing they don’t have widths which is fine but setting one should be easy

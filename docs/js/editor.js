@@ -22,7 +22,9 @@ const editor = {
 	
 		// Escape dismisses the editor with no save!
 		if ( event.keyCode === 27 ) {
+			lightbox.callback = null
 			lightbox.close()
+			editor.removeEditor()
 		}
 	},
 
@@ -51,7 +53,7 @@ const editor = {
 			let shape = model.shape( selection.ids()[0] )
 			editor.shapeId = shape['id']
 			lightbox.open()
-			lightbox.callback = editor.removeEditor
+			lightbox.callback = editor.save
 			editor.elem.classList.remove( 'hidden' )
 			
 			// Position the input on the glass near the mouse click
@@ -74,9 +76,9 @@ const editor = {
 	/**
 	 * Remove the glass editor, optionally committing its value to the model
 	 */
-	save: ( event ) => {
+	save: () => {
 		undo.pushShape( model.updateShape( editor.shapeId, { tx:editor.textarea.value } ) )
-		lightbox.close()
+		editor.removeEditor()
 	},
 
 	/**
