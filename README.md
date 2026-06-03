@@ -3,6 +3,9 @@ Wireframing from the horse stable
 
 ## Version history
 
+### v0.3.1
+* Improvements to paragraphs and labels in terms of sizing and text parsing.
+
 ### v0.3.0
 * Moving shapes forwards and backwards can now be undone and redone
 * Re-implemented selection mechanics making it easier to see and find selected shapes

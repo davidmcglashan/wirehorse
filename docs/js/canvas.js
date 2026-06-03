@@ -390,8 +390,15 @@ const canvas = {
 			lbl: ( shape, safe ) => {
 				let lines = shape.tx.split('\n')
 				let html = ''
+				let nextHasGap = false
+
 				for ( let i=0; i<lines.length; i++) {
-					html += `<p>${safe(lines[i])}</p>`
+					if ( lines[i] === '' ) {
+						nextHasGap = true
+					} else {
+						html += `<p${nextHasGap ? ' class="gap">' : '>'}${safe(lines[i])}</p>`
+						nextHasGap = false
+					}
 				}
 				return html
 			},

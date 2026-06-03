@@ -6,8 +6,6 @@ bugs
 
 backlog
 --------
-- paragraphs on long text separated by blank lines
-- line height setting for labels
 - All shapes are going to need default W and H values to be aligned properly
 - Horizontal and vertical arrange features - space & distribute
 - Text resizing they don’t have widths which is fine but setting one should be easy
