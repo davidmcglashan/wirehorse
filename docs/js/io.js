@@ -1,11 +1,44 @@
 const io = {
 	/**
-	 * Load a file from disk.
+	 * Populates the switcher in the main dropdown with all the wireframes
+	 */
+	init: () => {
+		console.log( 'io.init')
+		// Empty the list.
+		let list = document.getElementById( '-wireframes' )
+		list.innerHTML = ''
+
+		// Spelunk localStorage for all the saved wireframes and give each one
+		// a link in the list.
+		for ( let key of Object.keys( localStorage ).sort() ) {
+			if ( key.startsWith( 'wh_' ) ) {
+				let li = document.createElement( 'li' )
+				list.appendChild( li )
+
+				let a = document.createElement( 'a' )
+				a.innerHTML = key.substring( 3 )
+				a.setAttribute( 'href', 'javascript:void(0)' )
+				a.setAttribute( 'onclick', `javascript:toolbar.switch('${key}')` )
+				li.appendChild( a )
+			}
+		}
+
+		// If we added nothing, say something!
+		if ( list.children.length === 0 ) {
+			let li = document.createElement( 'li' )
+			list.appendChild( li )
+			li.innerHTML = 'None'
+		}
+	},
+
+	/**
+	 * Load a file from disk to replace the current wireframe
 	 */
 	loadModel: ( filename, callback ) => {
 		new Response( filename ).text().then(
 			json => {
-    			localStorage['wirehorse.current'] = json
+				let name = localStorage['wirehorse.current']
+    			localStorage[name] = json
 				model.parse()
 				callback()
   			}, 

@@ -235,15 +235,40 @@ const toolbar = {
 	 * Start over with a blank canvas.
 	 */
 	new: () => {
+		canvas.reset()
+
 		// Flush out the model
 		model.new()
 
 		// Reset the UI
-		toolbar.mainDropdown.classList.add( 'hidden' )
+		toolbar.hideMainDropdown()
 		lightbox.close()
+		selection.clear()
+		undo.clear()
+		io.init()
+	},
+
+
+	/**
+	 * Switch the editor to the selected wireframe
+	 */
+	switch: ( wireframe ) => {
+		// Reset all the models
 		canvas.reset()
 		selection.clear()
 		undo.clear()
+
+		// Persist the passed in key as the current wireframe.
+		localStorage['wirehorse.current'] = wireframe
+		
+		// Parse that model into life
+		model.parse()
+		
+		// Reset the UI
+		toolbar.hideMainDropdown()
+		toolbar.mainDropdown.classList.add( 'hidden' )
+		lightbox.close()
+		io.init()
 	},
 
 	/**

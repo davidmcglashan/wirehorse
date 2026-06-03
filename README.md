@@ -11,6 +11,7 @@ Wireframing from the horse stable
 * New outlined button default
 * Vertical scrollbars can have their border colours changed
 * New items added via the menu are set in the middle of the screen
+* Multiple wireframes are stored in localstorage now
 
 ### v0.2.4
 * Labels have width support to behave like paragraphs

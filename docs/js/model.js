@@ -110,11 +110,16 @@ const model = {
 	 * Load the current model from localstorage
 	 */
 	parse: () => {
-		let current = localStorage['wirehorse.current']
+		let name = localStorage['wirehorse.current']
+		let current = localStorage[name]
+
+		// If there isn't a model in localStorage create a new one.
 		if ( current ) {
 			current = JSON.parse( current )
 		} else {
-			return
+			model.new()
+			name = localStorage['wirehorse.current']
+			current = JSON.parse( localStorage[name] )
 		}
 		
 		// Do something with the meta, e.g. page title
@@ -370,8 +375,14 @@ const model = {
 	 * Save the current model into localstorage
 	 */
 	save: () => {
+		// Get the name we're saving against. Use 'new wireframe' if there isn't one.
+		let name = localStorage['wirehorse.current']
+		if ( !name ) {
+			name = 'wh_new wireframe'
+		}
+
 		// Dump all of that into localstorage
-		localStorage['wirehorse.current'] = JSON.stringify( 
+		localStorage[name] = JSON.stringify( 
 			{ 
 				mt: model.mt, 
 				sh: model.sh 
@@ -382,10 +393,25 @@ const model = {
 	 * Replace the model with a new empty version.
 	 */
 	new: () => {
-		localStorage['wirehorse.current'] = JSON.stringify( 
+		let i = 1
+		let name = null
+		
+		// Find the next available 'new wireframe' name
+		while ( true ) {
+			name = `wh_new wireframe ${i}`
+			if ( localStorage[name] ) {
+				i += 1
+			} else {
+				break
+			}
+		}
+
+		// Store the current name and its new model in localStorage.
+		localStorage['wirehorse.current'] = name
+		localStorage[name] = JSON.stringify( 
 			{ 
 				mt: {
-					tt: 'new-wireframe.json',
+					tt: name.substring(3),
 					ox: 0,
 					oy: 0,
 					sc: 1
@@ -393,6 +419,8 @@ const model = {
 				sh: []
 			}
 		)
+
+		// Refresh the UI
 		model.parse()
 	},
 };

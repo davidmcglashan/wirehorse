@@ -104,7 +104,7 @@
 		<div id="-toolbar">
 			<div>
 				<strong><a href="javascript:void(0)" onclick="toolbar.openMainDropdown()">Wirehorse</a></strong>
-				<span id="-title"><</span>
+				<span id="-title"></span>
 			</div>
 			<div>
 				<a href="javascript:void(0)" id="-search-button" onclick="toolbar.openSearchDropdown()">
@@ -118,6 +118,14 @@
 				</a>
 			</div>
 			<div id="-main-dropdown" class="hidden">
+				<div>
+					<img src="assets/switch-apps-svgrepo-com.svg">
+					<div>
+						<strong>Switch to</strong>
+						<span>Wireframes available on this computer &hellip;</span>
+						<ul id="-wireframes"></ul>
+					</div>
+				</div>
 				<div>
 					<img src="assets/plus-file-svgrepo-com.svg">
 					<div>
@@ -174,6 +182,7 @@
 			toolbar.init()
 			model.parse()
 			selection.init()
+			io.init()
 		</script>
 	</body>
 </html>
