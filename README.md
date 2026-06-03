@@ -8,8 +8,9 @@ Wireframing from the horse stable
 * Re-implemented selection mechanics making it easier to see and find selected shapes
 * Press 'R' and drag to add a new rectangle shape
 * Horizontal and vertical alignment
-* New outline button default
-* Vertical scrollbars can have their borders changed
+* New outlined button default
+* Vertical scrollbars can have their border colours changed
+* New items added via the menu are set in the middle of the screen
 
 ### v0.2.4
 * Labels have width support to behave like paragraphs

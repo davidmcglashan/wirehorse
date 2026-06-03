@@ -19,7 +19,6 @@ backlog
 - Text resizing they don’t have widths which is fine but setting one should be easy
 - Text fields wrap as they approach the palette
 - See selection box while resizing and after edits etc. 
-- New elements in centre of screen
 - Cmd B for bold etc. 
 - Cmd+R rects to account for scale
 - Filter icon

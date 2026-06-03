@@ -209,9 +209,10 @@ const toolbar = {
 		// Our new shape is a shallow clone of the default.
 		let newShape = { ...defaults.entries[index].model } 
 
-		// It needs an x and a y.
-		newShape.x = 100
-		newShape.y = 100
+		// It needs an x and a y that'll put it in the middle of the current
+		// visible viewport.
+		newShape.x = ( (document.documentElement.clientWidth/2) - model.meta( 'ox' ) )
+		newShape.y = ( (document.documentElement.clientHeight/2) - model.meta( 'oy' ) )
 
 		// Now send that to the model
 		model.addShape( newShape )
