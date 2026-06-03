@@ -8,6 +8,7 @@ const defaults = {
 				bo: 'g2',
 				ha: 'c',
 				va: 'm',
+				tx: '',
 				w: 300,
 				h: 100
 			}
