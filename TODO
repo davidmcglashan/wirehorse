@@ -4,7 +4,6 @@ bugs
 - mouse leaving the window mid-drag
 - invoke editor is not working
 - alignment bugs
-  - comboboxes report their dimensions strangely
   - checkboxes do not report a width and height
   - radiobuttons do not report a width and height
 

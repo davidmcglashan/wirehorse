@@ -41,14 +41,15 @@ const defaults = {
 				h: 13
 			}
 		},{
-			name: 'Combobox',
+			name: 'Combobox / dropdown',
 			model: {
 				ty: 'cmb',
 				tx: 'Choose an option',
 				fz: 11,
 				co: 'bk',
+				bo: 'g4',
 				w: 200,
-				h: 30
+				h: 13
 			}
 		},{
 			name: 'Checkboxes',
