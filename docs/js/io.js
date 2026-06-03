@@ -3,7 +3,6 @@ const io = {
 	 * Populates the switcher in the main dropdown with all the wireframes
 	 */
 	init: () => {
-		console.log( 'io.init')
 		// Empty the list.
 		let list = document.getElementById( '-wireframes' )
 		list.innerHTML = ''

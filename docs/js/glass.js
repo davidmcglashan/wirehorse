@@ -19,7 +19,8 @@ const glass = {
 		RESIZE_W: 		8,
 		RESIZE_NW: 		9,
 
-		DRAW_RECTANGLE:	10
+		DRAW_RECTANGLE:	10,
+		SELECT_SHAPES:	11
 	},
 
 	// Glass is responsible for scroll drags, which we track with this object.
@@ -164,6 +165,11 @@ const glass = {
 				}
 			}
 		}
+
+		else {
+			glass.drag.pressed = true
+			glass.drag.mode = glass.dragmodes.SELECT_SHAPES
+		}
 		
 		// Whatever the drag mode, record the start x,y ...
 		if ( glass.drag.pressed ) {
@@ -204,8 +210,12 @@ const glass = {
 			} 
 
 			// Are we drawing a rectangle?
-			else if ( glass.drag.mode === glass.dragmodes.DRAW_RECTANGLE ) {
-				glass.dragRect.setAttribute( 'class', 'entity entity-rec border-bk' )
+			else if ( glass.drag.mode === glass.dragmodes.DRAW_RECTANGLE || glass.drag.mode === glass.dragmodes.SELECT_SHAPES ) {
+				if ( glass.drag.mode === glass.dragmodes.DRAW_RECTANGLE ) {
+					glass.dragRect.setAttribute( 'class', 'entity entity-rec border-bk' )
+				} else {
+					glass.dragRect.setAttribute( 'class', 'select' )
+				}
 
 				// Calculate the amount moved since the last call. 
 				if ( event.pageX < glass.drag.x ) {
@@ -318,6 +328,29 @@ const glass = {
 				glass.dragRect.setAttribute( 'class', 'hidden')
 			}
 
+			// Are we selecting lots of shapes with a big rectangle?
+			else if ( glass.drag.mode === glass.dragmodes.SELECT_SHAPES ) {
+				let rect = {
+					x: ( event.pageX < glass.drag.x ? event.pageX : glass.drag.x ) - model.meta('ox'),
+					y: ( event.pageY < glass.drag.y ? event.pageY : glass.drag.y ) - model.meta('oy'),
+					w: ( event.pageX < glass.drag.x ? glass.drag.x - event.pageX - 18 : event.pageX - glass.drag.x - 18 ),
+					h: ( event.pageY < glass.drag.y ? glass.drag.y - event.pageY - 18 : event.pageY - glass.drag.y - 18 )
+				}
+
+				// Which shapes intersect that rect?
+				for ( let shape of model.sh ) {
+					if (
+							(rect.x < shape.x + shape.w)
+						&&	(rect.x + rect.w > shape.x)
+						&&	(rect.y < shape.y + shape.h)
+						&&	(rect.y + rect.h > shape.y)
+					) {
+						selection.add( shape.elem, {multi:true} )
+					}
+				}
+				glass.dragRect.setAttribute( 'class', 'hidden')
+			}
+
 			// Object drags supply new x,y values for the shapes being moved.
 			else {
 				let dx = event.pageX - glass.drag.x
@@ -416,18 +449,12 @@ const glass = {
 		else if ( event.metaKey && event.keyCode === 48 ) {
 			model.updateMeta( { sc: 1 } )
 		}
-
-		// // Option/Alt forces the caret to appear
-		// else if ( selection.yes() === 1 && event.altKey ) {
-		// 	glass.caret.setAttribute( 'class', '' )
-		// }
 	},
 
 	/**
 	 * 
 	 */
 	keyUp: ( event ) => {
-//		glass.caret.setAttribute( 'class', 'hidden' )
 		glass.elem.setAttribute( 'class', '' )
 		if ( event.keyCode === 32 )  {
 			if ( selection.yes() ) {

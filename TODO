@@ -10,7 +10,6 @@ backlog
 - line height setting for labels
 - All shapes are going to need default W and H values to be aligned properly
 - Horizontal and vertical arrange features - space & distribute
-- Select dragger
 - Text resizing they don’t have widths which is fine but setting one should be easy
 - Text fields wrap as they approach the palette
 - See selection box while resizing and after edits etc. 
@@ -66,7 +65,6 @@ backlog
 - option+double-click a shape to recentre and re-zoom the display around it
 - proper tracking of min values to stop shapes become zero width/height
 ----- v0.7
-- selection drag event to draw a <div>, get its bounds, work out what intersects it
 - cut copy paste
 - icon and label
 - inject version
