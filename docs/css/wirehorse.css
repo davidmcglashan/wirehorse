@@ -141,8 +141,7 @@ a:hover, a:focus {
 	left: 0;
 	right: 0;
 	padding: 0.5rem 1rem 0.25rem 1rem;
-	background-color: rgba(0,0,0,0.2);
-	backdrop-filter: blur(8px);
+	background-color: #f0f0f0;
 	display: flex;
 	justify-content: space-between;
 	align-items: baseline;
@@ -256,9 +255,7 @@ a:hover, a:focus {
 	padding: 3rem 0.5rem;
 
 	border-left: 1px solid #ccc;
-	background-color: rgba(220,220,220,0.95);
-	backdrop-filter: blur(4px);
-	box-shadow: -4px 0px 8px rgba(0,0,0,0.1);
+	background-color: #ddd;
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
