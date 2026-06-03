@@ -23,7 +23,21 @@ const defaults = {
 				va: 'm',
 				fz: 11,
 				w: 100,
-				h: 16
+				h: 13
+			}
+		},{
+			name: 'Outline button',
+			model: {
+				ty: 'rec',
+				tx: 'Button',
+				bg: 'wh',
+				co: 'bk',
+				bo: 'g5',
+				ha: 'c',
+				va: 'm',
+				fz: 11,
+				w: 100,
+				h: 13
 			}
 		},{
 			name: 'Combobox',
@@ -60,13 +74,13 @@ const defaults = {
 				fz: 11,
 			}
 		},{
-			name: 'Text input',
+			name: 'Text input field',
 			model: {
 				ty: 'rec',
 				tx: 'Value',
 				bg: 'wh',
 				co: 'bk',
-				bo: 'bk',
+				bo: 'g4',
 				ha: 'l',
 				va: 'm',
 				fz: 11,
@@ -80,7 +94,7 @@ const defaults = {
 				tx: 'Value',
 				bg: 'wh',
 				co: 'bk',
-				bo: 'bk',
+				bo: 'g4',
 				ha: 'l',
 				va: 't',
 				fz: 11,
@@ -105,7 +119,8 @@ const defaults = {
 			name: 'Vertical scrollbar',
 			model: {
 				ty: 'vs',
-				h: 128
+				h: 128,
+				bo: 'bk'
 			}
 		},{
 			name: 'Tabs',

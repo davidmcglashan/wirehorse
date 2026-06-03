@@ -339,7 +339,7 @@ const canvas = {
 		 * Vertical scrollbars have a hard-coded border-bk class.
 		 */
 		vs: ( shape ) => {
-			shape.elem.classList.add( 'border-bk' )
+			shape.elem.classList.add( `border-${shape.bo}` )
 		},
 
 		/**
@@ -455,11 +455,11 @@ const canvas = {
 			},	
 			cmb: ( shape, safe ) => {
 				let lines = shape.tx.split('\n')
-				let html = `<div class="value border-bk">${safe(lines[0])}</div><div class="caret"></div>`
+				let html = `<div class="value border-g4">${safe(lines[0])}</div><div class="caret"></div>`
 
 				if ( lines.length > 1 ) {
 					lines.pop
-					html += '<ul class="dropdown border-bk">'
+					html += '<ul class="dropdown border-g4">'
 					for ( let i=1; i<lines.length; i++) {
 						html += `<li>${safe(lines[i])}</li>`
 					}

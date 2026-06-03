@@ -93,6 +93,10 @@ const glass = {
 		// Iterate the shapes to find the outer bounds of all the selected shapes. We start
 		// by setting our internal storage to the first shape's dimensions.
 		let shapes = model.shapes( ids )
+		if ( shapes.length === 0 ) {
+			return
+		}
+
 		let rect = shapes[0].elem.getBoundingClientRect()
 		let minx = rect.x
 		let miny = rect.y

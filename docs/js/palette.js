@@ -37,7 +37,7 @@ const palette = {
 			toolbars: ['arrange','font']
 		},
 		vs: {
-			fields: [ 'x','y','h' ],
+			fields: [ 'x','y','h','bo' ],
 			toolbars: ['arrange']
 		},
 	},
@@ -411,5 +411,7 @@ const palette = {
 			changes[id] = model.updateShape( id, mod )
 		}
 		undo.pushMulti( changes )
+
+		glass.selectionChanged( selection.ids() )
 	}
 };

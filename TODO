@@ -2,7 +2,12 @@ bugs
 ----
 - Enter is re-invoking the editor!
 - mouse leaving the window mid-drag
-- selection after shape updates omits shapes sometimes
+- new rectangles have 'undefined' labels
+- invoke editor is not working
+- alignment bugs
+  - comboboxes report their dimensions strangely
+  - checkboxes do not report a width and height
+  - radiobuttons do not report a width and height
 
 backlog
 --------
@@ -12,10 +17,8 @@ backlog
 - Text resizing they don’t have widths which is fine but setting one should be easy
 - Text fields wrap as they approach the palette
 - See selection box while resizing and after edits etc. 
-- Blue button height 13
 - New elements in centre of screen
 - Cmd B for bold etc. 
-- grey borders for form components
 - Cmd+R rects to account for scale
 - Filter icon
 - Up down arrows icon for table sorting
