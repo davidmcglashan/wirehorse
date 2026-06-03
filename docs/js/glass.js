@@ -330,20 +330,17 @@ const glass = {
 
 			// Are we selecting lots of shapes with a big rectangle?
 			else if ( glass.drag.mode === glass.dragmodes.SELECT_SHAPES ) {
-				let rect = {
-					x: ( event.pageX < glass.drag.x ? event.pageX : glass.drag.x ) - model.meta('ox'),
-					y: ( event.pageY < glass.drag.y ? event.pageY : glass.drag.y ) - model.meta('oy'),
-					w: ( event.pageX < glass.drag.x ? glass.drag.x - event.pageX - 18 : event.pageX - glass.drag.x - 18 ),
-					h: ( event.pageY < glass.drag.y ? glass.drag.y - event.pageY - 18 : event.pageY - glass.drag.y - 18 )
-				}
-
-				// Which shapes intersect that rect?
+				let rect = glass.dragRect.getBoundingClientRect()
 				for ( let shape of model.sh ) {
-					if (
-							(rect.x < shape.x + shape.w)
-						&&	(rect.x + rect.w > shape.x)
-						&&	(rect.y < shape.y + shape.h)
-						&&	(rect.y + rect.h > shape.y)
+					let shapeRect = shape.elem.getBoundingClientRect()
+
+					// We only need to check that the DOM elements overlap by comparing
+					// their bounding rectangles.
+					if ( 
+						rect.top < shapeRect.bottom &&
+    					rect.right > shapeRect.left &&
+    					rect.bottom > shapeRect.top &&
+    					rect.left < shapeRect.right 
 					) {
 						selection.add( shape.elem, {multi:true} )
 					}
