@@ -336,6 +336,12 @@ const model = {
 		for ( let shape of model.sh ) {
 			if ( shape.id === id ) {
 				for ( const [key, value] of Object.entries( params ) ) {
+					// There's a handbrake here to stop key values getting blasted by bad code
+					// elsewhere
+					if ( ['x','y','w','h'].includes(key) && isNaN( value ) ) {
+						continue
+					}
+
 					// Record what the value was and is becoming.
 					record['_'+key] = shape[key]
 					record[key] = value

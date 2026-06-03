@@ -5,7 +5,7 @@ const palette = {
 			toolbars: ['arrange','font','text-align']
 		},
 		cmb: {
-			fields: [ 'x','y','w','h','co' ],
+			fields: [ 'x','y','w','co' ],
 			toolbars: ['arrange','font']
 		},
 		chb: {

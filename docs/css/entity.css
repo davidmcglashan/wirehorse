@@ -129,7 +129,11 @@ ul.dropdown,
 		color: #999;
 	}
 
-.entity-rad.selected
+.entity-rad,
+.entity-chb {
+	margin: -3px;
+}
+.entity-rad.selected,
 .entity-chb.selected {
 	outline-offset: 2px;
 }
