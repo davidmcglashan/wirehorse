@@ -156,6 +156,10 @@ a:hover, a:focus {
 		margin-top: -0.2rem;
 	}
 
+#-title {
+	color: black;
+}
+
 #-search-dropdown {
 	position: absolute;
 	top: 2.5rem;

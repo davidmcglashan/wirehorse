@@ -57,6 +57,73 @@ const toolbar = {
 		}
 	},
 
+	/**
+	 * Open the rename UI.
+	 */
+	rename: () => {
+		lightbox.open()
+		lightbox.callback = toolbar.doRename
+
+		// Create an <input> to gather the new name for us.
+		let input = document.createElement( 'input' )
+		input.style.position = 'absolute'
+		input.style.top = '32px'
+		input.style.left = '32px'
+		input.value = localStorage['wirehorse.current'].substring(3)
+		
+		// Have Enter in the input do the actual renaming
+		input.addEventListener( 'keypress', function( event ) {
+			if ( event.keyCode === 13 ) {
+				event.preventDefault()
+				lightbox.close()
+  			} else if ( event.keyCode === 27 ) {
+				event.preventDefault()
+				toolbar.renameInput.remove()
+				lightbox.callback = null
+				lightbox.close()
+  			}
+		} )
+
+		// Build the UI above our new lightbox.
+		document.body.appendChild( input )
+		input.focus()
+		input.select()
+		toolbar.renameInput = input
+	},
+
+	/**
+	 * Perform the rename and tidy up the UI.
+	 */
+	doRename: () => {
+		// Sort out the UI.
+		toolbar.renameInput.remove()
+		
+		let oldName = localStorage['wirehorse.current']
+		let newName = `wh_${toolbar.renameInput.value}`
+		
+		// is the name valid?
+		if ( newName && newName.length <= 3 ) {
+			return
+		}
+
+		// is the name unique amongst wireframes?
+		// Nothing doing if we match an existing name
+		for ( let key of Object.keys( localStorage ) ) {
+			if ( key === newName ) {
+				return
+			}
+		}
+
+		// point current at the new name. When we update the meta this will
+		// invoke a save with the new name.
+		localStorage['wirehorse.current'] = newName
+		model.updateMeta( { tt: newName.substring(3) } )
+
+		// get rid of the old model under the old name
+		localStorage.removeItem( oldName )
+		io.init()
+	},
+
 	openMainDropdown: () => {
 		lightbox.open()
 		lightbox.callback = function() {
