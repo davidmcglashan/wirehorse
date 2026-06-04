@@ -6,14 +6,13 @@ bugs
 
 backlog
 --------
+- Rename a wireframe (and rejig the localstorage when you do)
 - Redo the alignment features to consider the DOM elems which should all have correctly formed dimensions
 - Horizontal and vertical arrange features - space & distribute
 - Text fields wrap as they approach the palette
 - See selection box while resizing and after edits etc. 
 - Cmd B for bold etc. 
 - Cmd+R rects to account for scale
-- Filter icon
-- Up down arrows icon for table sorting
 - Table component 
   - Ellipsis
   - Hyperlink
@@ -73,4 +72,7 @@ meta
 - License information
   - https://chr15m.github.io/DoodleCSS/
   - Google fonts
-  - SVG Repo - zest interface icons collection
+  - SVG Repo
+    - zest interface icons collection (most of the others)
+    - Coolicons (filter)
+	- Gentlecons (up-down arrows)

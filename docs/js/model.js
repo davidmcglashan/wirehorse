@@ -29,6 +29,7 @@ const model = {
 	icons: {
 		arch: { name: 'Archive box', asset: 'archive-svgrepo-com.svg' },
 		atch: { name: 'Attachment / paperclip', asset: 'paperclip-svgrepo-com.svg' },
+		ardu: { name: 'Arrow down & up', asset: 'arrow-down-up-svgrepo-com.svg' }, 
 		bell: { name: 'Bell', asset: 'bell-svgrepo-com.svg' },
 		bkmk: { name: 'Bookmark', asset: 'bookmark-svgrepo-com.svg' },
 		bldg: { name: 'Building', asset: 'office-svgrepo-com.svg' },
@@ -54,6 +55,7 @@ const model = {
 		velp: { name: 'Vertical ellipsis', asset: 'more-svgrepo-com.svg' },
 		envl: { name: 'Envelope', asset: 'mail-svgrepo-com.svg' },
 		file: { name: 'File', asset: 'file-svgrepo-com.svg' },
+		fltr: { name: 'Filter', asset: 'filter-svgrepo-com.svg'},
 		newf: { name: 'New file', asset: 'plus-file-svgrepo-com.svg' },
 		save: { name: 'Floppy disk', asset: 'floppy-disk-svgrepo-com.svg' },
 		full: { name: 'Fullscreen', asset: 'full-screen-svgrepo-com.svg' },

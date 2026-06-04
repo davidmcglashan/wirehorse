@@ -5,6 +5,7 @@ Wireframing from the horse stable
 
 ### v0.3.1
 * Improvements to paragraphs and labels in terms of sizing and text parsing
+* Added a filter and up/down icons for future use in tables
 
 ### v0.3.0
 * Moving shapes forwards and backwards can now be undone and redone
