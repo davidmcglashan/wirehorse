@@ -56,7 +56,6 @@ backlog
 - alignment guides
 - inset guides
 - text parsing e.g. this is *bold*, [hyperlink], {#ddd}color{#}
-- is it quicker/more responsive to use a scroll/pan rather than a translate()?
 - option+double-click a shape to recentre and re-zoom the display around it
 - proper tracking of min values to stop shapes become zero width/height
 ----- v0.7

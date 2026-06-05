@@ -395,12 +395,16 @@ const glass = {
 		// If command is down we be zooming
 		if ( event.metaKey ) {
 			let scale = model.meta( 'sc' )
-			scale += event.deltaY * -0.00125
+			if ( event.deltaY > 0 ) {
+				scale = scale * 0.9
+			} else {
+				scale = scale * 1.1
+			}
 			scale = Math.min( Math.max( 0.125, scale ), 4)
 			model.updateMeta( { sc: scale } )
 		}
 
-		// Otherwise it's a scroll. Meta listeners only fire oif both ox and oy are
+		// Otherwise it's a scroll. Meta listeners only fire if both ox and oy are
 		// present in the payload since they need to know how to do the translation in 
 		// both directions ...
 		else {
@@ -418,11 +422,16 @@ const glass = {
 			return
 		}
 
+		if ( event.metaKey ) {
+			glass.canvas.style.willChange = 'transform'
+		}
+
 		// Space prepares to hand-drag scroll the canvas around.
 		if ( event.keyCode === 32 )  {
 			glass.elem.setAttribute( 'class', 'ready' )
 			glass.selem.classList.add( 'hidden' )
 			glass.drag.mode = glass.dragmodes.MOVE_CANVAS
+			glass.canvas.style.willChange = 'transform'
 			glass.drag.ready = true
 		}
 
@@ -453,6 +462,8 @@ const glass = {
 	 */
 	keyUp: ( event ) => {
 		glass.elem.setAttribute( 'class', '' )
+		glass.canvas.style.willChange = 'auto'
+
 		if ( event.keyCode === 32 )  {
 			if ( selection.yes() ) {
 				glass.selem.classList.remove( 'hidden' )
