@@ -6,9 +6,12 @@ bugs
 
 backlog
 --------
-- Redo the alignment features to consider the DOM elems which should all have correctly formed dimensions
-- Horizontal and vertical arrange features - space & distribute
-- Text fields wrap as they approach the palette
+- Elements need ...
+  - reasonable declared widths
+  - text-wrap: nowrap where appropriate
+  - Text fields wrap as they approach the palette
+  - Redo the alignment features to consider the DOM elems which should all have correctly formed dimensions
+  - Horizontal and vertical arrange features - space & distribute
 - See selection box while resizing and after edits etc. 
 - Cmd B for bold etc. 
 - Cmd+R rects to account for scale

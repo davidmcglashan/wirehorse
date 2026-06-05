@@ -58,11 +58,21 @@ const selection = {
 		if ( !params.multi ) {
 			selection.clear()
 			selection.storage = [ elem ]
-		} else {
-			selection.storage.push( elem )
+			elem.classList.add( 'selected' )
+		} 
+		
+		// Multi being true means we need to check if the elem isn't in there already ...
+		else {
+			let index = selection.storage.indexOf( elem ) 
+			if ( index === -1 ) {
+				selection.storage.push( elem )
+				elem.classList.add( 'selected' )
+			} else {
+				selection.storage.splice( index, 1 )
+				elem.classList.remove( 'selected' )
+			}
 		}
 
-		elem.classList.add( 'selected' )
 		selection.fireListeners()
 	},
 
