@@ -16,10 +16,13 @@ backlog
 - Cmd B for bold etc. 
 - Cmd+R rects to account for scale
 - Table component 
-  - Ellipsis
+  - csv
+  - Ellipsis actions column
   - Hyperlink
   - Activity status
   - Checkbox rows
+  - [ ]/[x] for checkboxes
+  - _foo_ for hyperlinks
 - keyboard+drag to quickly add 
   - text with 't'
   - labels with 'l'
@@ -50,10 +53,6 @@ backlog
   - this might help with the selection do-over
   - arrows woud be added to an arrows collection, not a shapes one?
 ----- v0.6
-- tables
-  - csv
-  - [ ]/[x] for checkboxes
-  - _foo_ for hyperlinks
 - vertical rule
 - horizontal scrollbar
 - alignment guides

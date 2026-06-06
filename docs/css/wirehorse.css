@@ -19,6 +19,7 @@ a:hover, a:focus {
 	font-style: normal;
 	position: absolute;
 	inset: 0;
+/*	border: 1px dotted #888; */
 }
 
 #-selection {

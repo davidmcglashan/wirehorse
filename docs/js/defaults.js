@@ -131,7 +131,7 @@ const defaults = {
 			model: {
 				ty: 'bcb',
 				tx: 'home,section,page',
-				fz: 11,
+				fz: 9,
 			}
 		},{
 			name: 'Horizontal rule',
@@ -152,7 +152,8 @@ const defaults = {
 			model: {
 				ty: 'tab',
 				tx: '>one\ntwo\nthree',
-				w: 512
+				w: 512,
+				fz: 9
 			}
 		}
 	],

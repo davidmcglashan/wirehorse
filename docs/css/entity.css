@@ -84,6 +84,10 @@ ul.dropdown,
 		background-size: contain;
 		bottom: -8px;
 	}
+
+/* ==================================================== */
+/* Tab bar and horizontal rule */
+
 .entity-tab,
 .entity-tab ul li.selected,
 .entity-hr {
@@ -103,7 +107,6 @@ ul.dropdown,
 	display: flex;
 	flex-direction: row;
 	text-transform: uppercase;
-	font-size: 90%;
 	gap: 2rem;
 }
 	.entity-tab ul li {
@@ -115,6 +118,10 @@ ul.dropdown,
 		color: #999;
 		border-image-outset: 0 20px 3px 20px;
 	}
+
+/* ==================================================== */
+/* Breadcrumbs bar */
+
 .entity-bcb {
 	text-transform: uppercase;
 	font-size: 0.75rem;
@@ -123,11 +130,15 @@ ul.dropdown,
 }
 	.entity-bcb span {
 		color: #36c;
+		width: max-content;
 	}
 	.entity-bcb span:last-child,
 	.entity-bcb span.divider {
 		color: #999;
 	}
+
+/* ==================================================== */
+/* Radio buttons and checkboxes */
 
 .entity-rad,
 .entity-chb {
@@ -169,7 +180,11 @@ ul.dropdown,
 		display: flex;
 		align-items: center;
 		gap: 0.25rem;
+		width: max-content;
 	}
+
+/* ==================================================== */
+/* Icons */
 
 #-canvas .entity-ic {
 	mask-size: contain;
@@ -177,8 +192,11 @@ ul.dropdown,
 	aspect-ratio: 1;
 }
 
+/* ==================================================== */
+/* Labels and text paragraphs */
+
 .entity-lbl {
-	width: fit-content;
+	width: max-content;
 }
 	.entity-lbl p {
 		margin-block-start: 0;
