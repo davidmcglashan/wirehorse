@@ -55,7 +55,7 @@ const glass = {
 		document.addEventListener( 'keyup', glass.keyUp )
 
 		model.registerMetadataListener( glass.viewChanged )
-		model.registerShapeListener( glass.viewChanged )
+		model.registerShapeListener( glass.shapeChanged )
 		selection.registerListener( glass.selectionChanged )
 	},
 
@@ -78,6 +78,23 @@ const glass = {
 	},
 
 	/**
+	 * Detect a change in a shape's model. This is only used here to update the
+	 * selection boxes, and as such is delayed by requesting an animation frame twice
+	 * to ensure this runs _after_ any other DOM changes which might e.g. cause a 
+	 * further resizing of the selection boxes.
+	 */
+	shapeChanged: ( id, params ) => {
+		let sids = selection.ids()
+		if ( sids.includes( id ) ) {
+			requestAnimationFrame(() => {
+				requestAnimationFrame(() => {
+					glass.selectionChanged( sids )
+				});
+			});
+		}
+	},
+
+	/**
 	 * React to a change in the selection model.
 	 */
 	selectionChanged: ( ids ) => {
@@ -85,19 +102,19 @@ const glass = {
 		glass.selemsubs.innerHTML = ''
 		glass.selem.classList.add( 'hidden' )
 		glass.selem.classList.remove( 'multiple' )
-
+		
 		// Selections can be empty!
 		if ( ids.length === 0 ) {
 			return
 		}
-
+		
 		// Iterate the shapes to find the outer bounds of all the selected shapes. We start
 		// by setting our internal storage to the first shape's dimensions.
 		let shapes = model.shapes( ids )
 		if ( shapes.length === 0 ) {
 			return
 		}
-
+		
 		let rect = shapes[0].elem.getBoundingClientRect()
 		let minx = rect.x
 		let miny = rect.y
