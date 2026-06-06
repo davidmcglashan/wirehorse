@@ -6,11 +6,6 @@ bugs
 
 backlog
 --------
-- Elements need ...
-  - reasonable declared widths
-  - Redo the alignment features to consider the DOM elems which should all have correctly formed dimensions
-  - Horizontal and vertical arrange features - space & distribute
-- Cmd+R rects to account for scale
 - Table component 
   - csv
   - Ellipsis actions column
@@ -19,11 +14,14 @@ backlog
   - Checkbox rows
   - [ ]/[x] for checkboxes
   - _foo_ for hyperlinks
+  - headers
+----- v0.4
+- Cmd+R rects to account for scale
+- selection tools e.g. Cmd+left/right to focus on a shape
 - keyboard+drag to quickly add 
   - text with 't'
   - labels with 'l'
 - lots of the little strings should be constants
------ v0.4
 - export to clipboard as a PNG
   - everything
   - selected items
@@ -34,9 +32,11 @@ backlog
 ----- v0.5
 - groups of components
   - select one, select all - just need groups with their members described in the model
-- insert a component from file e.g. zatpark window, modal window
-  - some JSON editing
-  - remember recently used 
+- insert a component from file ...
+  - e.g. zatpark window, modal window
+  - pagination as component
+  - table tools (presets,filters,search,configure) as a component
+  - remember recently used and include them in the adder dropdown
 - play with the main dropdown
   - accidental horizontal layout looked cool!
   - light grey panel for the credits and acks
@@ -49,6 +49,10 @@ backlog
   - this might help with the selection do-over
   - arrows woud be added to an arrows collection, not a shapes one?
 ----- v0.6
+- Elements need ...
+  - reasonable declared widths
+  - Redo the alignment features to consider the DOM elems which should all have correctly formed dimensions
+  - Horizontal and vertical arrange features - space & distribute
 - vertical rule
 - horizontal scrollbar
 - alignment guides

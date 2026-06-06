@@ -333,8 +333,8 @@ const glass = {
 					tx: '',
 					x: ( event.pageX < glass.drag.x ? event.pageX : glass.drag.x ) - model.meta('ox'),
 					y: ( event.pageY < glass.drag.y ? event.pageY : glass.drag.y ) - model.meta('oy'),
-					w: ( event.pageX < glass.drag.x ? glass.drag.x - event.pageX - 18 : event.pageX - glass.drag.x - 18 ),
-					h: ( event.pageY < glass.drag.y ? glass.drag.y - event.pageY - 18 : event.pageY - glass.drag.y - 18 )
+					w: ( event.pageX < glass.drag.x ? (glass.drag.x - event.pageX)/scale : (event.pageX - glass.drag.x)/scale ) - 18,
+					h: ( event.pageY < glass.drag.y ? (glass.drag.y - event.pageY)/scale : (event.pageY - glass.drag.y)/scale ) - 18
 				}
 				model.addShape( newShape )
 				undo.pushBulkShapes( undo.types.ADD_NEW_SHAPES, [ newShape ] )
