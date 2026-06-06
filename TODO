@@ -10,7 +10,6 @@ backlog
   - reasonable declared widths
   - Redo the alignment features to consider the DOM elems which should all have correctly formed dimensions
   - Horizontal and vertical arrange features - space & distribute
-- Cmd B for bold etc. 
 - Cmd+R rects to account for scale
 - Table component 
   - csv

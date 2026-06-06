@@ -443,6 +443,16 @@ const glass = {
 			glass.canvas.style.willChange = 'transform'
 		}
 
+		// Cmd+A to select everything
+		if ( event.metaKey && event.keyCode == 65 ) {
+			event.preventDefault()
+			selection.clear()
+
+			for ( let shape of model.sh ) {
+				selection.add( shape.elem, { multi:true } )
+			}
+		}
+
 		// Space prepares to hand-drag scroll the canvas around.
 		if ( event.keyCode === 32 )  {
 			glass.elem.setAttribute( 'class', 'ready' )

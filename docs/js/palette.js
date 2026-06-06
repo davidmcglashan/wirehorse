@@ -45,6 +45,14 @@ const palette = {
 	fields: [ 'x','y','w','h','bg','co','bo','fz','fb','fi','fu','fs','ha','va','op' ],
 	toolbars: ['arrange','text-align','font'],
 	multiToolbars: [ 'shape-align' ],
+	
+	// Hotkeys are used in canvas.js and map ids to key codes for e.g. Cmd+B to make a 
+	// shape bold
+	hotkeys: {
+		fb: 66,
+		fi: 73,
+		fu: 85
+	},
 
 	/**
 	 * Prepare the palette for use.

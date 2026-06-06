@@ -124,18 +124,8 @@ const canvas = {
 
 		let changes = {}
 
-		// Cmd+A to select everything
-		if ( event.metaKey && event.keyCode == 65 ) {
-			event.preventDefault()
-			selection.clear()
-
-			for ( let shape of model.sh ) {
-				selection.add( shape.elem, { multi:true } )
-			}
-		}
-
 		// Enter to invoke the editor
-		else if ( event.keyCode === 13 && editor.canOpen ) {
+		if ( event.keyCode === 13 && editor.canOpen ) {
 			if ( selection.yes() === 1 ) {
 				// We can pass in an 'event' object based on the selection's location.
 				let rect = selection.first().getBoundingClientRect()
@@ -223,6 +213,19 @@ const canvas = {
 			}
 			undo.pushMulti( changes )
 			glass.selectionChanged( selection.ids() )
+		}
+
+		// Look to the palette for hotkeys there e.g. Cmd+B to trigger the bold!
+		else if ( event.metaKey ) {
+			for ( const[key,code] of Object.entries( palette.hotkeys ) ) {
+				if ( event.keyCode === code ) {
+					let elem = document.getElementById( `-fld-${key}` ) 
+					if ( elem.checkVisibility() ) {
+						palette.toggleField( key )
+						event.preventDefault()
+					}
+				}
+			}
 		}
 	},
 
