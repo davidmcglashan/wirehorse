@@ -360,6 +360,13 @@ const canvas = {
 		},
 
 		/**
+		 * Tables have a hard-coded grey border class.
+		 */
+		tbl: ( shape ) => {
+			shape.elem.classList.add( `border-g3` )
+		},
+
+		/**
 		 * Icons use classes to configure their appearance
 		 */
 		ic: ( shape ) => {
@@ -491,6 +498,60 @@ const canvas = {
 
 				return html
 			},
+			tbl: ( shape, safe ) => {
+				let rows = shape.tx.split( /[\n\r]+/ )
+				let html = '<table>'
+
+				for ( let row of rows ) {
+					html += '<tr>'
+					let cells = row.split(',')
+					for ( let cell of cells ) {
+						let css = canvas.elementCreator.innerHTML.tableCellClass(cell)
+						if ( css.indexOf( 'replace' ) != -1 ) {
+							html += `<td class="${css}"></td>`
+						} else {
+							let content = safe(cell)
+							if ( [ '>','^' ].includes( content[0] ) ) {
+								content = content.substring(1)
+							}
+							if ( css === 'hyperlink' ) {
+								content = content.substring(1,content.length-1)
+							}
+							html += `<td class="${css}">${content}</td>`
+						}
+					}
+					html += '</tr>'
+				}
+
+				html += '</table>'
+				return html
+			},
+
+			/**
+			 * Returns the CSS class that should be used on a table cell based on its content
+			 */
+			tableCellClass: ( cell ) => {
+				if ( cell === '[ ]' ) {
+					return 'tbl-icon unticked replace'
+				} else if ( cell === '[x]' ) {
+					return 'tbl-icon ticked replace'
+				} else if ( cell === '...' ) {
+					return 'tbl-icon ellipsis replace'
+				} else if ( cell === '( )' ) {
+					return 'tbl-icon inactive replace'
+				} else if ( cell === '(x)' ) {
+					return 'tbl-icon active replace'
+				} else if ( cell[0] === '>' ) {
+					return 'centred'
+				} else if ( cell[0] === '^' ) {
+					return 'sorting'
+				} else if ( cell[0] === '[' && cell[cell.length-1] === ']' ) {
+					return 'hyperlink'
+				}
+
+				// No doing? No class!
+				return ""
+			}
 		}
 	},
 };

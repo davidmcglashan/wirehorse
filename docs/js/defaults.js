@@ -147,13 +147,21 @@ const defaults = {
 				h: 128,
 				bo: 'bk'
 			}
-		},{
+		},{   
 			name: 'Tabs',
 			model: {
 				ty: 'tab',
 				tx: '>one\ntwo\nthree',
 				w: 512,
 				fz: 9
+			}
+		},{   
+			name: 'Data table',
+			model: {
+				ty: 'tbl',
+				tx: 'Name,Age,Size\nAlice,23,S\nBob,17,M\nZebedee,44,L',
+				w: 512,
+				fz: 11
 			}
 		}
 	],

@@ -3,25 +3,10 @@ bugs
 - Enter is re-invoking the editor!
 - mouse leaving the window mid-drag
 - invoke editor occasionally stops working
+- presing enter while renaming invokes editor if there's a selection and then hell breaks loose
 
 backlog
 --------
-- Table component 
-  - csv
-  - Ellipsis actions column
-  - Hyperlink
-  - Activity status
-  - Checkbox rows
-  - [ ]/[x] for checkboxes
-  - _foo_ for hyperlinks
-  - headers
------ v0.4
-- Cmd+R rects to account for scale
-- selection tools e.g. Cmd+left/right to focus on a shape
-- keyboard+drag to quickly add 
-  - text with 't'
-  - labels with 'l'
-- lots of the little strings should be constants
 - export to clipboard as a PNG
   - everything
   - selected items
@@ -29,7 +14,7 @@ backlog
 - switch one component to another - merge the two objects {} and set the type
 - Map view component (probably an SVG)
 - rectangle with the X through it that can be colour changed
------ v0.5
+----- v0.4
 - groups of components
   - select one, select all - just need groups with their members described in the model
 - insert a component from file ...
@@ -48,8 +33,13 @@ backlog
   - glass is a canvas, not a <div>
   - this might help with the selection do-over
   - arrows woud be added to an arrows collection, not a shapes one?
------ v0.6
-- Elements need ...
+----- v0.5
+- Cmd+R rects to account for scale
+- selection tools e.g. Cmd+left/right to focus on a shape
+- keyboard+drag to quickly add 
+  - text with 't'
+  - labels with 'l'
+- lots of the little strings should be constants- Elements need ...
   - reasonable declared widths
   - Redo the alignment features to consider the DOM elems which should all have correctly formed dimensions
   - Horizontal and vertical arrange features - space & distribute
@@ -60,7 +50,7 @@ backlog
 - text parsing e.g. this is *bold*, [hyperlink], {#ddd}color{#}
 - option+double-click a shape to recentre and re-zoom the display around it
 - proper tracking of min values to stop shapes become zero width/height
------ v0.7
+----- v0.6
 - cut copy paste
 - icon and label
 - inject version
