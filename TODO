@@ -9,7 +9,6 @@ bugs
 backlog
 --------
 
-- Shift+Enter to submit a multi-line editor
 - duplicate current wireframe with new name
 - need to test that load and save still work properly
 

@@ -3,6 +3,9 @@ Wireframing from the horse stable
 
 ## Version history
 
+### v0.3.2
+* Editors can be submitted with Shift+Enter
+
 ### v0.3.1
 * Improvements to paragraphs and labels in terms of sizing and text parsing
 * Added a filter and up/down icons for future use in tables

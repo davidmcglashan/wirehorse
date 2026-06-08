@@ -25,6 +25,11 @@ const editor = {
 			lightbox.close()
 			editor.removeEditor()
 		}
+
+		// Shift + Enter will submit the current editor's value.
+		else if ( event.shiftKey && event.keyCode === 13 ) {
+			lightbox.close()
+		}
 	},
 
 	/**
