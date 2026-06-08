@@ -5,6 +5,7 @@ Wireframing from the horse stable
 
 ### v0.3.2
 * Editors can be submitted with Shift+Enter
+* Cmd-D duplicate now retains the z-index order
 
 ### v0.3.1
 * Improvements to paragraphs and labels in terms of sizing and text parsing

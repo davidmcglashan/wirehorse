@@ -1,6 +1,5 @@
 bugs
 ----
-- Cmd-D duplicate must retain the z-index order
 - Enter is re-invoking the editor!
 - mouse leaving the window mid-drag
 - invoke editor occasionally stops working
@@ -12,6 +11,7 @@ backlog
 - need to test that load and save still work properly
 
 - cut copy paste as JSON
+- Delete a wireframe
 
 - export to clipboard as a PNG
   - everything

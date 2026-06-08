@@ -154,10 +154,10 @@ const canvas = {
 				event.preventDefault()
 				let clones = []
 
-				// Do the cloning
-				for ( let elem of selection.storage ) {
-					// Do the clone and push to the creation queue.
-					clones.push( model.cloneShape( elem.getAttribute( 'id' ) ) )
+				// Do the cloning, and do it in Z index order!
+				let sids = selection.idsInZOrder()
+				for ( let id of sids ) {
+					clones.push( model.cloneShape( id ) )
 				}
 				
 				// Give undo something to (un)do.
