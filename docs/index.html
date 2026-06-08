@@ -118,43 +118,50 @@
 				</a>
 			</div>
 			<div id="-main-dropdown" class="hidden">
-				<div>
-					<img src="assets/switch-apps-svgrepo-com.svg">
-					<div>
-						<strong>Switch to</strong>
-						<span>Wireframes available on this computer &hellip;</span>
-						<ul id="-wireframes"></ul>
+				<div class="split">
+					<div class="option">
+						<img src="assets/switch-apps-svgrepo-com.svg">
+						<div>
+							<strong>Switch to</strong>
+							<span>Wireframes available on this computer &hellip;</span>
+							<ul id="-wireframes"></ul>
+						</div>
+					</div>
+					<div class="options">
+						<div class="option">
+							<img src="assets/plus-file-svgrepo-com.svg">
+							<div>
+								<strong>New Wireframe</strong>
+								<span>Start over with a blank canvas &mdash; <a href="javascript:void(0)" onclick="toolbar.new()">Do it!</a></span>
+							</div>
+						</div>
+						<div class="option">
+							<img src="assets/upload-svgrepo-com.svg">
+							<div>
+								<strong>Open a file</strong>
+								<span>Click the file picker below to import a JSON file from your local disk</span>
+								<input type="file" id="-load-input" onchange="toolbar.load()">
+							</div>
+						</div>
+						<div class="option">
+							<img src="assets/floppy-disk-svgrepo-com.svg">
+							<div>
+								<strong>Save Wireframe</strong>
+								<span>Save the current wireframe in your Downloads folder with the name ...</span>
+								<input id="-save-input" type="text" value="new-wireframe.json">
+								<a href="javascript:void(0)" onclick="toolbar.save()">Save</a>
+							</div>
+						</div>
 					</div>
 				</div>
-				<div>
-					<img src="assets/plus-file-svgrepo-com.svg">
-					<div>
-						<strong>New Wireframe</strong>
-						<span>Start over with a blank canvas &mdash; <a href="javascript:void(0)" onclick="toolbar.new()">Do it!</a></span>
-					</div>
-				</div>
-				<div>
-					<img src="assets/upload-svgrepo-com.svg">
-					<div>
-						<strong>Open a file</strong>
-						<span>Click the file picker below to import a JSON file from your local disk</span>
-						<input type="file" id="-load-input" onchange="toolbar.load()">
-					</div>
-				</div>
-				<div>
-					<img src="assets/floppy-disk-svgrepo-com.svg">
-					<div>
-						<strong>Save Wireframe</strong>
-						<span>Save the current wireframe in your Downloads folder with the name ...</span>
-						<input id="-save-input" type="text" value="new-wireframe.json">
-						<a href="javascript:void(0)" onclick="toolbar.save()">Save</a>
-					</div>
-				</div>
-				<div>
+				<div class="option credits">
 					<img src="assets/potion-svgrepo-com.svg">
 					<ul>
-						<li><strong>Wirehorse v0.3.2-latest</strong></li>
-						<li>&copy; 2026 David McGlashan</li>
+						<li>
+							<strong>Wirehorse v0.3.2-latest</strong> 
+							&mdash;
+							&copy; Copyright 2026 David McGlashan
+						</li>
 						<li>
 							<a href="https://wirehorse.mcglashan.net/">wirehorse.mcglashan.net</a> &mdash; <a href="https://github.com/davidmcglashan/wirehorse">github.com/davidmcglashan/wirehorse</a>  &mdash; CC0 1.0 Universal
 						</li>

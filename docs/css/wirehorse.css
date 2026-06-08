@@ -219,9 +219,8 @@ a:hover, a:focus {
 	position: absolute;
 	top: 2rem;
 	left: 0.5rem;
-	width: 40rem;
+	width: 60rem;
 	box-shadow: 0px 4px 8px rgba(0,0,0,0.25);
-	padding: 1rem;
 	border: 1px solid #ddd;
 	background-color: white;
 	border-radius: 8px;
@@ -231,8 +230,25 @@ a:hover, a:focus {
 	flex-direction: column;
 	gap: 2rem;
 }
-	#-main-dropdown > div {
+	#-main-dropdown div.split {
+		padding: 1rem;
 		display: flex;
+		flex-direction: row;
+		gap: 5rem;
+	}
+	#-main-dropdown div.split > div {
+		width: 25rem;
+		max-width: 25rem;
+	}
+	#-main-dropdown div.options {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		align-items: flex-start;
+	}
+	#-main-dropdown div.option {
+		display: flex;
+		flex-direction: row;
 		gap: 0.5rem;
 		align-items: flex-start;
 	}
@@ -252,6 +268,13 @@ a:hover, a:focus {
 		margin: 0;
 		font-size: 10pt;
 		color: #666;
+	}
+	#-main-dropdown .credits {
+		padding: 1rem;
+		background-color: #f0f0f0;
+	}
+	#-main-dropdown .credits img {
+		max-width: 1.25rem;
 	}
 
 ul#-wireframes {

@@ -294,7 +294,7 @@ const toolbar = {
 			let elem = document.getElementById( '-title' )
 			elem.innerHTML = meta.tt
 			elem = document.getElementById( '-save-input' )
-			elem.value = meta.tt
+			elem.value = `${meta.tt}.json`
 		}
 	},
 
