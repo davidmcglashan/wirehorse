@@ -1,20 +1,27 @@
 bugs
 ----
+- presing enter while renaming invokes editor if there's a selection and then hell breaks loose
+- Cmd-D duplicate must retain the z-index order
 - Enter is re-invoking the editor!
 - mouse leaving the window mid-drag
 - invoke editor occasionally stops working
-- presing enter while renaming invokes editor if there's a selection and then hell breaks loose
 
 backlog
 --------
+- Shift+Enter to submit a multi-line editor
+- icon: key
+- duplicate current wireframe with new name
+- cut copy paste as JSON
 - export to clipboard as a PNG
   - everything
   - selected items
 - need to test that load and save still work properly
+  - load will reuse IDs and cause lots of problems!
 - switch one component to another - merge the two objects {} and set the type
 - Map view component (probably an SVG)
 - rectangle with the X through it that can be colour changed
 ----- v0.4
+- push scroll
 - groups of components
   - select one, select all - just need groups with their members described in the model
 - insert a component from file ...
@@ -51,7 +58,6 @@ backlog
 - option+double-click a shape to recentre and re-zoom the display around it
 - proper tracking of min values to stop shapes become zero width/height
 ----- v0.6
-- cut copy paste
 - icon and label
 - inject version
 - inject (c) date

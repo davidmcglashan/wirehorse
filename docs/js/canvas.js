@@ -511,7 +511,7 @@ const canvas = {
 							html += `<td class="${css}"></td>`
 						} else {
 							let content = safe(cell)
-							if ( [ '>','^' ].includes( content[0] ) ) {
+							if ( [ '>','^','~' ].includes( content[0] ) ) {
 								content = content.substring(1)
 							}
 							if ( css === 'hyperlink' ) {
@@ -545,6 +545,8 @@ const canvas = {
 					return 'centred'
 				} else if ( cell[0] === '^' ) {
 					return 'sorting'
+				} else if ( cell[0] === '~' ) {
+					return 'scribble'
 				} else if ( cell[0] === '[' && cell[cell.length-1] === ']' ) {
 					return 'hyperlink'
 				}
