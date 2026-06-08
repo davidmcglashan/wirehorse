@@ -157,6 +157,12 @@ a:hover, a:focus {
 		margin-top: -0.2rem;
 	}
 
+#-rename-input {
+	position: absolute;
+	top: 32px;
+	left: 32px;
+}
+
 #-title {
 	color: black;
 }

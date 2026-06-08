@@ -3,6 +3,7 @@ const toolbar = {
 	searchInput: null,
 	searchList: null,
 	mainDropdown: null,
+	renameInput: null,
 
 	init: () => {
 		model.registerMetadataListener( toolbar.update )
@@ -11,6 +12,22 @@ const toolbar = {
 		toolbar.searchInput = document.getElementById( '-search-input' )
 		toolbar.searchList = document.getElementById( '-search-list' )
 		toolbar.mainDropdown = document.getElementById( '-main-dropdown' )
+
+		// Have Enter in the input do the actual renaming
+		toolbar.renameInput = document.getElementById( '-rename-input' )
+		toolbar.renameInput.addEventListener( 'keydown', function( event ) {
+			event.stopPropagation()
+			
+			if ( event.keyCode === 13 ) {
+				event.preventDefault()
+				lightbox.close()
+  			} else if ( event.keyCode === 27 ) {
+				event.preventDefault()
+				toolbar.renameInput.remove()
+				lightbox.callback = null
+				lightbox.close()
+  			}
+		} )
 
 		// Listen to CMD+Z for undo
 		document.addEventListener( 'keydown', function( event ) {
@@ -64,31 +81,14 @@ const toolbar = {
 		lightbox.open()
 		lightbox.callback = toolbar.doRename
 
-		// Create an <input> to gather the new name for us.
-		let input = document.createElement( 'input' )
-		input.style.position = 'absolute'
-		input.style.top = '32px'
-		input.style.left = '32px'
-		input.value = localStorage['wirehorse.current'].substring(3)
-		
-		// Have Enter in the input do the actual renaming
-		input.addEventListener( 'keypress', function( event ) {
-			if ( event.keyCode === 13 ) {
-				event.preventDefault()
-				lightbox.close()
-  			} else if ( event.keyCode === 27 ) {
-				event.preventDefault()
-				toolbar.renameInput.remove()
-				lightbox.callback = null
-				lightbox.close()
-  			}
-		} )
-
 		// Build the UI above our new lightbox.
-		document.body.appendChild( input )
-		input.focus()
-		input.select()
-		toolbar.renameInput = input
+		toolbar.renameInput.value = localStorage['wirehorse.current'].substring(3)
+		toolbar.renameInput.classList.remove( 'hidden' )
+		document.body.appendChild( toolbar.renameInput )
+		
+		// Get the rename input ready
+		toolbar.renameInput.focus()
+		toolbar.renameInput.select()
 	},
 
 	/**
@@ -96,7 +96,7 @@ const toolbar = {
 	 */
 	doRename: () => {
 		// Sort out the UI.
-		toolbar.renameInput.remove()
+		toolbar.renameInput.classList.add( 'hidden' )
 		
 		let oldName = localStorage['wirehorse.current']
 		let newName = `wh_${toolbar.renameInput.value}`

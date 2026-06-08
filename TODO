@@ -1,6 +1,5 @@
 bugs
 ----
-- presing enter while renaming invokes editor if there's a selection and then hell breaks loose
 - Cmd-D duplicate must retain the z-index order
 - Enter is re-invoking the editor!
 - mouse leaving the window mid-drag
