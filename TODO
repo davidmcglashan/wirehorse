@@ -1,14 +1,12 @@
 bugs
 ----
-- Enter is re-invoking the editor!
-- mouse leaving the window mid-drag
-- invoke editor occasionally stops working
 
 backlog
 --------
 
 - duplicate current wireframe with new name
 - need to test that load and save still work properly
+- handle the mouse leaving the window mid-drag
 
 - cut copy paste as JSON
 - Delete a wireframe
