@@ -8,19 +8,24 @@ bugs
 
 backlog
 --------
+
 - Shift+Enter to submit a multi-line editor
-- icon: key
 - duplicate current wireframe with new name
+- need to test that load and save still work properly
+
 - cut copy paste as JSON
+
 - export to clipboard as a PNG
   - everything
   - selected items
-- need to test that load and save still work properly
   - load will reuse IDs and cause lots of problems!
+
 - switch one component to another - merge the two objects {} and set the type
 - Map view component (probably an SVG)
 - rectangle with the X through it that can be colour changed
+
 ----- v0.4
+
 - push scroll
 - groups of components
   - select one, select all - just need groups with their members described in the model

@@ -12,6 +12,7 @@ Wireframing from the horse stable
 * Cmd+A to select all is less intermittant
 * Cmd+B,I,U change the font of the selected shapes
 * There's a fancy new data table component
+* Five new icons: at, camera, document, key, phone
 
 ### v0.3.0
 * Moving shapes forwards and backwards can now be undone and redone
