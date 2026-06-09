@@ -131,15 +131,29 @@
 						<div class="option">
 							<img src="assets/plus-file-svgrepo-com.svg">
 							<div>
-								<strong>New Wireframe</strong>
-								<span>Start over with a blank canvas &mdash; <a href="javascript:void(0)" onclick="toolbar.new()">Do it!</a></span>
+								<strong>New wireframe</strong>
+								<span>Start over with a blank canvas &mdash; <a href="javascript:void(0)" onclick="toolbar.new()">Let's go!</a></span>
+							</div>
+						</div>
+						<div class="option">
+							<img src="assets/copy-svgrepo-com.svg">
+							<div>
+								<strong>Copy this wireframe</strong>
+								<span>Make a copy in a new file &mdash; <a href="javascript:void(0)" onclick="toolbar.duplicate()">Make a copy</a></span>
+							</div>
+						</div>
+						<div class="option">
+							<img src="assets/trash-svgrepo-com.svg">
+							<div>
+								<strong>Delete this wireframe</strong>
+								<span>It'll be gone forever &mdash; <a class="delete" href="javascript:void(0)" onclick="toolbar.delete()">Delete</a></span>
 							</div>
 						</div>
 						<div class="option">
 							<img src="assets/upload-svgrepo-com.svg">
 							<div>
-								<strong>Open a file</strong>
-								<span>Click the file picker below to import a JSON file from your local disk</span>
+								<strong>Import into this wireframe</strong>
+								<span>Click the file picker below to add the contents of a JSON file to this wireframe</span>
 								<input type="file" id="-load-input" onchange="toolbar.load()">
 							</div>
 						</div>

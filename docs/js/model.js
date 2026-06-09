@@ -54,6 +54,7 @@ const model = {
 		crch: { name: 'Circled check', asset: 'circled-check-svgrepo-com.svg' },
 		cusr: { name: 'Circled user', asset: 'circled-user-svgrepo-com.svg' },
 		crpl: { name: 'Circled plus', asset: 'circled-plus-svgrepo-com.svg' },
+		copy: { name: 'Copy', asset: 'copy-svgrepo-com.svg' },
 		edit: { name: 'Edit', asset: 'edit-svgrepo-com.svg' },
 		velp: { name: 'Vertical ellipsis', asset: 'more-svgrepo-com.svg' },
 		envl: { name: 'Envelope', asset: 'mail-svgrepo-com.svg' },
@@ -67,6 +68,7 @@ const model = {
 		gift: { name: 'Gift / present', asset: 'gift-svgrepo-com.svg' },
 		hart: { name: 'Heart', asset: 'heart-svgrepo-com.svg' },
 		hrtf: { name: 'Filled heart', asset: 'solid-heart-svgrepo-com.svg' },
+		idcd: { name: 'ID card / photo', asset: 'id-card-svgrepo-com.svg' },
 		imgg: { name: 'Image', asset: 'image-svgrepo-com.svg' },
 		info: { name: 'Information circle', asset: 'circled-info-svgrepo-com.svg' },
 		keyy: { name: 'Key', asset: 'key-svgrepo-com.svg' },
@@ -88,6 +90,7 @@ const model = {
 		star: { name: 'Star', asset: 'star-svgrepo-com.svg' },
 		strf: { name: 'Filled star', asset: 'solid-star-svgrepo-com.svg' },
 		tagg: { name: 'Tag / category', asset: 'tag-svgrepo-com.svg' },
+		trsh: { name: 'Trash / bin / garbage', asset: 'trash-svgrepo-com.svg' },
 		trck: { name: 'Truck / lorry', asset: 'truck-svgrepo-com.svg' },
 		tree: { name: 'Tree', asset: 'oak-tree-svgrepo-com.svg' },
 		undo: { name: 'Undo', asset: 'rotate-left-svgrepo-com.svg' },
@@ -400,18 +403,7 @@ const model = {
 	 * Replace the model with a new empty version.
 	 */
 	new: () => {
-		let i = 1
-		let name = null
-		
-		// Find the next available 'new wireframe' name
-		while ( true ) {
-			name = `wh_new wireframe ${i}`
-			if ( localStorage[name] ) {
-				i += 1
-			} else {
-				break
-			}
-		}
+		let name = io.nextName()
 
 		// Store the current name and its new model in localStorage.
 		localStorage['wirehorse.current'] = name

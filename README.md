@@ -6,6 +6,8 @@ Wireframing from the horse stable
 ### v0.3.2
 * Editors can be submitted with Shift+Enter
 * Cmd-D duplicate now retains the z-index order
+* New icons: trash, id card, copy
+* Duplicate a wireframe into a new file with the next available name
 
 ### v0.3.1
 * Improvements to paragraphs and labels in terms of sizing and text parsing

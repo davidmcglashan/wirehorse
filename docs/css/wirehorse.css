@@ -252,6 +252,10 @@ a:hover, a:focus {
 		gap: 0.5rem;
 		align-items: flex-start;
 	}
+	#-main-dropdown div.option .delete {
+		font-weight: 700;
+		color: #900;
+	}
 	#-main-dropdown span {
 		color: #999;
 		display: block;

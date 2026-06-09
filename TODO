@@ -4,7 +4,6 @@ bugs
 backlog
 --------
 
-- duplicate current wireframe with new name
 - need to test that load and save still work properly
 - handle the mouse leaving the window mid-drag
 
@@ -23,6 +22,7 @@ backlog
 ----- v0.4
 
 - push scroll
+- zoom to fit 
 - groups of components
   - select one, select all - just need groups with their members described in the model
 - insert a component from file ...

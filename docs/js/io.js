@@ -79,4 +79,24 @@ const io = {
 			1000
 		);
 	},
+
+	/**
+	 * Get the next available wireframe name.
+	 */
+	nextName: () => {
+		let i = 1
+		let name = null
+		
+		// Find the next available 'new wireframe' name
+		while ( true ) {
+			name = `wh_new wireframe ${i}`
+			if ( localStorage[name] ) {
+				i += 1
+			} else {
+				break
+			}
+		}
+
+		return name
+	}
 };

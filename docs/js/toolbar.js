@@ -360,5 +360,20 @@ const toolbar = {
 	save: () => {
 		let filename = document.getElementById( '-save-input' ).value
 		io.writeModel( filename, toolbar.hideMainDropdown )
+	},
+
+	/**
+	 * Duplicate the current wireframe into a new file with a fresh name.
+	 */
+	duplicate: () => {
+		// All we need to do is point the current value at a new
+		// 'next available' name
+		let newName = io.nextName()
+		localStorage['wirehorse.current'] = newName
+		
+		// Updating the meta will invoke a save. io.init() updates the UI.
+		model.updateMeta( { tt: newName.substring(3) } )
+		io.init()
+		toolbar.hideMainDropdown()
 	}
 };
