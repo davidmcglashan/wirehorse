@@ -8,6 +8,7 @@ Wireframing from the horse stable
 * Cmd-D duplicate now retains the z-index order
 * New icons: trash, id card, copy
 * Duplicate a wireframe into a new file with the next available name
+* Wireframes can be deleted
 
 ### v0.3.1
 * Improvements to paragraphs and labels in terms of sizing and text parsing

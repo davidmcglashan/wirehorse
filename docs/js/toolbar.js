@@ -375,5 +375,22 @@ const toolbar = {
 		model.updateMeta( { tt: newName.substring(3) } )
 		io.init()
 		toolbar.hideMainDropdown()
+	},
+
+	/**
+	 * Deletes the current wireframe.
+	 */
+	delete: () => {
+		// Deletes are simple enough.
+		let name = localStorage['wirehorse.current']
+		localStorage.removeItem( name )
+
+		// Refresh the UI. This gives us the first alphabetical wireframe remaining.
+		name = io.init()
+		if ( name ) {
+			toolbar.switch( name )
+		} else {
+			toolbar.new()
+		}
 	}
 };

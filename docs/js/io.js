@@ -1,11 +1,14 @@
 const io = {
 	/**
-	 * Populates the switcher in the main dropdown with all the wireframes
+	 * Populates the switcher in the main dropdown with all the wireframes. Returns
+	 * the name of the first wireframe alphabetically.
 	 */
 	init: () => {
 		// Empty the list.
 		let list = document.getElementById( '-wireframes' )
 		list.innerHTML = ''
+
+		let ret = null
 
 		// Spelunk localStorage for all the saved wireframes and give each one
 		// a link in the list.
@@ -19,6 +22,10 @@ const io = {
 				a.setAttribute( 'href', 'javascript:void(0)' )
 				a.setAttribute( 'onclick', `javascript:toolbar.switch('${key}')` )
 				li.appendChild( a )
+
+				if ( ret === null ) {
+					ret = key
+				}
 			}
 		}
 
@@ -28,6 +35,8 @@ const io = {
 			list.appendChild( li )
 			li.innerHTML = 'None'
 		}
+
+		return ret
 	},
 
 	/**
