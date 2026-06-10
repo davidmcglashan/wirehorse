@@ -46,6 +46,7 @@ const model = {
 		ckbx: { name: 'Checked checkbox (icon)', asset: 'checked-checkbox-svgrepo-com.svg' },
 		lchv: { name: 'Left chevron', asset: 'left-chevron-svgrepo-com.svg' },
 		rchv: { name: 'Right chevron', asset: 'right-chevron-svgrepo-com.svg' },
+		cmps: { name: 'Compass', asset: 'compass-svgrepo-com.svg' },
 		docu: { name: 'Document', asset: 'document-svgrepo-com.svg' },
 		dlch: { name: 'Double left chevron', asset: 'double-left-chevron-svgrepo-com.svg' },
 		drch: { name: 'Double right chevon', asset: 'double-right-chevron-svgrepo-com.svg' },

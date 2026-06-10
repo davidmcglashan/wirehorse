@@ -39,10 +39,53 @@ const canvas = {
 		style.innerHTML = css
 	},
 
-	reset: () => {
+	/**
+	 * Clear the canvas of DOM elements.
+	 */
+	clear: () => {
 		canvas.elem.innerHTML = ''
-		canvas.elem.style.scale = '1'
-		canvas.elem.style.transform = 'translate(0px,0px)'
+	},
+
+	/**
+	 * Scales the canvas according to its current selection.
+	 */
+	scale: ( event ) => {
+		let ids = selection.ids()
+		
+		// For a simple press, if there's no selection we simply reset the display.
+		if ( ids.length === 0 && !event.shiftKey ) {
+			model.updateMeta( {ox:1, oy:1, sc:1 } )
+			return
+		}
+
+		// If there's no selection but shift was pressed then we consider every element
+		// on the canvas.
+		if ( ids.length === 0 && event.shiftKey ) {
+			for ( let shape of model.sh ) {
+				ids.push( shape.id )
+			}
+		}
+
+		// Work out scale of rectangle we want to fit in the viewport
+		let minX = 10000
+		let minY = 10000
+		let maxX = -10000
+		let maxY = -10000
+		for ( let id of ids ) {
+			let rect = document.getElementById( id ).getBoundingClientRect()
+			minX = Math.min( minX, rect.x )
+			minY = Math.min( minY, rect.y )
+			maxX = Math.max( maxX, rect.x + rect.width )
+			maxY = Math.max( maxY, rect.y + rect.height )
+		}
+
+		let width = maxX - minX
+		let height = maxY - minY
+
+		// if if fits in the current viewport at 1x then centre it and scale:1
+		if ( width < window.viewport.width ) {
+		}
+		// otherwise scale the viewport to fit with a little padding
 	},
 
 	/**

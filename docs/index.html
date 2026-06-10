@@ -103,17 +103,20 @@
 		</div>
 		<div id="-toolbar">
 			<div>
-				<strong><a href="javascript:void(0)" onclick="toolbar.openMainDropdown()">Wirehorse</a></strong>
-				<a href="javascript:void(0)" onclick="toolbar.rename()" id="-title"></a>
+				<strong><a href="javascript:void(0)" onclick="toolbar.openMainDropdown()" title="Open the main menu">Wirehorse</a></strong>
+				<a href="javascript:void(0)" onclick="toolbar.rename()" id="-title" title="Rename this wireframe"></a>
 			</div>
 			<div>
-				<a href="javascript:void(0)" id="-search-button" onclick="toolbar.openSearchDropdown()">
+				<a href="javascript:void(0)" id="-search-button" onclick="toolbar.openSearchDropdown()" title="Add shapes to the canvas">
 					<img src="assets/circled-plus-svgrepo-com.svg">
 					Press '/' to add something
 				</a>
 			</div>
-			<div>
-				<a href="javascript:void(0)" onclick="toolbar.palette()">
+			<div class="buttons">
+				<a href="javascript:void(0)" onclick="canvas.scale(event)" title="Re-centre the display">
+					<img src="assets/compass-svgrepo-com.svg">
+				</a>
+				<a href="javascript:void(0)" onclick="palette.toggle()" title="Toggle the selection palette">
 					<img src="assets/sidebar-right-svgrepo-com.svg">
 				</a>
 			</div>
@@ -172,7 +175,7 @@
 					<img src="assets/potion-svgrepo-com.svg">
 					<ul>
 						<li>
-							<strong>Wirehorse v0.3.2</strong> 
+							<strong>Wirehorse v0.3.3-latest</strong> 
 							&mdash;
 							&copy; Copyright 2026 David McGlashan
 						</li>

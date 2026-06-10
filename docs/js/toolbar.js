@@ -289,6 +289,10 @@ const toolbar = {
 		undo.pushBulkShapes( undo.types.ADD_NEW_SHAPES, [ newShape ] )
 	},
 
+	/**
+	 * Respond to a meta update in the model - usually the wireframe's title being
+	 * set or changing.
+	 */
 	update: ( meta ) => {
 		if ( meta.tt ) {
 			let elem = document.getElementById( '-title' )
@@ -302,7 +306,7 @@ const toolbar = {
 	 * Start over with a blank canvas.
 	 */
 	new: () => {
-		canvas.reset()
+		canvas.clear()
 
 		// Flush out the model
 		model.new()
@@ -321,7 +325,7 @@ const toolbar = {
 	 */
 	switch: ( wireframe ) => {
 		// Reset all the models
-		canvas.reset()
+		canvas.clear()
 		selection.clear()
 		undo.clear()
 
@@ -336,14 +340,6 @@ const toolbar = {
 		toolbar.mainDropdown.classList.add( 'hidden' )
 		lightbox.close()
 		io.init()
-	},
-
-	/**
-	 * Toggle the palette's visibility
-	 */
-	palette: () => {
-		let elem = document.getElementById( '-palette' )
-		elem.classList.toggle( 'hidden' )
 	},
 
 	/**

@@ -95,6 +95,14 @@ const palette = {
 		event.stopPropagation()
 	},
 
+	/**
+	 * Toggle the palette's visibility
+	 */
+	toggle: () => {
+		let elem = document.getElementById( '-palette' )
+		elem.classList.toggle( 'hidden' )
+	},
+
 	inputChanged: ( event ) => {
 		// Determine if the value in the input is different to one the shape has.
 		let sids = selection.ids()

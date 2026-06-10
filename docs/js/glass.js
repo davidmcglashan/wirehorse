@@ -69,7 +69,7 @@ const glass = {
 		}
 
 		// Re-translate the UI if it has moved
-		if ( meta.ox && meta.oy ) {
+		if ( meta.ox != null && meta.oy != null ) {
 			glass.canvas.style.transform = `translate(${meta.ox}px,${meta.oy}px)`
 		}
 

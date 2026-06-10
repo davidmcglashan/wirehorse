@@ -3,6 +3,9 @@ Wireframing from the horse stable
 
 ## Version history
 
+### v0.3.3
+* New compass button to reset the display in terms of scroll and zoom
+
 ### v0.3.2
 * Editors can be submitted with Shift+Enter
 * Cmd-D duplicate now retains the z-index order

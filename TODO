@@ -5,21 +5,20 @@ backlog
 --------
 
 - handle the mouse leaving the window mid-drag
-
+- push scroll
+- zoom to fit 
+- zoom centred on selection
 - cut copy paste as JSON
+- icons and meta
+
 - export to clipboard as a PNG
   - everything
   - selected items
-  - load will reuse IDs and cause lots of problems!
 
-- switch one component to another - merge the two objects {} and set the type
+- switch one icon for another - keeps its xy - just change its ic: prop
 - Map view component (probably an SVG)
 - rectangle with the X through it that can be colour changed
 
------ v0.4
-
-- push scroll
-- zoom to fit 
 - groups of components
   - select one, select all - just need groups with their members described in the model
 - insert a component from file ...
@@ -38,7 +37,6 @@ backlog
   - glass is a canvas, not a <div>
   - this might help with the selection do-over
   - arrows woud be added to an arrows collection, not a shapes one?
------ v0.5
 - Cmd+R rects to account for scale
 - selection tools e.g. Cmd+left/right to focus on a shape
 - keyboard+drag to quickly add 
@@ -55,7 +53,6 @@ backlog
 - text parsing e.g. this is *bold*, [hyperlink], {#ddd}color{#}
 - option+double-click a shape to recentre and re-zoom the display around it
 - proper tracking of min values to stop shapes become zero width/height
------ v0.6
 - icon and label
 - inject version
 - inject (c) date
