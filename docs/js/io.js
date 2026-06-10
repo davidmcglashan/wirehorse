@@ -40,18 +40,35 @@ const io = {
 	},
 
 	/**
-	 * Load a file from disk to replace the current wireframe
+	 * Load a file from disk to be added into the current wireframe
 	 */
 	loadModel: ( filename, callback ) => {
-		new Response( filename ).text().then(
-			json => {
-				let name = localStorage['wirehorse.current']
-    			localStorage[name] = json
-				model.parse()
-				callback()
+		new Response( filename ).json().then(
+			contents => {
+				let added = []
+				selection.clear()
+
+				// Contents should be a model like any other. Ignore the meta and simply
+				// iterate its shapes, adding them to the incumbent model.
+				if ( contents.sh ) {
+					for ( let shape of contents.sh ) {
+						shape.id = null
+						let newShape = model.addShape( shape ) 
+						
+						added.push( newShape )
+						selection.add( newShape.elem, {multi:true} )
+					}
+				}
+
+				undo.pushBulkShapes( undo.types.ADD_NEW_SHAPES, added )
+
+				// Call the submitted callback.
+				if ( callback ) {
+					callback()
+				}
   			}, 
 			err => {
-    			// not json
+				console.err( err )
   			}
 		) 
 	},

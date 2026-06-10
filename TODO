@@ -4,7 +4,6 @@ bugs
 backlog
 --------
 
-- need to test that load and save still work properly
 - handle the mouse leaving the window mid-drag
 
 - cut copy paste as JSON

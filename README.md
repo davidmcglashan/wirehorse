@@ -9,6 +9,7 @@ Wireframing from the horse stable
 * New icons: trash, id card, copy
 * Duplicate a wireframe into a new file with the next available name
 * Wireframes can be deleted
+* Load now functions as import into the current wireframe
 
 ### v0.3.1
 * Improvements to paragraphs and labels in terms of sizing and text parsing
