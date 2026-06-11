@@ -6,8 +6,6 @@ backlog
 
 - handle the mouse leaving the window mid-drag
 - push scroll
-- zoom to fit 
-- zoom centred on selection
 - cut copy paste as JSON
 - icons and meta
 
