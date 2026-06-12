@@ -92,6 +92,8 @@ const model = {
 		strf: { name: 'Filled star', asset: 'solid-star-svgrepo-com.svg' },
 		tagg: { name: 'Tag / category', asset: 'tag-svgrepo-com.svg' },
 		trsh: { name: 'Trash / bin / garbage', asset: 'trash-svgrepo-com.svg' },
+		thup: { name: 'Thumbs up', asset: 'thumbs-up-svgrepo-com.svg' },
+		thdn: { name: 'Thumbs down', asset: 'thumbs-down-svgrepo-com.svg' },
 		trck: { name: 'Truck / lorry', asset: 'truck-svgrepo-com.svg' },
 		tree: { name: 'Tree', asset: 'oak-tree-svgrepo-com.svg' },
 		undo: { name: 'Undo', asset: 'rotate-left-svgrepo-com.svg' },
