@@ -424,22 +424,21 @@ const canvas = {
 		},
 
 		/**
-		 * Vertical scrollbars have a hard-coded border-bk class.
+		 * Scrollbars have a hard-coded border-bk class.
 		 */
+		hs: ( shape ) => {
+			shape.elem.classList.add( `border-${shape.bo}` )
+		},
 		vs: ( shape ) => {
 			shape.elem.classList.add( `border-${shape.bo}` )
 		},
 
 		/**
-		 * Horizontal rules use a custom border class.
+		 * Rules use a custom border class.
 		 */
 		hr: ( shape ) => {
 			shape.elem.classList.add( `hr-${shape.bo}` )
 		},
-
-		/**
-		 * Vertical rules use a custom border class.
-		 */
 		vr: ( shape ) => {
 			shape.elem.classList.add( `vr-${shape.bo}` )
 		},
@@ -509,6 +508,9 @@ const canvas = {
 			},
 			vr: ( shape, safe ) => {
 				return ''
+			},
+			hs: ( shape, safe ) => {
+				return '<div class="left"></div><div class="bar"></div><div class="right"></div>'
 			},
 			vs: ( shape, safe ) => {
 				return '<div class="up"></div><div class="bar"></div><div class="down"></div>'

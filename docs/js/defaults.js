@@ -148,6 +148,13 @@ const defaults = {
 				bo: 'g5'
 			}
 		},{
+			name: 'Horizontal scrollbar',
+			model: {
+				ty: 'hs',
+				w: 128,
+				bo: 'bk'
+			}
+		},{
 			name: 'Vertical scrollbar',
 			model: {
 				ty: 'vs',

@@ -9,7 +9,6 @@ backlog
 - icons and meta for application/website
 - change x/y in a clever way when pasting
 - can you hook cut/copy/paste into the apple menu?
-- horizontal scrollbar
 - only show drag handles for directions you can drag in
 - switch one icon for another - keeps its xy - just change its ic: prop
 - locking shapes for selection immunity
