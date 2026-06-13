@@ -216,26 +216,30 @@ const canvas = {
 			undo.pushBulkShapes( undo.types.REMOVE_SHAPES, removed )
 		} 
 
+		// Cmd-C to copy to clipboard
+		else if ( event.keyCode === 67 && event.metaKey ) {
+			event.preventDefault()
+			clipboard.copy( selection.idsInZOrder() )
+		}
+
 		// Cmd-D to duplicate!
 		else if ( event.keyCode === 68 && event.metaKey ) {
-			if ( selection.yes() ) {
-				event.preventDefault()
-				let clones = []
+			event.preventDefault()
+			let clones = []
 
-				// Do the cloning, and do it in Z index order!
-				let sids = selection.idsInZOrder()
-				for ( let id of sids ) {
-					clones.push( model.cloneShape( id ) )
-				}
-				
-				// Give undo something to (un)do.
-				undo.pushBulkShapes( undo.types.ADD_NEW_SHAPES, clones )
+			// Do the cloning, and do it in Z index order!
+			let sids = selection.idsInZOrder()
+			for ( let id of sids ) {
+				clones.push( model.cloneShape( id ) )
+			}
+			
+			// Give undo something to (un)do.
+			undo.pushBulkShapes( undo.types.ADD_NEW_SHAPES, clones )
 
-				// Now select the new object(s).
-				selection.clear()
-				for ( let clone of clones ) {
-					selection.add( clone.elem, { multi:true } )
-				}
+			// Now select the new object(s).
+			selection.clear()
+			for ( let clone of clones ) {
+				selection.add( clone.elem, { multi:true } )
 			}
 		}
 

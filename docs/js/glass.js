@@ -482,6 +482,11 @@ const glass = {
 		else if ( event.metaKey && event.keyCode === 48 ) {
 			model.updateMeta( { sc: 1 } )
 		}
+
+		// Cmd+V to paste from the clipboard
+		else if ( event.metaKey && event.keyCode === 86 ) {
+			clipboard.paste()
+		}
 	},
 
 	/**

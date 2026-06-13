@@ -6,6 +6,8 @@ Wireframing from the horse stable
 ### v0.3.3
 * New compass button to reset the display in terms of scroll and zoom
 * Compass will focus the selection or everything if Shift is held when pressing
+* New icons: thumbs up and down
+* Copy and paste into the clipboard
 
 ### v0.3.2
 * Editors can be submitted with Shift+Enter

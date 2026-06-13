@@ -6,30 +6,29 @@ backlog
 
 - handle the mouse leaving the window mid-drag
 - push scroll
-- cut copy paste as JSON
-- icons and meta
-
+- icons and meta for application/website
+- make delete text a bit redder/brighter
+- cut to the clipboard
+- change x/y in a clever way when pasting
+- can you hook cut/copy/paste into the apple menu?
+- vertical rule
+- horizontal scrollbar
+- switch one icon for another - keeps its xy - just change its ic: prop
+- locking shapes for selection immunity
+- Map view component (probably an SVG)
+- rectangle with the X through it that can be colour changed
+- show usage of localstorage on the main dropdown
+- groups of components
+  - select one, select all - just need groups with their members described in the model
 - export to clipboard as a PNG
   - everything
   - selected items
-
-- switch one icon for another - keeps its xy - just change its ic: prop
-- Map view component (probably an SVG)
-- rectangle with the X through it that can be colour changed
-
-- groups of components
-  - select one, select all - just need groups with their members described in the model
 - insert a component from file ...
   - e.g. zatpark window, modal window
   - pagination as component
   - table tools (presets,filters,search,configure) as a component
   - remember recently used and include them in the adder dropdown
-- play with the main dropdown
-  - accidental horizontal layout looked cool!
-  - light grey panel for the credits and acks
-  - include the font and icon meta
 - drag without selecting first
-- locking shapes for selection immunity
 - fancy arrows
   - drawn on the glass to always be on top? 
   - glass is a canvas, not a <div>
@@ -44,8 +43,6 @@ backlog
   - reasonable declared widths
   - Redo the alignment features to consider the DOM elems which should all have correctly formed dimensions
   - Horizontal and vertical arrange features - space & distribute
-- vertical rule
-- horizontal scrollbar
 - alignment guides
 - inset guides
 - text parsing e.g. this is *bold*, [hyperlink], {#ddd}color{#}
