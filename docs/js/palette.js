@@ -32,6 +32,10 @@ const palette = {
 			fields: [ 'x','y','w','bo' ],
 			toolbars: ['arrange']
 		},
+		vr: {
+			fields: [ 'x','y','h','bo' ],
+			toolbars: ['arrange']
+		},
 		tab: {
 			fields: [ 'x','y','w' ],
 			toolbars: ['arrange','font']

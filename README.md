@@ -8,6 +8,7 @@ Wireframing from the horse stable
 * Compass will focus the selection or everything if Shift is held when pressing
 * New icons: thumbs up and down
 * Cut, copy and paste into the clipboard
+* New shape: vertical rule
 
 ### v0.3.2
 * Editors can be submitted with Shift+Enter

@@ -438,6 +438,13 @@ const canvas = {
 		},
 
 		/**
+		 * Vertical rules use a custom border class.
+		 */
+		vr: ( shape ) => {
+			shape.elem.classList.add( `vr-${shape.bo}` )
+		},
+
+		/**
 		 * Tabs have a hard-coded grey border class.
 		 */
 		tab: ( shape ) => {
@@ -498,6 +505,9 @@ const canvas = {
 				return html
 			},
 			hr: ( shape, safe ) => {
+				return ''
+			},
+			vr: ( shape, safe ) => {
 				return ''
 			},
 			vs: ( shape, safe ) => {

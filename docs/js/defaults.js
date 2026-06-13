@@ -141,6 +141,13 @@ const defaults = {
 				bo: 'g5'
 			}
 		},{
+			name: 'Vertical rule',
+			model: {
+				ty: 'vr',
+				h: 128,
+				bo: 'g5'
+			}
+		},{
 			name: 'Vertical scrollbar',
 			model: {
 				ty: 'vs',
