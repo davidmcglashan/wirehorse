@@ -7,8 +7,6 @@ backlog
 - handle the mouse leaving the window mid-drag
 - push scroll
 - icons and meta for application/website
-- make delete text a bit redder/brighter
-- cut to the clipboard
 - change x/y in a clever way when pasting
 - can you hook cut/copy/paste into the apple menu?
 - vertical rule

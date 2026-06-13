@@ -156,6 +156,19 @@ const canvas = {
 	},
 
 	/**
+	 * Delete the selected shapes.
+	 */
+	deleteSelection: () => {
+		let removed = []
+		for ( let elem of selection.storage ) {
+			let id = elem.getAttribute( 'id' )
+			removed.push( model.removeShape( id ) )
+		}
+		// Give undo something to (un)do.
+		undo.pushBulkShapes( undo.types.REMOVE_SHAPES, removed )
+	},
+
+	/**
 	 * Bring the current selection to the front
 	 */
 	relayerSelection: ( event, direction ) => {
@@ -207,19 +220,19 @@ const canvas = {
 
 		// Backspace for delete!
 		else if ( event.keyCode === 8 ) {
-			let removed = []
-			for ( let elem of selection.storage ) {
-				let id = elem.getAttribute( 'id' )
-				removed.push( model.removeShape( id ) )
-			}
-			// Give undo something to (un)do.
-			undo.pushBulkShapes( undo.types.REMOVE_SHAPES, removed )
+			canvas.deleteSelection()
 		} 
 
 		// Cmd-C to copy to clipboard
 		else if ( event.keyCode === 67 && event.metaKey ) {
 			event.preventDefault()
 			clipboard.copy( selection.idsInZOrder() )
+		}
+
+		// Cmd-X to copy to clipboard
+		else if ( event.keyCode === 88 && event.metaKey ) {
+			event.preventDefault()
+			clipboard.cut( selection.idsInZOrder() )
 		}
 
 		// Cmd-D to duplicate!

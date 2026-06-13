@@ -13,6 +13,14 @@ const clipboard = {
 	},
 
 	/**
+	 * Cut is a copy() with a delete() tacked on the back!
+	 */
+	cut: ( sids ) => {
+		clipboard.copy( sids )
+		canvas.deleteSelection()
+	},
+
+	/**
 	 * Paste from the clipboard into the wireframe. This will only work if
 	 * there's something that was previously copied in there!
 	 */
