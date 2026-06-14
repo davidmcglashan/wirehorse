@@ -317,3 +317,13 @@ ul.dropdown,
 		background-color: #666;
 		mask-image: url('../assets/circle.svg');
 	}
+
+/* ==================================================== */
+/* Street map */
+
+.entity-map {
+	background-color: #fff;
+	background-image: url('../assets/street-map.svg');
+	aspect-ratio: 1;
+	background-size: contain;
+}

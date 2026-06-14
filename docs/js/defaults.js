@@ -177,6 +177,12 @@ const defaults = {
 				w: 512,
 				fz: 11
 			}
+		},{   
+			name: 'Street map',
+			model: {
+				ty: 'map',
+				w: 200,
+			}
 		}
 	],
 

@@ -5,12 +5,15 @@ backlog
 --------
 
 - handle the mouse leaving the window mid-drag
-- push scroll
+	- push scroll
+	- balsamiq follows you out of the window and keeps moving the items
+	- it knows when you're above or below as you move around outside the window
 - only show drag handles for directions you can drag in
 - switch one icon for another - keeps its xy - just change its ic: prop
-- Map view component (probably an SVG)
 - rectangle with the X through it that can be colour changed
+
 - show usage of localstorage on the main dropdown
+- export view to get all the localstorage contents
 - groups of components
   - select one, select all - just need groups with their members described in the model
 - export to clipboard as a PNG

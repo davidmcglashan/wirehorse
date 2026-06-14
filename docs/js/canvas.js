@@ -518,6 +518,9 @@ const canvas = {
 			ic: ( shape, safe ) => {
 				return ''
 			},
+			map: ( shape, safe ) => {
+				return ''
+			},
 			tab: ( shape, safe ) => {
 				let lines = shape.tx.split('\n')
 				let html = '<ul>'

@@ -20,6 +20,10 @@ const palette = {
 			fields: [ 'x','y','w','bg' ],
 			toolbars: ['arrange','tools']
 		},
+		map: {
+			fields: [ 'x','y','w' ],
+			toolbars: ['arrange','tools']
+		},
 		lbl: {
 			fields: [ 'x','y','w','co' ],
 			toolbars: ['arrange','tools','font'],
