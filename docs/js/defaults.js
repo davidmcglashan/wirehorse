@@ -182,6 +182,7 @@ const defaults = {
 			model: {
 				ty: 'map',
 				w: 200,
+				h: 180
 			}
 		}
 	],
