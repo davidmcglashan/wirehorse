@@ -5,6 +5,7 @@ Wireframing from the horse stable
 
 ### v0.3.4
 * Shapes can be locked to prevent edits
+* Palette now handles multi-selection form UI for the common controls
 
 ### v0.3.3
 * New compass button to reset the display in terms of scroll and zoom

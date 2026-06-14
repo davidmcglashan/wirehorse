@@ -205,6 +205,7 @@ const palette = {
 		// Is the currently selected shape changing?
 		if ( sids.length === 1 && sids[0] === id ) {
 			palette.singleSelection( id )
+			palette.setFields( id )
 			return
 		}
 
@@ -213,6 +214,7 @@ const palette = {
 			for ( let sid of sids ) {
 				if ( sid === id ) {
 					palette.multiSelection( sids )
+					palette.setFields( sids[0] )
 					return
 				}
 			}
@@ -241,8 +243,10 @@ const palette = {
 
 			if ( ids.length === 1 ) {
 				palette.singleSelection( ids[0] )
+				palette.setFields( ids[0] )
 			} else {
 				palette.multiSelection( ids )
+				palette.setFields( ids[0] )
 			}
 		}
 	},
@@ -266,6 +270,52 @@ const palette = {
 			let elem = document.getElementById( `-toolbar-${toolbar}` )
 			if ( elem ) {
 				elem.classList.add( 'hidden' )
+			}
+		}
+	},
+
+	/**
+	 * Render the UI for a single selected shape.
+	 */
+	setFields: ( id ) => {
+		let shape = model.shape( id )
+		let deflt = palette.config[shape.ty]
+
+		for ( let field of palette.fields ) {
+			// Does the model have a value for this field?
+			let value = shape[field]			
+			let input = document.getElementById( `-fld-${field}` )
+
+			// Some inputs include a permitted value in their id. If we don't find
+			// one of these then move on.
+			if ( !input ) {
+				input = document.getElementById( `-fld-${field}:${value}` )
+				if ( !input ) {
+					continue
+				}
+			}
+
+			// What kind of ipnut are we dealing with. <a> can be a toggling icon button
+			if ( input.tagName === 'A' && input.getAttribute( 'data-type' ) === 'toggle' ) {
+				input.setAttribute( 'class', value === 'yes' ? 'selected' : '' )
+			} 
+
+			// What kind of ipnut are we dealing with. <a> can be a toggling icon button
+			else if ( input.tagName === 'A' && input.getAttribute( 'data-type' ) === 'switch' ) {
+				input.setAttribute( 'class', 'selected' )
+			} 
+			
+			// Colour pickers need a bit of additional set up
+			else if ( input.getAttribute( 'data-type' ) === 'colour' ) {
+				input.setAttribute( 'onclick',`javascript:palette.colourPicker('${field}','${shape[field]}')` )
+				input.setAttribute( 'class', `button-${value}` )
+			} 
+			
+			// Number inputs get their values rounded so we don't see flaots in the UI.
+			else if ( input.getAttribute( 'type' ) === 'number' ) {
+				input.value = parseInt( value, 10 )
+			} else {
+				input.value = value
 			}
 		}
 	},
@@ -338,14 +388,52 @@ const palette = {
 	},
 
 	/**
-	 * Render the UI for a multiple selection. Currently this hides everything!
+	 * Render the UI for a multiple selection. 
 	 */
 	multiSelection: ( ids ) => {
+		// Hide the individual fields
 		for ( field of palette.fields ) {
 			let container = document.getElementById( `-con-${field}` )
 			container?.classList.add( 'hidden' )
 		}
 
+		// Find the fields in common to all the selection
+		let shape = model.shape( ids[0] )
+		let deflt = palette.config[shape.ty]
+		let common = deflt.fields
+		for ( let id of ids ) {
+			deflt = palette.config[ model.shape( ids[0] ).ty ]
+			common.filter(element => deflt.fields.includes(element));
+		}
+
+		// Display just those fields
+		for ( field of common ) {
+			let container = document.getElementById( `-con-${field}` )
+			container?.classList.remove( 'hidden' )
+		}
+
+		// Hide the toolbars
+		for ( let toolbar of palette.toolbars ) {
+			let elem = document.getElementById( `-toolbar-${toolbar}` )
+			elem?.classList.add( 'hidden' )
+		}
+
+		// Find the toolbars in common to all the selection
+		shape = model.shape( ids[0] )
+		deflt = palette.config[shape.ty]
+		common = deflt.toolbars
+		for ( let id of ids ) {
+			deflt = palette.config[ model.shape( ids[0] ).ty ]
+			common.filter(element => deflt.toolbars.includes(element));
+		}
+
+		// Display just those toolbars
+		for ( let toolbar of common ) {
+			let elem = document.getElementById( `-toolbar-${toolbar}` )
+			elem?.classList.remove( 'hidden' )
+		}
+
+		// Show the multi-toolbars
 		for ( let toolbar of palette.multiToolbars ) {
 			let elem = document.getElementById( `-toolbar-${toolbar}` )
 			elem?.classList.remove( 'hidden' )

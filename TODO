@@ -4,7 +4,6 @@ bugs
 backlog
 --------
 
-- multiselection UIs for the common controls
 - handle the mouse leaving the window mid-drag
 - push scroll
 - only show drag handles for directions you can drag in

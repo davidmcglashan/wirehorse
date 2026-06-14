@@ -163,7 +163,7 @@ const model = {
 		
 		// Fire the listeners
 		for ( listener of model.metadataListeners ) {
-			listener( obj )
+			listener( model.mt )
 		}
 
 		// Save the model into the localstorage
