@@ -99,6 +99,10 @@
 				<a href="javascript:void(0)" onclick="canvas.relayerSelection(event,'b')"><img src="assets/send-to-back-svgrepo-com.svg"></a>
 				<a href="javascript:void(0)" onclick="canvas.relayerSelection(event,'f')"><img src="assets/bring-to-front-svgrepo-com.svg"></a>
 			</div>
+			<div id="-toolbar-tools" class="toolbar hidden">
+				<span class="label">Tools</span>
+				<a href="javascript:void(0)" onclick="toolbar.lockSelection()"><img src="assets/lock-svgrepo-com.svg"></a>
+			</div>
 			<div id="-toolbar-shape-align" class="toolbar hidden">
 				<span class="label">Align Shapes</span>
 				<a href="javascript:void(0)" onclick="palette.align('l')"><img src="assets/align-shapes-left-svgrepo-com.svg"></a>
@@ -121,6 +125,9 @@
 				</a>
 			</div>
 			<div class="buttons">
+				<a id="-button-lock" class="disabled" href="javascript:void(0)" onclick="toolbar.unlock()" title="Unlock all locked shapes">
+					<img src="assets/open-lock-svgrepo-com.svg">
+				</a>
 				<a href="javascript:void(0)" onclick="canvas.scale(event)" title="Re-centre the display">
 					<img src="assets/compass-svgrepo-com.svg">
 				</a>

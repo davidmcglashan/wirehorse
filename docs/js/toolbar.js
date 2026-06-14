@@ -300,6 +300,15 @@ const toolbar = {
 			elem = document.getElementById( '-save-input' )
 			elem.value = `${meta.tt}.json`
 		}
+
+		if ( meta.lx ) {
+			let elem = document.getElementById( '-button-lock' )
+			if ( meta.lx.length === 0 ) {
+				elem.classList.add( 'disabled' )
+			} else {
+				elem.classList.remove( 'disabled' )
+			}
+		}
 	},
 
 	/**
@@ -318,7 +327,6 @@ const toolbar = {
 		undo.clear()
 		io.init()
 	},
-
 
 	/**
 	 * Switch the editor to the selected wireframe
@@ -388,5 +396,27 @@ const toolbar = {
 		} else {
 			toolbar.new()
 		}
+	},
+
+	/**
+	 * Locks the selected shapes, preventing them from being edited or moved until
+	 * unlock is pressed.
+	 */
+	lockSelection: () => {
+		if ( !selection.yes() ) {
+			return
+		}
+
+		for ( let elem of selection.storage ) {
+			let id = elem.getAttribute( 'id' )
+			model.lockShape( id )
+		}
+	},
+
+	/**
+	 * Unlocks any locked shapes in the model.
+	 */
+	unlock: () => {
+		model.unlockShapes()
 	}
 };

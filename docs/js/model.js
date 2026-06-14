@@ -199,6 +199,44 @@ const model = {
 	},
 
 	/**
+	 * Locks a shapes, preventing it from being edited or moved until all shapes are
+	 * unlocked again.
+	 */
+	lockShape: ( id ) => {
+		if ( model.mt.lx ) {
+			model.mt.lx.push( id )
+		} else {
+			model.mt.lx = [ id ]
+		}
+
+		// Fire the listeners
+		for ( listener of model.metadataListeners ) {
+			listener( model.mt )
+		}
+		model.save()
+	},
+
+	/**
+	 * Returns true if the shape is locked.
+	 */
+	isLocked: ( id ) => {
+		return model.mt.lx?.includes( id )
+	},
+
+	/**
+	 * Unlocks all the locked shapes.
+	 */
+	unlockShapes: () => {
+		model.mt.lx = []
+
+		// Fire the listeners
+		for ( listener of model.metadataListeners ) {
+			listener( model.mt )
+		}
+		model.save()
+	},
+
+	/**
 	 * Create a clone of the shape with this id
 	 */
 	cloneShape: ( id ) => {
@@ -398,7 +436,7 @@ const model = {
 		localStorage[name] = JSON.stringify( 
 			{ 
 				mt: model.mt, 
-				sh: model.sh 
+				sh: model.sh
 			} )
 	},
 
@@ -416,7 +454,8 @@ const model = {
 					tt: name.substring(3),
 					ox: 0,
 					oy: 0,
-					sc: 1
+					sc: 1,
+					lx: []
 				},
 				sh: []
 			}

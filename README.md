@@ -3,6 +3,9 @@ Wireframing from the horse stable
 
 ## Version history
 
+### v0.3.4
+* Shapes can be locked to prevent edits
+
 ### v0.3.3
 * New compass button to reset the display in terms of scroll and zoom
 * Compass will focus the selection or everything if Shift is held when pressing

@@ -2,60 +2,60 @@ const palette = {
 	config: {
 		rec: {
 			fields: [ 'x','y','w','h','bg','co','bo','op' ],
-			toolbars: ['arrange','font','text-align']
+			toolbars: ['arrange','tools','font','text-align']
 		},
 		cmb: {
 			fields: [ 'x','y','w','co' ],
-			toolbars: ['arrange','font']
+			toolbars: ['arrange','tools','font']
 		},
 		chb: {
 			fields: [ 'x','y','w','co' ],
-			toolbars: ['arrange','font'],
+			toolbars: ['arrange','tools','font'],
 		},
 		rad: {
 			fields: [ 'x','y','w','co' ],
-			toolbars: ['arrange','font'],
+			toolbars: ['arrange','tools','font'],
 		},
 		ic: {
 			fields: [ 'x','y','w','bg' ],
-			toolbars: ['arrange']
+			toolbars: ['arrange','tools']
 		},
 		lbl: {
 			fields: [ 'x','y','w','co' ],
-			toolbars: ['arrange','font'],
+			toolbars: ['arrange','tools','font'],
 		},
 		bcb: {
 			fields: [ 'x','y' ],
-			toolbars: ['arrange','font']
+			toolbars: ['arrange','tools','font']
 		},
 		hr: {
 			fields: [ 'x','y','w','bo' ],
-			toolbars: ['arrange']
+			toolbars: ['arrange','tools']
 		},
 		vr: {
 			fields: [ 'x','y','h','bo' ],
-			toolbars: ['arrange']
+			toolbars: ['arrange','tools']
 		},
 		tab: {
 			fields: [ 'x','y','w' ],
-			toolbars: ['arrange','font']
+			toolbars: ['arrange','tools','font']
 		},
 		tbl: {
 			fields: [ 'x','y','w' ],
-			toolbars: ['arrange','font']
+			toolbars: ['arrange','tools','font']
 		},
 		hs: {
 			fields: [ 'x','y','w','bo' ],
-			toolbars: ['arrange']
+			toolbars: ['arrange','tools']
 		},
 		vs: {
 			fields: [ 'x','y','h','bo' ],
-			toolbars: ['arrange']
+			toolbars: ['arrange','tools']
 		},
 	},
 
 	fields: [ 'x','y','w','h','bg','co','bo','fz','fb','fi','fu','fs','ha','va','op' ],
-	toolbars: ['arrange','text-align','font'],
+	toolbars: ['arrange','tools','text-align','font'],
 	multiToolbars: [ 'shape-align' ],
 	
 	// Hotkeys are used in canvas.js and map ids to key codes for e.g. Cmd+B to make a 

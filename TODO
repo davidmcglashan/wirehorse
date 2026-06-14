@@ -4,11 +4,11 @@ bugs
 backlog
 --------
 
+- multiselection UIs for the common controls
 - handle the mouse leaving the window mid-drag
 - push scroll
 - only show drag handles for directions you can drag in
 - switch one icon for another - keeps its xy - just change its ic: prop
-- locking shapes for selection immunity
 - Map view component (probably an SVG)
 - rectangle with the X through it that can be colour changed
 - show usage of localstorage on the main dropdown

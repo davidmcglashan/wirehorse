@@ -162,10 +162,16 @@ a:hover, a:focus {
 	#-toolbar .buttons a {
 		padding: 0.4rem 0.25rem 0.25rem 0.25rem;
 		border-radius: 8px;
-
+	}
+	#-toolbar .buttons a.disabled {
+		opacity:0.25;
 	}
 	#-toolbar .buttons a:hover {
 		background-color: #ccc;
+	}
+	#-toolbar .buttons a:hover.disabled {
+		background-color: unset;
+		cursor: not-allowed;
 	}
 
 #-rename-input {

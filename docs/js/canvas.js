@@ -144,18 +144,6 @@ const canvas = {
 	},
 
 	/**
-	 * Relayering the canvas simply updates the z-index of every child element
-	 * to be its position in the model shapes array.
-	 */
-	relayer: () => {
-		let z = 1
-		for ( let shape of model.sh ) {
-			shape.elem.style.zIndex = z
-			z += 1
-		}
-	},
-
-	/**
 	 * Delete the selected shapes.
 	 */
 	deleteSelection: () => {
@@ -166,6 +154,18 @@ const canvas = {
 		}
 		// Give undo something to (un)do.
 		undo.pushBulkShapes( undo.types.REMOVE_SHAPES, removed )
+	},
+
+	/**
+	 * Relayering the canvas simply updates the z-index of every child element
+	 * to be its position in the model shapes array.
+	 */
+	relayer: () => {
+		let z = 1
+		for ( let shape of model.sh ) {
+			shape.elem.style.zIndex = z
+			z += 1
+		}
 	},
 
 	/**

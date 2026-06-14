@@ -4,6 +4,7 @@ const selection = {
 
 	init: () => {
 		model.registerShapeListener( selection.shapeUpdated )
+		model.registerMetadataListener( selection.metaUpdated )
 	},
 
 	/**
@@ -12,6 +13,16 @@ const selection = {
 	 */
 	shapeUpdated: ( id, shape ) => {
 		if ( shape.deleted ) {
+			selection.clear()
+		}
+	},
+
+	/**
+	 * Listen to meta updates in the model. Naively clears the selection when
+	 * there's a change to the lock.
+	 */
+	metaUpdated: ( meta ) => {
+		if ( meta.lx ) {
 			selection.clear()
 		}
 	},
@@ -53,7 +64,13 @@ const selection = {
 	/**
 	 * Select the supplied elem. Pass in an optional 'true' for multi
 	 */
-	add: ( elem, params = { multi: false } ) => {	
+	add: ( elem, params = { multi: false } ) => {
+		// If this elem is locked then we do nothing!
+		let id = elem.getAttribute( 'id' )
+		if ( model.isLocked( id ) ) {
+			return
+		}
+
 		// If this isn't a multi-select then clear all existing selection storage
 		if ( !params.multi ) {
 			selection.clear()
