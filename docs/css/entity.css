@@ -324,5 +324,5 @@ ul.dropdown,
 .entity-map {
 	background-color: #fff;
 	background-image: url('../assets/street-map.svg');
-	background-size: contain;
+	background-size: cover;
 }

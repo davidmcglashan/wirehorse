@@ -1,6 +1,7 @@
 const selection = {
 	storage: [],
 	listeners: [],
+	lockCount: null,
 
 	init: () => {
 		model.registerShapeListener( selection.shapeUpdated )
@@ -18,12 +19,18 @@ const selection = {
 	},
 
 	/**
-	 * Listen to meta updates in the model. Naively clears the selection when
+	 * Listen to meta updates in the model. Clears the selection when
 	 * there's a change to the lock.
 	 */
 	metaUpdated: ( meta ) => {
 		if ( meta.lx ) {
-			selection.clear()
+			if ( selection.lockCount === null ) {
+				selection.lockCount = meta.lx.length
+			}
+			if ( selection.lockCount !== meta.lx.length ) {
+				selection.clear()
+			}
+			selection.lockCount = meta.lx.length
 		}
 	},
 
