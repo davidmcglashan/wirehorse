@@ -1,3 +1,7 @@
+/**
+ * Simple empty body. We hide scrolling here since we use the space dragger or the compass
+ * to move around.
+ */
 body {
 	margin: 0;
 	padding: 0;
@@ -6,87 +10,101 @@ body {
 	font-size: 11pt;
 }
 
+/* Plain hyperlinks with underlines appearing on hover */
 a {
 	text-decoration: none;
-}
-a:hover, a:focus {
-	text-decoration: underline;
+	&:hover, &:focus {
+		text-decoration: underline;
+	}
 }
 
+/* Canvas is where the shapes are drawn. It uses the sketchy font. */
 #-canvas {
 	font-family: "Balsamiq Sans", sans-serif;
 	font-weight: 400;
 	font-style: normal;
 	position: absolute;
 	inset: 0;
-/*	border: 1px dotted #888; */
 }
 
+/* Selection is drawn around the selected shapes */
 #-selection {
 	outline-offset: 5px;
 	outline: 2px solid #36c;
 	position: absolute;
-}
-	#-selection.multiple {
+	
+	/* Multiple selections get a thinner line with the individual shapes getting thicker ones. */
+	&.multiple {
 		outline-offset: 10px;
 		outline: 1px dashed #36c;
 	}
-	#-selection-subs {
-		position:absolute;
-		offset: 0;
-	}
-		#-selection-subs>div {
-			outline-offset: 5px;
-			outline: 2px solid #36c;
-			position: absolute;
-		}
-	#-selection .handle {
+	
+	/* Handles are the blue boxes for interacting with the selection */
+	& .handle {
 		border: 1px solid #36c;
 		background-color: #36c;
 		width: 0.5rem;
 		height: 0.5rem;
 		position: absolute;
+
+		/* There's one handle for each compass point. */
+		&.ne {
+			top: -10px;
+			right: -10px;
+			cursor: nesw-resize;
+		}
+		&.n {
+			top: -10px;
+			right: calc(50% - 5px);
+			cursor: ns-resize;
+		}
+		&.nw {
+			top: -10px;
+			left: -10px;
+			cursor: nwse-resize;
+		}
+		&.w {
+			top: calc(50% - 5px);
+			left: -10px;
+			cursor: ew-resize;
+		}
+		&.e {
+			top: calc(50% - 5px);
+			right: -10px;
+			cursor: ew-resize;
+		}
+		&.sw {
+			bottom: -10px;
+			left: -10px;
+			cursor: nesw-resize;
+		}
+		&.s {
+			bottom: -10px;
+			right: calc(50% - 5px);
+			cursor: ns-resize;
+		}
+		&.se {
+			bottom: -10px;
+			right: -10px;
+			cursor: nwse-resize;
+		}
 	}
-	#-selection .handle.ne {
-		top: -10px;
-		right: -10px;
-		cursor: nesw-resize;
+}
+
+/* Selection subs appear when multiple selections are used around each shape. */
+#-selection-subs {
+	position:absolute;
+	offset: 0;
+
+	/* The same thick line as above for each shape. */
+	&>div {
+		outline-offset: 5px;
+		outline: 2px solid #36c;
+		position: absolute;
 	}
-	#-selection .handle.n {
-		top: -10px;
-		right: calc(50% - 5px);
-		cursor: ns-resize;
-	}
-	#-selection .handle.nw {
-		top: -10px;
-		left: -10px;
-		cursor: nwse-resize;
-	}
-	#-selection .handle.w {
-		top: calc(50% - 5px);
-		left: -10px;
-		cursor: ew-resize;
-	}
-	#-selection .handle.e {
-		top: calc(50% - 5px);
-		right: -10px;
-		cursor: ew-resize;
-	}
-	#-selection .handle.sw {
-		bottom: -10px;
-		left: -10px;
-		cursor: nesw-resize;
-	}
-	#-selection .handle.s {
-		bottom: -10px;
-		right: calc(50% - 5px);
-		cursor: ns-resize;
-	}
-	#-selection .handle.se {
-		bottom: -10px;
-		right: -10px;
-		cursor: nwse-resize;
-	}
+}
+
+
 #-glass {
 	position: absolute;
 	inset: 0;
