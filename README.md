@@ -7,6 +7,7 @@ Wireframing from the horse stable
 * Shapes can be locked to prevent edits
 * Palette now handles multi-selection form UI for the common controls
 * New street map component
+* Icon components can have their icon changed _in situ_
 
 ### v0.3.3
 * New compass button to reset the display in terms of scroll and zoom

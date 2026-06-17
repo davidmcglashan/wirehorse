@@ -9,7 +9,6 @@ backlog
 	- balsamiq follows you out of the window and keeps moving the items
 	- it knows when you're above or below as you move around outside the window
 - only show drag handles for directions you can drag in
-- switch one icon for another - keeps its xy - just change its ic: prop
 - rectangle with the X through it that can be colour changed
 
 - show usage of localstorage on the main dropdown

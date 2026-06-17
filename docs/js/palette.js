@@ -17,7 +17,7 @@ const palette = {
 			toolbars: ['arrange','tools','font'],
 		},
 		ic: {
-			fields: [ 'x','y','w','bg' ],
+			fields: [ 'x','y','w','ic','bg' ],
 			toolbars: ['arrange','tools']
 		},
 		map: {
@@ -58,7 +58,7 @@ const palette = {
 		},
 	},
 
-	fields: [ 'x','y','w','h','bg','co','bo','fz','fb','fi','fu','fs','ha','va','op' ],
+	fields: [ 'x','y','w','h','ic','bg','co','bo','fz','fb','fi','fu','fs','ha','va','op' ],
 	toolbars: ['arrange','tools','text-align','font'],
 	multiToolbars: [ 'shape-align' ],
 	
@@ -360,10 +360,13 @@ const palette = {
 				input.setAttribute( 'class', 'selected' )
 			} 
 			
-			// Colour pickers need a bit of additional set up
+			// Colour & icon pickers need a bit of additional set up
 			else if ( input.getAttribute( 'data-type' ) === 'colour' ) {
 				input.setAttribute( 'onclick',`javascript:palette.colourPicker('${field}','${shape[field]}')` )
 				input.setAttribute( 'class', `button-${value}` )
+			} else if ( input.getAttribute( 'data-type' ) === 'icon' ) {
+				input.setAttribute( 'onclick',`javascript:palette.iconPicker('${shape[field]}')` )
+				input.setAttribute( 'class', `icon-${value}` )
 			} 
 			
 			// Number inputs get their values rounded so we don't see flaots in the UI.
@@ -450,7 +453,7 @@ const palette = {
 	colourPicker: ( field, selected ) => {
 		let picker = document.createElement( 'div' )
 		document.body.appendChild( picker )
-		picker.setAttribute( 'class', 'picker' )
+		picker.setAttribute( 'class', 'picker colour-picker' )
 		picker.addEventListener( 'mouseup', function( event ) {
 			event.stopPropagation()
 		} )
@@ -474,6 +477,43 @@ const palette = {
 				for ( let shape of selection.ids() ) {
 					let mod = {}
 					mod[field] = key
+					undo.pushShape( model.updateShape( shape, mod ) )
+				}
+				lightbox.close()
+			} )
+		}
+	},
+
+	/**
+	 * Spins up a icon picker on the UI
+	 */
+	iconPicker: ( selected ) => {
+		let picker = document.createElement( 'div' )
+		document.body.appendChild( picker )
+		picker.setAttribute( 'class', 'picker icon-picker' )
+		picker.addEventListener( 'mouseup', function( event ) {
+			event.stopPropagation()
+		} )
+		
+		lightbox.open()
+		lightbox.callback = function() {
+			picker.remove()
+		}
+
+		let input = document.getElementById( `-fld-ic` ).getBoundingClientRect()
+		picker.style.top = `${input.y + input.height+3}px`
+		picker.style.right = '0.5rem'
+
+		for ( let [key,icon] of Object.entries(model.icons) ) {
+			let button = document.createElement( 'a' )
+			button.setAttribute( 'class', `button-${key} ${key === selected ? 'selected' : ''}` )
+			button.innerHTML = `<img src="assets/${icon.asset}"> ${icon.name}`
+			picker.appendChild( button )
+
+			button.addEventListener( 'click', function( event ) {
+				for ( let shape of selection.ids() ) {
+					let mod = {}
+					mod['ic'] = key
 					undo.pushShape( model.updateShape( shape, mod ) )
 				}
 				lightbox.close()
