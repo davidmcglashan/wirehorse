@@ -394,6 +394,12 @@ const glass = {
 		let elems = document.elementsFromPoint( event.pageX, event.pageY )
 		for ( let elem of elems ) {
 			if ( elem.classList.contains( 'entity' ) ) {
+				// Ignore this element if it's locked
+				let id = elem.getAttribute( 'id' )
+				if ( model.isLocked( id ) ) {
+					continue
+				}
+
 				selection.add( elem, { multi: event.shiftKey } )
 				return
 			}
