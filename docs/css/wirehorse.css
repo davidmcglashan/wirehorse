@@ -104,93 +104,100 @@ a {
 	}
 }
 
-
+/* Glass sits on top of the UI and interacts with the mouse. */
 #-glass {
 	position: absolute;
 	inset: 0;
-}
-	#-glass.ready {
+
+	/* Various cursors for various application states. */
+	&.ready {
 		cursor: grab;
 	}
-	#-glass.ready-xhair {
+	&.ready-xhair {
 		cursor: crosshair;
 	}
-	#-glass.dragging {
+	&.dragging {
 		cursor: grabbing;
 	}
-	#-glass.caret-ns {
+	&.caret-ns {
 		cursor: ns-resize;
 	}
-	#-glass.caret-ew {
+	&.caret-ew {
 		cursor: ew-resize;
 	}
-	#-glass.caret-nwse {
+	&.caret-nwse {
 		cursor: nwse-resize;
 	}
-	#-glass.caret-nesw {
+	&.caret-nesw {
 		cursor: nesw-resize;
 	}
-	#-glass #-caret {
-		position: absolute;
-		min-width: 24px;
-		min-height: 24px;
-		border: 3px solid rgb(51, 102, 204);
-		border-radius: 1rem;
-		background-color: rgba(51, 102, 204,0.5);
-	}
-	#-glass input,
-	#-glass textarea {
+
+	/* Sometimes there are form elements on glass for getting user input */
+	& input,
+	& textarea {
 		position: absolute;
 		min-width: 24rem;
 	}
+}
 
+/* Drag Rect is used when the user is drawing on the screen to select shapes ... */
 #-drag-rect.select {
 	background-color: rgba(0,0,0,0.25);
 	border: 1px solid #666;
 	position: absolute;
-}
-	#-drag-rect.entity-rec {
+
+	/* ... or add a new rectangle */
+	&.entity-rec {
 		background-color: #fff;;
 	}
+}
 
+/* Toolbar is pinned to the top of the screen and lays out horizontally. */
 #-toolbar {
-	font-family: "Karla", sans-serif;
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
-	padding: 0.1rem 1rem 0.1rem 1rem;
 	background-color: #f0f0f0;
+	font-family: "Karla", sans-serif;
+	
+	padding: 0.1rem 1rem 0.1rem 1rem;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-}
-	#-toolbar > div {
+
+	& > div {
 		display: flex;
 		gap: 1rem;
 	}
-	#-toolbar img {
+	& img {
 		max-width: 1.5rem;
 		vertical-align: middle;
 		margin-top: -0.2rem;
 	}
-	#-toolbar > div.buttons {
+
+	/* Buttons is the area top-right with some image buttons in */
+	& > div.buttons {
 		gap: 0.25rem;
+
+		/* Style the <a> to look and behave like buttons. */
+		& a {
+			padding: 0.4rem 0.25rem 0.25rem 0.25rem;
+			border-radius: 8px;
+			
+			&.disabled {
+				opacity:0.25;
+			}
+			&:hover {
+				background-color: #ccc;
+			}
+			&:hover.disabled {
+				background-color: unset;
+				cursor: not-allowed;
+			}
+		}
 	}
-	#-toolbar .buttons a {
-		padding: 0.4rem 0.25rem 0.25rem 0.25rem;
-		border-radius: 8px;
-	}
-	#-toolbar .buttons a.disabled {
-		opacity:0.25;
-	}
-	#-toolbar .buttons a:hover {
-		background-color: #ccc;
-	}
-	#-toolbar .buttons a:hover.disabled {
-		background-color: unset;
-		cursor: not-allowed;
-	}
+}
 
 #-rename-input {
 	position: absolute;
@@ -198,58 +205,70 @@ a {
 	left: 32px;
 }
 
-#-title {
-	color: black;
-}
-
+/* The UI used to search for and add new shpaes to the canvas. */
 #-search-dropdown {
 	position: absolute;
 	top: 2.5rem;
 	width: 20rem;
+
+	/* Search list is the long list of shapes and icons. */
+	& #-search-list {
+		top: 1.2rem;
+		max-height: 35rem;
+		margin-top: 0.5rem;
+		overflow: hidden scroll;
+		border-radius: 8px;
+		box-shadow: 0px 4px 8px rgba(0,0,0,0.25);
+		background-color: white;
+		border: 1px solid #ddd;
+		font-family: "Karla", sans-serif;
+		padding-inline-start: 0;
+		list-style-type: none;
+		display: flex;
+		flex-direction: column;
+
+		/* Styling for entries in the list */
+		& li {
+			position: relative;
+			& a {
+				display: block;
+				padding: 0.5rem;
+				text-decoration: none;
+				color: #000;
+
+				&:hover,:focus {
+					background-color: #36c;
+					color: #fff;
+					text-decoration: underline;
+					
+					& img {
+						filter: invert()
+					}
+				}
+			}
+
+			/* Icon previews are pinned to the right of the entry */
+			& img {
+				position: absolute;
+				right: 0.25rem;
+				top: 0.25rem;
+				max-width: 1.5rem;
+			}
+			&.selected {
+				outline: none;
+				& a {
+					background-color: #36c;
+					color: #fff;
+					text-decoration: underline;
+				}
+				& img {
+					filter: invert()
+				}
+			}
+		}
+	}
 }
 
-#-search-list {
-	font-family: "Karla", sans-serif;
-	padding-inline-start: 0;
-	border: 1px solid #ddd;
-	list-style-type: none;
-	background-color: white;
-	top: 1.2rem;
-	border-radius: 8px;
-	box-shadow: 0px 4px 8px rgba(0,0,0,0.25);
-	display: flex;
-	flex-direction: column;
-	margin-top: 0.5rem;
-	overflow: hidden scroll;
-	max-height: 35rem;
-}
-	#-search-list a {
-		display: block;
-		padding: 0.5rem;
-		text-decoration: none;
-		color: #000;
-	}
-	#-search-list li {
-		position: relative;
-	}
-		#-search-list li img {
-			position: absolute;
-			right: 0.25rem;
-			top: 0.25rem;
-			max-width: 1.5rem;
-		}
-	#-search-list li.selected {
-		outline: none;
-	}
-		#-search-list li.selected a, #-search-list a:hover, #-search-list a:focus {
-			background-color: #36c;
-			color: #fff;
-			text-decoration: underline;
-		}
-		#-search-list a:hover img,
-		#-search-list li.selected img {
-			filter: invert()
-		}
 #-main-dropdown {
 	position: absolute;
 	top: 2rem;
