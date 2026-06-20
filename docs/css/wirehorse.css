@@ -166,6 +166,11 @@ a {
 	justify-content: space-between;
 	align-items: center;
 
+	/* Make the title black. */
+	& #-title {
+		color: #000;
+	}
+
 	& > div {
 		display: flex;
 		gap: 1rem;
@@ -333,6 +338,9 @@ a {
 	}
 	#-main-dropdown .credits img {
 		max-width: 1.25rem;
+	}
+	#-main-dropdown .credits ul {
+		display: flex;
 	}
 
 ul#-wireframes {

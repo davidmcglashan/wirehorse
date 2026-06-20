@@ -9,6 +9,7 @@ Wireframing from the horse stable
 * New street map component
 * Icon components can have their icon changed _in situ_
 * Locked elements are fully ignored by selection clicks
+* LocalStorage usage is shown on the menu
 
 ### v0.3.3
 * New compass button to reset the display in terms of scroll and zoom

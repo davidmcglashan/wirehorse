@@ -9,10 +9,14 @@ const io = {
 		list.innerHTML = ''
 
 		let ret = null
+		let size = 0
 
 		// Spelunk localStorage for all the saved wireframes and give each one
 		// a link in the list.
 		for ( let key of Object.keys( localStorage ).sort() ) {
+			size += key.length
+			size += localStorage[key].length
+
 			if ( key.startsWith( 'wh_' ) ) {
 				let li = document.createElement( 'li' )
 				list.appendChild( li )
@@ -35,6 +39,10 @@ const io = {
 			list.appendChild( li )
 			li.innerHTML = 'None'
 		}
+
+		// Do something with that size calculation
+		let elem = document.getElementById( '-usage' )
+		elem.innerHTML = `Using ${size} of 5M chars (${parseInt(size/5000000*100)}%)`
 
 		return ret
 	},

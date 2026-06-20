@@ -11,13 +11,13 @@ backlog
 - only show drag handles for directions you can drag in
 - rectangle with the X through it that can be colour changed
 
-- show usage of localstorage on the main dropdown
 - export view to get all the localstorage contents
 - groups of components
   - select one, select all - just need groups with their members described in the model
 - export to clipboard as a PNG
   - everything
   - selected items
+- text parsing e.g. this is *bold*, [hyperlink], {#ddd}color{#}
 - change x/y in a clever way when pasting
 - can you hook cut/copy/paste into the apple menu?
 - insert a component from file ...
@@ -36,16 +36,13 @@ backlog
 - keyboard+drag to quickly add 
   - text with 't'
   - labels with 'l'
-- lots of the little strings should be constants- Elements need ...
+- lots of the little strings should be constants
+- Elements need ...
   - reasonable declared widths
   - Redo the alignment features to consider the DOM elems which should all have correctly formed dimensions
   - Horizontal and vertical arrange features - space & distribute
 - alignment guides
 - inset guides
-- text parsing e.g. this is *bold*, [hyperlink], {#ddd}color{#}
-- option+double-click a shape to recentre and re-zoom the display around it
-- proper tracking of min values to stop shapes become zero width/height
-- icon and label
 - inject version
 - inject (c) date
 - alias a field on the palette to change the label name e.g. {'bg': 'Colour'}
