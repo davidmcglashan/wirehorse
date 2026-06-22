@@ -42,7 +42,8 @@ const io = {
 
 		// Do something with that size calculation
 		let elem = document.getElementById( '-usage' )
-		elem.innerHTML = `Using ${size} of 5M chars (${parseInt(size/5000000*100)}%)`
+		elem.innerHTML = `Storage ${parseInt(size/5000000*100)}%`
+		elem.title = `${size} of 5M chars`
 
 		return ret
 	},
