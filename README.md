@@ -3,6 +3,9 @@ Wireframing from the horse stable
 
 ## Version history
 
+### v0.3.5
+* New shape: Horizontal slider 
+
 ### v0.3.4
 * Shapes can be locked to prevent edits
 * Palette now handles multi-selection form UI for the common controls

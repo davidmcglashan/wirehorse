@@ -118,10 +118,11 @@ ul.dropdown,
 	}
 
 /* ==================================================== */
-/* Tab bar and horizontal rule */
+/* Tab bar, slider, and horizontal rule all have lines! */
 
 .entity-tab,
 .entity-tab ul li.selected,
+.entity-sld,
 .entity-hr {
 	border-style: solid;
 	border-width: 0px 0px 5px 0px;
@@ -139,6 +140,20 @@ ul.dropdown,
 	border-image-width: 0 5px 0 0;
 	border-image-outset: 0;
 }
+
+/* ==================================================== */
+/* Horizontal slider */
+.entity-sld .slider {
+	background-image: url('../assets/solid-circle.svg');
+	background-size: contain;
+	width: 1rem;
+	height: 1rem;
+	position: absolute;
+	top: -0.35rem;
+}
+
+/* ==================================================== */
+/* Tabs bar */
 
 .entity-tab ul {
 	list-style-type: none;

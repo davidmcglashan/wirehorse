@@ -44,6 +44,10 @@ const palette = {
 			fields: [ 'x','y','w' ],
 			toolbars: ['arrange','tools','font']
 		},
+		sld: {
+			fields: [ 'x','y','w','val' ],
+			toolbars: ['arrange','tools']
+		},
 		tbl: {
 			fields: [ 'x','y','w' ],
 			toolbars: ['arrange','tools','font']
@@ -58,7 +62,7 @@ const palette = {
 		},
 	},
 
-	fields: [ 'x','y','w','h','ic','bg','co','bo','fz','fb','fi','fu','fs','ha','va','op' ],
+	fields: [ 'x','y','w','h','ic','bg','co','bo','fz','fb','fi','fu','fs','ha','va','op','val' ],
 	toolbars: ['arrange','tools','text-align','font'],
 	multiToolbars: [ 'shape-align' ],
 	

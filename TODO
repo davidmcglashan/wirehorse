@@ -11,7 +11,14 @@ backlog
 - only show drag handles for directions you can drag in
 - rectangle with the X through it that can be colour changed
 
+- fancy arrows that actually "simple" SVG curves
+  - xywh define the bounding rect where the SVG is drawn
+  - start and end are independent %age co-ords inside the rect
+  - needs two more drag handles to move the curve descriptors
+  - clever drag mechanics to resize and re-position the box
+
 - export view to get all the localstorage contents
+  - needs a corresponding import
 - groups of components
   - select one, select all - just need groups with their members described in the model
 - export to clipboard as a PNG
@@ -26,11 +33,6 @@ backlog
   - table tools (presets,filters,search,configure) as a component
   - remember recently used and include them in the adder dropdown
 - drag without selecting first
-- fancy arrows
-  - drawn on the glass to always be on top? 
-  - glass is a canvas, not a <div>
-  - this might help with the selection do-over
-  - arrows woud be added to an arrows collection, not a shapes one?
 - Cmd+R rects to account for scale
 - selection tools e.g. Cmd+left/right to focus on a shape
 - keyboard+drag to quickly add 

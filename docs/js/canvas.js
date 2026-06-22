@@ -444,10 +444,13 @@ const canvas = {
 		},
 
 		/**
-		 * Tabs have a hard-coded grey border class.
+		 * Tabs and sliders have a hard-coded grey border class.
 		 */
 		tab: ( shape ) => {
 			shape.elem.classList.add( `hr-g3` )
+		},
+		sld: ( shape ) => {
+			shape.elem.classList.add( `hr-g4` )
 		},
 
 		/**
@@ -520,6 +523,10 @@ const canvas = {
 			},
 			map: ( shape, safe ) => {
 				return ''
+			},
+			sld: ( shape, safe ) => {
+				let val = shape.val ? shape.val : 30
+				return `<div class="slider" style="left:${val}%;"></div>`
 			},
 			tab: ( shape, safe ) => {
 				let lines = shape.tx.split('\n')

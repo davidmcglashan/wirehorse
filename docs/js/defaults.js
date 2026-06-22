@@ -162,6 +162,13 @@ const defaults = {
 				bo: 'bk'
 			}
 		},{   
+			name: 'Horizontal slider',
+			model: {
+				ty: 'sld',
+				w: 256,
+				val: 30
+			}
+		},{   
 			name: 'Tabs',
 			model: {
 				ty: 'tab',
