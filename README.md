@@ -5,6 +5,7 @@ Wireframing from the horse stable
 
 ### v0.3.5
 * New shape: Horizontal slider 
+* Added 21 new icons
 
 ### v0.3.4
 * Shapes can be locked to prevent edits
