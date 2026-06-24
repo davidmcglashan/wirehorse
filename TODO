@@ -4,6 +4,13 @@ bugs
 backlog
 --------
 
+- There might be a locked object here
+- Lcr on text elements (rect has it - paras are weird because <br>s)
+- export view to get all the localstorage contents
+  - needs a corresponding import
+- text parsing e.g. this is *bold*, [hyperlink], {#ddd}color{#}
+- change x/y in a clever way when pasting
+
 - handle the mouse leaving the window mid-drag
 	- push scroll
 	- balsamiq follows you out of the window and keeps moving the items
@@ -17,15 +24,11 @@ backlog
   - needs two more drag handles to move the curve descriptors
   - clever drag mechanics to resize and re-position the box
 
-- export view to get all the localstorage contents
-  - needs a corresponding import
 - groups of components
   - select one, select all - just need groups with their members described in the model
 - export to clipboard as a PNG
   - everything
   - selected items
-- text parsing e.g. this is *bold*, [hyperlink], {#ddd}color{#}
-- change x/y in a clever way when pasting
 - can you hook cut/copy/paste into the apple menu?
 - insert a component from file ...
   - e.g. zatpark window, modal window

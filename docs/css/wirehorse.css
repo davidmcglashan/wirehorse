@@ -399,6 +399,7 @@ ul#-wireframes {
 		aspect-ratio: 1;
 		height: 1.5rem;
 		width: 1.5rem;
+		border: 0;
 	}
 	#-palette div input[data-type="icon"]:hover {
 		background-color: #fff;
