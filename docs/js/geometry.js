@@ -22,6 +22,25 @@ var geometry = {
 	},
 
 	/**
+     * Given a point {x:100,y:100} will return a point where the x and y are modded for
+	 * the corresponding canvas position.
+ 	 */
+	viewportXYtoCanvas: ( point ) => {
+		let rect = {}
+
+		// Ratio the passed in point to the client width
+		let xr = point.x / document.documentElement.clientWidth
+		let yr = point.y / document.documentElement.clientHeight
+
+		// Get the viewport dims and scale its width and height by the ratios.
+		let viewport = geometry.viewportRect()
+		rect.x = viewport.x + viewport.w * xr
+		rect.y = viewport.y + viewport.h * yr
+
+		return rect
+	},
+
+	/**
 	 * Given an array of shape ids returns a rectangle that describes its bounds
 	 */
 	bounds: ( ids ) => {

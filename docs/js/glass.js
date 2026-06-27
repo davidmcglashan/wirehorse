@@ -323,6 +323,7 @@ var glass = {
 			
 			// Are we drawing a rectangle?
 			else if ( glass.drag.mode === glass.dragmodes.DRAW_RECTANGLE ) {
+				// The new shape's basics are easy.
 				let newShape = {
 					ty: 'rec',
 					bg: 'wh',
@@ -331,18 +332,23 @@ var glass = {
 					ha: 'c',
 					va: 'm',
 					tx: '',
-					x: ( event.pageX < glass.drag.x ? event.pageX : glass.drag.x ) - model.meta('ox'),
-					y: ( event.pageY < glass.drag.y ? event.pageY : glass.drag.y ) - model.meta('oy'),
 					w: ( event.pageX < glass.drag.x ? (glass.drag.x - event.pageX)/scale : (event.pageX - glass.drag.x)/scale ) - 18,
 					h: ( event.pageY < glass.drag.y ? (glass.drag.y - event.pageY)/scale : (event.pageY - glass.drag.y)/scale ) - 18
 				}
+
+				// Use geometry to workout where the mouse drag stopped on the canvas.
+				let point = geometry.viewportXYtoCanvas( { x: glass.drag.x, y: glass.drag.y } )
+				newShape.x = point.x
+				newShape.y = point.y
+
+				// Push it into the model in an undoable way.
 				model.addShape( newShape )
 				undo.pushBulkShapes( undo.types.ADD_NEW_SHAPES, [ newShape ] )
-				glass.drag.ready = false
-
+				
 				// Update the UI to select the new shape
 				selection.add( newShape.elem )
 				glass.dragRect.setAttribute( 'class', 'hidden')
+				glass.drag.ready = false
 			}
 
 			// Are we selecting lots of shapes with a big rectangle?
