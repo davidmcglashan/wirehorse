@@ -26,7 +26,7 @@ var palette = {
 		},
 		lbl: {
 			fields: [ 'x','y','w','co' ],
-			toolbars: ['arrange','tools','font'],
+			toolbars: ['arrange','tools','font','text-align'],
 		},
 		bcb: {
 			fields: [ 'x','y' ],

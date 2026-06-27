@@ -159,11 +159,11 @@ var model = {
 		// Do something with the meta, e.g. page title
 		model.updateMeta ( current.mt, { dontSave:true } )
 
-		// Iterate the shapes via elementCreator to put them into the DOM
+		// Iterate the shapes via element creator to put them into the DOM
 		model.sh = current.sh
 		model.sh.forEach( shape => {
-			canvas.elementCreator.make( shape )
-			canvas.elementCreator.style( shape )
+			element.make( shape )
+			element.style( shape )
 		} )
 	},
 

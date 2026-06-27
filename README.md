@@ -3,8 +3,12 @@ Wireframing from the horse stable
 
 ## Version history
 
+### v0.4.1
+* Text elements now properly support the left, centre, and right alignment options
+
 ### v0.4
 * Paste now places new shapes in the centre of the viewport
+* Considerable script loading refactor
 
 ### v0.3.5
 * New shape: Horizontal slider 
