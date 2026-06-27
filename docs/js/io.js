@@ -77,7 +77,7 @@ const io = {
 				}
   			}, 
 			err => {
-				console.err( err )
+				console.log( err )
   			}
 		) 
 	},

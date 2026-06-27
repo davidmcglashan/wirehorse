@@ -3,6 +3,9 @@ Wireframing from the horse stable
 
 ## Version history
 
+### v0.3.6
+* Paste now places new shapes in the centre of the viewport
+
 ### v0.3.5
 * New shape: Horizontal slider 
 * Added 21 new icons

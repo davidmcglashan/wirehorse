@@ -4,12 +4,15 @@ bugs
 backlog
 --------
 
+- can i write a wirehorse.js that 
+  - imports and inits all the other js files?
+  - injects the version
+  - injects the date
 - There might be a locked object here
-- Lcr on text elements (rect has it - paras are weird because <br>s)
+- left/centre/right on text elements (rect has it - paras are weird because <br>s)
+- text parsing e.g. this is *bold*, [hyperlink], {#ddd}color{#}
 - export view to get all the localstorage contents
   - needs a corresponding import
-- text parsing e.g. this is *bold*, [hyperlink], {#ddd}color{#}
-- change x/y in a clever way when pasting
 
 - handle the mouse leaving the window mid-drag
 	- push scroll
@@ -24,6 +27,8 @@ backlog
   - needs two more drag handles to move the curve descriptors
   - clever drag mechanics to resize and re-position the box
 
+- probably some mileage and re-organising a lot of the code and functions in the 'wrong' place
+- robustness around adding new shapes e.g. not finding the defaults or functions
 - groups of components
   - select one, select all - just need groups with their members described in the model
 - export to clipboard as a PNG
@@ -48,8 +53,6 @@ backlog
   - Horizontal and vertical arrange features - space & distribute
 - alignment guides
 - inset guides
-- inject version
-- inject (c) date
 - alias a field on the palette to change the label name e.g. {'bg': 'Colour'}
 
 meta

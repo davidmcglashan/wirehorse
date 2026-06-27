@@ -278,9 +278,10 @@ const toolbar = {
 
 		// It needs an x and a y that'll put it in the middle of the current
 		// visible viewport.
-		newShape.x = ( (document.documentElement.clientWidth/2) - model.meta( 'ox' ) )
-		newShape.y = ( (document.documentElement.clientHeight/2) - model.meta( 'oy' ) )
-
+		let rect = geometry.viewportRect()
+		newShape.x = rect.cx - (newShape.w|0)/2
+		newShape.y = rect.cy - (newShape.h|0)/2
+		
 		// Now send that to the model
 		model.addShape( newShape )
 		selection.add( newShape.elem )
