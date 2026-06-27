@@ -5,6 +5,7 @@ Wireframing from the horse stable
 
 ### v0.4.1
 * Text elements now properly support the left, centre, and right alignment options
+* Text parsing e.g. this is {b bold}, {i italic} {#ddd color}
 
 ### v0.4
 * Paste now places new shapes in the centre of the viewport

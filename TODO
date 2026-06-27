@@ -4,7 +4,6 @@ bugs
 backlog
 --------
 
-- text parsing e.g. this is *bold*, [hyperlink], {#ddd}color{#}
 - export view to get all the localstorage contents
   - needs a corresponding import
 
@@ -21,6 +20,7 @@ backlog
   - needs two more drag handles to move the curve descriptors
   - clever drag mechanics to resize and re-position the box
 
+- super wide tabs and rules get a space in the middle - probably need their own scribbley SVG
 - entity.css and class="entity" but shape and element elsehwere?
 - probably some mileage and re-organising a lot of the code and functions in the 'wrong' place
 - robustness around adding new shapes e.g. not finding the defaults or functions

@@ -161,6 +161,6 @@ const element = {
 	},
 
 	safeInnerHTML: ( shape ) => {
-		shape.elem.innerHTML = innerHTML[shape.ty]( shape, innerHTML.safe ) 
+		shape.elem.innerHTML = innerHTML[shape.ty]( shape ) 
 	}
 };
