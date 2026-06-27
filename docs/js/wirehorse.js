@@ -3,7 +3,7 @@ var wirehorse = {
 	loadCount: 0,
 
 	// The current software version.
-	version: 'v2.3.5',
+	version: 'v0.3.5',
 
 	// These are the scripts that need to be loaded.
 	scripts: [
