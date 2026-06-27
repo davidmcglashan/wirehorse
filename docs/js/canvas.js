@@ -1,4 +1,4 @@
-const canvas = {
+var canvas = {
 	elem: null,
 
 	ha: {

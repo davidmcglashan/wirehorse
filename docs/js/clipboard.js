@@ -1,4 +1,4 @@
-const clipboard = {
+var clipboard = {
 	/**
 	 * Prepare the selection of shape IDs for writing to the clipboard
 	 */

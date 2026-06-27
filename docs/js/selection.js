@@ -1,4 +1,4 @@
-const selection = {
+var selection = {
 	storage: [],
 	listeners: [],
 	lockCount: null,

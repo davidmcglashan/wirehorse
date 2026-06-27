@@ -14,19 +14,7 @@
 		<link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Redacted+Script:wght@300;400;700&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="css/wirehorse.css">
 		<link rel="stylesheet" href="css/entity.css">
-		<script type="text/javascript" src="js/lightbox.js"></script>
-		<script type="text/javascript" src="js/defaults.js"></script>
-		<script type="text/javascript" src="js/model.js"></script>
-		<script type="text/javascript" src="js/toolbar.js"></script>
-		<script type="text/javascript" src="js/editor.js"></script>
-		<script type="text/javascript" src="js/glass.js"></script>
-		<script type="text/javascript" src="js/selection.js"></script>
-		<script type="text/javascript" src="js/canvas.js"></script>
-		<script type="text/javascript" src="js/undo.js"></script>
-		<script type="text/javascript" src="js/palette.js"></script>
-		<script type="text/javascript" src="js/io.js"></script>
-		<script type="text/javascript" src="js/clipboard.js"></script>
-		<script type="text/javascript" src="js/geometry.js"></script>
+		<script type="text/javascript" src="js/wirehorse.js"></script>
 	</head>
 	<body>
 		<div id="-canvas"></div>
@@ -199,9 +187,9 @@
 					<img src="assets/potion-svgrepo-com.svg">
 					<ul>
 						<li>
-							<strong>Wirehorse v0.3.6-latest</strong> 
+							<strong>Wirehorse <span id="-version"></span></strong> 
 							<br>
-							&copy; Copyright 2026 David McGlashan
+							&copy; Copyright <span id="-year"></span> David McGlashan
 						</li>
 						<li>
 							<a href="https://wirehorse.mcglashan.net/">wirehorse.mcglashan.net</a>
@@ -226,15 +214,7 @@
 		</div>
 		<input type="text" id="-rename-input" class="hidden">
 		<script>
-			editor.init()
-			defaults.init()
-			palette.init()
-			glass.init()
-			toolbar.init()
-			canvas.init()
-			model.parse()
-			selection.init()
-			io.init()
+			wirehorse.go()
 		</script>
 	</body>
 </html>

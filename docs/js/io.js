@@ -1,4 +1,4 @@
-const io = {
+var io = {
 	/**
 	 * Populates the switcher in the main dropdown with all the wireframes. Returns
 	 * the name of the first wireframe alphabetically.

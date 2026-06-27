@@ -1,4 +1,4 @@
-const glass = {
+var glass = {
 	elem: null,
 	dragRect: null,
 	canvas: null,

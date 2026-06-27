@@ -4,10 +4,6 @@ bugs
 backlog
 --------
 
-- can i write a wirehorse.js that 
-  - imports and inits all the other js files?
-  - injects the version
-  - injects the date
 - There might be a locked object here
 - left/centre/right on text elements (rect has it - paras are weird because <br>s)
 - text parsing e.g. this is *bold*, [hyperlink], {#ddd}color{#}

@@ -1,4 +1,4 @@
-const editor = {
+var editor = {
 	elem: null,
 	textarea: null,
 	canOpen: true,

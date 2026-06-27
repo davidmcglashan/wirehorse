@@ -1,4 +1,4 @@
-const geometry = {
+var geometry = {
 	/**
 	 * Returns are rectangle shape that describes the canvas pixels ...
 	 * rect.x & rect.y - pixel address of the top-left corner

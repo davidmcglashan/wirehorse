@@ -1,4 +1,4 @@
-const model = {
+var model = {
 	mt: {},
 	sh: [],
 	metadataListeners: [],

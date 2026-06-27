@@ -1,4 +1,4 @@
-const undo = {
+var undo = {
 	// History is where changes are stored in chronological order. 
 	history: [],
 

@@ -1,4 +1,4 @@
-const palette = {
+var palette = {
 	config: {
 		rec: {
 			fields: [ 'x','y','w','h','bg','co','bo','op' ],

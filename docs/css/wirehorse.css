@@ -319,6 +319,11 @@ a {
 		color: #999;
 		display: block;
 	}
+	#-main-dropdown span#-version,
+	#-main-dropdown span#-year {
+		color: unset;
+		display: unset;
+	}
 	#-main-dropdown img {
 		max-width: 2rem;
 	}

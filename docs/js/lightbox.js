@@ -1,4 +1,4 @@
-const lightbox = {
+var lightbox = {
 	callback: null,
 
 	open: () => {

@@ -1,4 +1,4 @@
-const toolbar = {
+var toolbar = {
 	searchDropdown: null,
 	searchInput: null,
 	searchList: null,
