@@ -3,7 +3,7 @@ Wireframing from the horse stable
 
 ## Version history
 
-### v0.3.6
+### v0.4
 * Paste now places new shapes in the centre of the viewport
 
 ### v0.3.5
