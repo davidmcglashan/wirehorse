@@ -16,7 +16,7 @@ Wireframing from the horse stable
 * New shape: Horizontal slider 
 * Added 21 new icons
 
-### v0.3.4
+### v0.3.4
 * Shapes can be locked to prevent edits
 * Palette now handles multi-selection form UI for the common controls
 * New street map component
@@ -24,14 +24,14 @@ Wireframing from the horse stable
 * Locked elements are fully ignored by selection clicks
 * LocalStorage usage is shown on the menu
 
-### v0.3.3
+### v0.3.3
 * New compass button to reset the display in terms of scroll and zoom
 * Compass will focus the selection or everything if Shift is held when pressing
 * New icons: thumbs up and down
 * Cut, copy and paste into the clipboard
 * New shapes: vertical rule, horizontal scrollbar
 
-### v0.3.2
+### v0.3.2
 * Editors can be submitted with Shift+Enter
 * Cmd-D duplicate now retains the z-index order
 * New icons: trash, id card, copy
