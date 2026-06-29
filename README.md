@@ -12,6 +12,7 @@ Wireframing from the horse stable
 * Comboboxes now ignore blank lines in their model when rendering
 * Text area content editor can now be resized
 * Paragraphs can be added quickly with T+mouse drag
+* Labels can be added quickly with L+mouse click
 
 ### v0.4
 * Paste now places new shapes in the centre of the viewport

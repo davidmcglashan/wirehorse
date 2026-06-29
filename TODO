@@ -4,6 +4,8 @@ bugs
 backlog
 --------
 
+- Add more components with key+click and tidy up the repetitive code!
+
 - export view to get all the localstorage contents
   - needs a corresponding import
 - handle the mouse leaving the window mid-drag
@@ -38,7 +40,6 @@ backlog
   - remember recently used and include them in the adder dropdown
 - drag without selecting first
 - selection tools e.g. Cmd+left/right to focus on a shape
-- keyboard+drag to quickly add labels with 'l'
 - lots of the little strings should be constants
 - Elements need ...
   - reasonable declared widths

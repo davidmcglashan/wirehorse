@@ -20,8 +20,9 @@ var glass = {
 		RESIZE_NW: 		9,
 
 		DRAW_RECTANGLE:	10,
-		DRAW_TEXT:		11,
-		SELECT_SHAPES:	12
+		DRAW_PARAGRAPH:	11,
+		DRAW_LABEL:		12,
+		SELECT_SHAPES:	13
 	},
 
 	// Glass is responsible for scroll drags, which we track with this object.
@@ -228,7 +229,7 @@ var glass = {
 			} 
 
 			// Are we drawing or selecting something?
-			else if ( [ glass.dragmodes.DRAW_RECTANGLE, glass.dragmodes.DRAW_TEXT, glass.dragmodes.SELECT_SHAPES ].includes( glass.drag.mode ) ) {
+			else if ( [ glass.dragmodes.DRAW_RECTANGLE, glass.dragmodes.DRAW_PARAGRAPH, glass.dragmodes.SELECT_SHAPES ].includes( glass.drag.mode ) ) {
 				if ( glass.drag.mode === glass.dragmodes.SELECT_SHAPES ) {
 					glass.dragRect.setAttribute( 'class', 'select' )
 				} else {
@@ -314,7 +315,7 @@ var glass = {
 			glass.drag.moving = false
 
 			// Scroll drags store the new offset values in the model meta.
-			if ( glass.drag.mode === 0 ) {
+			if ( glass.drag.mode === glass.dragmodes.MOVE_CANVAS ) {
 				glass.elem.setAttribute( 'class', 'ready' )
 				model.updateMeta( { 
 					ox: model.meta('ox') + ( event.pageX - glass.drag.x ) / scale, 
@@ -325,7 +326,7 @@ var glass = {
 			// Are we drawing a rectangle?
 			else if ( 
 				glass.drag.mode === glass.dragmodes.DRAW_RECTANGLE 
-				|| glass.drag.mode === glass.dragmodes.DRAW_TEXT
+				|| glass.drag.mode === glass.dragmodes.DRAW_PARAGRAPH
 			) {
 				let newShape = null
 
@@ -408,6 +409,37 @@ var glass = {
 				}
 				undo.pushMulti( changes )
 			}
+
+			// Restore the selection and return without invoking a further selection.
+			if ( selection.yes() ) {
+				glass.selectionChanged( selection.ids() )
+			}
+			return
+		}
+
+		// If L is being held down we should pop a label object in at the mouse position
+		if ( glass.drag.ready && glass.drag.mode === glass.dragmodes.DRAW_LABEL ) {
+			let newShape = {
+				ty: 'lbl',
+				co: 'bk',
+				tx: 'New label',
+				fz: 11,
+			}
+
+			// Use geometry to workout where the mouse drag stopped on the canvas.
+			let point = geometry.viewportXYtoCanvas( { x: glass.drag.x, y: glass.drag.y } )
+			newShape.x = point.x
+			newShape.y = point.y
+
+			// Push it into the model in an undoable way.
+			model.addShape( newShape )
+			undo.pushBulkShapes( undo.types.ADD_NEW_SHAPES, [ newShape ] )
+			
+			// Update the UI to select the new shape
+			selection.add( newShape.elem )
+			glass.dragRect.setAttribute( 'class', 'hidden')
+			glass.elem.setAttribute( 'class', '' )
+			glass.drag.ready = false
 
 			// Restore the selection and return without invoking a further selection.
 			if ( selection.yes() ) {
@@ -506,7 +538,15 @@ var glass = {
 		else if ( event.keyCode === 84 )  {
 			glass.elem.setAttribute( 'class', 'ready-xhair' )
 			glass.selem.classList.add( 'hidden' )
-			glass.drag.mode = glass.dragmodes.DRAW_TEXT
+			glass.drag.mode = glass.dragmodes.DRAW_PARAGRAPH
+			glass.drag.ready = true
+		}
+
+		// 'L' prepares to add a label.
+		else if ( event.keyCode === 76 )  {
+			glass.elem.setAttribute( 'class', 'ready-hand' )
+			glass.selem.classList.add( 'hidden' )
+			glass.drag.mode = glass.dragmodes.DRAW_LABEL
 			glass.drag.ready = true
 		}
 

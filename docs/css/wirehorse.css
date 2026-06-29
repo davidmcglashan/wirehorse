@@ -116,6 +116,9 @@ a {
 	&.ready-xhair {
 		cursor: crosshair;
 	}
+	&.ready-hand {
+		cursor: pointer;
+	}
 	&.dragging {
 		cursor: grabbing;
 	}
