@@ -158,7 +158,15 @@ var innerHTML = {
 		return html
 	},	
 	cmb: ( shape ) => {
-		let lines = shape.tx.split('\n')
+		let ls = shape.tx.split('\n')
+		let lines = []
+
+		for ( let line of ls ) {
+			if ( line.trim().length > 0 ) {
+				lines.push( line )
+			}
+		}
+		
 		let html = `<div class="value">${innerHTML.safe(lines[0])}</div><div class="caret"></div>`
 
 		if ( lines.length > 1 ) {

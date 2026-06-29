@@ -9,6 +9,7 @@ Wireframing from the horse stable
 * 'R'+drag rectangles now position correctly
 * Fixed an issue where the editor stopped invoking
 * Editor can no longer be invoked on entities with no text aspect e.g. icons, rules, sliders, ...
+* Comboboxes now ignore blank lines in their model when rendering
 
 ### v0.4
 * Paste now places new shapes in the centre of the viewport
