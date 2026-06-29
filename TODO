@@ -38,9 +38,7 @@ backlog
   - remember recently used and include them in the adder dropdown
 - drag without selecting first
 - selection tools e.g. Cmd+left/right to focus on a shape
-- keyboard+drag to quickly add 
-  - text with 't'
-  - labels with 'l'
+- keyboard+drag to quickly add labels with 'l'
 - lots of the little strings should be constants
 - Elements need ...
   - reasonable declared widths

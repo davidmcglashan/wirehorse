@@ -11,6 +11,7 @@ Wireframing from the horse stable
 * Editor can no longer be invoked on entities with no text aspect e.g. icons, rules, sliders, ...
 * Comboboxes now ignore blank lines in their model when rendering
 * Text area content editor can now be resized
+* Paragraphs can be added quickly with T+mouse drag
 
 ### v0.4
 * Paste now places new shapes in the centre of the viewport

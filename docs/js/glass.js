@@ -20,7 +20,8 @@ var glass = {
 		RESIZE_NW: 		9,
 
 		DRAW_RECTANGLE:	10,
-		SELECT_SHAPES:	11
+		DRAW_TEXT:		11,
+		SELECT_SHAPES:	12
 	},
 
 	// Glass is responsible for scroll drags, which we track with this object.
@@ -226,12 +227,12 @@ var glass = {
 				glass.elem.setAttribute( 'class', 'dragging' )
 			} 
 
-			// Are we drawing a rectangle?
-			else if ( glass.drag.mode === glass.dragmodes.DRAW_RECTANGLE || glass.drag.mode === glass.dragmodes.SELECT_SHAPES ) {
-				if ( glass.drag.mode === glass.dragmodes.DRAW_RECTANGLE ) {
-					glass.dragRect.setAttribute( 'class', 'entity entity-rec border-bk' )
-				} else {
+			// Are we drawing or selecting something?
+			else if ( [ glass.dragmodes.DRAW_RECTANGLE, glass.dragmodes.DRAW_TEXT, glass.dragmodes.SELECT_SHAPES ].includes( glass.drag.mode ) ) {
+				if ( glass.drag.mode === glass.dragmodes.SELECT_SHAPES ) {
 					glass.dragRect.setAttribute( 'class', 'select' )
+				} else {
+					glass.dragRect.setAttribute( 'class', 'entity entity-rec border-bk' )
 				}
 
 				// Calculate the amount moved since the last call. 
@@ -322,18 +323,37 @@ var glass = {
 			} 
 			
 			// Are we drawing a rectangle?
-			else if ( glass.drag.mode === glass.dragmodes.DRAW_RECTANGLE ) {
+			else if ( 
+				glass.drag.mode === glass.dragmodes.DRAW_RECTANGLE 
+				|| glass.drag.mode === glass.dragmodes.DRAW_TEXT
+			) {
+				let newShape = null
+
 				// The new shape's basics are easy.
-				let newShape = {
-					ty: 'rec',
-					bg: 'wh',
-					co: 'bk',
-					bo: 'bk',
-					ha: 'c',
-					va: 'm',
-					tx: '',
-					w: ( event.pageX < glass.drag.x ? (glass.drag.x - event.pageX)/scale : (event.pageX - glass.drag.x)/scale ) - 18,
-					h: ( event.pageY < glass.drag.y ? (glass.drag.y - event.pageY)/scale : (event.pageY - glass.drag.y)/scale ) - 18
+				if ( glass.drag.mode === glass.dragmodes.DRAW_RECTANGLE ) {
+					newShape = {
+						ty: 'rec',
+						bg: 'wh',
+						co: 'bk',
+						bo: 'bk',
+						ha: 'c',
+						va: 'm',
+						tx: '',
+						w: ( event.pageX < glass.drag.x ? (glass.drag.x - event.pageX)/scale : (event.pageX - glass.drag.x)/scale ) - 18,
+						h: ( event.pageY < glass.drag.y ? (glass.drag.y - event.pageY)/scale : (event.pageY - glass.drag.y)/scale ) - 18
+					}
+				} else {
+					// The new shape's basics are easy.
+					newShape = {
+						ty: 'lbl',
+						co: 'bk',
+						ha: 'l',
+						va: 't',
+						fs: 'yes',
+						tx: globals.lorem,
+						w: ( event.pageX < glass.drag.x ? (glass.drag.x - event.pageX)/scale : (event.pageX - glass.drag.x)/scale ) - 18,
+						h: ( event.pageY < glass.drag.y ? (glass.drag.y - event.pageY)/scale : (event.pageY - glass.drag.y)/scale ) - 18
+					}
 				}
 
 				// Use geometry to workout where the mouse drag stopped on the canvas.
@@ -479,6 +499,14 @@ var glass = {
 			glass.elem.setAttribute( 'class', 'ready-xhair' )
 			glass.selem.classList.add( 'hidden' )
 			glass.drag.mode = glass.dragmodes.DRAW_RECTANGLE
+			glass.drag.ready = true
+		}
+
+		// 'T' prepares to draw a text paragraph.
+		else if ( event.keyCode === 84 )  {
+			glass.elem.setAttribute( 'class', 'ready-xhair' )
+			glass.selem.classList.add( 'hidden' )
+			glass.drag.mode = glass.dragmodes.DRAW_TEXT
 			glass.drag.ready = true
 		}
 
