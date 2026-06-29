@@ -133,19 +133,6 @@ var canvas = {
 	},
 
 	/**
-	 * Delete the selected shapes.
-	 */
-	deleteSelection: () => {
-		let removed = []
-		for ( let elem of selection.storage ) {
-			let id = elem.getAttribute( 'id' )
-			removed.push( model.removeShape( id ) )
-		}
-		// Give undo something to (un)do.
-		undo.pushBulkShapes( undo.types.REMOVE_SHAPES, removed )
-	},
-
-	/**
 	 * Relayering the canvas simply updates the z-index of every child element
 	 * to be its position in the model shapes array.
 	 */
@@ -209,7 +196,7 @@ var canvas = {
 
 		// Backspace for delete!
 		else if ( event.keyCode === 8 ) {
-			canvas.deleteSelection()
+			toolbar.deleteSelection()
 		} 
 
 		// Cmd-C to copy to clipboard

@@ -20,6 +20,7 @@ backlog
   - needs two more drag handles to move the curve descriptors
   - clever drag mechanics to resize and re-position the box
 
+- decide what resetSelection() should do and reinstate it
 - super wide tabs and rules get a space in the middle - probably need their own scribbley SVG
 - entity.css and class="entity" but shape and element elsehwere?
 - probably some mileage and re-organising a lot of the code and functions in the 'wrong' place

@@ -400,6 +400,33 @@ var toolbar = {
 	},
 
 	/**
+	 * Delete the selected shapes.
+	 */
+	deleteSelection: () => {
+		let removed = []
+		for ( let elem of selection.storage ) {
+			let id = elem.getAttribute( 'id' )
+			removed.push( model.removeShape( id ) )
+		}
+		// Give undo something to (un)do.
+		undo.pushBulkShapes( undo.types.REMOVE_SHAPES, removed )
+	},
+
+	/**
+	 * Reset the selected shapes.
+	 */
+	resetSelection: () => {
+		let changes = []
+		for ( let elem of selection.storage ) {
+			let id = elem.getAttribute( 'id' )
+			changes[id] = model.resetShape( id )
+		}
+
+		// Give undo something to (un)do.
+		undo.pushMulti( changes )
+	},
+
+	/**
 	 * Locks the selected shapes, preventing them from being edited or moved until
 	 * unlock is pressed.
 	 */

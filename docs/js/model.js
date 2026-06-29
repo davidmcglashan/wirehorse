@@ -444,6 +444,30 @@ var model = {
 	},
 
 	/**
+	 * Reset a shape to its defaults. This sets all the values back to the ones declared in
+	 * defaults, but keeps its x & y.
+	 */
+	resetShape: ( id ) => {
+		for ( let shape of model.sh ) {
+			if ( shape.id === id ) {
+				for ( let defs of defaults.entries ) {
+					if ( defs.model.ty === shape.ty ) {
+						shape.w = undefined
+						let newMod = { ...defs.model } 
+
+						// Preserve the x and y
+						newMod.x = shape.x
+						newMod.y = shape.y
+
+						// Update the new model and abort the sorry nested loops.
+						return model.updateShape( id, newMod )
+					}
+				}
+			}
+		}
+	},
+
+	/**
 	 * Save the current model into localstorage
 	 */
 	save: () => {
