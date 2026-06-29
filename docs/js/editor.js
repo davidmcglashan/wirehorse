@@ -50,11 +50,15 @@ var editor = {
 		if ( !editor.canOpen ) {
 			return
 		}
-		editor.canOpen = false
-
+		
 		// Only show an editor if there's a single shape selectede.
 		if ( selection.yes() === 1 ) {
 			let shape = model.shape( selection.ids()[0] )
+			if ( globals.noEditor.includes( shape.ty ) ) {
+				return
+			}
+			
+			editor.canOpen = false
 			editor.shapeId = shape['id']
 			lightbox.open()
 			lightbox.callback = editor.save

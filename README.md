@@ -7,6 +7,8 @@ Wireframing from the horse stable
 * Text elements now properly support the left, centre, and right alignment options
 * Text parsing e.g. this is {b bold}, {i italic} {#ddd color}
 * 'R'+drag rectangles now position correctly
+* Fixed an issue where the editor stopped invoking
+* Editor can no longer be invoked on entities with no text aspect e.g. icons, rules, sliders, ...
 
 ### v0.4
 * Paste now places new shapes in the centre of the viewport
