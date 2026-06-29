@@ -6,7 +6,6 @@ backlog
 
 - export view to get all the localstorage contents
   - needs a corresponding import
-- bigger textarea for paragraphs (or tt values over 200 chars)
 - handle the mouse leaving the window mid-drag
 	- push scroll
 	- balsamiq follows you out of the window and keeps moving the items
