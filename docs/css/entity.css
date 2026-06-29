@@ -251,17 +251,20 @@ ul.dropdown,
 /* ==================================================== */
 /* Labels and text paragraphs */
 
+.entity-rec, .entity-lbl {
+	& p {
+		margin-block-start: 0;
+		margin: 0 0 0.03rem 0;
+
+		&.gap {
+			margin: 1rem 0 0 0;
+		}
+	}
+}
+
 .entity-lbl {
 	width: max-content;
 }
-	.entity-lbl p {
-		margin-block-start: 0;
-		margin: 0 0 0.03rem 0;
-	}
-	
-	.entity-lbl p.gap {
-		margin: 1rem 0 0 0;
-	}
 
 /* ==================================================== */
 /* Tables */
