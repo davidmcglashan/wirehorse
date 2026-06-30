@@ -4,7 +4,8 @@ bugs
 backlog
 --------
 
-- Add more components with key+click and tidy up the repetitive code!
+- Add horizontal rules with H+drag
+- Write a better README :)
 
 - export view to get all the localstorage contents
   - needs a corresponding import

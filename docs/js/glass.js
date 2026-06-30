@@ -18,12 +18,37 @@ var glass = {
 		RESIZE_SW: 		7,
 		RESIZE_W: 		8,
 		RESIZE_NW: 		9,
+		
+		SELECT_SHAPES:	10,
 
-		DRAW_RECTANGLE:	10,
-		DRAW_PARAGRAPH:	11,
-		DRAW_LABEL:		12,
-		SELECT_SHAPES:	13
+		DRAW_SHAPE:		11
 	},
+
+	// These are the various shapes that can be added by holding a key and pressing
+	// or moving the mouse.
+	drawShapes: [
+		{
+//			shape: 13, 		// glass.dragmodes.DRAW_LABEL,
+			keyCode: 76, 	// L
+			model: defaults.entries[6].model,
+			drag: false
+		},{
+//			shape: 11, 		// glass.dragmodes.DRAW_RECTANGLE,
+			keyCode: 82, 	// R
+			model: defaults.entries[0].model,
+			drag: true
+		},{
+//			shape: 12, 		// glass.dragmodes.DRAW_PARAGRAPH,
+			keyCode: 84, 	// T
+			model: defaults.entries[8].model,
+			drag: true
+		},{
+//			shape: 14,		// glass.dragmodes.DRAW_BUTTON,
+			keyCode: 66, 	// B
+			model: defaults.entries[1].model,
+			drag: false
+		}
+	],
 
 	// Glass is responsible for scroll drags, which we track with this object.
 	drag: {
@@ -229,11 +254,11 @@ var glass = {
 			} 
 
 			// Are we drawing or selecting something?
-			else if ( [ glass.dragmodes.DRAW_RECTANGLE, glass.dragmodes.DRAW_PARAGRAPH, glass.dragmodes.SELECT_SHAPES ].includes( glass.drag.mode ) ) {
-				if ( glass.drag.mode === glass.dragmodes.SELECT_SHAPES ) {
-					glass.dragRect.setAttribute( 'class', 'select' )
-				} else {
+			else if (  [ glass.dragmodes.DRAW_SHAPE, glass.dragmodes.SELECT_SHAPES ].includes( glass.drag.mode ) ) {
+				if ( glass.drag.shape?.drag  ) {
 					glass.dragRect.setAttribute( 'class', 'entity entity-rec border-bk' )
+				} else {
+					glass.dragRect.setAttribute( 'class', 'select' )
 				}
 
 				// Calculate the amount moved since the last call. 
@@ -323,53 +348,10 @@ var glass = {
 				} )
 			} 
 			
-			// Are we drawing a rectangle?
-			else if ( 
-				glass.drag.mode === glass.dragmodes.DRAW_RECTANGLE 
-				|| glass.drag.mode === glass.dragmodes.DRAW_PARAGRAPH
-			) {
-				let newShape = null
-
-				// The new shape's basics are easy.
-				if ( glass.drag.mode === glass.dragmodes.DRAW_RECTANGLE ) {
-					newShape = {
-						ty: 'rec',
-						bg: 'wh',
-						co: 'bk',
-						bo: 'bk',
-						ha: 'c',
-						va: 'm',
-						tx: '',
-						w: ( event.pageX < glass.drag.x ? (glass.drag.x - event.pageX)/scale : (event.pageX - glass.drag.x)/scale ) - 18,
-						h: ( event.pageY < glass.drag.y ? (glass.drag.y - event.pageY)/scale : (event.pageY - glass.drag.y)/scale ) - 18
-					}
-				} else {
-					// The new shape's basics are easy.
-					newShape = {
-						ty: 'lbl',
-						co: 'bk',
-						ha: 'l',
-						va: 't',
-						fs: 'yes',
-						tx: globals.lorem,
-						w: ( event.pageX < glass.drag.x ? (glass.drag.x - event.pageX)/scale : (event.pageX - glass.drag.x)/scale ) - 18,
-						h: ( event.pageY < glass.drag.y ? (glass.drag.y - event.pageY)/scale : (event.pageY - glass.drag.y)/scale ) - 18
-					}
-				}
-
-				// Use geometry to workout where the mouse drag stopped on the canvas.
-				let point = geometry.viewportXYtoCanvas( { x: glass.drag.x, y: glass.drag.y } )
-				newShape.x = point.x
-				newShape.y = point.y
-
-				// Push it into the model in an undoable way.
-				model.addShape( newShape )
-				undo.pushBulkShapes( undo.types.ADD_NEW_SHAPES, [ newShape ] )
-				
-				// Update the UI to select the new shape
-				selection.add( newShape.elem )
-				glass.dragRect.setAttribute( 'class', 'hidden')
-				glass.drag.ready = false
+			// Are we drawing a shape?
+			else if ( glass.drag.mode === glass.dragmodes.DRAW_SHAPE ) {
+				glass.addShapeWithMouse( event )
+				return
 			}
 
 			// Are we selecting lots of shapes with a big rectangle?
@@ -417,34 +399,9 @@ var glass = {
 			return
 		}
 
-		// If L is being held down we should pop a label object in at the mouse position
-		if ( glass.drag.ready && glass.drag.mode === glass.dragmodes.DRAW_LABEL ) {
-			let newShape = {
-				ty: 'lbl',
-				co: 'bk',
-				tx: 'New label',
-				fz: 11,
-			}
-
-			// Use geometry to workout where the mouse drag stopped on the canvas.
-			let point = geometry.viewportXYtoCanvas( { x: glass.drag.x, y: glass.drag.y } )
-			newShape.x = point.x
-			newShape.y = point.y
-
-			// Push it into the model in an undoable way.
-			model.addShape( newShape )
-			undo.pushBulkShapes( undo.types.ADD_NEW_SHAPES, [ newShape ] )
-			
-			// Update the UI to select the new shape
-			selection.add( newShape.elem )
-			glass.dragRect.setAttribute( 'class', 'hidden')
-			glass.elem.setAttribute( 'class', '' )
-			glass.drag.ready = false
-
-			// Restore the selection and return without invoking a further selection.
-			if ( selection.yes() ) {
-				glass.selectionChanged( selection.ids() )
-			}
+		// Some draw shapes get put in with just a click
+		if ( glass.drag.ready && glass.drag.mode === glass.dragmodes.DRAW_SHAPE && !glass.drag.shape.drag ) {
+			glass.addShapeWithMouse( event )
 			return
 		}
 
@@ -465,6 +422,40 @@ var glass = {
 
 		// Clear the selection if the click wasn't on an entity.
 		selection.clear()
+	},
+
+	/**
+	 * Adds the new shape held in the drag event to the canvas at the mouse location.
+	 */
+	addShapeWithMouse: ( event ) => {
+		let newShape = {...glass.drag.shape.model}
+
+		// Use geometry to workout where the mouse drag stopped on the canvas.
+		let point = geometry.viewportXYtoCanvas( { x: glass.drag.x, y: glass.drag.y } )
+		newShape.x = point.x
+		newShape.y = point.y
+		
+		if ( glass.drag.shape.drag ) {
+			let scale = model.meta( 'sc' )
+			newShape.w = event.pageX < glass.drag.x ? (glass.drag.x - event.pageX)/scale : (event.pageX - glass.drag.x)/scale - 18
+			newShape.h = event.pageY < glass.drag.y ? (glass.drag.y - event.pageY)/scale : (event.pageY - glass.drag.y)/scale - 18
+		}
+
+		// Push it into the model in an undoable way.
+		model.addShape( newShape )
+		undo.pushBulkShapes( undo.types.ADD_NEW_SHAPES, [ newShape ] )
+			
+		// Update the UI to select the new shape
+		selection.add( newShape.elem )
+		glass.dragRect.setAttribute( 'class', 'hidden')
+		glass.elem.setAttribute( 'class', '' )
+		glass.drag.ready = false
+		glass.drag.shape = null
+
+		// Restore the selection and return without invoking a further selection.
+		if ( selection.yes() ) {
+			glass.selectionChanged( selection.ids() )
+		}
 	},
 
 	/**
@@ -526,30 +517,6 @@ var glass = {
 			glass.drag.ready = true
 		}
 
-		// 'R' prepares to draw a rectangle.
-		else if ( event.keyCode === 82 )  {
-			glass.elem.setAttribute( 'class', 'ready-xhair' )
-			glass.selem.classList.add( 'hidden' )
-			glass.drag.mode = glass.dragmodes.DRAW_RECTANGLE
-			glass.drag.ready = true
-		}
-
-		// 'T' prepares to draw a text paragraph.
-		else if ( event.keyCode === 84 )  {
-			glass.elem.setAttribute( 'class', 'ready-xhair' )
-			glass.selem.classList.add( 'hidden' )
-			glass.drag.mode = glass.dragmodes.DRAW_PARAGRAPH
-			glass.drag.ready = true
-		}
-
-		// 'L' prepares to add a label.
-		else if ( event.keyCode === 76 )  {
-			glass.elem.setAttribute( 'class', 'ready-hand' )
-			glass.selem.classList.add( 'hidden' )
-			glass.drag.mode = glass.dragmodes.DRAW_LABEL
-			glass.drag.ready = true
-		}
-
 		// Minus and Plus to adjust the zoom/scale.
 		else if ( event.metaKey && ( event.keyCode === 187 || event.keyCode === 189 ) ) {
 			let scale = model.meta( 'sc' )
@@ -567,6 +534,19 @@ var glass = {
 		else if ( event.metaKey && event.keyCode === 86 ) {
 			clipboard.paste()
 		}
+
+		// Iterate the various drawShapes and see if anything hits there
+		else {
+			for ( let ds of glass.drawShapes ) {
+				if ( event.keyCode === ds.keyCode ) {
+					glass.selem.classList.add( 'hidden' )
+					glass.drag.ready = true
+					glass.drag.mode = glass.dragmodes.DRAW_SHAPE
+					glass.drag.shape = ds
+					glass.elem.setAttribute( 'class', ds.drag ? 'ready-xhair' : 'ready-hand' )
+				}
+			}
+		}
 	},
 
 	/**
@@ -581,6 +561,7 @@ var glass = {
 				glass.selem.classList.remove( 'hidden' )
 			}
 			glass.drag.ready = false
+			glass.drag.shape = null
 		}
 	}
 };

@@ -10,9 +10,9 @@ var defaults = {
 			name: 'Rectangle',
 			model: {
 				ty: 'rec',
-				bg: 'g1',
+				bg: 'wh',
 				co: 'bk',
-				bo: 'g2',
+				bo: 'bk',
 				ha: 'c',
 				va: 'm',
 				tx: '',
@@ -57,6 +57,19 @@ var defaults = {
 				bo: 'g4',
 				w: 200,
 				h: 13
+			}
+		},{
+			name: 'Call to action',
+			model: {
+				ty: 'rec',
+				bg: 'g1',
+				co: 'bk',
+				bo: 'g3',
+				ha: 'c',
+				va: 'm',
+				tx: '',
+				w: 300,
+				h: 100
 			}
 		},{
 			name: 'Checkboxes',

@@ -3,6 +3,9 @@ Wireframing from the horse stable
 
 ## Version history
 
+### v0.4.2
+* Buttons can be added by holding 'b' and clicking the mouse
+
 ### v0.4.1
 * Text elements now properly support the left, centre, and right alignment options
 * Text parsing e.g. this is {b bold}, {i italic} {#ddd color}
