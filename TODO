@@ -12,7 +12,6 @@ backlog
 	- push scroll
 	- balsamiq follows you out of the window and keeps moving the items
 	- it knows when you're above or below as you move around outside the window
-- allow no-width shaped to get a width through handle-draggin
 - rectangle with the X through it that can be colour changed
 - There might be a locked object here
 - fancy arrows that actually "simple" SVG curves

@@ -416,7 +416,10 @@ var model = {
 					// There's a handbrake here to stop key values getting blasted by bad code
 					// elsewhere
 					if ( ['x','y','w','h'].includes(key) && isNaN( value ) ) {
-						continue
+						// The only override of a handbrake is a label setting its width ...
+						if ( shape.ty !== 'lbl' || key !== 'w' ) {
+							continue
+						}
 					}
 
 					// Record what the value was and is becoming.

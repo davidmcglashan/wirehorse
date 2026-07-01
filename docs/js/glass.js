@@ -325,12 +325,20 @@ var glass = {
 				// These drag modes affect the width - the second lot negatively
 				if ( m === 3 || m === 4 || m === 5 ) {
 					for ( let elem of selection.storage ) {
-						elem.style.width = `${parseFloat( elem.style.width, 10 ) + (dx/scale)}px`
+						let w = parseFloat( elem.style.width, 10 )
+						if ( isNaN(w) ) {
+							w = elem.getBoundingClientRect().width
+						}
+						elem.style.width = `${w + (dx/scale)}px`
 					}
 				}
 				if ( m === 7 || m === 8 || m === 9 ) {
 					for ( let elem of selection.storage ) {
-						elem.style.width = `${parseFloat( elem.style.width, 10 ) - (dx/scale)}px`
+						let w = parseFloat( elem.style.width, 10 )
+						if ( isNaN(w) ) {
+							w = elem.getBoundingClientRect().width
+						}
+						elem.style.width = `${w - (dx/scale)}px`
 					}
 				}
 
