@@ -27,26 +27,26 @@ var glass = {
 	// These are the various shapes that can be added by holding a key and pressing
 	// or moving the mouse.
 	drawShapes: [
-		{
-//			shape: 13, 		// glass.dragmodes.DRAW_LABEL,
-			keyCode: 76, 	// L
+		{ // L for adding labels
+			keyCode: 76,
 			model: defaults.entries[6].model,
-			drag: false
-		},{
-//			shape: 11, 		// glass.dragmodes.DRAW_RECTANGLE,
-			keyCode: 82, 	// R
+			drag: 0
+		},{ // R for adding rectangles
+			keyCode: 82, 
 			model: defaults.entries[0].model,
-			drag: true
-		},{
-//			shape: 12, 		// glass.dragmodes.DRAW_PARAGRAPH,
-			keyCode: 84, 	// T
+			drag: 1
+		},{ // T for adding text paragraphs
+			keyCode: 84,
 			model: defaults.entries[8].model,
-			drag: true
-		},{
-//			shape: 14,		// glass.dragmodes.DRAW_BUTTON,
-			keyCode: 66, 	// B
+			drag: 1
+		},{ // B for buttons
+			keyCode: 66,
 			model: defaults.entries[1].model,
-			drag: false
+			drag: 0
+		},{ // H for horizontal rules
+			keyCode: 72,
+			model: defaults.entries[13].model,
+			drag: 2
 		}
 	],
 
@@ -256,7 +256,11 @@ var glass = {
 			// Are we drawing or selecting something?
 			else if (  [ glass.dragmodes.DRAW_SHAPE, glass.dragmodes.SELECT_SHAPES ].includes( glass.drag.mode ) ) {
 				if ( glass.drag.shape?.drag  ) {
-					glass.dragRect.setAttribute( 'class', 'entity entity-rec border-bk' )
+					if ( glass.drag.shape?.drag === 2 ) {
+						glass.dragRect.setAttribute( 'class', 'entity entity-hr border-g5' )
+					} else {
+						glass.dragRect.setAttribute( 'class', 'entity entity-rec border-bk' )
+					}
 				} else {
 					glass.dragRect.setAttribute( 'class', 'select' )
 				}
@@ -438,7 +442,9 @@ var glass = {
 		if ( glass.drag.shape.drag ) {
 			let scale = model.meta( 'sc' )
 			newShape.w = event.pageX < glass.drag.x ? (glass.drag.x - event.pageX)/scale : (event.pageX - glass.drag.x)/scale - 18
-			newShape.h = event.pageY < glass.drag.y ? (glass.drag.y - event.pageY)/scale : (event.pageY - glass.drag.y)/scale - 18
+			if ( glass.drag.shape.drag !== 2 ) {
+				newShape.h = event.pageY < glass.drag.y ? (glass.drag.y - event.pageY)/scale : (event.pageY - glass.drag.y)/scale - 18
+			}
 		}
 
 		// Push it into the model in an undoable way.
