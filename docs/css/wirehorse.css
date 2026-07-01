@@ -91,6 +91,24 @@ a {
 	}
 }
 
+#-selection.no-width .ne, 
+#-selection.no-width .e,
+#-selection.no-width .se, 
+#-selection.no-width .nw,
+#-selection.no-width .w,
+#-selection.no-width .sw {
+	display: none;
+}
+
+#-selection.no-height .ne, 
+#-selection.no-height .n,
+#-selection.no-height .nw,
+#-selection.no-height .se, 
+#-selection.no-height .s,
+#-selection.no-height .sw {
+	display: none;
+}
+
 /* Selection subs appear when multiple selections are used around each shape. */
 #-selection-subs {
 	position:absolute;

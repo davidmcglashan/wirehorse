@@ -148,6 +148,12 @@ var glass = {
 		let maxx = rect.x + rect.width
 		let maxy = rect.y + rect.height
 
+		// These two fields track the width and height in the model. Entities with
+		// null values will flip them to NaN so we can identify those which are sized
+		// based on their content.		
+		let logicalHeight = 0
+		let logicalWidth = 0
+
 		// First pass calculates the min & max x,y,w,h of the combined selection.
 		for ( let shape of shapes ) {
 			rect = shape.elem.getBoundingClientRect()
@@ -155,6 +161,27 @@ var glass = {
 			miny = Math.min( miny, rect.y )
 			maxx = Math.max( maxx, rect.x + rect.width )
 			maxy = Math.max( maxy, rect.y + rect.height )
+			
+			// Labels might have no logical dimension whatsoever, so we force a width on
+			// it to make the handles appear.
+			if ( shape.ty === 'lbl' && !shape.w ) {
+				logicalWidth += rect.width
+			} else {
+				logicalWidth += shape.w
+			}
+			logicalHeight += shape.h
+		}
+
+		if ( isNaN( logicalWidth ) ) {
+			glass.selem.classList.add( 'no-width' )
+		} else {
+			glass.selem.classList.remove( 'no-width' )
+		}
+
+		if ( isNaN( logicalHeight ) ) {
+			glass.selem.classList.add( 'no-height' )
+		} else {
+			glass.selem.classList.remove( 'no-height' )
 		}
 
 		// Now we can place the selection <div> where it should be.

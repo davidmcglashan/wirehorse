@@ -6,6 +6,7 @@ Wireframing from the horse stable
 ### v0.4.2
 * Buttons can be added by holding 'b' and clicking the mouse
 * Horizontal rules can be added by holding 'h' and dragging the mouse
+* Improvements to shape resizing via drag handles
 
 ### v0.4.1
 * Text elements now properly support the left, centre, and right alignment options
