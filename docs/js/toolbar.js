@@ -413,13 +413,13 @@ var toolbar = {
 	},
 
 	/**
-	 * Reset the selected shapes.
+	 * Reset the width of the selected shapes.
 	 */
-	resetSelection: () => {
+	resetSelectionWidth: () => {
 		let changes = []
 		for ( let elem of selection.storage ) {
 			let id = elem.getAttribute( 'id' )
-			changes[id] = model.resetShape( id )
+			changes[id] = model.resetShapeWidth( id )
 		}
 
 		// Give undo something to (un)do.

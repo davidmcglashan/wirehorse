@@ -335,6 +335,10 @@ var palette = {
 		let shape = model.shape( id )
 		let deflt = palette.config[shape.ty]
 
+		// Give the palette the class of the type of the selected shape!
+		let elem = document.getElementById( '-palette' )
+		elem.setAttribute( 'class', shape.ty )
+
 		// Quickly hide everything and let the config restore anything
 		// that needs to be visible.
 		for ( let field of palette.fields ) {

@@ -3,8 +3,15 @@ bugs
 
 backlog
 --------
+ - happened consistently but cannot be reproduced here
+   - Sticky keys eg H for rule
+  - Copy paste not working across wfs
 
+- Main menu pointy corners
+- Breadcrumsbs shohld be multiline
+- Scroll and search other wireframes
 - Write a better README :)
+- Put import in the toolbar as it's an 'add' funcotin for the current wf
 
 - export view to get all the localstorage contents
   - needs a corresponding import
@@ -12,6 +19,7 @@ backlog
 	- push scroll
 	- balsamiq follows you out of the window and keeps moving the items
 	- it knows when you're above or below as you move around outside the window
+
 - rectangle with the X through it that can be colour changed
 - There might be a locked object here
 - fancy arrows that actually "simple" SVG curves
@@ -20,7 +28,6 @@ backlog
   - needs two more drag handles to move the curve descriptors
   - clever drag mechanics to resize and re-position the box
 
-- decide what resetSelection() should do and reinstate it
 - super wide tabs and rules get a space in the middle - probably need their own scribbley SVG
 - entity.css and class="entity" but shape and element elsehwere?
 - probably some mileage and re-organising a lot of the code and functions in the 'wrong' place

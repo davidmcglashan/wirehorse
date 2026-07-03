@@ -447,24 +447,29 @@ var model = {
 	},
 
 	/**
-	 * Reset a shape to its defaults. This sets all the values back to the ones declared in
-	 * defaults, but keeps its x & y.
+	 * Reset a shape's width. This behaviour is ill-defined ... ?
 	 */
-	resetShape: ( id ) => {
+	resetShapeWidth: ( id ) => {
+		let record = {}
+
 		for ( let shape of model.sh ) {
 			if ( shape.id === id ) {
-				for ( let defs of defaults.entries ) {
-					if ( defs.model.ty === shape.ty ) {
-						shape.w = undefined
-						let newMod = { ...defs.model } 
+				// Labels get their width parameter removed
+				if ( shape.ty === 'lbl' ) {
+					record['_w'] = shape.w
+					record['w'] = undefined
 
-						// Preserve the x and y
-						newMod.x = shape.x
-						newMod.y = shape.y
+					delete shape.w
+					params = shape
+					shape.elem.style.width = 'unset'
 
-						// Update the new model and abort the sorry nested loops.
-						return model.updateShape( id, newMod )
+					// Fire the listeners
+					for ( listener of model.shapeListeners ) {
+						listener( id, shape )
 					}
+
+					model.save()
+					return record
 				}
 			}
 		}
