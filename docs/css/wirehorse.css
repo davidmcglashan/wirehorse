@@ -323,84 +323,93 @@ a {
 		& div.right {
 			display: flex;
 			flex-direction: column;
-			gap: 1.5rem;
+			gap: 2rem;
 			align-items: flex-start;
+			padding-top: 0.5rem;
+
+			& .delete {
+				font-weight: 700;
+				color: #f00;
+			}
 		}
+
 		& div.left {
 			width: 30rem;
 
 			& div.finder {
 				height: 100%;
 				width: 100%;
+				
+				& #-wire-finder {
+					margin-bottom: 0.5rem;
+					width: 75%;
+				}
 
 				& ul {
-					height: calc(100% - 5rem);
+					height: calc(100% - 5.5rem);
 					padding-top: 4px;
 					overflow-y: scroll;
 					border: 1px solid #e0e0e0;
 					border-radius: 4px;
+					background-color: #fafafa;
+					font-size: 100%;
+					display: flex;
+					flex-direction: column;
+					gap: 0.25rem;
+					list-style-type: circle;
+					padding-inline-start: 1.5rem;
+					margin-top: 0.25rem;
 				}
 			}
 		}
 	}
+
+	& .credits {
+		padding: 1rem;
+		background-color: #f0f0f0;
+		
+		& span#-version,
+		& span#-year {
+			color: unset;
+			display: unset;
+		}
+		
+		& img {
+			border-radius: 5px;
+			opacity: 1;
+		}
+		& ul {
+			display: flex;
+			justify-content: space-between;
+			flex-grow: 1;
+		}
+	}
+
 	& div.dropdown-card {
 		display: flex;
 		flex-direction: row;
 		gap: 0.5rem;
 		align-items: flex-start;
 	}
-}
-	#-main-dropdown #-wire-finder {
-		margin-bottom: 0.5rem;
-		width: 75%;
-	}
-	#-main-dropdown div.option .delete {
-		font-weight: 700;
-		color: #f00;
-	}
-	#-main-dropdown span {
-		color: #999;
-		display: block;
-	}
-	#-main-dropdown span#-version,
-	#-main-dropdown span#-year {
-		color: unset;
-		display: unset;
-	}
-	#-main-dropdown img {
+
+	& img {
 		max-width: 2rem;
+		opacity: 0.5;
 	}
-	#-main-dropdown input {
+	& input {
 		margin-top: 0.5rem;
 	}
-	#-main-dropdown ul {
+	& ul {
 		list-style-type: none;
 		padding-inline-start: 0;
 		margin: 0;
 		font-size: 10pt;
 		color: #666;
 	}
-	#-main-dropdown .credits {
-		padding: 1rem;
-		background-color: #f0f0f0;
+	& span {
+		color: #999;
+		display: block;
 	}
-	#-main-dropdown .credits img {
-		border-radius: 5px;
-	}
-	#-main-dropdown .credits ul {
-		display: flex;
-		justify-content: space-between;
-		flex-grow: 1;
-	}
-
-ul#-wireframes {
-	font-size: 100%;
-	display: flex;
-	flex-direction: column;
-	gap: 0.1rem;
-	list-style-type: circle;
-	padding-inline-start: 1.5rem;
-	margin-top: 0.25rem;
 }
 
 #-palette {
