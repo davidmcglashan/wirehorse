@@ -300,6 +300,7 @@ a {
 	top: 2rem;
 	left: 0.5rem;
 	width: 60rem;
+	bottom: 2rem;
 	box-shadow: 0px 4px 8px rgba(0,0,0,0.25);
 	border: 1px solid #ddd;
 	background-color: white;
@@ -308,29 +309,50 @@ a {
 	font-style: normal;
 	display: flex;
 	flex-direction: column;
-	gap: 2rem;
-}
-	#-main-dropdown div.split {
+	justify-content: space-between;
+	overflow: hidden;
+
+	& div.split {
 		padding: 1rem;
 		display: flex;
 		flex-direction: row;
-		gap: 5rem;
+		position: relative;
+		height: calc( 100% - 6rem );
+		gap: 2rem;
+
+		& div.right {
+			display: flex;
+			flex-direction: column;
+			gap: 1.5rem;
+			align-items: flex-start;
+		}
+		& div.left {
+			width: 30rem;
+
+			& div.finder {
+				height: 100%;
+				width: 100%;
+
+				& ul {
+					height: calc(100% - 5rem);
+					padding-top: 4px;
+					overflow-y: scroll;
+					border: 1px solid #e0e0e0;
+					border-radius: 4px;
+				}
+			}
+		}
 	}
-	#-main-dropdown div.split > div {
-		width: 25rem;
-		max-width: 25rem;
-	}
-	#-main-dropdown div.options {
-		display: flex;
-		flex-direction: column;
-		gap: 1.5rem;
-		align-items: flex-start;
-	}
-	#-main-dropdown div.option {
+	& div.dropdown-card {
 		display: flex;
 		flex-direction: row;
 		gap: 0.5rem;
 		align-items: flex-start;
+	}
+}
+	#-main-dropdown #-wire-finder {
+		margin-bottom: 0.5rem;
+		width: 75%;
 	}
 	#-main-dropdown div.option .delete {
 		font-weight: 700;
@@ -363,7 +385,7 @@ a {
 		background-color: #f0f0f0;
 	}
 	#-main-dropdown .credits img {
-		max-width: 1.25rem;
+		border-radius: 5px;
 	}
 	#-main-dropdown .credits ul {
 		display: flex;

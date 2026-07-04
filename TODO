@@ -7,11 +7,7 @@ backlog
    - Sticky keys eg H for rule
   - Copy paste not working across wfs
 
-- Main menu pointy corners
-- Breadcrumsbs shohld be multiline
-- Scroll and search other wireframes
 - Write a better README :)
-- Put import in the toolbar as it's an 'add' funcotin for the current wf
 
 - export view to get all the localstorage contents
   - needs a corresponding import
@@ -19,6 +15,10 @@ backlog
 	- push scroll
 	- balsamiq follows you out of the window and keeps moving the items
 	- it knows when you're above or below as you move around outside the window
+
+- Spilt toolbar.js into bits
+
+v5.0
 
 - rectangle with the X through it that can be colour changed
 - There might be a locked object here

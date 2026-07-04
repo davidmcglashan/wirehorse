@@ -4,6 +4,7 @@ var toolbar = {
 	searchList: null,
 	mainDropdown: null,
 	renameInput: null,
+	finder: null,
 
 	init: () => {
 		model.registerMetadataListener( toolbar.update )
@@ -121,7 +122,7 @@ var toolbar = {
 
 		// get rid of the old model under the old name
 		localStorage.removeItem( oldName )
-		io.init()
+		finder.update()
 	},
 
 	openMainDropdown: () => {
@@ -133,6 +134,10 @@ var toolbar = {
 		// Move the dropdown above our new lightbox.
 		toolbar.mainDropdown.classList.remove( 'hidden' )
 		document.body.appendChild( toolbar.mainDropdown )
+
+		// Prepare the wireframe finder for keyboard input
+		finder.input.value = ''
+		finder.input.focus()
 	},
 
 	hideMainDropdown: () => {
@@ -326,7 +331,7 @@ var toolbar = {
 		lightbox.close()
 		selection.clear()
 		undo.clear()
-		io.init()
+		finder.update()
 	},
 
 	/**
@@ -348,7 +353,7 @@ var toolbar = {
 		toolbar.hideMainDropdown()
 		toolbar.mainDropdown.classList.add( 'hidden' )
 		lightbox.close()
-		io.init()
+		finder.update()
 	},
 
 	/**
@@ -376,9 +381,9 @@ var toolbar = {
 		let newName = io.nextName()
 		localStorage['wirehorse.current'] = newName
 		
-		// Updating the meta will invoke a save. io.init() updates the UI.
+		// Updating the meta will invoke a save. Then manually update the UI.
 		model.updateMeta( { tt: newName.substring(3) } )
-		io.init()
+		finder.update()
 		toolbar.hideMainDropdown()
 	},
 
@@ -391,7 +396,7 @@ var toolbar = {
 		localStorage.removeItem( name )
 
 		// Refresh the UI. This gives us the first alphabetical wireframe remaining.
-		name = io.init()
+		name = finder.update()
 		if ( name ) {
 			toolbar.switch( name )
 		} else {

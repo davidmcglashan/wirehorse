@@ -3,6 +3,9 @@ Wireframing from the horse stable
 
 ## Version history
 
+### v0.5.0
+* Wireframe switcher now scrolls long lists and is searchable
+
 ### v0.4.2
 * Buttons can be added by holding 'b' and clicking the mouse
 * Horizontal rules can be added by holding 'h' and dragging the mouse

@@ -136,37 +136,38 @@
 			</div>
 			<div id="-main-dropdown" class="hidden">
 				<div class="split">
-					<div class="option">
+					<div class="left dropdown-card">
 						<img src="assets/switch-apps-svgrepo-com.svg">
-						<div>
+						<div class="finder">
 							<strong>Switch to</strong>
 							<span>Wireframes available on this computer &hellip;</span>
+							<input type="text" placeholder="Type to find a wireframe" id="-wire-finder">
 							<ul id="-wireframes"></ul>
 						</div>
 					</div>
-					<div class="options">
-						<div class="option">
+					<div class="right">
+						<div class="dropdown-card">
 							<img src="assets/plus-file-svgrepo-com.svg">
 							<div>
 								<strong>New wireframe</strong>
 								<span>Start over with a blank canvas &mdash; <a href="javascript:void(0)" onclick="toolbar.new()">Let's go!</a></span>
 							</div>
 						</div>
-						<div class="option">
+						<div class="dropdown-card">
 							<img src="assets/copy-svgrepo-com.svg">
 							<div>
 								<strong>Copy this wireframe</strong>
 								<span>Make a copy in a new file &mdash; <a href="javascript:void(0)" onclick="toolbar.duplicate()">Make a copy</a></span>
 							</div>
 						</div>
-						<div class="option">
+						<div class="dropdown-card">
 							<img src="assets/trash-svgrepo-com.svg">
 							<div>
 								<strong>Delete this wireframe</strong>
 								<span>It'll be gone forever &mdash; <a class="delete" href="javascript:void(0)" onclick="toolbar.delete()">Delete</a></span>
 							</div>
 						</div>
-						<div class="option">
+						<div class="dropdown-card">
 							<img src="assets/upload-svgrepo-com.svg">
 							<div>
 								<strong>Import into this wireframe</strong>
@@ -174,7 +175,7 @@
 								<input type="file" id="-load-input" onchange="toolbar.load()">
 							</div>
 						</div>
-						<div class="option">
+						<div class="dropdown-card">
 							<img src="assets/floppy-disk-svgrepo-com.svg">
 							<div>
 								<strong>Save Wireframe</strong>
@@ -185,8 +186,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="option credits">
-					<img src="assets/potion-svgrepo-com.svg">
+				<div class="dropdown-card credits">
+					<img src="favicon-48x48.png">
 					<ul>
 						<li>
 							<strong>Wirehorse <span id="-version"></span></strong> 

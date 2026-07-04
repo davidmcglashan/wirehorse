@@ -146,7 +146,7 @@ var defaults = {
 			name: 'Breadcrumbs',
 			model: {
 				ty: 'bcb',
-				tx: 'home,section,page',
+				tx: 'home\nsection\npage',
 				fz: 9,
 			}
 		},{

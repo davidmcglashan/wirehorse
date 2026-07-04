@@ -1,54 +1,5 @@
 var io = {
 	/**
-	 * Populates the switcher in the main dropdown with all the wireframes. Returns
-	 * the name of the first wireframe alphabetically.
-	 */
-	init: () => {
-		// Empty the list.
-		let list = document.getElementById( '-wireframes' )
-		list.innerHTML = ''
-
-		let ret = null
-		let size = 0
-
-		// Spelunk localStorage for all the saved wireframes and give each one
-		// a link in the list.
-		for ( let key of Object.keys( localStorage ).sort() ) {
-			size += key.length
-			size += localStorage[key].length
-
-			if ( key.startsWith( 'wh_' ) ) {
-				let li = document.createElement( 'li' )
-				list.appendChild( li )
-
-				let a = document.createElement( 'a' )
-				a.innerHTML = key.substring( 3 )
-				a.setAttribute( 'href', 'javascript:void(0)' )
-				a.setAttribute( 'onclick', `javascript:toolbar.switch('${key}')` )
-				li.appendChild( a )
-
-				if ( ret === null ) {
-					ret = key
-				}
-			}
-		}
-
-		// If we added nothing, say something!
-		if ( list.children.length === 0 ) {
-			let li = document.createElement( 'li' )
-			list.appendChild( li )
-			li.innerHTML = 'None'
-		}
-
-		// Do something with that size calculation
-		let elem = document.getElementById( '-usage' )
-		elem.innerHTML = `Storage ${parseInt(size/5000000*100)}%`
-		elem.title = `${size} of 5M chars`
-
-		return ret
-	},
-
-	/**
 	 * Load a file from disk to be added into the current wireframe
 	 */
 	loadModel: ( filename, callback ) => {
