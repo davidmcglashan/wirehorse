@@ -8,6 +8,7 @@ backlog
   - Copy paste not working across wfs
 
 - Write a better README :)
+- Give the draggable paragraph a lorem content 
 
 - export view to get all the localstorage contents
   - needs a corresponding import
