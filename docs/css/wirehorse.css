@@ -616,13 +616,47 @@ input {
 		}
 	}
 }
-	.colour-picker input[type="button"] {
-		width: 2rem;
-		height: 2rem;
-		border: 1px solid #aaa;
-		border-radius: 3px;
+
+.colour-picker input[type="button"] {
+	width: 2rem;
+	height: 2rem;
+	border: 1px solid #aaa;
+	border-radius: 3px;
+}
+.colour-picker input.selected {
+	outline-offset: 0px;
+	outline: 2px dotted #36c;
+}
+
+/* Use this CSS when in archive mode. */
+body.archive {
+	font-family: "Karla", sans-serif;
+
+	& div {
+		position: absolute;
+		padding: 1rem;
+		display: flex;
+		flex-direction: row;
+		align-items: baseline;
+		gap: 1rem;
+
+		& a {
+			border: 1px solid #14a;
+			background-color: #36c;
+			color: #fff;
+			padding: 0.25rem 1.5rem;
+			border-radius: 4px;
+
+			&.risk {
+				border: 1px solid #800;
+				background-color: #a00;
+			}
+		}
 	}
-	.colour-picker input.selected {
-		outline-offset: 0px;
-		outline: 2px dotted #36c;
+	& textarea {
+		position: absolute;
+		inset: 4rem 1rem 1rem 1rem;
+		resize: none;
+		font-family: monospace;
 	}
+}

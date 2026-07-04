@@ -22,7 +22,8 @@ var wirehorse = {
 		'clipboard',
 		'element',
 		'innerHTML',
-		'geometry'
+		'geometry',
+		'archive'
 	],
 
 	/**

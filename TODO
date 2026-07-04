@@ -9,9 +9,8 @@ backlog
 
 - Write a better README :)
 - Give the draggable paragraph a lorem content 
+- archive is a little naughty removing other modules event listeners!
 
-- export view to get all the localstorage contents
-  - needs a corresponding import
 - handle the mouse leaving the window mid-drag
 	- push scroll
 	- balsamiq follows you out of the window and keeps moving the items
