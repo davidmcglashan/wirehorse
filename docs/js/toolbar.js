@@ -24,7 +24,7 @@ var toolbar = {
 				lightbox.close()
   			} else if ( event.keyCode === 27 ) {
 				event.preventDefault()
-				toolbar.renameInput.remove()
+				document.getElementById( '-rename' ).classList.add( 'hidden' )
 				lightbox.callback = null
 				lightbox.close()
   			}
@@ -84,8 +84,10 @@ var toolbar = {
 
 		// Build the UI above our new lightbox.
 		toolbar.renameInput.value = localStorage['wirehorse.current'].substring(3)
-		toolbar.renameInput.classList.remove( 'hidden' )
-		document.body.appendChild( toolbar.renameInput )
+		
+		let ui = document.getElementById( '-rename' )
+		ui.classList.remove( 'hidden' )
+		document.body.appendChild( ui )
 		
 		// Get the rename input ready
 		toolbar.renameInput.focus()
@@ -97,7 +99,7 @@ var toolbar = {
 	 */
 	doRename: () => {
 		// Sort out the UI.
-		toolbar.renameInput.classList.add( 'hidden' )
+		document.getElementById( '-rename' ).classList.add( 'hidden' )
 		
 		let oldName = localStorage['wirehorse.current']
 		let newName = `wh_${toolbar.renameInput.value}`

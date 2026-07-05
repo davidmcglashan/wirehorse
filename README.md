@@ -8,6 +8,7 @@ Wireframing from the horse stable
 * Added a new 'use at your risk' backup and restore tool
 * Improvements to shape drawing
 * Drop-down box caret is now a fixed size
+* Better rename UI
 
 ### v0.4.2
 * Buttons can be added by holding 'b' and clicking the mouse
