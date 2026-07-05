@@ -1,5 +1,16 @@
 # wirehorse
-Wireframing from the horse stable
+
+Wireframing from the horse stable. Rapid, clean, web-based -- as it should be.
+
+Wireframing works when the distance from idea to demonstration is kept as as short as possible. This is the guiding philosophy of Wirehorse.
+
+* Clean UI where the only elements on top of the canvas are selection handles and the mouse pointer
+* No barely- and rarely-used features getting in the way. Just shapes and a canvas.
+* Draw rectangles by holding 'R' and dragging the mouse
+* Draw text by holding 'T' and dragging the mouse
+* Place labels by holding 'L' and clicking
+* Place buttons by holding 'B' and clicking
+* Add other things from the toolbar or by pressing '/'
 
 ## Version history
 
