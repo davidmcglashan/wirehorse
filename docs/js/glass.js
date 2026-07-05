@@ -224,12 +224,12 @@ var glass = {
 	 */
 	mousePressed: ( event ) => {
 		glass.drag.editorPermitted = true
-		
+
 		// If we're ready for a glass drag it means a key is being held to modify the drag. 
 		if ( glass.drag.ready ) {
 			glass.drag.pressed = true
 		}
-		
+
 		// If there's a selection we should prepare to move or resize
 		// the selected entities instead.
 		else if ( selection.yes() ) {
@@ -255,15 +255,9 @@ var glass = {
 			glass.drag.x = event.pageX
 			glass.drag.y = event.pageY
 
-			glass.dragRect.style.top = `${event.pageY}px`
-			glass.dragRect.style.left = `${event.pageX}px`
-			glass.dragRect.style.width = 0
-			glass.dragRect.style.height = 0
-
 			// Prepare the rectangle which appears when you drag.
 			if (  [ glass.dragmodes.DRAW_SHAPE, glass.dragmodes.SELECT_SHAPES ].includes( glass.drag.mode ) ) {
 				glass.dragRect.setAttribute( 'class', 'select' )
-				glass.dragRect.innerHTML = ''
 
 				switch ( glass.drag.shape?.drag ) {
 					case glass.drawShapeModes.DRAG_RECT:
@@ -487,6 +481,12 @@ var glass = {
 			// Always, always shut down the visual aspects of the drag.
 			glass.drag.pressed = false
 			glass.dragRect.setAttribute( 'class', 'hidden')
+			glass.drag.shape = null
+			glass.dragRect.style.top = `${event.pageY}px`
+			glass.dragRect.style.left = `${event.pageX}px`
+			glass.dragRect.style.width = 0
+			glass.dragRect.style.height = 0
+			glass.dragRect.innerHTML = ''
 		}
 	},
 
@@ -557,7 +557,8 @@ var glass = {
 	},
 	
 	/**
-	 * 
+	 * A key was pressed. We inspect the keyboard here to see if the user is trying
+	 * to modify their next drag e.g. to draw a shape or scroll the canvas.
 	 */
 	keyDown: ( event ) => {
 		if ( event.repeat ) {
@@ -620,18 +621,18 @@ var glass = {
 	},
 
 	/**
-	 * 
+	 * A key is released.
 	 */
 	keyUp: ( event ) => {
 		glass.elem.setAttribute( 'class', '' )
 		glass.canvas.style.willChange = 'auto'
+		glass.drag.ready = false
+		glass.drag.shape = null
 
 		if ( event.keyCode === 32 )  {
 			if ( selection.yes() ) {
 				glass.selem.classList.remove( 'hidden' )
 			}
-			glass.drag.ready = false
-			glass.drag.shape = null
 		}
 	}
 };

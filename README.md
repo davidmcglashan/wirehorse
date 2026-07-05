@@ -23,7 +23,7 @@ Wireframing works when the distance from idea to demonstration is kept as as sho
 * Drop-down box caret is now a fixed size
 * Better rename UI
 
-### v0.4.2
+### v0.4.2
 * Buttons can be added by holding 'b' and clicking the mouse
 * Horizontal rules can be added by holding 'h' and dragging the mouse
 * Improvements to shape resizing via drag handles
