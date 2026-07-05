@@ -7,6 +7,7 @@ Wireframing from the horse stable
 * Wireframe switcher now scrolls long lists and is searchable
 * Added a new 'use at your risk' backup and restore tool
 * Improvements to shape drawing
+* Drop-down box caret is now a fixed size
 
 ### v0.4.2
 * Buttons can be added by holding 'b' and clicking the mouse

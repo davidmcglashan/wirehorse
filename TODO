@@ -7,10 +7,8 @@ backlog
    - Sticky keys eg H for rule
   - Copy paste not working across wfs
 
-- Combo box caret too big on wide dropdowns
 - Write a better README :)
 - Better rename UI eg labels , large box
-- archive is a little naughty removing other modules event listeners!
 
 - handle the mouse leaving the window mid-drag
 	- push scroll
@@ -21,6 +19,7 @@ backlog
 
 v5.0
 
+- archive is a little naughty removing other modules event listeners!
 - rectangle with the X through it that can be colour changed
 - There might be a locked object here
 - fancy arrows that actually "simple" SVG curves

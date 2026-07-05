@@ -38,8 +38,11 @@ ul.dropdown,
 	.entity-cmb .caret {
 		background-image: url('../assets/dropdown-arrow-svgrepo-com.svg');
 		background-size: contain;
-		width: 2rem;
-		height: 2rem;
+		background-repeat: no-repeat;
+		min-width: 1.5rem;
+		min-height: 1.5rem;
+		max-width: 1.5rem;
+		max-height: 1.5rem;
 		margin-top: 2px;
 	}
 	.entity-cmb ul.dropdown {
