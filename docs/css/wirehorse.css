@@ -549,6 +549,7 @@ input {
 #-main-dropdown.hidden,
 #-search-dropdown.hidden,
 #-palette.hidden,
+#-rename.hidden,
 #-palette div.hidden {
 	display: none;
 	opacity: 0;
