@@ -12,6 +12,8 @@ Wireframing works when the distance from idea to demonstration is kept as as sho
 * Place buttons by holding 'B' and clicking
 * Add other things from the toolbar or by pressing '/'
 
+![Wirehorse screenshot]([image-url](https://wirehorse.mcglashan.net/assets/screenshot.png))
+
 ## Version history
 
 ### v0.5.0
