@@ -538,6 +538,7 @@ input {
 #-palette.hidden,
 #-palette div.hidden {
 	display: none;
+	opacity: 0;
 }
 
 #-lightbox {

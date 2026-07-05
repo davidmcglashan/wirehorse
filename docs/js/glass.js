@@ -24,29 +24,39 @@ var glass = {
 		DRAW_SHAPE:		11
 	},
 
+	drawShapeModes: {
+		CLICK: 0,
+		DRAG_RECT: 1,
+		DRAG_RULE: 2,
+		DRAG_TEXT: 3
+	},
+
 	// These are the various shapes that can be added by holding a key and pressing
 	// or moving the mouse.
 	drawShapes: [
 		{ // L for adding labels
 			keyCode: 76,
 			model: defaults.entries[6].model,
-			drag: 0
-		},{ // R for adding rectangles
-			keyCode: 82, 
-			model: defaults.entries[0].model,
-			drag: 1
-		},{ // T for adding text paragraphs
-			keyCode: 84,
-			model: defaults.entries[8].model,
-			drag: 1
+			drag: 0 // CLICK
 		},{ // B for buttons
 			keyCode: 66,
 			model: defaults.entries[1].model,
-			drag: 0
-		},{ // H for horizontal rules
+			drag: 0 // CLICK
+		},
+		{ // R for adding rectangles
+			keyCode: 82, 
+			model: defaults.entries[0].model,
+			drag: 1 // DRAG_RECT
+		},
+		{ // H for horizontal rules
 			keyCode: 72,
 			model: defaults.entries[13].model,
-			drag: 2
+			drag: 2 // DRAG_RULE
+		},
+		{ // T for adding text paragraphs
+			keyCode: 84,
+			model: defaults.entries[8].model,
+			drag: 3 // DRAG_TEXT
 		}
 	],
 
@@ -215,9 +225,7 @@ var glass = {
 	mousePressed: ( event ) => {
 		glass.drag.editorPermitted = true
 		
-		// If we're ready for a glass drag it means Space is being held and we should prepare to move the
-		// viewport around. The x/y location is therefore the current page location with the current offset subtracted
-		// multiplied by the scale factor.
+		// If we're ready for a glass drag it means a key is being held to modify the drag. 
 		if ( glass.drag.ready ) {
 			glass.drag.pressed = true
 		}
@@ -246,6 +254,31 @@ var glass = {
 		if ( glass.drag.pressed ) {
 			glass.drag.x = event.pageX
 			glass.drag.y = event.pageY
+
+			glass.dragRect.style.top = `${event.pageY}px`
+			glass.dragRect.style.left = `${event.pageX}px`
+			glass.dragRect.style.width = 0
+			glass.dragRect.style.height = 0
+
+			// Prepare the rectangle which appears when you drag.
+			if (  [ glass.dragmodes.DRAW_SHAPE, glass.dragmodes.SELECT_SHAPES ].includes( glass.drag.mode ) ) {
+				glass.dragRect.setAttribute( 'class', 'select' )
+				glass.dragRect.innerHTML = ''
+
+				switch ( glass.drag.shape?.drag ) {
+					case glass.drawShapeModes.DRAG_RECT:
+						glass.dragRect.setAttribute( 'class', 'hidden entity entity-rec border-bk' )
+						break;
+					case glass.drawShapeModes.DRAG_RULE:
+						glass.dragRect.setAttribute( 'class', 'hidden entity entity-hr border-g5' )
+						break;
+					case glass.drawShapeModes.DRAG_TEXT:
+						glass.dragRect.setAttribute( 'class', 'hidden entity entity-lbl scribble' )
+						glass.dragRect.innerHTML = `<p>${globals.lorem}</p>`
+						glass.dragRect.style.color = `#${model.colours['g5'].hex}`
+						break;
+				}
+			}
 		}
 	},
 
@@ -270,7 +303,8 @@ var glass = {
 			glass.drag.moving = true
 			glass.drag.editorPermitted = false
 			glass.selem.classList.add( 'hidden' )
-			
+			glass.dragRect.classList.remove( 'hidden' )
+
 			// If we're scroll dragging then we translate the distance from where we started to where we are now.
 			if ( glass.drag.mode === glass.dragmodes.MOVE_CANVAS ) {
 				let dx = model.meta('ox') + ( event.pageX - glass.drag.x ) / scale
@@ -282,16 +316,6 @@ var glass = {
 
 			// Are we drawing or selecting something?
 			else if (  [ glass.dragmodes.DRAW_SHAPE, glass.dragmodes.SELECT_SHAPES ].includes( glass.drag.mode ) ) {
-				if ( glass.drag.shape?.drag  ) {
-					if ( glass.drag.shape?.drag === 2 ) {
-						glass.dragRect.setAttribute( 'class', 'entity entity-hr border-g5' )
-					} else {
-						glass.dragRect.setAttribute( 'class', 'entity entity-rec border-bk' )
-					}
-				} else {
-					glass.dragRect.setAttribute( 'class', 'select' )
-				}
-
 				// Calculate the amount moved since the last call. 
 				if ( event.pageX < glass.drag.x ) {
 					glass.dragRect.style.left = `${event.pageX}px`
@@ -370,97 +394,100 @@ var glass = {
 	 * The mouse was released. Usually this is a click event.
 	 */
 	mouseReleased: ( event ) => {
-		glass.drag.pressed = false
+		try {
+			// If this is a drag then let it finish.
+			if ( glass.drag.moving ) {
+				let scale = model.meta('sc')
+				
+				glass.drag.moving = false
 
-		// If this is a drag then let it finish.
-		if ( glass.drag.moving ) {
-			let scale = model.meta('sc')
-			
-			glass.drag.moving = false
+				// Scroll drags store the new offset values in the model meta.
+				if ( glass.drag.mode === glass.dragmodes.MOVE_CANVAS ) {
+					glass.elem.setAttribute( 'class', 'ready' )
+					model.updateMeta( { 
+						ox: model.meta('ox') + ( event.pageX - glass.drag.x ) / scale, 
+						oy: model.meta('oy') + ( event.pageY - glass.drag.y ) / scale
+					} )
+				} 
+				
+				// Are we drawing a shape?
+				else if ( glass.drag.mode === glass.dragmodes.DRAW_SHAPE ) {
+					glass.addShapeWithMouse( event )
+					return
+				}
 
-			// Scroll drags store the new offset values in the model meta.
-			if ( glass.drag.mode === glass.dragmodes.MOVE_CANVAS ) {
-				glass.elem.setAttribute( 'class', 'ready' )
-				model.updateMeta( { 
-					ox: model.meta('ox') + ( event.pageX - glass.drag.x ) / scale, 
-					oy: model.meta('oy') + ( event.pageY - glass.drag.y ) / scale
-				} )
-			} 
-			
-			// Are we drawing a shape?
-			else if ( glass.drag.mode === glass.dragmodes.DRAW_SHAPE ) {
+				// Are we selecting lots of shapes with a big rectangle?
+				else if ( glass.drag.mode === glass.dragmodes.SELECT_SHAPES ) {
+					let rect = glass.dragRect.getBoundingClientRect()
+					for ( let shape of model.sh ) {
+						let shapeRect = shape.elem.getBoundingClientRect()
+
+						// We only need to check that the DOM elements overlap by comparing
+						// their bounding rectangles.
+						if ( 
+							rect.top < shapeRect.bottom &&
+							rect.right > shapeRect.left &&
+							rect.bottom > shapeRect.top &&
+							rect.left < shapeRect.right 
+						) {
+							selection.add( shape.elem, {multi:true} )
+						}
+					}
+				}
+
+				// Object drags supply new x,y values for the shapes being moved.
+				else {
+					let dx = event.pageX - glass.drag.x
+					let dy = event.pageY - glass.drag.y
+
+					let changes = {}
+					for ( let elem of selection.storage ) {
+						let id = elem.getAttribute( 'id' )
+						changes[id] = model.updateShape( id, {
+							x: parseFloat( elem.style.left, 10 ) + dx/scale,
+							y: parseFloat( elem.style.top, 10 ) + dy/scale ,
+							w: parseFloat( elem.style.width, 10 ) + dx/scale,
+							h: parseFloat( elem.style.height, 10 ) + dy/scale 
+						} )
+					}
+					undo.pushMulti( changes )
+				}
+
+				// Restore the selection and return without invoking a further selection.
+				if ( selection.yes() ) {
+					glass.selectionChanged( selection.ids() )
+				}
+				return
+			}
+
+			// Some draw shapes get put in with just a click
+			if ( glass.drag.ready && glass.drag.mode === glass.dragmodes.DRAW_SHAPE && !glass.drag.shape.drag ) {
 				glass.addShapeWithMouse( event )
 				return
 			}
 
-			// Are we selecting lots of shapes with a big rectangle?
-			else if ( glass.drag.mode === glass.dragmodes.SELECT_SHAPES ) {
-				let rect = glass.dragRect.getBoundingClientRect()
-				for ( let shape of model.sh ) {
-					let shapeRect = shape.elem.getBoundingClientRect()
-
-					// We only need to check that the DOM elements overlap by comparing
-					// their bounding rectangles.
-					if ( 
-						rect.top < shapeRect.bottom &&
-    					rect.right > shapeRect.left &&
-    					rect.bottom > shapeRect.top &&
-    					rect.left < shapeRect.right 
-					) {
-						selection.add( shape.elem, {multi:true} )
-					}
-				}
-				glass.dragRect.setAttribute( 'class', 'hidden')
-			}
-
-			// Object drags supply new x,y values for the shapes being moved.
-			else {
-				let dx = event.pageX - glass.drag.x
-				let dy = event.pageY - glass.drag.y
-
-				let changes = {}
-				for ( let elem of selection.storage ) {
+			// Stop at the first entity and select it
+			let elems = document.elementsFromPoint( event.pageX, event.pageY )
+			for ( let elem of elems ) {
+				if ( elem.classList.contains( 'entity' ) ) {
+					// Ignore this element if it's locked
 					let id = elem.getAttribute( 'id' )
-					changes[id] = model.updateShape( id, {
-						x: parseFloat( elem.style.left, 10 ) + dx/scale,
-						y: parseFloat( elem.style.top, 10 ) + dy/scale ,
-						w: parseFloat( elem.style.width, 10 ) + dx/scale,
-						h: parseFloat( elem.style.height, 10 ) + dy/scale 
-					} )
+					if ( model.isLocked( id ) ) {
+						continue
+					}
+
+					selection.add( elem, { multi: event.shiftKey } )
+					return
 				}
-				undo.pushMulti( changes )
 			}
 
-			// Restore the selection and return without invoking a further selection.
-			if ( selection.yes() ) {
-				glass.selectionChanged( selection.ids() )
-			}
-			return
+			// Clear the selection if the click wasn't on an entity.
+			selection.clear()
+		} finally {
+			// Always, always shut down the visual aspects of the drag.
+			glass.drag.pressed = false
+			glass.dragRect.setAttribute( 'class', 'hidden')
 		}
-
-		// Some draw shapes get put in with just a click
-		if ( glass.drag.ready && glass.drag.mode === glass.dragmodes.DRAW_SHAPE && !glass.drag.shape.drag ) {
-			glass.addShapeWithMouse( event )
-			return
-		}
-
-		// Stop at the first entity and select it
-		let elems = document.elementsFromPoint( event.pageX, event.pageY )
-		for ( let elem of elems ) {
-			if ( elem.classList.contains( 'entity' ) ) {
-				// Ignore this element if it's locked
-				let id = elem.getAttribute( 'id' )
-				if ( model.isLocked( id ) ) {
-					continue
-				}
-
-				selection.add( elem, { multi: event.shiftKey } )
-				return
-			}
-		}
-
-		// Clear the selection if the click wasn't on an entity.
-		selection.clear()
 	},
 
 	/**
@@ -477,7 +504,9 @@ var glass = {
 		if ( glass.drag.shape.drag ) {
 			let scale = model.meta( 'sc' )
 			newShape.w = event.pageX < glass.drag.x ? (glass.drag.x - event.pageX)/scale : (event.pageX - glass.drag.x)/scale - 18
-			if ( glass.drag.shape.drag !== 2 ) {
+			
+			// Evaluate a height for shapes that need it.
+			if ( glass.drag.shape.drag !== glass.drawShapeModes.DRAG_RULE ) {
 				newShape.h = event.pageY < glass.drag.y ? (glass.drag.y - event.pageY)/scale : (event.pageY - glass.drag.y)/scale - 18
 			}
 		}
