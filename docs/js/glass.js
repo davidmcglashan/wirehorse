@@ -538,9 +538,9 @@ var glass = {
 		if ( event.metaKey ) {
 			let scale = model.meta( 'sc' )
 			if ( event.deltaY > 0 ) {
-				scale = scale * 0.9
+				scale = scale * 0.95
 			} else {
-				scale = scale * 1.1
+				scale = scale * 1.05
 			}
 			scale = Math.min( Math.max( 0.125, scale ), 4)
 			model.updateMeta( { sc: scale } )
