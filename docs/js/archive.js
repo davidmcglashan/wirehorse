@@ -3,6 +3,7 @@
  */
 var archive = {
 	textarea: null,
+	importButton: null,
 
 	/**
 	 * Destroys the wirehorse UI and build up the (very simple) archive UI
@@ -27,9 +28,10 @@ var archive = {
 		button = document.createElement( 'a' )
 		button.setAttribute( 'href', 'javascript:void(0)' )
 		button.setAttribute( 'onclick', 'archive.put()' )
-		button.setAttribute( 'class', 'risk' )
+		button.setAttribute( 'class', 'risk hidden' )
 		button.innerHTML = '!!! Import !!!'
 		toolbar.appendChild( button )
+		archive.importButton = button
 
 		button = document.createElement( 'a' )
 		button.setAttribute( 'href', 'javascript:void(0)' )
@@ -39,7 +41,12 @@ var archive = {
 
 		// Fill the rest of the display with a textatrea.
 		archive.textarea = document.createElement( 'textarea' )
+		archive.textarea.addEventListener( 'input', function() { 
+			archive.importButton.classList.remove( 'hidden' )	
+		} )
+
 		document.body.appendChild( archive.textarea )
+		archive.textarea.focus()
 
 		document.removeEventListener( 'keydown', glass.keyDown )
 	},
@@ -65,6 +72,8 @@ var archive = {
 		}
 
 		archive.textarea.value = str + "]}"
+		archive.importButton.classList.remove( 'hidden' )
+		archive.textarea.focus()
 	},
 
 	/**
