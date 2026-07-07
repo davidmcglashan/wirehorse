@@ -138,7 +138,6 @@ var toolbar = {
 		document.body.appendChild( toolbar.mainDropdown )
 
 		// Prepare the wireframe finder for keyboard input
-		finder.input.value = ''
 		finder.input.focus()
 	},
 
