@@ -53,7 +53,10 @@ var geometry = {
 
 		for ( let id of ids ) {
 			let shape = model.shape( id )
-			
+			if ( !shape ) {
+				continue
+			}
+
 			rect.x = Math.min( rect.x, shape.x )
 			rect.y = Math.min( rect.y, shape.y )
 
