@@ -202,11 +202,6 @@ var model = {
 	 */
 	shape: ( id ) => {
 		return model.shapeCache[ id ]
-		// for ( let shape of model.sh ) {
-		// 	if ( shape.id === id ) {
-		// 		return shape
-		// 	}
-		// }
 	},
 
 	/**
@@ -214,14 +209,9 @@ var model = {
 	 */
 	shapes: ( ids ) => {
 		let ret = []
-//		for ( let shape of model.sh ) {
-			for ( let id of ids ) {
-				ret.push( model.shapeCache[ id ] )
-				// if ( shape.id === id ) {
-				// 	ret.push( shape )
-				// }
-			}
-//		}
+		for ( let id of ids ) {
+			ret.push( model.shapeCache[ id ] )
+		}
 		return ret
 	},
 
@@ -281,6 +271,7 @@ var model = {
 		newShape.elem = null
 		newShape.x += 20
 		newShape.y += 20
+		model.shapeCache[newShape.id] = newShape
 
 		// Fire the listeners
 		for ( listener of model.shapeListeners ) {
@@ -353,6 +344,7 @@ var model = {
 		if ( !newShape.id ) {
 			newShape.id = model.nextShapeId()
 		}
+		model.shapeCache[newShape.id] = newShape
 
 		// Fire the listeners
 		for ( listener of model.shapeListeners ) {
@@ -361,7 +353,6 @@ var model = {
 
 		// Save the model and return the new shape
 		model.save()
-		model.shapeCache[newShape.id] = newShape
 
 		return newShape
 	},
@@ -413,26 +404,24 @@ var model = {
 		let record = {}
 		record.id = id
 
-		for ( let shape of model.sh ) {
-			if ( shape.id === id ) {
-				for ( const [key, value] of Object.entries( params ) ) {
-					// There's a handbrake here to stop key values getting blasted by bad code
-					// elsewhere
-					if ( ['x','y','w','h'].includes(key) && isNaN( value ) ) {
-						// The only override of a handbrake is a label setting its width ...
-						if ( shape.ty !== 'lbl' || key !== 'w' ) {
-							continue
-						}
+		let shape = model.shapeCache[id]
+		if ( shape ) {
+			for ( const [key, value] of Object.entries( params ) ) {
+				// There's a handbrake here to stop key values getting blasted by bad code
+				// elsewhere
+				if ( ['x','y','w','h'].includes(key) && isNaN( value ) ) {
+					// The only override of a handbrake is a label setting its width ...
+					if ( shape.ty !== 'lbl' || key !== 'w' ) {
+						continue
 					}
-
-					// Record what the value was and is becoming.
-					record['_'+key] = shape[key]
-					record[key] = value
-
-					// Now effect the change.
-					shape[key] = value
 				}
-				break
+
+				// Record what the value was and is becoming.
+				record['_'+key] = shape[key]
+				record[key] = value
+
+				// Now effect the change.
+				shape[key] = value
 			}
 		}
 
@@ -455,26 +444,23 @@ var model = {
 	resetShapeWidth: ( id ) => {
 		let record = {}
 
-		for ( let shape of model.sh ) {
-			if ( shape.id === id ) {
-				// Labels get their width parameter removed
-				if ( shape.ty === 'lbl' ) {
-					record['_w'] = shape.w
-					record['w'] = undefined
+		// Only labels get their width parameter removed
+		let shape = model.shapeCache[id]
+		if ( shape && shape.ty === 'lbl' ) {
+			record['_w'] = shape.w
+			record['w'] = undefined
 
-					delete shape.w
-					params = shape
-					shape.elem.style.width = 'unset'
+			delete shape.w
+			params = shape
+			shape.elem.style.width = 'unset'
 
-					// Fire the listeners
-					for ( listener of model.shapeListeners ) {
-						listener( id, shape )
-					}
-
-					model.save()
-					return record
-				}
+			// Fire the listeners
+			for ( listener of model.shapeListeners ) {
+				listener( id, shape )
 			}
+
+			model.save()
+			return record
 		}
 	},
 

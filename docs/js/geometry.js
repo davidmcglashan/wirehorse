@@ -66,11 +66,19 @@ var geometry = {
 			rect.x = Math.min( rect.x, shape.x )
 			rect.y = Math.min( rect.y, shape.y )
 
-			let bounds = document.getElementById( id ).getBoundingClientRect()
+			let bounds = null
 			let w = shape.w
-			if ( !w ) { w = bounds.width }
+			if ( !w ) { 
+				bounds = document.getElementById( id ).getBoundingClientRect()
+				w = bounds.width 
+			}
 			let h = shape.h
-			if ( !h ) { h = bounds.height }
+			if ( !h ) { 
+				if ( !bounds ) {
+					bounds = document.getElementById( id ).getBoundingClientRect()
+				}
+				h = bounds.height 
+			}
 
 			rect.x2 = Math.max( rect.x2, shape.x + w )
 			rect.y2 = Math.max( rect.y2, shape.y + h )
