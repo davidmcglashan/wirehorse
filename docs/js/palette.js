@@ -115,8 +115,7 @@ var palette = {
 	 * Toggle the palette's visibility
 	 */
 	toggle: () => {
-		let elem = document.getElementById( '-palette' )
-		elem.classList.toggle( 'hidden' )
+		let elem = document.body.classList.toggle( 'hide-palette' )
 	},
 
 	inputChanged: ( event ) => {

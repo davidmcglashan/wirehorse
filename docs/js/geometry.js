@@ -1,6 +1,6 @@
 var geometry = {
 	/**
-	 * Returns are rectangle shape that describes the canvas pixels ...
+	 * Returns a rectangle shape that describes the canvas pixels ...
 	 * rect.x & rect.y - pixel address of the top-left corner
 	 * w & h - width and height of the viewport in pixels
 	 * x2 & y2 - pixel address of the bottom-right corner
@@ -9,7 +9,13 @@ var geometry = {
 	viewportRect: () => {
 		let rect = {}
 		
+		// W is the width ...
 		rect.w = document.documentElement.clientWidth / model.meta( 'sc' )
+
+		// ... but we must consider the palette
+		let palette = document.getElementById( '-palette' ).getBoundingClientRect()
+		rect.w -= palette.width
+
 		rect.h = document.documentElement.clientHeight / model.meta( 'sc' )
 		rect.cx = ( (document.documentElement.clientWidth/2) - model.meta( 'ox' ) )
 		rect.cy = ( (document.documentElement.clientHeight/2) - model.meta( 'oy' ) )

@@ -57,11 +57,9 @@ var canvas = {
 
 		// This is the inner width to use in calculations
 		let innerWidth = window.innerWidth
-		if ( !document.getElementById( '-palette' ).classList.contains( 'hidden' ) ) {
-			innerWidth -= 250;
-		}
+		innerWidth -= document.getElementById( '-palette' ).getBoundingClientRect().width
 
-		// Work out scale of rectangle we want to fit in the viewport
+			// Work out scale of rectangle we want to fit in the viewport
 		let minX = 10000
 		let minY = 10000
 		let maxX = -10000
@@ -94,7 +92,7 @@ var canvas = {
 
 		// Work out where to move the transform to based on viewport size and focus position.
 		let newX = (innerWidth - width) / 2
-		let newY = (innerWidth - height) / 2
+		let newY = (window.innerHeight - height) / 2
 		model.updateMeta( {
 			ox: -1 * (minX - newX), 
 			oy: -1 * (minY - newY), 
