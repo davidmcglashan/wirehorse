@@ -3,6 +3,7 @@ var model = {
 	sh: [],
 	metadataListeners: [],
 	shapeListeners: [],
+	shapeCache: {},
 
 	// These are the 15 standard colours we're using
 	colours: {
@@ -160,10 +161,13 @@ var model = {
 		model.updateMeta ( current.mt, { dontSave:true } )
 
 		// Iterate the shapes via element creator to put them into the DOM
+		// and hydrate the shape cache
+		model.shapeCache = {}
 		model.sh = current.sh
 		model.sh.forEach( shape => {
 			element.make( shape )
 			element.style( shape )
+			model.shapeCache[shape.id] = shape
 		} )
 	},
 
@@ -197,11 +201,12 @@ var model = {
 	 * Return the model for a shape with this id
 	 */
 	shape: ( id ) => {
-		for ( let shape of model.sh ) {
-			if ( shape.id === id ) {
-				return shape
-			}
-		}
+		return model.shapeCache[ id ]
+		// for ( let shape of model.sh ) {
+		// 	if ( shape.id === id ) {
+		// 		return shape
+		// 	}
+		// }
 	},
 
 	/**
@@ -209,13 +214,14 @@ var model = {
 	 */
 	shapes: ( ids ) => {
 		let ret = []
-		for ( let shape of model.sh ) {
+//		for ( let shape of model.sh ) {
 			for ( let id of ids ) {
-				if ( shape.id === id ) {
-					ret.push( shape )
-				}
+				ret.push( model.shapeCache[ id ] )
+				// if ( shape.id === id ) {
+				// 	ret.push( shape )
+				// }
 			}
-		}
+//		}
 		return ret
 	},
 
@@ -355,19 +361,15 @@ var model = {
 
 		// Save the model and return the new shape
 		model.save()
+		model.shapeCache[newShape.id] = newShape
+
 		return newShape
 	},
 
 	nextShapeId: () => {
-		// Quickly gather the in-use ids
-		let inUse = []
-		for ( let shape of model.sh ) {
-			inUse[shape.id] = shape.id
-		}
-
 		let i = 0
 		do {
-			let shape = inUse[`shape-${i}`]
+			let shape = model.shapeCache[`shape-${i}`]
 			if ( shape ) {
 				i++
 			} else {
@@ -384,6 +386,7 @@ var model = {
 	removeShape: ( id ) => {
 		let removed = null
 
+		delete model.shapeCache[id]
 		for ( let i=0; i < model.sh.length; i++ ) {
 			if ( model.sh[i].id === id ) {
 				removed = model.sh[i]

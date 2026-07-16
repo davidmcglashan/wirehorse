@@ -3,6 +3,7 @@ bugs
 
 backlog
 --------
+- select all is really slow - it does lots of inefficient checks and fires the listeners over and over
 - handle the mouse leaving the window mid-drag
 	- push scroll
 	- balsamiq follows you out of the window and keeps moving the items
@@ -10,7 +11,7 @@ backlog
 - drag-drawing up or left gets the shape drawn in the wrong place
 - Spilt toolbar.js into bits
 
-v5.0
+v0.5.0
 
 - archive is a little naughty removing other modules event listeners!
 - rectangle with the X through it that can be colour changed
