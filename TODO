@@ -3,6 +3,10 @@ bugs
 
 backlog
 --------
+- It's painful to swicth between two wireframes - button - switch - rename
+- Front back labels on the bring to buttons
+- Open the renamer after a copy
+- what happens if you give two wfs the same name?
 - select all is really slow - it does lots of inefficient checks and fires the listeners over and over
 - handle the mouse leaving the window mid-drag
 	- push scroll

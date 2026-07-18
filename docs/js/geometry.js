@@ -9,17 +9,16 @@ var geometry = {
 	viewportRect: () => {
 		let rect = {}
 		
-		// W is the width ...
-		rect.w = document.documentElement.clientWidth / model.meta( 'sc' )
-
-		// ... but we must consider the palette
-		let palette = document.getElementById( '-palette' ).getBoundingClientRect()
-		rect.w -= palette.width
+		// W is the width but we must consider the palette
+		let pw = document.getElementById( '-palette' ).getBoundingClientRect().width
+		rect.w = document.documentElement.clientWidth
+		rect.w -= pw
+		rect.w /= model.meta( 'sc' )
 
 		rect.h = document.documentElement.clientHeight / model.meta( 'sc' )
 		rect.cx = ( (document.documentElement.clientWidth/2) - model.meta( 'ox' ) )
 		rect.cy = ( (document.documentElement.clientHeight/2) - model.meta( 'oy' ) )
-		rect.x = rect.cx - rect.w/2
+		rect.x = rect.cx - rect.w/2 - pw/2
 		rect.y = rect.cy - rect.h/2
 		rect.x2 = rect.cx + rect.w/2
 		rect.y2 = rect.cy + rect.h/2
@@ -32,18 +31,19 @@ var geometry = {
 	 * the corresponding canvas position.
  	 */
 	viewportXYtoCanvas: ( point ) => {
-		let rect = {}
+		let modded = {}
 
-		// Ratio the passed in point to the client width
-		let xr = point.x / document.documentElement.clientWidth
+		// Ratio the passed in point to the client width considering the palette
+		let pw = document.getElementById( '-palette' ).getBoundingClientRect().width
+		let xr = point.x / ( document.documentElement.clientWidth - pw )
 		let yr = point.y / document.documentElement.clientHeight
 
 		// Get the viewport dims and scale its width and height by the ratios.
 		let viewport = geometry.viewportRect()
-		rect.x = viewport.x + viewport.w * xr
-		rect.y = viewport.y + viewport.h * yr
+		modded.x = viewport.x + viewport.w * xr
+		modded.y = viewport.y + viewport.h * yr
 
-		return rect
+		return modded
 	},
 
 	/**
