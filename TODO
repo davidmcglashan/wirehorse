@@ -3,9 +3,10 @@ bugs
 
 backlog
 -------- 
-- It's painful to swicth between two wireframes - button - switch - rename
 - Open the renamer after a copy
 - what happens if you give two wfs the same name?
+- paste doesn't always place the incoming in the middle of the viewport
+- compassing selections taller but not wider than the viewport should do a Y scale instead of an X one
 - select all is really slow - it does lots of inefficient checks and fires the listeners over and over
 - handle the mouse leaving the window mid-drag
 	- push scroll

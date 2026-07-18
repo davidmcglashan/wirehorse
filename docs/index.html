@@ -111,8 +111,16 @@
 		</div>
 		<div id="-toolbar">
 			<div>
-				<strong><a href="javascript:void(0)" onclick="toolbar.openMainDropdown()" title="Open the main menu">Wirehorse</a></strong>
-				<a href="javascript:void(0)" onclick="toolbar.rename()" id="-title" title="Rename this wireframe"></a>
+				<a id="-wirehorse-button" href="javascript:void(0)" onclick="toolbar.openMainDropdown()" title="Open the main menu">
+					<img src="favicon-48x48.png"> Wirehorse
+				</a>
+				<a class="toolbar-button hidden" href="javascript:void(0)" onclick="toolbar.switchBack()" title="Switch back to the previous wireframe" id="-switch-back">
+					<img src="assets/send-to-back-svgrepo-com.svg">
+				</a>
+				<a href="javascript:void(0)" onclick="toolbar.rename()" title="Rename this wireframe">
+					<span id="-title"></span>
+					<img src="assets/edit-svgrepo-com.svg" class="img-1">
+				</a>
 			</div>
 			<div>
 				<a href="javascript:void(0)" id="-search-button" onclick="toolbar.openSearchDropdown()" title="Add shapes to the canvas">
@@ -121,13 +129,13 @@
 				</a>
 			</div>
 			<div class="buttons">
-				<a id="-button-lock" class="disabled" href="javascript:void(0)" onclick="toolbar.unlock()" title="Unlock all locked shapes">
+				<a id="-button-lock" class="toolbar-button disabled" href="javascript:void(0)" onclick="toolbar.unlock()" title="Unlock all locked shapes">
 					<img src="assets/open-lock-svgrepo-com.svg">
 				</a>
-				<a href="javascript:void(0)" onclick="canvas.scale(event)" title="Re-centre the display">
+				<a href="javascript:void(0)" class="toolbar-button" onclick="canvas.scale(event)" title="Re-centre the display">
 					<img src="assets/compass-svgrepo-com.svg">
 				</a>
-				<a href="javascript:void(0)" onclick="palette.toggle()" title="Toggle the selection palette">
+				<a href="javascript:void(0)" class="toolbar-button" onclick="palette.toggle()" title="Toggle the selection palette">
 					<img src="assets/sidebar-right-svgrepo-com.svg">
 				</a>
 			</div>

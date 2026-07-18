@@ -192,6 +192,21 @@ body.hide-palette #-canvas {
 	justify-content: space-between;
 	align-items: center;
 
+	& #-wirehorse-button {
+		font-weight: 600;
+		background-color: #d8d8d8;
+		border-radius: 5px;
+		display: flex;
+		gap: 0.5rem;
+		align-items: center;
+		padding-right: 0.75rem;
+
+		& img {
+			margin-top: unset;
+			border-radius: 5px 0 0 5px;
+		}
+	}
+
 	/* Make the title black. */
 	& #-title {
 		color: #000;
@@ -200,19 +215,24 @@ body.hide-palette #-canvas {
 	& > div {
 		display: flex;
 		gap: 1rem;
+		align-items: center;
 	}
 	& img {
 		max-width: 1.5rem;
 		vertical-align: middle;
 		margin-top: -0.2rem;
 	}
+	& img.img-1 {
+		max-width: 1rem;
+	}
 
 	/* Buttons is the area top-right with some image buttons in */
-	& > div.buttons {
+	& > .buttons {
 		gap: 0.25rem;
+	}
 
 		/* Style the <a> to look and behave like buttons. */
-		& a {
+		& a.toolbar-button {
 			padding: 0.4rem 0.25rem 0.25rem 0.25rem;
 			border-radius: 8px;
 			
@@ -227,7 +247,6 @@ body.hide-palette #-canvas {
 				cursor: not-allowed;
 			}
 		}
-	}
 }
 
 #-rename {

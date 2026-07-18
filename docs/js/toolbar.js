@@ -5,6 +5,7 @@ var toolbar = {
 	mainDropdown: null,
 	renameInput: null,
 	finder: null,
+	previousWireframe: null,
 
 	init: () => {
 		model.registerMetadataListener( toolbar.update )
@@ -344,9 +345,11 @@ var toolbar = {
 		selection.clear()
 		undo.clear()
 
-		// Persist the passed in key as the current wireframe.
+		// Persist the passed in key as the current wireframe. Remember the outgoing one for the switcher.
+		toolbar.previousWireframe = localStorage['wirehorse.current']
 		localStorage['wirehorse.current'] = wireframe
-		
+		document.getElementById( '-switch-back' ).classList.remove( 'hidden' )
+
 		// Parse that model into life
 		model.parse()
 		
@@ -355,6 +358,13 @@ var toolbar = {
 		toolbar.mainDropdown.classList.add( 'hidden' )
 		lightbox.close()
 		finder.update()
+	},
+
+	/**
+	 * Switch back to a previously edited wireframe.
+	 */
+	switchBack: () => {
+		toolbar.switch( toolbar.previousWireframe )
 	},
 
 	/**
