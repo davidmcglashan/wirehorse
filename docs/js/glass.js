@@ -4,6 +4,7 @@ var glass = {
 	canvas: null,
 	selem: null,
 	selemsubs: null,
+	queuedShapeChange: null,
 
 	// There are ten things a drag operation can do ...
 	dragmodes: {
@@ -121,13 +122,19 @@ var glass = {
 	 * further resizing of the selection boxes.
 	 */
 	shapeChanged: ( id, params ) => {
+		if ( glass.queuedShapeChange ) {
+			return
+		}
+
 		let sids = selection.ids()
 		if ( sids.includes( id ) ) {
-			requestAnimationFrame(() => {
+			glass.queuedShapeChange = () => {
 				requestAnimationFrame(() => {
 					glass.selectionChanged( sids )
+					glass.queuedShapeChange = null
 				});
-			});
+			}
+			requestAnimationFrame( glass.queuedShapeChange );
 		}
 	},
 
@@ -627,7 +634,7 @@ var glass = {
 		glass.drag.ready = false
 		glass.drag.shape = null
 		canvas.applyScale()
-		
+
 		if ( event.keyCode === 32 )  {
 			if ( selection.yes() ) {
 				glass.selem.classList.remove( 'hidden' )

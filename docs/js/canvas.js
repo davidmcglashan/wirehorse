@@ -121,7 +121,7 @@ var canvas = {
 		// If the scale is sufficiently zoomed out then we see performance boosts
 		// by applying some CSS acceleration hints.
 		if ( model.meta('sc' ) < 0.9 ) {
-			canvas.elem.style.willChange = 'transform'
+			canvas.elem.style.willChange = 'transform, scroll-position, opacity'
 		} else {
 			canvas.elem.style.willChange = 'auto'
 		}
