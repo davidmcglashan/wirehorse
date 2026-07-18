@@ -396,6 +396,9 @@ var toolbar = {
 		model.updateMeta( { tt: newName.substring(3) } )
 		finder.update()
 		toolbar.hideMainDropdown()
+		
+		// Prompt the user to give the new wireframe an original name.
+		toolbar.rename()
 	},
 
 	/**
