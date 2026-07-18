@@ -41,25 +41,29 @@ var canvas = {
 	scale: ( event ) => {
 		let ids = selection.ids()
 		
-		// For a simple press, if there's no selection we simply reset the display.
-		if ( ids.length === 0 && !event.shiftKey ) {
-			model.updateMeta( {ox:1, oy:1, sc:1 } )
+		// Shift+compass focuses on the first shape in the model at zero scale.
+		if ( event.shiftKey ) {
+			//model.updateMeta( {ox:1, oy:1, sc:1 } )
+			let shape = model.sh[0]
+			canvas.performScale( 
+				{ 
+					x: shape ? shape.x : 0, 
+					y: shape ? shape.y : 0, 
+					width: 100, 
+					height: 100
+				} 
+			)
 			return
 		}
 
-		// If there's no selection but shift was pressed then we consider every element
-		// on the canvas.
-		if ( event.shiftKey ) {
+		// If there's no selection then consider every element on the canvas.
+		if ( ids.length === 0 ) {
 			for ( let shape of model.sh ) {
 				ids.push( shape.id )
 			}
 		}
-
-		// This is the inner width to use in calculations
-		let innerWidth = window.innerWidth
-		innerWidth -= document.getElementById( '-palette' ).getBoundingClientRect().width
-
-			// Work out scale of rectangle we want to fit in the viewport
+		
+		// Work out scale of rectangle we want to fit in the viewport
 		let minX = 10000
 		let minY = 10000
 		let maxX = -10000
@@ -69,13 +73,13 @@ var canvas = {
 			
 			minX = Math.min( minX, shape.x )
 			minY = Math.min( minY, shape.y )
-
+			
 			let rect = document.getElementById( id ).getBoundingClientRect()
 			let w = shape.w
 			if ( !w ) { w = rect.width }
 			let h = shape.h
 			if ( !h ) { h = rect.height }
-
+			
 			maxX = Math.max( maxX, shape.x + w )
 			maxY = Math.max( maxY, shape.y + h )
 		}
@@ -83,19 +87,31 @@ var canvas = {
 		let width = maxX - minX
 		let height = maxY - minY
 
+		canvas.performScale( { x: minX, y: minY, width: width, height: height } )
+	},
+
+	/**
+	 * Performs the canvas scale operation around the passed in rectangle. 
+	 * Usually called from canvas.scale().
+	 */
+	performScale: ( rect ) => {
+		// This is the inner width to use in calculations
+		let innerWidth = window.innerWidth
+		innerWidth -= document.getElementById( '-palette' ).getBoundingClientRect().width
+
 		// if if fits in the current viewport at 1x then centre it and scale:1. Otherwise,
 		// apply a scale with 10% margin for context.
 		let scale = 1
-		if ( width > innerWidth ) {
-			scale = innerWidth / (width*1.1)
+		if ( rect.width > innerWidth ) {
+			scale = innerWidth / (rect.width*1.1)
 		}
 
 		// Work out where to move the transform to based on viewport size and focus position.
-		let newX = (innerWidth - width) / 2
-		let newY = (window.innerHeight - height) / 2
+		let newX = (innerWidth - rect.width) / 2
+		let newY = (window.innerHeight - rect.height) / 2
 		model.updateMeta( {
-			ox: -1 * (minX - newX), 
-			oy: -1 * (minY - newY), 
+			ox: -1 * (rect.x - newX), 
+			oy: -1 * (rect.y - newY), 
 			sc: scale
 		} )
 	},

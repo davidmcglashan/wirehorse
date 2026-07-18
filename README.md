@@ -21,6 +21,7 @@ Wireframing works when the distance from idea to demonstration is kept as as sho
 * Added a button to quickly switch back to the previous wireframe
 * Copying a wireframe now prompts for a new name immediately
 * Paste tries better to place the output in the centre of the viewport
+* The compass button now focuses your selection, or everything, or resets with Shift+click and 
 
 ### v0.5.0
 * Wireframe switcher now scrolls long lists and is searchable
