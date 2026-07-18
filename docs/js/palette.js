@@ -2,68 +2,68 @@ var palette = {
 	config: {
 		rec: {
 			fields: [ 'x','y','w','h','bg','co','bo','op' ],
-			toolbars: ['arrange','tools','font','text-align']
+			toolbars: ['tools','font','text-align']
 		},
 		cmb: {
 			fields: [ 'x','y','w','co' ],
-			toolbars: ['arrange','tools','font']
+			toolbars: ['tools','font']
 		},
 		chb: {
 			fields: [ 'x','y','w','co' ],
-			toolbars: ['arrange','tools','font'],
+			toolbars: ['tools','font'],
 		},
 		rad: {
 			fields: [ 'x','y','w','co' ],
-			toolbars: ['arrange','tools','font'],
+			toolbars: ['tools','font'],
 		},
 		ic: {
 			fields: [ 'x','y','w','ic','bg' ],
-			toolbars: ['arrange','tools']
+			toolbars: ['tools']
 		},
 		map: {
 			fields: [ 'x','y','w' ],
-			toolbars: ['arrange','tools']
+			toolbars: ['tools']
 		},
 		lbl: {
 			fields: [ 'x','y','w','co' ],
-			toolbars: ['arrange','tools','font','text-align'],
+			toolbars: ['tools','font','text-align'],
 		},
 		bcb: {
 			fields: [ 'x','y' ],
-			toolbars: ['arrange','tools','font']
+			toolbars: ['tools','font']
 		},
 		hr: {
 			fields: [ 'x','y','w','bo' ],
-			toolbars: ['arrange','tools']
+			toolbars: ['tools']
 		},
 		vr: {
 			fields: [ 'x','y','h','bo' ],
-			toolbars: ['arrange','tools']
+			toolbars: ['tools']
 		},
 		tab: {
 			fields: [ 'x','y','w' ],
-			toolbars: ['arrange','tools','font']
+			toolbars: ['tools','font']
 		},
 		sld: {
 			fields: [ 'x','y','w','val' ],
-			toolbars: ['arrange','tools']
+			toolbars: ['tools']
 		},
 		tbl: {
 			fields: [ 'x','y','w' ],
-			toolbars: ['arrange','tools','font']
+			toolbars: ['tools','font']
 		},
 		hs: {
 			fields: [ 'x','y','w','bo' ],
-			toolbars: ['arrange','tools']
+			toolbars: ['tools']
 		},
 		vs: {
 			fields: [ 'x','y','h','bo' ],
-			toolbars: ['arrange','tools']
+			toolbars: ['tools']
 		},
 	},
 
 	fields: [ 'x','y','w','h','ic','bg','co','bo','fz','fb','fi','fu','fs','ha','va','op','val' ],
-	toolbars: ['arrange','tools','text-align','font'],
+	toolbars: ['tools','text-align','font'],
 	multiToolbars: [ 'shape-align' ],
 	
 	// Hotkeys are used in canvas.js and map ids to key codes for e.g. Cmd+B to make a 

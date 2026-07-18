@@ -92,16 +92,6 @@
 				<a data-type="switch" id="-fld-va:m" href="javascript:void(0)" onclick="palette.setField('va','m')"><img src="assets/align-middle-svgrepo-com.svg"></a>
 				<a data-type="switch" id="-fld-va:b" href="javascript:void(0)" onclick="palette.setField('va','b')"><img src="assets/align-bottom-svgrepo-com.svg"></a>
 			</div>
-			<div id="-toolbar-arrange" class="toolbar toolbar-labels hidden">
-				<span class="label">Arrange Shapes</span>
-				<a title="Move backward (+Shift: Send to back)" href="javascript:void(0)" onclick="canvas.relayerSelection(event,'b')"><img src="assets/send-to-back-svgrepo-com.svg"><btn-lbl>Send to back</btn-lbl></a>
-				<a title="Move forward (+Shift: Bring to front)" href="javascript:void(0)" onclick="canvas.relayerSelection(event,'f')"><img src="assets/bring-to-front-svgrepo-com.svg"><btn-lbl>Bring to front</btn-lbl></a>
-			</div>
-			<div id="-toolbar-tools" class="toolbar hidden toolbar-labels">
-				<span class="label">Tools</span>
-				<a href="javascript:void(0)" onclick="toolbar.lockSelection()" title="Lock the selection"><img src="assets/lock-svgrepo-com.svg"><btn-lbl>Lock selection</btn-lbl></a>
-				<a href="javascript:void(0)" onclick="toolbar.deleteSelection()" title="Delete the selection"><img src="assets/trash-svgrepo-com.svg"><btn-lbl>Delete selection</btn-lbl></a>
-			</div>
 			<div id="-toolbar-shape-align" class="toolbar hidden">
 				<span class="label">Align Shapes</span>
 				<a href="javascript:void(0)" onclick="palette.align('l')"><img src="assets/align-shapes-left-svgrepo-com.svg"></a>
@@ -110,6 +100,13 @@
 				<a href="javascript:void(0)" onclick="palette.align('t')"><img src="assets/align-shapes-top-svgrepo-com.svg"></a>
 				<a href="javascript:void(0)" onclick="palette.align('m')"><img src="assets/align-shapes-middle-svgrepo-com.svg"></a>
 				<a href="javascript:void(0)" onclick="palette.align('b')"><img src="assets/align-shapes-bottom-svgrepo-com.svg"></a>
+			</div>
+			<div id="-toolbar-tools" class="toolbar toolbar-labels hidden">
+				<span class="label">Tools</span>
+				<a title="Move backward (+Shift: Send to back)" href="javascript:void(0)" onclick="canvas.relayerSelection(event,'b')"><img src="assets/send-to-back-svgrepo-com.svg"><btn-lbl>Send to back</btn-lbl></a>
+				<a title="Move forward (+Shift: Bring to front)" href="javascript:void(0)" onclick="canvas.relayerSelection(event,'f')"><img src="assets/bring-to-front-svgrepo-com.svg"><btn-lbl>Bring to front</btn-lbl></a>
+				<a href="javascript:void(0)" onclick="toolbar.lockSelection()" title="Lock the selection"><img src="assets/lock-svgrepo-com.svg"><btn-lbl>Lock selection</btn-lbl></a>
+				<a href="javascript:void(0)" onclick="toolbar.deleteSelection()" title="Delete the selection"><img src="assets/trash-svgrepo-com.svg"><btn-lbl>Delete selection</btn-lbl></a>
 			</div>
 		</div>
 		<div id="-toolbar">
