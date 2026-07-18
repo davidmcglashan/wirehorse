@@ -575,8 +575,9 @@ var glass = {
 			selection.clear()
 
 			for ( let shape of model.sh ) {
-				selection.add( shape.elem, { multi:true } )
+				selection.add( shape.elem, { multi:true, quiet:true } )
 			}
+			selection.fireListeners()
 		}
 
 		// Space prepares to hand-drag scroll the canvas around.

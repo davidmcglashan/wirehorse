@@ -100,10 +100,10 @@ var canvas = {
 		innerWidth -= document.getElementById( '-palette' ).getBoundingClientRect().width
 
 		// if if fits in the current viewport at 1x then centre it and scale:1. Otherwise,
-		// apply a scale with 10% margin for context.
+		// apply a scale with 5% margin for context.
 		let scale = 1
 		if ( rect.width > innerWidth ) {
-			scale = innerWidth / (rect.width*1.1)
+			scale = innerWidth / (rect.width*1.05)
 		}
 
 		// Work out where to move the transform to based on viewport size and focus position.
