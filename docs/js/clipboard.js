@@ -36,25 +36,21 @@ var clipboard = {
 	receive: ( txt ) => {
 		try {
 			let shapes = JSON.parse( txt )
-			let newShapes = []
 			selection.clear()
-
+			
 			// Always paste new shapes into the viewport.
-			let ids = []
-			for ( let shape of shapes ) {
-				ids.push( shape.id )
-			}
 			let viewport = geometry.viewportRect()
-			let bounds = geometry.bounds( ids )
+			let bounds = geometry.bounds( shapes )
 
 			// All the pasted shapes need to travel to the centre of the viewport so
 			// calculate a distance for them to travel from where they are now.
 			let dx = viewport.cx - bounds.x - bounds.w/2
 			let dy = viewport.cy - bounds.y - bounds.h/2
-
+			
 			// Add the new shapes to the model, reset their ids and DOM elements,
 			// doing the viewport translation, and adding them to the selection all
 			// at the same time ...
+			let newShapes = []
 			for ( let shape of shapes ) {
 				shape.id = null
 				shape.elem = null

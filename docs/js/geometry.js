@@ -50,9 +50,11 @@ var geometry = {
 	},
 
 	/**
-	 * Given an array of shape ids returns a rectangle that describes its bounds
+	 * Given an array of shapes returns a rectangle that describes their combined bounds.
+	 * Attempts to gracefully deal with elements not having w & h properties by falling back
+	 * to inspecting the DOM element, and will default again if no such element exists.
 	 */
-	bounds: ( ids ) => {
+	bounds: ( shapes ) => {
 		let rect = {
 			x: 10000,
 			y: 10000,
@@ -60,27 +62,38 @@ var geometry = {
 			y2: -10000
 		}
 
-		for ( let id of ids ) {
-			let shape = model.shape( id )
-			if ( !shape ) {
-				continue
-			}
-
+		// Iterate the passed in shapes.
+		for ( let shape of shapes ) {
+			// Find the lowest x,y co-ords.
 			rect.x = Math.min( rect.x, shape.x )
 			rect.y = Math.min( rect.y, shape.y )
 
+			// We may set these looking for the width so can refer to them for deriving the h.
+			let elem = null
 			let bounds = null
+
+			// Does the shape have a width? No? Then look to the DOM element? Failing that assume 100px.
 			let w = shape.w
 			if ( !w ) { 
-				bounds = document.getElementById( id ).getBoundingClientRect()
-				w = bounds.width 
+				w = 100
+				elem = document.getElementById( shape.id )
+				if ( elem ) {
+					bounds = elem.getBoundingClientRect()
+					w = bounds.width 
+				}
 			}
+
+			// Same for height, but fallback to 50px this time.
 			let h = shape.h
 			if ( !h ) { 
+				h = 50
 				if ( !bounds ) {
-					bounds = document.getElementById( id ).getBoundingClientRect()
+					elem = document.getElementById( shape.id )
+					if ( elem ) {
+						bounds = elem.getBoundingClientRect()
+						h = bounds.height 
+					}
 				}
-				h = bounds.height 
 			}
 
 			rect.x2 = Math.max( rect.x2, shape.x + w )
