@@ -286,18 +286,19 @@ var glass = {
 				let dx = Math.abs( event.pageX - glass.drag.x )
 				let dy = Math.abs( event.pageY - glass.drag.y )
 				
+				// Distance check!
 				if ( dx < 5 && dy < 5 ) {
 					return
 				}				
+
+				// Once we survive the distance check then we're good to start the drag properly
+				glass.drag.editorPermitted = false
+				glass.selem.classList.add( 'hidden' )
+				glass.dragRect.classList.remove( 'hidden' )
+				glass.drag.moving = true
 			}
 			
 			let scale = model.meta( 'sc' )
-
-			// Tidy up the UI as we perform the drag
-			glass.drag.moving = true
-			glass.drag.editorPermitted = false
-			glass.selem.classList.add( 'hidden' )
-			glass.dragRect.classList.remove( 'hidden' )
 
 			// If we're scroll dragging then we translate the distance from where we started to where we are now.
 			if ( glass.drag.mode === glass.dragmodes.MOVE_CANVAS ) {
@@ -424,9 +425,10 @@ var glass = {
 							rect.bottom > shapeRect.top &&
 							rect.left < shapeRect.right 
 						) {
-							selection.add( shape.elem, {multi:true} )
+							selection.add( shape.elem, {multi:true, quiet:true} )
 						}
 					}
+					selection.fireListeners()
 				}
 
 				// Object drags supply new x,y values for the shapes being moved.
