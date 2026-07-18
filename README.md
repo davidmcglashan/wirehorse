@@ -16,6 +16,9 @@ Wireframing works when the distance from idea to demonstration is kept as as sho
 
 ## Version history
 
+### v0.5.1
+* Labelled the less-obvious palette buttons
+
 ### v0.5.0
 * Wireframe switcher now scrolls long lists and is searchable
 * Added a new 'use at your risk' backup and restore tool
