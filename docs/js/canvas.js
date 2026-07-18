@@ -114,6 +114,17 @@ var canvas = {
 			oy: -1 * (rect.y - newY), 
 			sc: scale
 		} )
+		canvas.applyScale()
+	},
+
+	applyScale: () => {
+		// If the scale is sufficiently zoomed out then we see performance boosts
+		// by applying some CSS acceleration hints.
+		if ( model.meta('sc' ) < 0.9 ) {
+			canvas.elem.style.willChange = 'transform'
+		} else {
+			canvas.elem.style.willChange = 'auto'
+		}
 	},
 
 	/**

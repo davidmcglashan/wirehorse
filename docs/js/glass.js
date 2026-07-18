@@ -567,10 +567,6 @@ var glass = {
 			return
 		}
 
-		if ( event.metaKey ) {
-			glass.canvas.style.willChange = 'transform'
-		}
-
 		// Cmd+A to select everything
 		if ( event.metaKey && event.keyCode == 65 ) {
 			event.preventDefault()
@@ -628,10 +624,10 @@ var glass = {
 	 */
 	keyUp: ( event ) => {
 		glass.elem.setAttribute( 'class', '' )
-		glass.canvas.style.willChange = 'auto'
 		glass.drag.ready = false
 		glass.drag.shape = null
-
+		canvas.applyScale()
+		
 		if ( event.keyCode === 32 )  {
 			if ( selection.yes() ) {
 				glass.selem.classList.remove( 'hidden' )
