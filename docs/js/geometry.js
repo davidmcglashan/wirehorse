@@ -15,9 +15,12 @@ var geometry = {
 		rect.w -= pw
 		rect.w /= model.meta( 'sc' )
 
+		// Scale and offset the rest of the new rectangle.
 		rect.h = document.documentElement.clientHeight / model.meta( 'sc' )
 		rect.cx = ( (document.documentElement.clientWidth/2) - model.meta( 'ox' ) )
 		rect.cy = ( (document.documentElement.clientHeight/2) - model.meta( 'oy' ) )
+
+		// Position it relative to the centre, remember to account for the palette again.
 		rect.x = rect.cx - rect.w/2 - pw/2
 		rect.y = rect.cy - rect.h/2
 		rect.x2 = rect.cx + rect.w/2
