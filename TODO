@@ -9,10 +9,6 @@ backlog
 - drag-drawing up or left gets the shape drawn in the wrong place
 - Spilt toolbar.js into bits
 
-v0.5.0
-
-- archive is a little naughty removing other modules event listeners!
-- rectangle with the X through it that can be colour changed
 - There might be a locked object here
 - fancy arrows that actually "simple" SVG curves
   - xywh define the bounding rect where the SVG is drawn
@@ -20,11 +16,14 @@ v0.5.0
   - needs two more drag handles to move the curve descriptors
   - clever drag mechanics to resize and re-position the box
 
+- archive is a little naughty removing other modules event listeners!
+- rectangle with the X through it that can be colour changed
 - compassing selections taller but not wider than the viewport should do a Y scale instead of an X one
 - super wide tabs and rules get a space in the middle - probably need their own scribbley SVG
 - entity.css and class="entity" but shape and element elsehwere?
 - probably some mileage and re-organising a lot of the code and functions in the 'wrong' place
 - robustness around adding new shapes e.g. not finding the defaults or functions
+- alias a field on the palette to change the label name e.g. {'bg': 'Colour'}
 
 - groups of components
   - select one, select all - just need groups with their members described in the model
@@ -46,14 +45,3 @@ v0.5.0
   - Horizontal and vertical arrange features - space & distribute
 - alignment guides
 - inset guides
-- alias a field on the palette to change the label name e.g. {'bg': 'Colour'}
-
-meta
-----
-- License information
-  - https://chr15m.github.io/DoodleCSS/
-  - Google fonts
-  - SVG Repo
-    - zest interface icons collection (most of the others)
-    - Coolicons (filter)
-	- Gentlecons (up-down arrows)
