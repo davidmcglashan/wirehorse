@@ -3,12 +3,9 @@ bugs
 
 backlog
 -------- 
-- glass and palette are slow to listen to changes to lots of objects 
-  - select N items, do a drag, let go
-  - this invokes a palette refresh and glass/selection refresh N times
-
 - handle the mouse leaving the window mid-drag
-	- push scroll
+  - what should happen when you hit the bounds? stop? track?
+  - can we make it push scroll if you sit near the edge?
 	- balsamiq follows you out of the window and keeps moving the items
 	- it knows when you're above or below as you move around outside the window
 - drag-drawing up or left gets the shape drawn in the wrong place

@@ -265,6 +265,7 @@ var glass = {
 			// Prepare the rectangle which appears when you drag.
 			if (  [ glass.dragmodes.DRAW_SHAPE, glass.dragmodes.SELECT_SHAPES ].includes( glass.drag.mode ) ) {
 				glass.dragRect.setAttribute( 'class', 'select' )
+				glass.elem.setAttribute( 'class', 'ready-xhair' )
 
 				switch ( glass.drag.shape?.drag ) {
 					case glass.drawShapeModes.DRAG_RECT:
@@ -317,21 +318,21 @@ var glass = {
 			} 
 
 			// Are we drawing or selecting something?
-			else if (  [ glass.dragmodes.DRAW_SHAPE, glass.dragmodes.SELECT_SHAPES ].includes( glass.drag.mode ) ) {
+			else if ( [ glass.dragmodes.DRAW_SHAPE, glass.dragmodes.SELECT_SHAPES ].includes( glass.drag.mode ) ) {
 				// Calculate the amount moved since the last call. 
 				if ( event.pageX < glass.drag.x ) {
 					glass.dragRect.style.left = `${event.pageX}px`
-					glass.dragRect.style.width = `${glass.drag.x - event.pageX - 18}px`
+					glass.dragRect.style.width = `${glass.drag.x - event.pageX}px`
 				} else {
 					glass.dragRect.style.left = `${glass.drag.x}px`
-					glass.dragRect.style.width = `${event.pageX - glass.drag.x - 18}px`
+					glass.dragRect.style.width = `${event.pageX - glass.drag.x}px`
 				}
 				if ( event.pageY < glass.drag.y ) {
 					glass.dragRect.style.top = `${event.pageY}px`
-					glass.dragRect.style.height = `${glass.drag.y - event.pageY - 18}px`
+					glass.dragRect.style.height = `${glass.drag.y - event.pageY}px`
 				} else {
 					glass.dragRect.style.top = `${glass.drag.y}px`
-					glass.dragRect.style.height = `${event.pageY - glass.drag.y - 18}px`
+					glass.dragRect.style.height = `${event.pageY - glass.drag.y}px`
 				}
 			}
 
@@ -397,6 +398,8 @@ var glass = {
 	 */
 	mouseReleased: ( event ) => {
 		try {
+			glass.elem.setAttribute( 'class', '' )
+
 			// If this is a drag then let it finish.
 			if ( glass.drag.moving ) {
 				let scale = model.meta('sc')
@@ -436,6 +439,7 @@ var glass = {
 						}
 					}
 					selection.fireListeners()
+					glass.elem.setAttribute( 'class', '' )
 				}
 
 				// Object drags supply new x,y values for the shapes being moved.
