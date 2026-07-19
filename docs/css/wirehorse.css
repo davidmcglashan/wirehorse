@@ -25,6 +25,8 @@ a {
 	font-style: normal;
 	position: absolute;
 	inset: 0 200px 0 0;
+	user-select: none;
+	-webkit-user-select: none;
 }
 
 /* When the canvas is showing we accomodate some space for it */
@@ -187,7 +189,9 @@ body.hide-palette #-canvas {
 	right: 0;
 	background-color: #f0f0f0;
 	font-family: "Karla", sans-serif;
-	
+	user-select: none; 
+	-webkit-user-select: none;
+
 	padding: 0.1rem 1rem 0.1rem 1rem;
 	display: flex;
 	justify-content: space-between;
@@ -454,6 +458,8 @@ body.hide-palette #-canvas {
 	font-family: "Karla", sans-serif;
 	font-weight: 400;
 	font-style: normal;
+	user-select: none;
+	-webkit-user-select: none;
 
 	position: absolute;
 	inset: 0 0 0 0;

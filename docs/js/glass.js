@@ -81,9 +81,9 @@ var glass = {
 
 		// Have the glass and selection <div>s listen to the same mouse events
 		for ( let elem of [ glass.elem, glass.selem ] ) {
-			elem.addEventListener( 'mouseup', glass.mouseReleased )
-			elem.addEventListener( 'mousemove', glass.mouseDragged )
-			elem.addEventListener( 'mousedown', glass.mousePressed )
+			elem.addEventListener( 'pointerup', glass.mouseReleased )
+			elem.addEventListener( 'pointermove', glass.mouseDragged )
+			elem.addEventListener( 'pointerdown', glass.mousePressed )
 			elem.addEventListener( 'wheel', glass.wheelTurned )
 			elem.addEventListener( 'dblclick', editor.invokeEditor )
 		}
@@ -261,6 +261,7 @@ var glass = {
 		if ( glass.drag.pressed ) {
 			glass.drag.x = event.pageX
 			glass.drag.y = event.pageY
+			glass.elem.setPointerCapture( event.pointerId )
 
 			// Prepare the rectangle which appears when you drag.
 			if (  [ glass.dragmodes.DRAW_SHAPE, glass.dragmodes.SELECT_SHAPES ].includes( glass.drag.mode ) ) {
@@ -492,6 +493,8 @@ var glass = {
 			selection.clear()
 		} finally {
 			// Always, always shut down the visual aspects of the drag.
+			glass.elem.releasePointerCapture( event.pointerId )
+
 			glass.drag.pressed = false
 			glass.dragRect.setAttribute( 'class', 'hidden')
 			glass.drag.shape = null

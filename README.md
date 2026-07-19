@@ -24,6 +24,7 @@ Wireframing works when the distance from idea to demonstration is kept as as sho
 * The compass button now focuses your selection, or everything, or resets with Shift+click
 * Cmd+A "Select All" is now very fast
 * Performance and appearance improvements to select-dragging
+* Dragging no longer collides with window edges
 
 ### v0.5.0
 * Wireframe switcher now scrolls long lists and is searchable
