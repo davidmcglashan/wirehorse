@@ -6,11 +6,18 @@ Wireframing works when the distance from idea to demonstration is kept as as sho
 
 * Clean UI where the only elements on top of the canvas are selection handles and the mouse pointer
 * No barely- and rarely-used features getting in the way. Just shapes and a canvas.
+* Rough-and-ready sketchy appearance, with text as squiggly scribbles, keeping focus on potential. 
 * Draw rectangles by holding 'R' and dragging the mouse
 * Draw text by holding 'T' and dragging the mouse
 * Place labels by holding 'L' and clicking
 * Place buttons by holding 'B' and clicking
-* Add other things from the toolbar or by pressing '/'
+* Add other things from the toolbar or by pressing '/' ...
+  * Paragraphs
+  * Drop-down boxes
+  * Checkboxes and radio buttons
+  * Over 100 SVG icons
+  * Tabs
+  * Scrollbars and sliders
 
 ![Wirehorse screenshot](https://wirehorse.mcglashan.net/assets/screenshot.png)
 
