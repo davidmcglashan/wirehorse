@@ -466,37 +466,4 @@ var toolbar = {
 	unlock: () => {
 		model.unlockShapes()
 	},
-
-	screenshot: () => {
-		// html2canvas().then(
-		// 	canvas => {
-    	// 		document.body.appendChild(canvas)
-		// 	}
-		// );	
-
-		html2canvas( document.querySelector("#-canvas"), { 
-			scale: 1,
-			useCORS: true,
-        	backgroundColor: null
-		} ).then(
-			function(canvas) {
-				// 1. Convert the canvas into a binary PNG Blob
-				canvas.toBlob(function(blob) {
-					// 2. Wrap the blob inside a native ClipboardItem object
-					const clipboardItem = new ClipboardItem({ 'image/png': blob });
-					
-					// 3. Write the item directly to the system clipboard
-					navigator.clipboard.write([clipboardItem])
-						.then(function() {
-							alert('PNG successfully copied to clipboard! Try pasting it (Ctrl+V).');
-						})
-						.catch(function(error) {
-							console.error('Clipboard write failed:', error);
-						});
-						
-					}, 'image/png'
-				); // Crucial: Explicitly define the mime-type as PNG
-    		}
-		);
-	}
-};
+}
