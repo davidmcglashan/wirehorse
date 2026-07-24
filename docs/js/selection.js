@@ -128,6 +128,18 @@ var selection = {
 	},
 
 	/**
+	 * Uses geometry to return the bounds of the current selection
+	 */
+	bounds: () => {
+		let shapes = []
+		for ( let elem of selection.storage ) {
+			shapes.push( model.shape( elem.getAttribute( 'id' ) ) )
+		}
+
+		return geometry.bounds( shapes )
+	},
+
+	/**
 	 * Returns the ids of all the currently selected entities in Z-order.
 	 */
 	idsInZOrder: () => {

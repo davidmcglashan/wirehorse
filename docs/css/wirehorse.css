@@ -20,13 +20,17 @@ a {
 
 /* Canvas is where the shapes are drawn. It uses the sketchy font. */
 #-canvas {
-	font-family: "Balsamiq Sans", sans-serif;
-	font-weight: 400;
-	font-style: normal;
 	position: absolute;
 	inset: 0 200px 0 0;
 	user-select: none;
 	-webkit-user-select: none;
+}
+
+.canvas {
+	font-family: "Balsamiq Sans", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+	background-color: #fff;
 }
 
 /* When the canvas is showing we accomodate some space for it */
@@ -729,5 +733,24 @@ body.archive {
 		inset: 4rem 1rem 1rem 1rem;
 		resize: none;
 		font-family: monospace;
+	}
+}
+
+body.snapshot img {
+	width: 100%;
+	height: unset;
+}
+
+div.snapshot {
+	font-family: "Karla", sans-serif;
+	padding: 1rem;
+
+	& a {
+		border: 1px solid #14a;
+		background-color: #36c;
+		color: #fff;
+		padding: 0.25rem 1.5rem;
+		border-radius: 4px;
+		margin-right: 1rem;
 	}
 }

@@ -27,9 +27,6 @@ backlog
 
 - groups of components
   - select one, select all - just need groups with their members described in the model
-- export to clipboard as a PNG
-  - everything
-  - selected items
 - can you hook cut/copy/paste into the apple menu?
 - insert a component from file ...
   - e.g. zatpark window, modal window

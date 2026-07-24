@@ -3,7 +3,7 @@ var wirehorse = {
 	loadCount: 0,
 
 	// The current software version.
-	version: 'v0.5.2-latest',
+	version: 'v0.6-latest',
 
 	// These are the scripts that need to be loaded.
 	scripts: [
@@ -24,7 +24,7 @@ var wirehorse = {
 		'innerHTML',
 		'geometry',
 		'archive',
-		'screenshot'
+		'snapshot'
 	],
 
 	/**

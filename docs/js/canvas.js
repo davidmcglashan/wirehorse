@@ -23,7 +23,7 @@ var canvas = {
 		css = ''
 
 		for ( let [key,icon] of Object.entries(model.icons) ) {
-			css += `.icon-${key}{mask: url('assets/${icon.asset}');}\n`
+			css += `.icon-${key}{mask-image: url('assets/${icon.asset}');}\n`
 		}
 		style.innerHTML = css
 	},

@@ -17,7 +17,7 @@
 		<script type="text/javascript" src="js/wirehorse.js"></script>
 	</head>
 	<body>
-		<div id="-canvas"></div>
+		<div id="-canvas" class="canvas"></div>
 		<div id="-drag-rect" class="hidden"></div>
 		<div id="-glass"></div>
 		<div id="-selection" data-drag-mode="1">
@@ -107,6 +107,9 @@
 				<a title="Move forward (+Shift: Bring to front)" href="javascript:void(0)" onclick="canvas.relayerSelection(event,'f')"><img src="assets/bring-to-front-svgrepo-com.svg"><btn-lbl>Bring to front</btn-lbl></a>
 				<a href="javascript:void(0)" onclick="toolbar.lockSelection()" title="Lock the selection"><img src="assets/lock-svgrepo-com.svg"><btn-lbl>Lock selection</btn-lbl></a>
 				<a href="javascript:void(0)" onclick="toolbar.deleteSelection()" title="Delete the selection"><img src="assets/trash-svgrepo-com.svg"><btn-lbl>Delete selection</btn-lbl></a>
+				<a href="javascript:void(0)" onclick="snapshot.take()" title="Take a snapshot"><img src="assets/camera-svgrepo-com.svg"><btn-lbl>Snap selection</btn-lbl></a>
+				</a>
+
 			</div>
 		</div>
 		<div id="-toolbar">
@@ -120,9 +123,6 @@
 				<a href="javascript:void(0)" onclick="toolbar.rename()" title="Rename this wireframe">
 					<span id="-title"></span>
 					<img src="assets/edit-svgrepo-com.svg" class="img-1">
-				</a>
-				<a href="javascript:void(0)" onclick="screenshot.take()" title="Take a screenshot">
-					<img src="assets/camera-svgrepo-com.svg">
 				</a>
 			</div>
 			<div>

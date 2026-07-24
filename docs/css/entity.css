@@ -246,7 +246,7 @@ ul.dropdown,
 /* ==================================================== */
 /* Icons */
 
-#-canvas .entity-ic {
+.entity-ic {
 	mask-size: contain;
 	mask-repeat: no-repeat;
 	aspect-ratio: 1;

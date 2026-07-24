@@ -39,6 +39,9 @@ Most of what you see is provided by [SVG Repo](https://www.svgrepo.com) ...
 
 ## Version history
 
+### v0.6
+* Selections can be converted to PNGs for copy/paste or download
+
 ### v0.5.1
 * Labelled the less-obvious palette buttons
 * Added a button to quickly switch back to the previous wireframe
