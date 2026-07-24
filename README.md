@@ -21,6 +21,8 @@ Wireframing works when the distance from idea to demonstration is kept as as sho
 
 ![Wirehorse screenshot](https://wirehorse.mcglashan.net/assets/screenshot.png)
 
+[![Built with SnapDOM](https://img.shields.io/badge/built%20with-SnapDOM-blue)](https://snapdom.dev)
+
 ## Credits & Acknowledgements
 
 Inspired by Balsamiq Wireframes with realisation and inspiration from [DoodleIO](https://chr15m.github.io/DoodleCSS/) by [Chris McCormick](https://mccormick.cx).
@@ -36,6 +38,10 @@ Most of what you see is provided by [SVG Repo](https://www.svgrepo.com) ...
 * [Coolicons](https://staging.svgrepo.com/collection/coolicons/) for the filter icon
 * [Gentlecons](https://www.svgrepo.com/collection/gentlecons-interface-icons/) for the up-down arrows
 * All the other SVGs were lovingly hand-mangled by the author
+
+### Snapdom
+
+The 'Snap Selection' feature was implemented using [Snapdom](https://snapdom.dev) 
 
 ## Version history
 
