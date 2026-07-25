@@ -321,19 +321,20 @@ var glass = {
 			// Are we drawing or selecting something?
 			else if ( [ glass.dragmodes.DRAW_SHAPE, glass.dragmodes.SELECT_SHAPES ].includes( glass.drag.mode ) ) {
 				// Calculate the amount moved since the last call. 
+				let offset = glass.drag.mode === glass.dragmodes.SELECT_SHAPES ? 0 : 18
 				if ( event.pageX < glass.drag.x ) {
 					glass.dragRect.style.left = `${event.pageX}px`
-					glass.dragRect.style.width = `${glass.drag.x - event.pageX}px`
+					glass.dragRect.style.width = `${glass.drag.x - event.pageX - offset}px`
 				} else {
 					glass.dragRect.style.left = `${glass.drag.x}px`
-					glass.dragRect.style.width = `${event.pageX - glass.drag.x}px`
+					glass.dragRect.style.width = `${event.pageX - glass.drag.x - offset}px`
 				}
 				if ( event.pageY < glass.drag.y ) {
 					glass.dragRect.style.top = `${event.pageY}px`
-					glass.dragRect.style.height = `${glass.drag.y - event.pageY}px`
+					glass.dragRect.style.height = `${glass.drag.y - event.pageY - offset}px`
 				} else {
 					glass.dragRect.style.top = `${glass.drag.y}px`
-					glass.dragRect.style.height = `${event.pageY - glass.drag.y}px`
+					glass.dragRect.style.height = `${event.pageY - glass.drag.y - offset}px`
 				}
 			}
 

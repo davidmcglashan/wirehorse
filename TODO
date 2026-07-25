@@ -3,6 +3,9 @@ bugs
 
 backlog
 -------- 
+- Fix the smooth left edge of scribbled text
+- combo box dropdowns disappear when scribbled
+- selecting a combobox to invoke its editor doesn't work on the dropdown bit
 
 - resize window needs to reset the selection
 - implement a push scroll if you linger outside the glass pane during a drag (but not a selection)
