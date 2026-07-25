@@ -48,6 +48,7 @@ The 'Snap Selection' feature was implemented using [Snapdom](https://snapdom.dev
 ### v0.6
 * Selections can be converted to PNGs for copy/paste or download
 * Re-aligned dragging a rect or text with the mouse pointer
+* Scribble text now uses clip to overflow to prevent hard cuts on its left and right edges
 
 ### v0.5.1
 * Labelled the less-obvious palette buttons

@@ -7,7 +7,7 @@
 	font-family: "Redacted Script", cursive;
 	font-weight: 700;
 	font-style: normal;
-	overflow: hidden;
+	overflow-y: clip;
 }
 
 /* ==================================================== */
@@ -28,14 +28,22 @@ ul.dropdown,
 	border-image-width: 10px;
 }
 
+/* ==================================================== */
+/* Dropdown/comboboxes */
+
 .entity-cmb {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
 	background-color: #fff;
-}
-	.entity-cmb .caret {
+
+	/* This stops the dropdown disappearing when scribble is enabled */
+	&.scribble {
+		overflow-y: initial;
+	}
+
+	& .caret {
 		background-image: url('../assets/dropdown-arrow-svgrepo-com.svg');
 		background-size: contain;
 		background-repeat: no-repeat;
@@ -45,7 +53,8 @@ ul.dropdown,
 		max-height: 1.5rem;
 		margin-top: 2px;
 	}
-	.entity-cmb ul.dropdown {
+
+	& ul.dropdown {
 		position: absolute; 
 		top: calc( 100% + 15px );
 		left: -8px;
@@ -59,6 +68,10 @@ ul.dropdown,
 		flex-direction: column;
 		gap: 1rem;
 	}
+}
+	
+/* ==================================================== */
+/* Rectangles */
 
 .entity-rec {
 	display: flex;
