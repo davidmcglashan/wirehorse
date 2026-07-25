@@ -3,8 +3,6 @@ bugs
 
 backlog
 -------- 
-- selecting a combobox to invoke its editor doesn't work on the dropdown bit
-
 - resize window needs to reset the selection
 - implement a push scroll if you linger outside the glass pane during a drag (but not a selection)
 - drag-drawing up or left gets the shape drawn in the wrong place

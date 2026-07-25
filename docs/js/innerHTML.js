@@ -171,7 +171,7 @@ var innerHTML = {
 
 		if ( lines.length > 1 ) {
 			lines.pop
-			html += '<ul class="dropdown border-g4">'
+			html += `<ul class="dropdown border-g4" data-entity="${shape.id}">`
 			for ( let i=1; i<lines.length; i++) {
 				html += `<li>${innerHTML.safe(lines[i])}</li>`
 			}

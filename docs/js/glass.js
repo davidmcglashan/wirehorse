@@ -488,6 +488,20 @@ var glass = {
 					selection.add( elem, { multi: event.shiftKey } )
 					return
 				}
+				
+				// DOM elements with a data-entity attr refer to other DOM elements, e.g.
+				// the menu of a drop-down box which is outside the bounds.
+				else if ( elem.getAttribute( 'data-entity' ) ) {
+					// Ignore this element if it's locked
+					let id = elem.getAttribute( 'data-entity' )
+					if ( model.isLocked( id ) ) {
+						continue
+					}
+
+					let parent = document.getElementById( id )
+					selection.add( parent, { multi: event.shiftKey } )
+					return
+				}
 			}
 
 			// Clear the selection if the click wasn't on an entity.
