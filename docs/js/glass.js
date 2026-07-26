@@ -537,13 +537,17 @@ var glass = {
 		newShape.x = point.x
 		newShape.y = point.y
 		
-		// Width and height are derived from where the drag started
-		let scale = model.meta( 'sc' )
-		newShape.w = event.pageX < glass.drag.x ? (glass.drag.x - event.pageX)/scale - 18 : (event.pageX - glass.drag.x)/scale - 18
+		// Width and height are derived from where the drag started. We only do this calculation
+		// for shapes thay have been dragged in. Those that are clicked e.g. buttons use different
+		// w,h mechanics.
+		if ( glass.drag.shape.drag ) {
+			let scale = model.meta( 'sc' )
+			newShape.w = event.pageX < glass.drag.x ? (glass.drag.x - event.pageX)/scale - 18 : (event.pageX - glass.drag.x)/scale - 18
 			
-		// Evaluate a height for shapes that need it.
-		if ( glass.drag.shape.drag !== glass.drawShapeModes.DRAG_RULE ) {
-			newShape.h = event.pageY < glass.drag.y ? (glass.drag.y - event.pageY)/scale - 18 : (event.pageY - glass.drag.y)/scale - 18
+			// Evaluate a height for shapes that need it.
+			if ( glass.drag.shape.drag !== glass.drawShapeModes.DRAG_RULE ) {
+				newShape.h = event.pageY < glass.drag.y ? (glass.drag.y - event.pageY)/scale - 18 : (event.pageY - glass.drag.y)/scale - 18
+			}
 		}
 
 		// Push it into the model in an undoable way.
