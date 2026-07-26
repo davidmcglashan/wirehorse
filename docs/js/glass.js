@@ -527,19 +527,22 @@ var glass = {
 	addShapeWithMouse: ( event ) => {
 		let newShape = {...glass.drag.shape.model}
 
-		// Use geometry to workout where the mouse drag stopped on the canvas.
-		let point = geometry.viewportXYtoCanvas( { x: glass.drag.x, y: glass.drag.y } )
+		// Use geometry to workout where the mouse drag stopped on the canvas. Use that as our new
+		// shape's x,y
+		let point = geometry.viewportXYtoCanvas( { 
+			x: event.pageX < glass.drag.x ? event.pageX : glass.drag.x, 
+			y: event.pageY < glass.drag.y ? event.pageY : glass.drag.y 
+		} )
 		newShape.x = point.x
 		newShape.y = point.y
 		
-		if ( glass.drag.shape.drag ) {
-			let scale = model.meta( 'sc' )
-			newShape.w = event.pageX < glass.drag.x ? (glass.drag.x - event.pageX)/scale : (event.pageX - glass.drag.x)/scale - 18
+		// Width and height are derived from where the drag started
+		let scale = model.meta( 'sc' )
+		newShape.w = event.pageX < glass.drag.x ? (glass.drag.x - event.pageX)/scale - 18 : (event.pageX - glass.drag.x)/scale - 18
 			
-			// Evaluate a height for shapes that need it.
-			if ( glass.drag.shape.drag !== glass.drawShapeModes.DRAG_RULE ) {
-				newShape.h = event.pageY < glass.drag.y ? (glass.drag.y - event.pageY)/scale : (event.pageY - glass.drag.y)/scale - 18
-			}
+		// Evaluate a height for shapes that need it.
+		if ( glass.drag.shape.drag !== glass.drawShapeModes.DRAG_RULE ) {
+			newShape.h = event.pageY < glass.drag.y ? (glass.drag.y - event.pageY)/scale - 18 : (event.pageY - glass.drag.y)/scale - 18
 		}
 
 		// Push it into the model in an undoable way.

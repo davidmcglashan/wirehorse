@@ -3,9 +3,7 @@ bugs
 
 backlog
 -------- 
-- resize window needs to reset the selection
-- implement a push scroll if you linger outside the glass pane during a drag (but not a selection)
-- drag-drawing up or left gets the shape drawn in the wrong place
+- implement a push scroll if you linger outside the glass pane during a drag (but not a selection) 
 - Spilt toolbar.js into bits
 
 - There might be a locked object here

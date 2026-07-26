@@ -50,6 +50,7 @@ The 'Snap Selection' feature was implemented using [Snapdom](https://snapdom.dev
 * Re-aligned dragging a rect or text with the mouse pointer
 * Scribble text now uses clip to overflow to prevent hard cuts on its left and right edges
 * Selecting a combobox now works on the dropdown bit
+* Drag-drawn shapes now calculate the correct size when drawn to the left or upwards
 
 ### v0.5.1
 * Labelled the less-obvious palette buttons
