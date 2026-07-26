@@ -54,8 +54,8 @@ var toolbar = {
 		toolbar.searchInput.addEventListener( 'input', toolbar.searching )
 
 		// Populate the dropdown with all the default shapes
-		for ( let i in defaults.entries ) {
-			let entry = defaults.entries[i]
+		for ( let i in defaults.shapes ) {
+			let entry = defaults.shapes[i]
 			let li = document.createElement( 'li' )
 			toolbar.searchList.appendChild( li )
 			entry.elem = li
@@ -152,7 +152,7 @@ var toolbar = {
 	 */
 	openSearchDropdown: () => {
 		// Straighten the appearance of the options.
-		for ( let def of defaults.entries ) {
+		for ( let def of defaults.shapes ) {
 			def.elem.classList.remove( 'hidden' )
 			def.elem.classList.remove( 'selected' )
 		}
@@ -202,8 +202,8 @@ var toolbar = {
 
 		// Enter will submit the selected shape.
 		else if ( event.keyCode === 13 ) {
-			for ( let i in defaults.entries ) {
-				let def = defaults.entries[i]
+			for ( let i in defaults.shapes ) {
+				let def = defaults.shapes[i]
 
 				if ( def.elem.checkVisibility() && def.elem.classList.contains( 'selected' ) ) {
 					toolbar.add( i )
@@ -220,7 +220,7 @@ var toolbar = {
 
 			// Iterate the <li> elements in the list. For the 'up' key we do this
 			// in reverse.
-			let iterate = defaults.entries
+			let iterate = defaults.shapes
 			if ( event.keyCode === 38 ) {
 				iterate = iterate.toReversed()
 			}
@@ -260,8 +260,8 @@ var toolbar = {
 		let term = toolbar.searchInput.value.toLowerCase()
 		let first = null
 
-		for ( let i in defaults.entries ) {
-			let def = defaults.entries[i]
+		for ( let i in defaults.shapes ) {
+			let def = defaults.shapes[i]
 			def.elem.classList.remove( 'selected' )
 
 			if ( def.name.toLowerCase().indexOf( term ) !== -1 ) {
@@ -280,8 +280,8 @@ var toolbar = {
 	 * Add a new shape to the model.
 	 */
 	add: ( index ) => {
-		// Our new shape is a shallow clone of the default.
-		let newShape = { ...defaults.entries[index].model } 
+		// Our new shape is a shallow clone of its default shape.
+		let newShape = { ...defaults.shapes[index].model } 
 
 		// It needs an x and a y that'll put it in the middle of the current
 		// visible viewport.

@@ -37,26 +37,26 @@ var glass = {
 	drawShapes: [
 		{ // L for adding labels
 			keyCode: 76,
-			model: defaults.entries[6].model,
+			model: defaults.shapes[6].model,
 			drag: 0 // CLICK
 		},{ // B for buttons
 			keyCode: 66,
-			model: defaults.entries[1].model,
+			model: defaults.shapes[1].model,
 			drag: 0 // CLICK
 		},
 		{ // R for adding rectangles
 			keyCode: 82, 
-			model: defaults.entries[0].model,
+			model: defaults.shapes[0].model,
 			drag: 1 // DRAG_RECT
 		},
 		{ // H for horizontal rules
 			keyCode: 72,
-			model: defaults.entries[13].model,
+			model: defaults.shapes[13].model,
 			drag: 2 // DRAG_RULE
 		},
 		{ // T for adding text paragraphs
 			keyCode: 84,
-			model: defaults.entries[8].model,
+			model: defaults.shapes[8].model,
 			drag: 3 // DRAG_TEXT
 		}
 	],

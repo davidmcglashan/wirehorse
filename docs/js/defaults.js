@@ -6,7 +6,7 @@ const globals = {
 };
 
 var defaults = {
-	entries: [ {
+	shapes: [ {
 			name: 'Rectangle',
 			model: {
 				ty: 'rec',
@@ -218,7 +218,7 @@ var defaults = {
 		for ( let i in model.icons ) {
 			let icon = model.icons[i]
 
-			defaults.entries.push(
+			defaults.shapes.push(
 				{
 					name: icon.name,
 					model: {
