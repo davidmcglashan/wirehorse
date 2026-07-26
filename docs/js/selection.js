@@ -158,5 +158,5 @@ var selection = {
 		}
 
 		return sidsInOrder
-	}
+	},
 };

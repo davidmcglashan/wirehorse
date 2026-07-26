@@ -17,7 +17,7 @@ var clipboard = {
 	 */
 	cut: ( sids ) => {
 		clipboard.copy( sids )
-		toolbar.deleteSelection()
+		palette.deleteSelection()
 	},
 
 	/**

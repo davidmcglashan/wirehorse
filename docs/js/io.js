@@ -1,4 +1,21 @@
 var io = {
+
+	/**
+	 * Load a new wireframe from a file.
+	 */
+	load: () => {
+		let input = document.getElementById( '-load-input' )
+		io.loadModel( input.files[0], toolbar.hideMainDropdown )
+	},
+
+	/**
+	 * Save the current wireframe model to disk.
+	 */
+	save: () => {
+		let filename = document.getElementById( '-save-input' ).value
+		io.writeModel( filename, toolbar.hideMainDropdown )
+	},
+
 	/**
 	 * Load a file from disk to be added into the current wireframe
 	 */

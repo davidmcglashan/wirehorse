@@ -8,7 +8,7 @@ var toolbar = {
 	previousWireframe: null,
 
 	init: () => {
-		model.registerMetadataListener( toolbar.update )
+		model.registerMetadataListener( toolbar.metaUpdated )
 		
 		toolbar.searchDropdown = document.getElementById( '-search-dropdown' )
 		toolbar.searchInput = document.getElementById( '-search-input' )
@@ -301,7 +301,7 @@ var toolbar = {
 	 * Respond to a meta update in the model - usually the wireframe's title being
 	 * set or changing.
 	 */
-	update: ( meta ) => {
+	metaUpdated: ( meta ) => {
 		if ( meta.tt ) {
 			let elem = document.getElementById( '-title' )
 			elem.innerHTML = meta.tt
@@ -368,22 +368,6 @@ var toolbar = {
 	},
 
 	/**
-	 * Load a new wireframe from a file.
-	 */
-	load: () => {
-		let input = document.getElementById( '-load-input' )
-		io.loadModel( input.files[0], toolbar.hideMainDropdown )
-	},
-
-	/**
-	 * Save the current wireframe model to disk.
-	 */
-	save: () => {
-		let filename = document.getElementById( '-save-input' ).value
-		io.writeModel( filename, toolbar.hideMainDropdown )
-	},
-
-	/**
 	 * Duplicate the current wireframe into a new file with a fresh name.
 	 */
 	duplicate: () => {
@@ -415,48 +399,6 @@ var toolbar = {
 			toolbar.switch( name )
 		} else {
 			toolbar.new()
-		}
-	},
-
-	/**
-	 * Delete the selected shapes.
-	 */
-	deleteSelection: () => {
-		let removed = []
-		for ( let elem of selection.storage ) {
-			let id = elem.getAttribute( 'id' )
-			removed.push( model.removeShape( id ) )
-		}
-		// Give undo something to (un)do.
-		undo.pushBulkShapes( undo.types.REMOVE_SHAPES, removed )
-	},
-
-	/**
-	 * Reset the width of the selected shapes.
-	 */
-	resetSelectionWidth: () => {
-		let changes = []
-		for ( let elem of selection.storage ) {
-			let id = elem.getAttribute( 'id' )
-			changes[id] = model.resetShapeWidth( id )
-		}
-
-		// Give undo something to (un)do.
-		undo.pushMulti( changes )
-	},
-
-	/**
-	 * Locks the selected shapes, preventing them from being edited or moved until
-	 * unlock is pressed.
-	 */
-	lockSelection: () => {
-		if ( !selection.yes() ) {
-			return
-		}
-
-		for ( let elem of selection.storage ) {
-			let id = elem.getAttribute( 'id' )
-			model.lockShape( id )
 		}
 	},
 

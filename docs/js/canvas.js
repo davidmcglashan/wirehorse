@@ -221,7 +221,7 @@ var canvas = {
 
 		// Backspace for delete!
 		else if ( event.keyCode === 8 ) {
-			toolbar.deleteSelection()
+			palette.deleteSelection()
 		} 
 
 		// Cmd-C to copy to clipboard
