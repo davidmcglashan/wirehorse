@@ -7,7 +7,6 @@ const snapshot = {
 	 * Called from the UI to take an image of the current selection.
 	 */
 	take: () => { 
-
 		// Restructure the UI around the current selection.
 		let bounds = selection.bounds()
 		console.log( bounds )
@@ -20,14 +19,14 @@ const snapshot = {
 		
 		// Shuffle all the shapes onto the new div.
 		for ( let id of selection.idsInZOrder() ) {
-			let entity = document.getElementById( id )
-			div.appendChild( entity )
+			let elem = document.getElementById( id )
+			div.appendChild( elem )
 
 			// Adjust the top and left by the x and y values of the bounds
-			let left = parseInt( entity.style.left, 10 ) - bounds.x
-			let top = parseInt( entity.style.top, 10 ) - bounds.y
-			entity.style.left = `${left+5}px`
-			entity.style.top = `${top+5}px`
+			let left = parseInt( elem.style.left, 10 ) - bounds.x
+			let top = parseInt( elem.style.top, 10 ) - bounds.y
+			elem.style.left = `${left+5}px`
+			elem.style.top = `${top+5}px`
 		}
 				
 		// Prepare the <body> tag

@@ -165,7 +165,7 @@ var glass = {
 		let maxx = rect.x + rect.width
 		let maxy = rect.y + rect.height
 
-		// These two fields track the width and height in the model. Entities with
+		// These two fields track the width and height in the model. Shapes with
 		// null values will flip them to NaN so we can identify those which are sized
 		// based on their content.		
 		let logicalHeight = 0
@@ -237,10 +237,11 @@ var glass = {
 			glass.drag.pressed = true
 		}
 
-		// If there's a selection we should prepare to move or resize
-		// the selected entities instead.
+		// If there's a selection we should prepare to move or resize the selected shapes
+		// instead.
 		else if ( selection.yes() ) {
-			// The drag mode we want is encoded in the HTML as data attr on the element, should we find one ...
+			// The drag mode we want is encoded in the HTML as data attr on the element, 
+			// should we find one ...
 			let elems = document.elementsFromPoint( event.pageX, event.pageY )
 			for ( let elem of elems ) {
 				let dragMode = elem.getAttribute( 'data-drag-mode' )
@@ -270,13 +271,13 @@ var glass = {
 
 				switch ( glass.drag.shape?.drag ) {
 					case glass.drawShapeModes.DRAG_RECT:
-						glass.dragRect.setAttribute( 'class', 'hidden entity entity-rec border-bk' )
+						glass.dragRect.setAttribute( 'class', 'hidden shape shape-rec border-bk' )
 						break;
 					case glass.drawShapeModes.DRAG_RULE:
-						glass.dragRect.setAttribute( 'class', 'hidden entity entity-hr border-g5' )
+						glass.dragRect.setAttribute( 'class', 'hidden shape shape-hr border-g5' )
 						break;
 					case glass.drawShapeModes.DRAG_TEXT:
-						glass.dragRect.setAttribute( 'class', 'hidden entity entity-lbl scribble' )
+						glass.dragRect.setAttribute( 'class', 'hidden shape shape-lbl scribble' )
 						glass.dragRect.innerHTML = `<p>${globals.lorem}</p>`
 						glass.dragRect.style.color = `#${model.colours['g5'].hex}`
 						break;
@@ -478,7 +479,7 @@ var glass = {
 			// Stop at the first element and select it
 			let elems = document.elementsFromPoint( event.pageX, event.pageY )
 			for ( let elem of elems ) {
-				if ( elem.classList.contains( 'entity' ) ) {
+				if ( elem.classList.contains( 'shape' ) ) {
 					// Ignore this shape if it's locked
 					let id = elem.getAttribute( 'id' )
 					if ( model.isLocked( id ) ) {
@@ -489,11 +490,11 @@ var glass = {
 					return
 				}
 				
-				// DOM elements with a data-entity attr refer to other DOM elements, e.g.
-				// the menu of a drop-down box which is outside the bounds.
-				else if ( elem.getAttribute( 'data-entity' ) ) {
+				// DOM elements with a data-shape attr refer a "master" DOM elements for the
+				// // shape, e.g. the menu of a drop-down box which is outside the bounds.
+				else if ( elem.getAttribute( 'data-shape' ) ) {
 					// Ignore this shape if it's locked
-					let id = elem.getAttribute( 'data-entity' )
+					let id = elem.getAttribute( 'data-shape' )
 					if ( model.isLocked( id ) ) {
 						continue
 					}
@@ -504,7 +505,7 @@ var glass = {
 				}
 			}
 
-			// Clear the selection if the click wasn't on an entity.
+			// Clear the selection if the click wasn't on a shape.
 			selection.clear()
 		} finally {
 			// Always, always shut down the visual aspects of the drag.

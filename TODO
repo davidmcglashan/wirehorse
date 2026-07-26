@@ -4,7 +4,6 @@ bugs
 backlog
 -------- 
 - new buttons have -18x-18 dimension (caused by the new size detection in glass.mouseReleased)
-- "entity" should become shape
 - implement a push scroll if you linger outside the glass pane during a drag (but not a selection) 
 - Spilt toolbar.js into bits
 

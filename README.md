@@ -80,7 +80,7 @@ The 'Snap Selection' feature was implemented using [Snapdom](https://snapdom.dev
 * Text parsing e.g. this is {b bold}, {i italic} {#ddd color}
 * 'R'+drag rectangles now position correctly
 * Fixed an issue where the editor stopped invoking
-* Editor can no longer be invoked on entities with no text aspect e.g. icons, rules, sliders, ...
+* Editor can no longer be invoked on shapes with no text aspect e.g. icons, rules, sliders, ...
 * Comboboxes now ignore blank lines in their model when rendering
 * Text area content editor can now be resized
 * Paragraphs can be added quickly with T+mouse drag

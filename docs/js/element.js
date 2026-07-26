@@ -112,7 +112,7 @@ const element = {
 	 */
 	style: ( shape ) => {
 		// Style and position it
-		shape.elem.setAttribute( 'class', `entity entity-${shape.ty}` )
+		shape.elem.setAttribute( 'class', `shape shape-${shape.ty}` )
 
 		element.xywh( shape )
 		element.font( shape )

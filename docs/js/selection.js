@@ -117,7 +117,7 @@ var selection = {
 	},
 
 	/**
-	 * Returns the ids of all the currently selected entities.
+	 * Returns the ids of all the currently selected shapes.
 	 */
 	ids: () => {
 		let ret = []
@@ -140,7 +140,7 @@ var selection = {
 	},
 
 	/**
-	 * Returns the ids of all the currently selected entities in Z-order.
+	 * Returns the ids of all the currently selected shapes in Z-order.
 	 */
 	idsInZOrder: () => {
 		// Selection isn't probably in Z-order, so we must do some consolidation first.

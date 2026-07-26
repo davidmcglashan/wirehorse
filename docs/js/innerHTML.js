@@ -128,10 +128,10 @@ var innerHTML = {
 			html += '<li>'
 			let cut = 0
 			if ( lines[i].startsWith('[x]') ) {
-				html += '<div class="entity-ic icon-ckbx"></div>'
+				html += '<div class="shape-ic icon-ckbx"></div>'
 				cut = 3
 			} else if ( lines[i].startsWith('[ ]') ) {
-				html += '<div class="entity-ic icon-chbx"></div>'
+				html += '<div class="shape-ic icon-chbx"></div>'
 				cut = 3
 			}
 			html += `${innerHTML.safe(lines[i].substring(cut))}</li>`
@@ -146,10 +146,10 @@ var innerHTML = {
 			html += '<li>'
 			let cut = 0
 			if ( lines[i].startsWith('(x)') ) {
-				html += '<div class="entity-ic icon-crad"></div>'
+				html += '<div class="shape-ic icon-crad"></div>'
 				cut = 3
 			} else if ( lines[i].startsWith('( )') ) {
-				html += '<div class="entity-ic icon-rado"></div>'
+				html += '<div class="shape-ic icon-rado"></div>'
 				cut = 3
 			}
 			html += `${innerHTML.safe(lines[i].substring(cut))}</li>`
@@ -171,7 +171,7 @@ var innerHTML = {
 
 		if ( lines.length > 1 ) {
 			lines.pop
-			html += `<ul class="dropdown border-g4" data-entity="${shape.id}">`
+			html += `<ul class="dropdown border-g4" data-shape="${shape.id}">`
 			for ( let i=1; i<lines.length; i++) {
 				html += `<li>${innerHTML.safe(lines[i])}</li>`
 			}

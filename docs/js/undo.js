@@ -80,7 +80,7 @@ var undo = {
 
 		// Shape edits are reversed into edits
 		else if ( recent.type === undo.types.SHAPE_EDIT ) {
-			// Iterate the recent changes for all the entities that changed.
+			// Iterate the recent changes for all the shapes that changed.
 			for ( const [id,log] of Object.entries( recent.changes ) ) {
 				// Construct a new update object by looking for the old value when the change 
 				// first occurred and using it as the new value for a new update to the model.
@@ -130,7 +130,7 @@ var undo = {
 		}
 
 		// Redos are straightforward since the recent future already describes the change
-		// we want to (re)make to each entity.
+		// we want to (re)make to each shape.
 		else  if ( redo.type === undo.types.SHAPE_EDIT ) {
 			for ( const [id,log] of Object.entries( redo.changes ) ) {
 				model.updateShape( id, log )

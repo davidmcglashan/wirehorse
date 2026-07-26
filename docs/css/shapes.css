@@ -1,4 +1,4 @@
-.entity {
+.shape {
 	position: absolute;
 	margin: 3px;
 }
@@ -11,14 +11,14 @@
 }
 
 /* ==================================================== */
-/* Entities requiring a border share these rules */
+/* Shapes requiring a border share these rules */
 
 ul.dropdown,
-.entity-vs,
-.entity-hs,
-.entity-cmb,
-.entity-tbl,
-.entity-rec {
+.shape-vs,
+.shape-hs,
+.shape-cmb,
+.shape-tbl,
+.shape-rec {
 	border-style: solid;
 	border-width: 8px;
 	border-radius: 2px;
@@ -31,7 +31,7 @@ ul.dropdown,
 /* ==================================================== */
 /* Dropdown/comboboxes */
 
-.entity-cmb {
+.shape-cmb {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -73,7 +73,7 @@ ul.dropdown,
 /* ==================================================== */
 /* Rectangles */
 
-.entity-rec {
+.shape-rec {
 	display: flex;
 	flex-direction: column;
 }
@@ -81,24 +81,24 @@ ul.dropdown,
 /* ==================================================== */
 /* Scrollbars */
 
-.entity-hs,
-.entity-vs {
+.shape-hs,
+.shape-vs {
 	background-color: #fff;
 }
-	.entity-hs div,
-	.entity-vs div {
+	.shape-hs div,
+	.shape-vs div {
 		position: absolute;
 		width: 1rem;
 		height: 1rem;
 		left: -8px;
 	}
-	.entity-hs div.left {
+	.shape-hs div.left {
 		background-image: url('../assets/dropdown-arrow-svgrepo-com.svg');
 		background-size: contain;
 		top: -8px;
 		rotate: 90deg
 	}
-	.entity-hs div.right {
+	.shape-hs div.right {
 		background-image: url('../assets/dropdown-arrow-svgrepo-com.svg');
 		background-size: contain;
 		top: -8px;
@@ -106,18 +106,18 @@ ul.dropdown,
 		left: unset;
 		rotate: 270deg
 	}
-	.entity-vs div.up {
+	.shape-vs div.up {
 		background-image: url('../assets/dropdown-arrow-svgrepo-com.svg');
 		background-size: contain;
 		top: -8px;
 		rotate: 180deg
 	}
-	.entity-vs div.down {
+	.shape-vs div.down {
 		background-image: url('../assets/dropdown-arrow-svgrepo-com.svg');
 		background-size: contain;
 		bottom: -8px;
 	}
-	.entity-hs div.bar {
+	.shape-hs div.bar {
 		width: 50%;
 		height: 0.5rem;
 		top: -0.25rem;
@@ -125,7 +125,7 @@ ul.dropdown,
 		background-color: #999;
 		border-radius: 1rem;
 	}
-	.entity-vs div.bar {
+	.shape-vs div.bar {
 		top: 0.5rem;
 		width: 0.5rem;
 		height: 50%;
@@ -137,10 +137,10 @@ ul.dropdown,
 /* ==================================================== */
 /* Tab bar, slider, and horizontal rule all have lines! */
 
-.entity-tab,
-.entity-tab ul li.selected,
-.entity-sld,
-.entity-hr {
+.shape-tab,
+.shape-tab ul li.selected,
+.shape-sld,
+.shape-hr {
 	border-style: solid;
 	border-width: 0px 0px 5px 0px;
 	border-image-repeat: round;
@@ -149,7 +149,7 @@ ul.dropdown,
 	border-image-outset: 0 20px 0 20px;
 }
 
-.entity-vr {
+.shape-vr {
 	border-style: solid;
 	border-width: 0px 5px 0px 0px;
 	border-image-repeat: round;
@@ -160,7 +160,7 @@ ul.dropdown,
 
 /* ==================================================== */
 /* Horizontal slider */
-.entity-sld .slider {
+.shape-sld .slider {
 	background-image: url('../assets/solid-circle.svg');
 	background-size: contain;
 	width: 1rem;
@@ -172,7 +172,7 @@ ul.dropdown,
 /* ==================================================== */
 /* Tabs bar */
 
-.entity-tab ul {
+.shape-tab ul {
 	list-style-type: none;
 	padding-inline-start: 0;
 	margin: 0;
@@ -182,11 +182,11 @@ ul.dropdown,
 	text-transform: uppercase;
 	gap: 2rem;
 }
-	.entity-tab ul li {
+	.shape-tab ul li {
 		color: #36c;
 		padding: 0.5rem 0.25rem;
 	}
-	.entity-tab ul li.selected {
+	.shape-tab ul li.selected {
 		outline: none;
 		color: #999;
 		border-image-outset: 0 20px 3px 20px;
@@ -195,52 +195,52 @@ ul.dropdown,
 /* ==================================================== */
 /* Breadcrumbs bar */
 
-.entity-bcb {
+.shape-bcb {
 	text-transform: uppercase;
 	font-size: 0.75rem;
 	display: flex;
 	gap: 0.5rem;
 }
-	.entity-bcb span {
+	.shape-bcb span {
 		color: #36c;
 		width: max-content;
 	}
-	.entity-bcb span:last-child,
-	.entity-bcb span.divider {
+	.shape-bcb span:last-child,
+	.shape-bcb span.divider {
 		color: #999;
 	}
 
 /* ==================================================== */
 /* Radio buttons and checkboxes */
 
-.entity-rad,
-.entity-chb {
+.shape-rad,
+.shape-chb {
 	margin: -3px;
 }
-.entity-rad.selected,
-.entity-chb.selected {
+.shape-rad.selected,
+.shape-chb.selected {
 	outline-offset: 2px;
 }
-	.entity-rad div.entity-ic,
-	.entity-chb div.entity-ic {
+	.shape-rad div.shape-ic,
+	.shape-chb div.shape-ic {
 		width: 1.5rem;
 		height: 1.5rem;
 		background-size: contain;
 	}
-	.entity-chb div.icon-chbx {
+	.shape-chb div.icon-chbx {
 		background-color: #333;
 	}
-	.entity-chb div.icon-ckbx {
+	.shape-chb div.icon-ckbx {
 		background-color: #36c;
 	}
-	.entity-rad div.icon-rado {
+	.shape-rad div.icon-rado {
 		background-color: #333;
 	}
-	.entity-rad div.icon-crad {
+	.shape-rad div.icon-crad {
 		background-color: #36c;
 	}
-	.entity-rad ul,
-	.entity-chb ul {
+	.shape-rad ul,
+	.shape-chb ul {
 		list-style-type: none;
 		padding-inline-start: 0;
 		margin: 0;
@@ -248,8 +248,8 @@ ul.dropdown,
 		flex-direction: column;
 		gap: 0.1rem;
 	}
-	.entity-rad ul li,
-	.entity-chb ul li {
+	.shape-rad ul li,
+	.shape-chb ul li {
 		display: flex;
 		align-items: center;
 		gap: 0.25rem;
@@ -259,7 +259,7 @@ ul.dropdown,
 /* ==================================================== */
 /* Icons */
 
-.entity-ic {
+.shape-ic {
 	mask-size: contain;
 	mask-repeat: no-repeat;
 	aspect-ratio: 1;
@@ -268,7 +268,7 @@ ul.dropdown,
 /* ==================================================== */
 /* Labels and text paragraphs */
 
-.entity-rec, .entity-lbl {
+.shape-rec, .shape-lbl {
 	& p {
 		margin-block-start: 0;
 		margin: 0 0 0.03rem 0;
@@ -279,48 +279,48 @@ ul.dropdown,
 	}
 }
 
-.entity-lbl {
+.shape-lbl {
 	width: max-content;
 }
 
 /* ==================================================== */
 /* Tables */
 
-.entity-tbl {
+.shape-tbl {
 	border-width: 0;
 }
 
-.entity-tbl table {
+.shape-tbl table {
 	width: 100%;
 	border-spacing: 0;
 }
-	.entity-tbl table tr {
+	.shape-tbl table tr {
 		height: 1.5rem;
 	}
-	.entity-tbl table tr:first-child {
+	.shape-tbl table tr:first-child {
 		background-color: #eee;
 	}
-	.entity-tbl table tr:first-child td {
+	.shape-tbl table tr:first-child td {
 		font-size: 9pt;
 		text-transform: uppercase;
 		color: #888;
 	}
-	.entity-tbl table td {
+	.shape-tbl table td {
 		padding: 0.5rem 0.75rem
 	}
-	.entity-tbl table td.centred {
+	.shape-tbl table td.centred {
 		text-align: center;
 	}
-	.entity-tbl table td.hyperlink {
+	.shape-tbl table td.hyperlink {
 		color: #36c;
 		text-decoration: underline;
 	}
-	.entity-tbl table td.tbl-icon {
+	.shape-tbl table td.tbl-icon {
 		mask-size: 1.5rem;
 		mask-repeat: no-repeat;
 		mask-position: center;
 	}
-	.entity-tbl table tr:first-child td.sorting {
+	.shape-tbl table tr:first-child td.sorting {
 		background-image: url('../assets/arrow-down-up-svgrepo-com.svg');
 		background-position: 0.5rem;
 		background-size: 1rem;
@@ -329,25 +329,25 @@ ul.dropdown,
 		color: #000;
 		opacity: 0.5;
 	}
-	.entity-tbl table td.unticked {
+	.shape-tbl table td.unticked {
 		background-color: #333;
 		mask-image: url('../assets/checkbox-svgrepo-com.svg');
 	}
-	.entity-tbl table td.ticked {
+	.shape-tbl table td.ticked {
 		background-color: #36c;
 		mask-image: url('../assets/checked-checkbox-svgrepo-com.svg');
 	}
-	.entity-tbl table td.ellipsis {
+	.shape-tbl table td.ellipsis {
 		mask-size: 15px;
 		background-color: #36c;
 		mask-image: url('../assets/more-svgrepo-com.svg');
 	}
-	.entity-tbl table td.active {
+	.shape-tbl table td.active {
 		mask-size: 11px;
 		background-color: #93C572;
 		mask-image: url('../assets/solid-circle.svg');
 	}
-	.entity-tbl table td.inactive {
+	.shape-tbl table td.inactive {
 		mask-size: 11px;
 		background-color: #666;
 		mask-image: url('../assets/circle.svg');
@@ -356,7 +356,7 @@ ul.dropdown,
 /* ==================================================== */
 /* Street map */
 
-.entity-map {
+.shape-map {
 	background-color: #fff;
 	background-image: url('../assets/street-map.svg');
 	background-size: cover;

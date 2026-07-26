@@ -180,7 +180,7 @@ body.hide-palette #-canvas {
 	will-change: opacity;
 
 	/* ... or add a new rectangle */
-	&.entity-rec {
+	&.shape-rec {
 		background-color: #fff;;
 	}
 }
