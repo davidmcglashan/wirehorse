@@ -12,6 +12,7 @@ var wirehorse = {
 		'canvas',
 		'defaults',
 		'toolbar',
+		'adder',
 		'selection',
 		'palette',
 		'glass',

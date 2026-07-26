@@ -19,6 +19,7 @@ backlog
 - probably some mileage and re-organising a lot of the code and functions in the 'wrong' place
 - robustness around adding new shapes e.g. not finding the defaults or functions
 - alias a field on the palette to change the label name e.g. {'bg': 'Colour'}
+- open dropdowns don't report their height properly to takeSnapshot
 
 - groups of components
   - select one, select all - just need groups with their members described in the model
