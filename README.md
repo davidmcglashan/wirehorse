@@ -73,10 +73,10 @@ The 'Snap Selection' feature was implemented using [Snapdom](https://snapdom.dev
 * Buttons can be added by holding 'b' and clicking the mouse
 * Horizontal rules can be added by holding 'h' and dragging the mouse
 * Improvements to shape resizing via drag handles
-* Text elements can have their widths reset
+* Text shapes can have their widths reset
 
 ### v0.4.1
-* Text elements now properly support the left, centre, and right alignment options
+* Text shapes now properly support the left, centre, and right alignment options
 * Text parsing e.g. this is {b bold}, {i italic} {#ddd color}
 * 'R'+drag rectangles now position correctly
 * Fixed an issue where the editor stopped invoking
@@ -99,7 +99,7 @@ The 'Snap Selection' feature was implemented using [Snapdom](https://snapdom.dev
 * Palette now handles multi-selection form UI for the common controls
 * New street map component
 * Icon components can have their icon changed _in situ_
-* Locked elements are fully ignored by selection clicks
+* Locked shapes are fully ignored by selection clicks
 * LocalStorage usage is shown on the menu
 
 ### v0.3.3
@@ -122,7 +122,7 @@ The 'Snap Selection' feature was implemented using [Snapdom](https://snapdom.dev
 * Added a filter and up/down icons for future use in tables
 * Wireframes can be renamed from the toolbar
 * Performance improvements to scaling and zooming
-* You can remove from a multi-selection by clicking an element while still holding Shift
+* You can remove from a multi-selection by clicking a shape while still holding Shift
 * Cmd+A to select all is less intermittant
 * Cmd+B,I,U change the font of the selected shapes
 * There's a fancy new data table component

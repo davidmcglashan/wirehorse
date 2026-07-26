@@ -145,11 +145,11 @@ var palette = {
 			return
 		}
 
-		// Flip the UI element first.
+		// Toggle the state on the form's DOM element first.
 		let input = document.getElementById( `-fld-${field}` )
 		input.classList.toggle( 'selected' )
 		
-		// Now pass its current state down into the selected elements.
+		// Now pass its current state down into the selected shapes.
 		let changes = []
 		let value = input.classList.contains( 'selected' ) ? 'yes' : 'no'
 		
@@ -184,7 +184,7 @@ var palette = {
 		let input = document.getElementById( `-fld-${field}:${value}` )
 		input.classList.toggle( 'selected' )
 		
-		// Now pass its current state down into the selected elements.
+		// Now pass its current state down into the selected shapes.
 		let changes = []		
 		for ( let sid of sids ) {
 			let shape = model.shape( sid )
@@ -417,7 +417,7 @@ var palette = {
 		let common = deflt.fields
 		for ( let id of ids ) {
 			deflt = palette.config[ model.shape( ids[0] ).ty ]
-			common.filter(element => deflt.fields.includes(element));
+			common.filter( item => deflt.fields.includes(item) );
 		}
 
 		// Display just those fields
@@ -438,7 +438,7 @@ var palette = {
 		common = deflt.toolbars
 		for ( let id of ids ) {
 			deflt = palette.config[ model.shape( ids[0] ).ty ]
-			common.filter(element => deflt.toolbars.includes(element));
+			common.filter( item => deflt.toolbars.includes(item) );
 		}
 
 		// Display just those toolbars

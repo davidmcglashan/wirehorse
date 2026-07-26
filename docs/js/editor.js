@@ -43,7 +43,7 @@ var editor = {
 	},
 
 	/**
-	 * Causes a text editing UI component to appear for a double-clicked element
+	 * Causes a text editing UI component to appear for a double-clicked shape
 	 */
 	invokeEditor: ( event ) => {
 		// The current state of drag operations can refuse this editor opening

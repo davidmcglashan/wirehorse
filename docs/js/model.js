@@ -160,8 +160,7 @@ var model = {
 		// Do something with the meta, e.g. page title
 		model.updateMeta ( current.mt, { dontSave:true } )
 
-		// Iterate the shapes via element creator to put them into the DOM
-		// and hydrate the shape cache
+		// Iterate the shapes to put their elements into the DOM and hydrate the shape cache
 		model.shapeCache = {}
 		model.sh = current.sh
 		model.sh.forEach( shape => {
@@ -265,7 +264,7 @@ var model = {
 			newShape[key] = value
 		}
 
-		// Tidy up the id, remove the DOM element, and put it in the model.
+		// Tidy up the id, remove the DOM element, and put the new shape into the model.
 		model.sh.push( newShape )
 		newShape.id = model.nextShapeId()
 		newShape.elem = null

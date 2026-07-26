@@ -1,3 +1,6 @@
+/**
+ * Concerned with DOM elements and their appearance.
+ */
 const element = {
 	ha: {
 		l: 'start',
@@ -11,7 +14,7 @@ const element = {
 	},
 
 	/**
-	 * Position the canvas entity
+	 * Position the element representing the provided shape.
 	 */
 	xywh: ( shape ) => {
 		if ( shape.x || shape.x === 0 ) { 
@@ -29,8 +32,7 @@ const element = {
 	},
 
 	/**
-	 * Set the font's appearance. These are tricky since they have CSS or HTML
-	 * values to be set when they're not present in the model.
+	 * Set the element's font.
 	 */
 	font: ( shape ) => {
 		if ( shape.fz ) {
@@ -59,6 +61,9 @@ const element = {
 		}
 	},
 
+	/**
+	 * Set the element's background, text and border colours.
+	 */
 	colour: ( shape ) => {
 		if ( shape.bg ) {
 			shape.elem.style.backgroundColor = `#${model.colours[shape.bg].hex}`
@@ -80,6 +85,9 @@ const element = {
 		}
 	},
 
+	/**
+	 * Set the DOM element's text alignment characteristics.
+	 */
 	alignment: ( shape ) => {
 		if ( shape.ha ) {
 			shape.elem.style.alignItems = element.ha[shape.ha]
@@ -90,7 +98,7 @@ const element = {
 	},
 
 	/**
-	 * Creates the basic <div> for a canvas entity.
+	 * Creates the basic <div> for the provided shape.
 	 */
 	make: ( shape ) => {
 		let elem = document.createElement( 'div' )
@@ -99,6 +107,9 @@ const element = {
 		canvas.elem.appendChild( elem )
 	},
 
+	/**
+	 * Style the provided shape. This in turn calls xywh(), font(), etc.
+	 */
 	style: ( shape ) => {
 		// Style and position it
 		shape.elem.setAttribute( 'class', `entity entity-${shape.ty}` )

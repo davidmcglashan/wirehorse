@@ -51,8 +51,8 @@ var geometry = {
 
 	/**
 	 * Given an array of shapes returns a rectangle that describes their combined bounds.
-	 * Attempts to gracefully deal with elements not having w & h properties by falling back
-	 * to inspecting the DOM element, and will default again if no such element exists.
+	 * Attempts to gracefully deal with shapes not having w & h properties by falling back
+	 * to inspecting their DOM elements, and will default again if no such element exists.
 	 */
 	bounds: ( shapes ) => {
 		let rect = {

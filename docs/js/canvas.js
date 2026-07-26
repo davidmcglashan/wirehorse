@@ -56,7 +56,7 @@ var canvas = {
 			return
 		}
 
-		// If there's no selection then consider every element on the canvas.
+		// If there's no selection then consider every shape
 		if ( ids.length === 0 ) {
 			for ( let shape of model.sh ) {
 				ids.push( shape.id )
@@ -131,16 +131,16 @@ var canvas = {
 	 * Called when somewhere else has changed a shape so we can update the canvas.
 	 */
 	shapeUpdate: ( id, params ) => {
-		// Get the element.
+		// Get the DOM element.
 		let elem = document.getElementById( id )
 
-		// If the update was a delete we can get rid of the element.
+		// If the update was a delete we can get rid of the DOM element.
 		if ( params.deleted ) {
 			elem.remove()
 			return
 		}
 
-		// Bring the shape to the front?
+		// Relayering the canvas puts all the DOM elements in the correct back-to-front sequence.
 		if ( params.relayer ) {
 			canvas.relayer()
 		}
@@ -151,14 +151,14 @@ var canvas = {
 			canvas.relayer()
 		}
 
-		// Make the change. Some of the markup changes require the entire model to be present
+		// Make the change. Some of these changes require the entire model to be present
 		// and not just the changeset, so we replace params with the full thing.
 		params = model.shape( id )
 		element.style( params )
 	},
 
 	/**
-	 * Relayering the canvas simply updates the z-index of every child element
+	 * Relayering the canvas simply updates the z-index of each shape's DOM element
 	 * to be its position in the model shapes array.
 	 */
 	relayer: () => {
@@ -170,13 +170,14 @@ var canvas = {
 	},
 
 	/**
-	 * Bring the current selection to the front
+	 * General purpose re-layering function. The value of direction (f,b,2f,2b) 
+	 * tells us how to move the current selection of shapes.
 	 */
 	relayerSelection: ( event, direction ) => {
 		let sids = selection.idsInZOrder()
 
-		// If moving forwards we need to reverse the array to move the front-most element
-		// first or the selected elements will just replace each other when they're moved.
+		// If moving forwards we need to reverse the array to move the front-most shape
+		// first or the selected shapes will just replace each other when they're moved.
 		if ( direction === 'f' ) {
 			sids.reverse()
 		}

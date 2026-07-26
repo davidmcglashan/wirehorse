@@ -427,15 +427,15 @@ var glass = {
 				else if ( glass.drag.mode === glass.dragmodes.SELECT_SHAPES ) {
 					let rect = glass.dragRect.getBoundingClientRect()
 					for ( let shape of model.sh ) {
-						let shapeRect = shape.elem.getBoundingClientRect()
+						let elemRect = shape.elem.getBoundingClientRect()
 
 						// We only need to check that the DOM elements overlap by comparing
 						// their bounding rectangles.
 						if ( 
-							rect.top < shapeRect.bottom &&
-							rect.right > shapeRect.left &&
-							rect.bottom > shapeRect.top &&
-							rect.left < shapeRect.right 
+							rect.top < elemRect.bottom &&
+							rect.right > elemRect.left &&
+							rect.bottom > elemRect.top &&
+							rect.left < elemRect.right 
 						) {
 							selection.add( shape.elem, {multi:true, quiet:true} )
 						}
@@ -475,11 +475,11 @@ var glass = {
 				return
 			}
 
-			// Stop at the first entity and select it
+			// Stop at the first element and select it
 			let elems = document.elementsFromPoint( event.pageX, event.pageY )
 			for ( let elem of elems ) {
 				if ( elem.classList.contains( 'entity' ) ) {
-					// Ignore this element if it's locked
+					// Ignore this shape if it's locked
 					let id = elem.getAttribute( 'id' )
 					if ( model.isLocked( id ) ) {
 						continue
@@ -492,7 +492,7 @@ var glass = {
 				// DOM elements with a data-entity attr refer to other DOM elements, e.g.
 				// the menu of a drop-down box which is outside the bounds.
 				else if ( elem.getAttribute( 'data-entity' ) ) {
-					// Ignore this element if it's locked
+					// Ignore this shape if it's locked
 					let id = elem.getAttribute( 'data-entity' )
 					if ( model.isLocked( id ) ) {
 						continue
