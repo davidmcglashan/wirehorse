@@ -29,6 +29,7 @@ var model = {
 
 	icons: {
 		arch: { name: 'Archive box', asset: 'archive-svgrepo-com.svg' },
+		arco: { name: 'Open archive box', asset: 'open-box-parcel-svgrepo-com.svg' },
 		atsy: { name: 'At symbol', asset: 'at-symbol-svgrepo-com.svg' },
 		atch: { name: 'Attachment / paperclip', asset: 'paperclip-svgrepo-com.svg' },
 		ardu: { name: 'Arrow down & up', asset: 'arrow-down-up-svgrepo-com.svg' }, 
@@ -75,6 +76,10 @@ var model = {
 		sflg: { name: 'Filled flag', asset: 'solid-flag-svgrepo-com.svg' },
 		save: { name: 'Floppy disk', asset: 'floppy-disk-svgrepo-com.svg' },
 		full: { name: 'Fullscreen', asset: 'full-screen-svgrepo-com.svg' },
+		hamb: { name: 'Hamburger /  gripper / justify', asset: 'align-justify-svgrepo-com.svg' },
+		hand: { name: 'Hand', asset: 'hand-svgrepo-com.svg' },
+		hndp: { name: 'Hand pointing', asset: 'one-finger-svgrepo-com.svg' },
+		home: { name: 'Home', asset: 'home-svgrepo-com.svg' },
 		home: { name: 'Home', asset: 'home-svgrepo-com.svg' },
 		horn: { name: 'Bullhorn / megaphone', asset: 'bullhorn-svgrepo-com.svg' },
 		buss: { name: 'Bus', asset: 'bus-svgrepo-com.svg' },

@@ -51,6 +51,7 @@ The 'Snap Selection' feature was implemented using [Snapdom](https://snapdom.dev
 * Scribble text now uses clip to overflow to prevent hard cuts on its left and right edges
 * Selecting a combobox now works on the dropdown bit
 * Drag-drawn shapes now calculate the correct size when drawn to the left or upwards
+* New icons: open archive box, hand, pointing hand, hamburger/gripper
 
 ### v0.5.1
 * Labelled the less-obvious palette buttons

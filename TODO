@@ -1,40 +1,33 @@
-bugs
-----
-
-backlog
--------- 
 - implement a push scroll if you linger outside the glass pane during a drag (but not a selection) 
 
 - There might be a locked object here
+
 - fancy arrows that actually "simple" SVG curves
   - xywh define the bounding rect where the SVG is drawn
   - start and end are independent %age co-ords inside the rect
   - needs two more drag handles to move the curve descriptors
   - clever drag mechanics to resize and re-position the box
+  - solid, dotted/dashed styles
 
 - archive is a little naughty removing other modules event listeners!
-- rectangle with the X through it that can be colour changed
-- compassing selections taller but not wider than the viewport should do a Y scale instead of an X one
+
 - super wide tabs and rules get a space in the middle - probably need their own scribbley SVG
-- probably some mileage and re-organising a lot of the code and functions in the 'wrong' place
-- robustness around adding new shapes e.g. not finding the defaults or functions
+
 - alias a field on the palette to change the label name e.g. {'bg': 'Colour'}
+
 - open dropdowns don't report their height properly to takeSnapshot
 
-- groups of components
-  - select one, select all - just need groups with their members described in the model
-- can you hook cut/copy/paste into the apple menu?
+- type to search on the icon switcher
+  - make the existing adder function nice and generic?
+
 - insert a component from file ...
   - e.g. zatpark window, modal window
   - pagination as component
   - table tools (presets,filters,search,configure) as a component
   - remember recently used and include them in the adder dropdown
+
 - drag without selecting first
-- selection tools e.g. Cmd+left/right to focus on a shape
-- lots of the little strings should be constants
-- Shapes need ...
-  - reasonable declared widths
-  - Redo the alignment features to consider the DOM elems which should all have correctly formed dimensions
-  - Horizontal and vertical arrange features - space & distribute
-- alignment guides
-- inset guides
+
+- Redo the alignment features to consider the DOM elems which should all have correctly formed dimensions
+
+- Horizontal and vertical arrange features - space & distribute
