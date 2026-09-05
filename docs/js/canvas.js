@@ -186,7 +186,7 @@ var canvas = {
 		// return an object we can send to the undo manager.
 		let changes = []
 		for ( let sid of sids ) {
-			changes.push( model.relayerShape( sid, (event.shiftKey ? '2' : '') + direction ) )
+			changes.push( model.relayerShape( sid, (event.shiftKey ? '' : '2') + direction ) )
 		}
 
 		// If moving forwards we need to again reverse the changes so the undo manager
