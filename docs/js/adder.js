@@ -41,6 +41,7 @@ var adder = {
 				let icon = model.icons[ entry.model.ic ]
 				let img = document.createElement( 'img' )
 				img.setAttribute( 'src', `assets/${icon.asset}` )
+				a.innerHTML = entry.name.slice(0,-5)
 				a.appendChild( img )
 			}
 		}

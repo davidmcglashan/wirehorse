@@ -8,10 +8,6 @@
   - solid, dotted/dashed styles
   - draw the drag lines in the SVG itself
 
-- Paper aeroplane
-
-- Put icon in the icon descriptions so you can icon
-
 - Checkbox column is close to left of the table
 
 - Black out feature which locks and puts a rect over the selection which is black but translucent

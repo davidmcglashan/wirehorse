@@ -45,6 +45,10 @@ The 'Snap Selection' feature was implemented using [Snapdom](https://snapdom.dev
 
 ## Version history
 
+### v0.6.1
+* New icon: paper plane
+* "icon" can be used to search for icons in the shape adder
+
 ### v0.6
 * Selections can be converted to PNGs for copy/paste or download
 * Re-aligned dragging a rect or text with the mouse pointer

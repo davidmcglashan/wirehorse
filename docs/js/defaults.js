@@ -236,7 +236,7 @@ var defaults = {
 
 			defaults.shapes.push(
 				{
-					name: icon.name,
+					name: icon.name + ' icon',
 					model: {
 						ty: 'ic',
 						ic: i,
