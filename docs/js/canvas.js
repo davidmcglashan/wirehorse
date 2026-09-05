@@ -41,8 +41,8 @@ var canvas = {
 	scale: ( event ) => {
 		let ids = selection.ids()
 		
-		// Shift+compass focuses on the first shape in the model at zero scale.
-		if ( event.shiftKey ) {
+		// Cmd+compass focuses on the first shape in the model at zero scale.
+		if ( event.metaKey ) {
 			//model.updateMeta( {ox:1, oy:1, sc:1 } )
 			let shape = model.sh[0]
 			canvas.performScale( 
@@ -56,8 +56,8 @@ var canvas = {
 			return
 		}
 
-		// If there's no selection then consider every shape
-		if ( ids.length === 0 ) {
+		// If there's no selection or Shift is down then consider every shape
+		if ( event.shiftKey || ids.length === 0 ) {
 			for ( let shape of model.sh ) {
 				ids.push( shape.id )
 			}

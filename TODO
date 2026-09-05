@@ -10,8 +10,6 @@
 
 - Black out feature which locks and puts a rect over the selection which is black but translucent
 
-- Compass icon should no longer reset. Shift press should zoom out if theres a selection
-
 - Alphabetical sort comboboxes button (except the first one)
 
 - Scrollbars with offsets
