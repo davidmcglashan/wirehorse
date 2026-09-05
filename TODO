@@ -8,8 +8,6 @@
   - solid, dotted/dashed styles
   - draw the drag lines in the SVG itself
 
-- Checkbox column is close to left of the table
-
 - Black out feature which locks and puts a rect over the selection which is black but translucent
 
 - Compass icon should no longer reset. Shift press should zoom out if theres a selection
@@ -24,7 +22,7 @@
 
 - alias a field on the palette to change the label name e.g. {'bg': 'Colour'}
 
-- open dropdowns don't report their height properly to takeSnapshot
+- open dropdowns don't report their height properly to takeSnapshot (put one near the bottom of the snap)
 
 - type to search on the icon switcher
   - make the existing adder function nice and generic?

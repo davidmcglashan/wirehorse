@@ -332,10 +332,12 @@ ul.dropdown,
 	.shape-tbl table td.unticked {
 		background-color: #333;
 		mask-image: url('../assets/checkbox-svgrepo-com.svg');
+		padding-left: 1.5rem;
 	}
 	.shape-tbl table td.ticked {
 		background-color: #36c;
 		mask-image: url('../assets/checked-checkbox-svgrepo-com.svg');
+		padding-left: 1.5rem;
 	}
 	.shape-tbl table td.ellipsis {
 		mask-size: 15px;
