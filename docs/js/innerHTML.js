@@ -104,6 +104,9 @@ var innerHTML = {
 	map: ( shape ) => {
 		return ''
 	},
+	arr: ( shape ) => {
+		return arrow.innerHTML( shape )
+	},
 	sld: ( shape ) => {
 		let val = shape.val ? shape.val : 30
 		return `<div class="slider" style="left:${val}%;"></div>`

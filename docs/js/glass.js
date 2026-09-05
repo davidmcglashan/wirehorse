@@ -6,6 +6,11 @@ var glass = {
 	selemsubs: null,
 	queuedShapeChange: null,
 
+	// Shapes of this type 
+	delegateSelection: { 
+		arr: arrow.select
+	},
+
 	// There are ten things a drag operation can do ...
 	dragmodes: {
 		MOVE_CANVAS:	0,
@@ -21,8 +26,8 @@ var glass = {
 		RESIZE_NW: 		9,
 		
 		SELECT_SHAPES:	10,
-
-		DRAW_SHAPE:		11
+		DRAW_SHAPE:		11,
+		DELEGATE:		12
 	},
 
 	drawShapeModes: {
@@ -144,21 +149,21 @@ var glass = {
 	selectionChanged: ( ids ) => {
 		// Remove everything!
 		glass.selemsubs.innerHTML = ''
-		glass.selem.classList.add( 'hidden' )
-		glass.selem.classList.remove( 'multiple' )
+		glass.selemsubs.setAttribute( 'class', '' )
+		glass.selem.setAttribute( 'class', 'hidden' )
 		
 		// Selections can be empty!
 		if ( ids.length === 0 ) {
 			return
 		}
-		
+
 		// Iterate the shapes to find the outer bounds of all the selected shapes. We start
 		// by setting our internal storage to the first shape's dimensions.
 		let shapes = model.shapes( ids )
 		if ( shapes.length === 0 ) {
 			return
 		}
-		
+
 		let rect = shapes[0].elem.getBoundingClientRect()
 		let minx = rect.x
 		let miny = rect.y
@@ -208,8 +213,19 @@ var glass = {
 		glass.selem.style.height = `${maxy-miny}px`
 		glass.selem.classList.remove( 'hidden' )
 
+		// Shapes can delegate the selection handling if ...
+		//  1. there's one of them
+		//  2. the type is in the delegateSelection object
+		if ( shapes.length === 1 ) {
+			let delegate = glass.delegateSelection[ shapes[0].ty ]
+			if ( delegate ) {
+				glass.selem.classList.add( `delegate-${shapes[0].ty}` )
+				delegate( shapes[0], glass.selemsubs )
+			}
+		}
+
 		// Optional second pass places all the sub-selection <div>s.
-		if ( shapes.length > 1 ) {
+		else if ( shapes.length > 1 ) {
 			glass.selem.classList.add( 'multiple' )
 
 			for ( let shape of shapes ) {
@@ -248,6 +264,15 @@ var glass = {
 				if ( dragMode ) {
 					glass.drag.pressed = true
 					glass.drag.mode = parseInt( dragMode )
+
+					// If we're going to delegate the mouse op, capture who we're delegating to
+					if ( glass.drag.mode === glass.dragmodes.DELEGATE ) {
+						let m = elem.getAttribute( 'data-drag-module' )
+						let f = elem.getAttribute( 'data-drag-func' )
+						glass.drag.delegateModule = window[m]
+						glass.drag.delegate = glass.drag.delegateModule[f]
+					}
+
 					break
 				}
 			}
@@ -339,6 +364,13 @@ var glass = {
 				}
 			}
 
+			// Hand off to delegates
+			else if ( glass.drag.mode === glass.dragmodes.DELEGATE ) {
+				glass.drag.delegate( glass.drag, event )
+				glass.drag.x = event.pageX
+				glass.drag.y = event.pageY
+			}
+
 			// We're moving or resizing something.
 			else {
 				// Calculate the amount moved since the last call. 
@@ -424,6 +456,11 @@ var glass = {
 					return
 				}
 
+				// Delegates
+				else if ( glass.drag.mode === glass.dragmodes.DELEGATE ) {
+					glass.drag.delegateModule.finishDrag( glass.drag, event )
+				}
+
 				// Are we selecting lots of shapes with a big rectangle?
 				else if ( glass.drag.mode === glass.dragmodes.SELECT_SHAPES ) {
 					let rect = glass.dragRect.getBoundingClientRect()
@@ -455,7 +492,7 @@ var glass = {
 						let id = elem.getAttribute( 'id' )
 						changes[id] = model.updateShape( id, {
 							x: parseFloat( elem.style.left, 10 ) + dx/scale,
-							y: parseFloat( elem.style.top, 10 ) + dy/scale ,
+							y: parseFloat( elem.style.top, 10 ) + dy/scale,
 							w: parseFloat( elem.style.width, 10 ) + dx/scale,
 							h: parseFloat( elem.style.height, 10 ) + dy/scale 
 						} )

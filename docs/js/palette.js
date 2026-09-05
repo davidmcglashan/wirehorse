@@ -24,6 +24,10 @@ var palette = {
 			fields: [ 'x','y','w' ],
 			toolbars: ['tools']
 		},
+		arr: {
+			fields: [ 'x','y','w','co' ],
+			toolbars: ['tools']
+		},
 		lbl: {
 			fields: [ 'x','y','w','co' ],
 			toolbars: ['tools','font','text-align'],

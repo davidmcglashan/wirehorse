@@ -2,7 +2,7 @@ const globals = {
 	lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
 	
 	// These shape types should not invoke an editor for their txt field (cos they don't have one!)
-	noEditor: [ 'hr','vr','hs','vs','sld','map','ic']
+	noEditor: [ 'hr','vr','hs','vs','sld','map','ic','arr']
 };
 
 var defaults = {
@@ -207,6 +207,22 @@ var defaults = {
 				w: 200,
 				h: 180
 			}
+/*		},{
+			name: 'Arrow',
+			model: {
+				ty: 'arr',
+				w: 200,
+				h: 100,
+				x1: 0.1,
+				y1: 0.1,
+				x2: 0.9,
+				y2: 0.1,
+				x3: 0.25,
+				y3: 0.25,
+				x4: 0.75,
+				y4: 0.25,
+				co: 'or'
+			}*/
 		}
 	],
 

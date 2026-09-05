@@ -1,13 +1,26 @@
 - implement a push scroll if you linger outside the glass pane during a drag (but not a selection) 
 
 - There might be a locked object here
+  - option+click to select a locked object
 
 - fancy arrows that actually "simple" SVG curves
-  - xywh define the bounding rect where the SVG is drawn
-  - start and end are independent %age co-ords inside the rect
-  - needs two more drag handles to move the curve descriptors
   - clever drag mechanics to resize and re-position the box
   - solid, dotted/dashed styles
+  - draw the drag lines in the SVG itself
+
+- Paper aeroplane
+
+- Put icon in the icon descriptions so you can icon
+
+- Checkbox column is close to left of the table
+
+- Black out feature which locks and puts a rect over the selection which is black but translucent
+
+- Compass icon should no longer reset. Shift press should zoom out if theres a selection
+
+- Alphabetical sort comboboxes button (except the first one)
+
+- Scrollbars with offsets
 
 - archive is a little naughty removing other modules event listeners!
 

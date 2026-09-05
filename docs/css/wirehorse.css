@@ -100,6 +100,14 @@ body.hide-palette #-canvas {
 			cursor: nwse-resize;
 		}
 	}
+
+	&.delegate-arr {
+		outline: 2px solid transparent;
+
+		& .handle {
+			display: none;
+		}
+	}
 }
 
 #-selection.no-width .ne, 
@@ -130,6 +138,13 @@ body.hide-palette #-canvas {
 		outline-offset: 5px;
 		outline: 2px solid #36c;
 		position: absolute;
+	}
+
+	&.arrow > div {
+		outline-offset: 0px;
+		cursor: pointer;
+		border-radius: 8px;
+		margin: -4px 0 0 -4px;
 	}
 }
 

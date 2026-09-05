@@ -361,3 +361,11 @@ ul.dropdown,
 	background-image: url('../assets/street-map.svg');
 	background-size: cover;
 }
+
+/* ==================================================== */
+/* Arrows */
+
+.shape-arr {
+	border: 1px solid black;
+	overflow: hidden;
+}

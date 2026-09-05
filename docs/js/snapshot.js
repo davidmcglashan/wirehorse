@@ -9,7 +9,6 @@ const snapshot = {
 	take: () => { 
 		// Restructure the UI around the current selection.
 		let bounds = selection.bounds()
-		console.log( bounds )
 
 		// This surrogate canvas will be used to generate the screenshot
 		let div = document.createElement( 'div' )

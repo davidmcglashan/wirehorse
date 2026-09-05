@@ -15,6 +15,7 @@ var wirehorse = {
 		'adder',
 		'selection',
 		'palette',
+		'arrow',
 		'glass',
 		'io',
 		'finder',
