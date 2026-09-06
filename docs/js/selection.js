@@ -71,10 +71,10 @@ var selection = {
 	/**
 	 * Select the supplied elem. Pass in an optional 'true' for multi
 	 */
-	add: ( elem, params = { multi: false, quiet: false } ) => {
+	add: ( elem, params = { multi: false, quiet: false, includeLocks: false } ) => {
 		// If this elem is locked then we do nothing!
 		let id = elem.getAttribute( 'id' )
-		if ( model.isLocked( id ) ) {
+		if ( !params.includeLocks && model.isLocked( id ) ) {
 			return
 		}
 

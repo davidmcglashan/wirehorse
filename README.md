@@ -45,6 +45,9 @@ The 'Snap Selection' feature was implemented using [Snapdom](https://snapdom.dev
 
 ## Version history
 
+### v0.6.2
+* Cmd+click can select a locked shape. Selected locked shapes can then be unlocked
+
 ### v0.6.1
 * New icon: paper plane
 * "icon" can be used to search for icons in the shape adder

@@ -246,6 +246,14 @@ var model = {
 	},
 
 	/**
+	 * Unlock a single shape
+	 */
+	unlockShape: ( id ) => {
+		let i = model.mt.lx.indexOf( id )
+		model.mt.lx.splice( i, 1 )
+	},
+
+	/**
 	 * Unlocks all the locked shapes.
 	 */
 	unlockShapes: () => {

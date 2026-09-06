@@ -475,7 +475,7 @@ var glass = {
 							rect.bottom > elemRect.top &&
 							rect.left < elemRect.right 
 						) {
-							selection.add( shape.elem, {multi:true, quiet:true} )
+							selection.add( shape.elem, {multi:true, quiet:true, includeLocks:event.metaKey} )
 						}
 					}
 					selection.fireListeners()
@@ -519,11 +519,11 @@ var glass = {
 				if ( elem.classList.contains( 'shape' ) ) {
 					// Ignore this shape if it's locked
 					let id = elem.getAttribute( 'id' )
-					if ( model.isLocked( id ) ) {
+					if ( model.isLocked( id ) && !event.metaKey ) {
 						continue
 					}
 
-					selection.add( elem, { multi: event.shiftKey } )
+					selection.add( elem, { multi:event.shiftKey, includeLocks:event.metaKey } )
 					return
 				}
 				
@@ -537,7 +537,7 @@ var glass = {
 					}
 
 					let parent = document.getElementById( id )
-					selection.add( parent, { multi: event.shiftKey } )
+					selection.add( parent, { multi:event.shiftKey, includeLocks:event.metaKey } )
 					return
 				}
 			}

@@ -214,9 +214,25 @@ var toolbar = {
 	},
 
 	/**
-	 * Unlocks any locked shapes in the model.
+	 * Unlocks locked shapes in the model.
 	 */
 	unlock: () => {
+		// We check the selection first. Any locked shapes in there get unlocked
+		let ids = selection.ids()
+		let count = 0
+		for ( let id of ids ) {
+			if ( model.isLocked( id ) ) {
+				model.unlockShape( id )
+				count += 1
+			}
+		}
+
+		// If we did anything in the selection then don't unlock anything else.
+		if ( count > 0 ) {
+			return
+		}
+
+		// Unlock everything.
 		model.unlockShapes()
 	},
 }
