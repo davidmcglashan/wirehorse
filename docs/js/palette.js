@@ -57,16 +57,16 @@ var palette = {
 			toolbars: ['tools','font']
 		},
 		hs: {
-			fields: [ 'x','y','w','bo' ],
+			fields: [ 'x','y','w','bo','pos' ],
 			toolbars: ['tools']
 		},
 		vs: {
-			fields: [ 'x','y','h','bo' ],
+			fields: [ 'x','y','h','bo','pos' ],
 			toolbars: ['tools']
 		},
 	},
 
-	fields: [ 'x','y','w','h','ic','bg','co','bo','fz','fb','fi','fu','fs','ha','va','op','val' ],
+	fields: [ 'x','y','w','h','ic','bg','co','bo','fz','fb','fi','fu','fs','ha','va','op','val','pos' ],
 	toolbars: ['tools','text-align','font'],
 	multiToolbars: [ 'shape-align' ],
 	
@@ -130,7 +130,7 @@ var palette = {
 			let field = event.srcElement.id.substring(5)
 			let modelValue = shape[field]
 			let inputValue = event.srcElement.value | 0
-
+			console.log( event.srcElement )
 			if ( modelValue !== inputValue ) {
 				let mod = {}
 				mod[field] = inputValue 
@@ -361,16 +361,36 @@ var palette = {
 				}
 			}
 
-			// What kind of ipnut are we dealing with. <a> can be a toggling icon button
+			// What kind of input are we dealing with. <a> can be a toggling icon button
 			if ( input.tagName === 'A' && input.getAttribute( 'data-type' ) === 'toggle' ) {
 				input.setAttribute( 'class', value === 'yes' ? 'selected' : '' )
 			} 
-
-			// What kind of ipnut are we dealing with. <a> can be a toggling icon button
+			
+			// ... or a 'switch' style button
 			else if ( input.tagName === 'A' && input.getAttribute( 'data-type' ) === 'switch' ) {
 				input.setAttribute( 'class', 'selected' )
 			} 
 			
+			// drop downs ...
+			else if ( input.tagName === 'SELECT' ) {
+				let vals = ['t','m','b']
+
+				// Default to the first value
+				let opt = shape.opt
+				if ( !opt ) {
+					opt = vals[0]
+				}
+
+				let children = input.children
+				for ( let i=0; i < children.length; i++ ) {
+					if ( vals[i] === opt ) {
+						children[i].setAttribute( 'selected', 'selected' )
+					} else {
+						children[i].removeAttribute( 'selected' )
+					}
+				}
+			}
+
 			// Colour & icon pickers need a bit of additional set up
 			else if ( input.getAttribute( 'data-type' ) === 'colour' ) {
 				input.setAttribute( 'onclick',`javascript:palette.colourPicker('${field}','${shape[field]}')` )

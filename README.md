@@ -51,6 +51,7 @@ The 'Snap Selection' feature was implemented using [Snapdom](https://snapdom.dev
 * Change to how the compass works: Click to focus on selection, Shift+click to see full canvas, even if there's a selection. Click with no selection shows full canvas
 * Send to front/back has been flipped with move forward/backward. Shift+click now moves a single layer
 * Options in the dropdown or combobox can be sorted alphabetically
+* Scrollbars can now be set with positions which moves the scroll indicator
 
 ### v0.6
 * Selections can be converted to PNGs for copy/paste or download

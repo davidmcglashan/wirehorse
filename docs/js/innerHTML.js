@@ -93,10 +93,18 @@ var innerHTML = {
 		return ''
 	},
 	hs: ( shape ) => {
-		return '<div class="left"></div><div class="bar"></div><div class="right"></div>'
+		let pos = shape.pos
+		if ( !pos ) {
+			pos = 1
+		}
+		return `<div class="left"></div><div class="bar pos-${pos}"></div><div class="right"></div>`
 	},
 	vs: ( shape ) => {
-		return '<div class="up"></div><div class="bar"></div><div class="down"></div>'
+		let pos = shape.pos
+		if ( !pos ) {
+			pos = 1
+		}
+		return `<div class="up"></div><div class="bar pos-${pos}"></div><div class="down"></div>`
 	},
 	ic: ( shape ) => {
 		return ''
