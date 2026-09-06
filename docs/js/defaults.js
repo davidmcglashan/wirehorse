@@ -107,7 +107,7 @@ var defaults = {
 				fs: 'yes'
 			}
 		},{
-			name: 'Radio button',
+			name: 'Radio buttons',
 			model: {
 				ty: 'rad',
 				co: 'bk',

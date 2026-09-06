@@ -48,8 +48,9 @@ The 'Snap Selection' feature was implemented using [Snapdom](https://snapdom.dev
 ### v0.6.1
 * New icon: paper plane
 * "icon" can be used to search for icons in the shape adder
-* Change to how the compass works: Click to focus on selection, Shift+click to see full canvas, even if there's a selection. Click with no selection shows full canvas.
-* Send to front/back has been flipped with move forward/backward. Shift+click now moves a single layer.
+* Change to how the compass works: Click to focus on selection, Shift+click to see full canvas, even if there's a selection. Click with no selection shows full canvas
+* Send to front/back has been flipped with move forward/backward. Shift+click now moves a single layer
+* Options in the dropdown or combobox can be sorted alphabetically
 
 ### v0.6
 * Selections can be converted to PNGs for copy/paste or download

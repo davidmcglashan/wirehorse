@@ -4,6 +4,14 @@ var editor = {
 	canOpen: true,
 	shapeId: null,
 
+	// Content and function of the single 'tool' button you get on the editor.
+	tools: {
+		cmb: {
+			text: 'Sort items',
+			func: 'sortItems'
+		}
+	},
+
 	/**
 	 * Initialise the editor, and its listeners
 	 */
@@ -64,10 +72,11 @@ var editor = {
 			lightbox.callback = editor.save
 			editor.elem.classList.remove( 'hidden' )
 			
-			// Position the input on the glass near the mouse click
+			// Position the input on the glass near the mouse click.
 			editor.elem.style.top = `${event.pageY+16}px`
 			editor.elem.style.left = `${event.pageX-16}px`
 			
+			// Feed in the value from the model.
 			let value = shape['tx']
 			if ( value ) {
 				editor.textarea.value = value
@@ -75,7 +84,18 @@ var editor = {
 				editor.textarea.value = ''
 			}
 			
-			// Get keyboard focus and selet all the text ready for quick edits.
+			// If this shape declares a tool we can set it up here.
+			let elem = document.getElementById( '-editor-tool' )
+			let tool = editor.tools[shape['ty']]
+			if ( tool ) {
+				elem.removeAttribute( 'class' )
+				elem.innerHTML = tool.text
+				editor.tools.current = editor[tool.func]
+			} else {
+				elem.setAttribute( 'class', 'hidden' )
+			}
+
+			// Get keyboard focus and select all the text ready for quick edits.
 			editor.textarea.focus()
 			editor.textarea.select()
 		}
@@ -96,4 +116,21 @@ var editor = {
 		editor.elem.classList.add( 'hidden' )
 		editor.canOpen = true
 	},
+
+	/**
+	 * Called from the UI when the user clicks the editor's tool button.
+	 */
+	tool: () => {
+		// Simply invoke the last function to get set up in invokeEditor.
+		editor.tools.current()
+	},
+
+	/**
+	 * Sort the text lines in the textarea.
+	 */
+	sortItems: () => {
+		let lines = editor.textarea.value.split('\n')
+		lines.sort()
+		editor.textarea.value = lines.join('\n')
+	}
 };

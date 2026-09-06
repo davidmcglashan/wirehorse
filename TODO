@@ -10,8 +10,6 @@
 
 - Black out feature which locks and puts a rect over the selection which is black but translucent
 
-- Alphabetical sort comboboxes button (except the first one)
-
 - Scrollbars with offsets
 
 - archive is a little naughty removing other modules event listeners!
