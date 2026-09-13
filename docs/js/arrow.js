@@ -12,8 +12,9 @@ var arrow = {
 
 		// Put the drag handles in the DOM and let the CSS do its work.
 		elem.setAttribute( 'class', 'arrow' )
+		let sc = model.mt.sc
 		for ( let i=1; i<5; i++ ) {
-			elem.appendChild( arrow.createHandle( arrow.xs[i-1]*shape.w, arrow.ys[i-1]*shape.h, i ) )
+			elem.appendChild( arrow.createHandle( arrow.xs[i-1]*shape.w * sc, arrow.ys[i-1]*shape.h * sc, i ) )
 		}
 
 		// Find the path element so we can mod it later.
@@ -55,8 +56,9 @@ var arrow = {
 		let dy = event.pageY - glass.drag.y
 
 		// Add this to the total distance travelled
-		arrow.dx += dx
-		arrow.dy += dy
+		let sc = model.mt.sc
+		arrow.dx += dx / sc
+		arrow.dy += dy / sc
 		arrow.i = 1
 
 		arrow.path.setAttribute(
@@ -74,8 +76,9 @@ var arrow = {
 		let dy = event.pageY - glass.drag.y
 
 		// Add this to the total distance travelled
-		arrow.dx += dx
-		arrow.dy += dy
+		let sc = model.mt.sc
+		arrow.dx += dx / sc
+		arrow.dy += dy / sc
 		arrow.i = 2
 
 		arrow.path.setAttribute(
@@ -93,14 +96,15 @@ var arrow = {
 		let dy = event.pageY - glass.drag.y
 
 		// Add this to the total distance travelled
-		arrow.dx += dx
-		arrow.dy += dy
+		let sc = model.mt.sc
+		arrow.dx += dx / sc
+		arrow.dy += dy / sc
 		arrow.i = 3
 
 		arrow.path.setAttribute(
 			'd',
 			`M ${arrow.shape.x1*arrow.shape.w} ${arrow.shape.y1*arrow.shape.h} 
-			 C ${arrow.xs[2]*arrow.shape.w+arrow.dx} ${arrow.shape.y3*arrow.shape.h+arrow.dy}, 
+			 C ${arrow.shape.x3*arrow.shape.w+arrow.dx} ${arrow.shape.y3*arrow.shape.h+arrow.dy}, 
 			 ${arrow.shape.x4*arrow.shape.w} ${arrow.shape.y4*arrow.shape.h},
 			 ${arrow.shape.x2*arrow.shape.w} ${arrow.shape.y2*arrow.shape.h}`
 		)
@@ -112,8 +116,9 @@ var arrow = {
 		let dy = event.pageY - glass.drag.y
 
 		// Add this to the total distance travelled
-		arrow.dx += dx
-		arrow.dy += dy
+		let sc = model.mt.sc
+		arrow.dx += dx / sc
+		arrow.dy += dy / sc
 		arrow.i = 4
 
 		arrow.path.setAttribute(
@@ -130,19 +135,42 @@ var arrow = {
 	 */
 	finishDrag: ( drag, event ) => {
 		// This is the changeset we'll submit to the model.
-		let changes = {
-			x: arrow.x,
-			y: arrow.y,
-			w: arrow.w,
-			h: arrow.h
-		}
-		
-		// Also add in the x1,y1, etc.
+		let changes = {}
 		for ( let j=1; j<5; j++ ) {
 			changes[`x${j}`] = arrow.shape[`x${j}`] + ( j === arrow.i ? arrow.dx/arrow.shape.w : 0 )
 			changes[`y${j}`] = arrow.shape[`y${j}`] + ( j === arrow.i ? arrow.dy/arrow.shape.h : 0 )
 		}
 		
+		// Since bezier curves are always bounded within their four points' min/max dimensions
+		// we can reduce changes{} to its smallest size and submit that instead. First calculate
+		// the min/max dimensions.
+		let minX = 10000
+		let minY = 10000
+		let maxX = -10000
+		let maxY = -10000
+		for ( let j=1; j<5; j++ ) {
+			minX = Math.min( minX, changes[`x${j}`] )
+			maxX = Math.max( maxX, changes[`x${j}`] )
+			minY = Math.min( minY, changes[`y${j}`])
+			maxY = Math.max( maxY, changes[`y${j}`] )
+		}
+
+		// Now we can calculate a new xywh for the shape.
+		changes.x = arrow.shape.x + minX * arrow.shape.w
+		changes.y = arrow.shape.y + minY * arrow.shape.h
+		changes.w = (maxX-minX) * arrow.shape.w
+		changes.h = (maxY-minY) * arrow.shape.h
+
+		// Now move the interior points to the new origin and rescale by the new width
+		let factorX = 1 / (maxX-minX)
+		let factorY = 1 / (maxY-minY)
+		for ( let j=1; j<5; j++ ) {
+			changes[`x${j}`] -= minX
+			changes[`y${j}`] -= minY
+			changes[`x${j}`] *= factorX
+			changes[`y${j}`] *= factorY
+		}
+
 		undo.pushShape( model.updateShape( arrow.shape.id, changes ) )
 	},
 

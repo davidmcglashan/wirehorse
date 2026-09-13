@@ -1,7 +1,5 @@
 - implement a push scroll if you linger outside the glass pane during a drag (but not a selection) 
 
-- Make arrows work at all scales
-
 - archive is a little naughty removing other modules event listeners!
 
 - super wide tabs and rules get a space in the middle - probably need their own scribbley SVG

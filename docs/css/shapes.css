@@ -399,4 +399,7 @@ ul.dropdown,
 	&.selected .show-on-selection {
 		display: unset;
 	}
+	svg {
+		overflow: initial;
+	}
 }
