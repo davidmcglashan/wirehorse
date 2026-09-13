@@ -207,7 +207,7 @@ var defaults = {
 				w: 200,
 				h: 180
 			}
-/*		},{
+		},{
 			name: 'Arrow',
 			model: {
 				ty: 'arr',
@@ -222,7 +222,7 @@ var defaults = {
 				x4: 0.75,
 				y4: 0.25,
 				co: 'or'
-			}*/
+			}
 		}
 	],
 

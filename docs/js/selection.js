@@ -110,6 +110,13 @@ var selection = {
 	},
 
 	/**
+	 * Returns true if the passed in shape is in the current selection
+	 */
+	contains: ( shape ) => {
+		return selection.storage.includes( shape.elem )
+	},
+
+	/**
 	 * Returns the first selected DOM element.
 	 */
 	first: () => {

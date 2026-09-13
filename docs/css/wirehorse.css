@@ -100,14 +100,6 @@ body.hide-palette #-canvas {
 			cursor: nwse-resize;
 		}
 	}
-
-	&.delegate-arr {
-		outline: 2px solid transparent;
-
-		& .handle {
-			display: none;
-		}
-	}
 }
 
 #-selection.no-width .ne, 

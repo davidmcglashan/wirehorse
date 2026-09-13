@@ -46,6 +46,7 @@ The 'Snap Selection' feature was implemented using [Snapdom](https://snapdom.dev
 ## Version history
 
 ### v0.6.2
+* New shape: Arrow - draw a bezier curved arrow between two points
 * Cmd+click can select a locked shape. Selected locked shapes can then be unlocked
 * Added palette function to quickly add a 'lightbox' rectangle over a selection 
 

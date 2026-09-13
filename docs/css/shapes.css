@@ -392,6 +392,11 @@ ul.dropdown,
 /* Arrows */
 
 .shape-arr {
-	border: 1px solid black;
-	overflow: hidden;
+	/* Hide the selection lines unless there's a selection. */
+	& .show-on-selection {
+		display: none;
+	}
+	&.selected .show-on-selection {
+		display: unset;
+	}
 }

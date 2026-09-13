@@ -1,9 +1,6 @@
 - implement a push scroll if you linger outside the glass pane during a drag (but not a selection) 
 
-- fancy arrows that actually "simple" SVG curves
-  - clever drag mechanics to resize and re-position the box
-  - solid, dotted/dashed styles
-  - draw the drag lines in the SVG itself
+- Make arrows work at all scales
 
 - archive is a little naughty removing other modules event listeners!
 

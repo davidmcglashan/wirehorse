@@ -6,7 +6,7 @@ var arrow = {
 	 * Called when the arrow is selected in the UI. Adds the drag handles to the DOM.
 	 */
 	select: ( shape, elem ) => {
-		// Convert the shape model into something we can programmatically inspect
+		// Convert the shape model into something we can quickly iterate 
 		arrow.xs = [ shape.x1, shape.x2, shape.x3, shape.x4 ]
 		arrow.ys = [ shape.y1, shape.y2, shape.y3, shape.y4 ]
 
@@ -40,6 +40,9 @@ var arrow = {
 		handle.style.width = `${8}px`
 		handle.style.height = `${8}px`
 		handle.setAttribute( 'data-drag-mode', '12' )
+
+		// The drag code will know to call back to this module if we provide these two parameters
+		// on the DOM element: basically, a numbered function for each drag handle.
 		handle.setAttribute( 'data-drag-module', 'arrow' )
 		handle.setAttribute( 'data-drag-func', `drag_${i}` )
 		
@@ -63,8 +66,6 @@ var arrow = {
 			 ${arrow.shape.x4*arrow.shape.w} ${arrow.shape.y4*arrow.shape.h},
 			 ${arrow.shape.x2*arrow.shape.w} ${arrow.shape.y2*arrow.shape.h}`
 		)
-
-		arrow.fixX( 1 )
 	},
 
 	drag_2: ( drag, event ) => {
@@ -84,8 +85,6 @@ var arrow = {
 			 ${arrow.shape.x4*arrow.shape.w} ${arrow.shape.y4*arrow.shape.h},
 			 ${arrow.shape.x2*arrow.shape.w+arrow.dx} ${arrow.shape.y2*arrow.shape.h+arrow.dy}`
 		)
-
-		arrow.fixX( 2 )
 	},
 
 	drag_3: ( drag, event ) => {
@@ -105,8 +104,6 @@ var arrow = {
 			 ${arrow.shape.x4*arrow.shape.w} ${arrow.shape.y4*arrow.shape.h},
 			 ${arrow.shape.x2*arrow.shape.w} ${arrow.shape.y2*arrow.shape.h}`
 		)
-
-		arrow.fixX( 3 )
 	},
 
 	drag_4: ( drag, event ) => {
@@ -126,8 +123,6 @@ var arrow = {
 		 	 ${arrow.shape.x4*arrow.shape.w+arrow.dx} ${arrow.shape.y4*arrow.shape.h+arrow.dy}, 
 			 ${arrow.shape.x2*arrow.shape.w} ${arrow.shape.y2*arrow.shape.h}`
 		)
-
-		arrow.fixX( 4 )
 	},
 
 	/**
@@ -151,30 +146,19 @@ var arrow = {
 		undo.pushShape( model.updateShape( arrow.shape.id, changes ) )
 	},
 
-	fixX: ( x ) => {
-		let xs = arrow.shape[`x${x}`]*arrow.shape.w+arrow.dx
-		if ( xs < 0 ) {
-			// How far short of zero?
-			let dx = 0-xs
-
-			// Add that value to all the other xs, subtract it from the x
-			for ( let i=0; i<4; i++ ) {
-				arrow.xs[i] = arrow.shape[`x${i}`] + (i === x ? 0 : dx)
-			}
-			arrow.x = arrow.shape.x - dx
-		}
-	},
-
 	/**
-	 * Inner HTML is delegated from the innerHTML.js file since arrows are a bit
-	 * special.
+	 * Inner HTML is delegated from the innerHTML.js file since arrows are a bit special.
 	 */
 	innerHTML: ( shape ) => {
 		let ret = ''
-		ret += '<svg fill="transparent" width="512px" height="512px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">'
+		ret += `<svg fill="transparent" width="${shape.w}px" height="${shape.h}px" viewBox="0 0 ${shape.w} ${shape.h}" xmlns="http://www.w3.org/2000/svg">`
 		ret += '<defs><marker id="arrow" viewBox="0 0 20 20" refX="10" refY="10" markerWidth="12" markerHeight="12" orient="auto-start-reverse">'
 		ret += `<path stroke-width="1.5px" stroke="#${model.colours[shape.co].hex}" stroke-linecap="round" fill="transparent" d="M 6 6 L 12 10 L 6 14" /></marker></defs>`
 		ret += `<path id="arrow-${shape.id}" marker-end="url(#arrow)" stroke-linecap="round" stroke-width="4px" stroke="#${model.colours[shape.co].hex}" d="M ${shape.x1*shape.w} ${shape.y1*shape.h} C ${shape.x3*shape.w} ${shape.y3*shape.h},${shape.x4*shape.w} ${shape.y4*shape.h}, ${shape.x2*shape.w} ${shape.y2*shape.h}"/>`
+
+		ret += `<path class='show-on-selection' stroke-width="1px" stroke="#36c" d="M ${shape.x1*shape.w} ${shape.y1*shape.h} ${shape.x3*shape.w} ${shape.y3*shape.h}"/>`
+		ret += `<path class='show-on-selection' stroke-width="1px" stroke="#36c" d="M ${shape.x2*shape.w} ${shape.y2*shape.h} ${shape.x4*shape.w} ${shape.y4*shape.h}"/>`
+
 		return ret
 	}
 };

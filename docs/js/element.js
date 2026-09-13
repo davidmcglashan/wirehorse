@@ -113,6 +113,9 @@ const element = {
 	style: ( shape ) => {
 		// Style and position it
 		shape.elem.setAttribute( 'class', `shape shape-${shape.ty}` )
+		if ( selection.contains( shape ) ) {
+			shape.elem.classList.add( 'selected' )
+		}
 
 		element.xywh( shape )
 		element.font( shape )
