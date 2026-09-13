@@ -100,6 +100,11 @@ body.hide-palette #-canvas {
 			cursor: nwse-resize;
 		}
 	}
+
+	/* Hide the resize handles on delegate arrows since they autosize as the arrow points are dragged about. */
+	&.delegate-arr .handle {
+		display: none;
+	}
 }
 
 #-selection.no-width .ne, 

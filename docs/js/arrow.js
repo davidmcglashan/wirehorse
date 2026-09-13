@@ -19,6 +19,8 @@ var arrow = {
 
 		// Find the path element so we can mod it later.
 		arrow.path = document.getElementById( `arrow-${shape.id}`)
+		arrow.l1 = document.getElementById( `arrow-${shape.id}-1`)
+		arrow.l2 = document.getElementById( `arrow-${shape.id}-2`)
 
 		// Remember these ...
 		arrow.shape = shape
@@ -61,12 +63,16 @@ var arrow = {
 		arrow.dy += dy / sc
 		arrow.i = 1
 
-		arrow.path.setAttribute(
-			'd',
+		arrow.path.setAttribute( 'd',
 			`M ${arrow.shape.x1*arrow.shape.w+arrow.dx} ${arrow.shape.y1*arrow.shape.h+arrow.dy} 
 			 C ${arrow.shape.x3*arrow.shape.w} ${arrow.shape.y3*arrow.shape.h}, 
 			 ${arrow.shape.x4*arrow.shape.w} ${arrow.shape.y4*arrow.shape.h},
 			 ${arrow.shape.x2*arrow.shape.w} ${arrow.shape.y2*arrow.shape.h}`
+		)
+
+		arrow.l1.setAttribute( 'd',
+			`M ${arrow.shape.x1*arrow.shape.w+arrow.dx} ${arrow.shape.y1*arrow.shape.h+arrow.dy} 
+			 ${arrow.shape.x3*arrow.shape.w} ${arrow.shape.y3*arrow.shape.h}`
 		)
 	},
 
@@ -81,11 +87,15 @@ var arrow = {
 		arrow.dy += dy / sc
 		arrow.i = 2
 
-		arrow.path.setAttribute(
-			'd',
+		arrow.path.setAttribute( 'd',
 			`M ${arrow.shape.x1*arrow.shape.w} ${arrow.shape.y1*arrow.shape.h} 
 			 C ${arrow.shape.x3*arrow.shape.w} ${arrow.shape.y3*arrow.shape.h}, 
 			 ${arrow.shape.x4*arrow.shape.w} ${arrow.shape.y4*arrow.shape.h},
+			 ${arrow.shape.x2*arrow.shape.w+arrow.dx} ${arrow.shape.y2*arrow.shape.h+arrow.dy}`
+		)
+
+		arrow.l2.setAttribute( 'd',
+			`M ${arrow.shape.x4*arrow.shape.w} ${arrow.shape.y4*arrow.shape.h},
 			 ${arrow.shape.x2*arrow.shape.w+arrow.dx} ${arrow.shape.y2*arrow.shape.h+arrow.dy}`
 		)
 	},
@@ -101,12 +111,16 @@ var arrow = {
 		arrow.dy += dy / sc
 		arrow.i = 3
 
-		arrow.path.setAttribute(
-			'd',
+		arrow.path.setAttribute( 'd',
 			`M ${arrow.shape.x1*arrow.shape.w} ${arrow.shape.y1*arrow.shape.h} 
 			 C ${arrow.shape.x3*arrow.shape.w+arrow.dx} ${arrow.shape.y3*arrow.shape.h+arrow.dy}, 
 			 ${arrow.shape.x4*arrow.shape.w} ${arrow.shape.y4*arrow.shape.h},
 			 ${arrow.shape.x2*arrow.shape.w} ${arrow.shape.y2*arrow.shape.h}`
+		)
+
+		arrow.l1.setAttribute( 'd',
+			`M ${arrow.shape.x1*arrow.shape.w} ${arrow.shape.y1*arrow.shape.h} 
+			 ${arrow.shape.x3*arrow.shape.w+arrow.dx} ${arrow.shape.y3*arrow.shape.h+arrow.dy}`
 		)
 	},
 
@@ -121,11 +135,15 @@ var arrow = {
 		arrow.dy += dy / sc
 		arrow.i = 4
 
-		arrow.path.setAttribute(
-			'd',
+		arrow.path.setAttribute( 'd',
 			`M ${arrow.shape.x1*arrow.shape.w} ${arrow.shape.y1*arrow.shape.h} 
 			 C ${arrow.shape.x3*arrow.shape.w} ${arrow.shape.y3*arrow.shape.h},
 		 	 ${arrow.shape.x4*arrow.shape.w+arrow.dx} ${arrow.shape.y4*arrow.shape.h+arrow.dy}, 
+			 ${arrow.shape.x2*arrow.shape.w} ${arrow.shape.y2*arrow.shape.h}`
+		)
+
+		arrow.l2.setAttribute( 'd',
+			`M ${arrow.shape.x4*arrow.shape.w+arrow.dx} ${arrow.shape.y4*arrow.shape.h+arrow.dy}, 
 			 ${arrow.shape.x2*arrow.shape.w} ${arrow.shape.y2*arrow.shape.h}`
 		)
 	},
@@ -184,8 +202,8 @@ var arrow = {
 		ret += `<path stroke-width="1.5px" stroke="#${model.colours[shape.co].hex}" stroke-linecap="round" fill="transparent" d="M 6 6 L 12 10 L 6 14" /></marker></defs>`
 		ret += `<path id="arrow-${shape.id}" marker-end="url(#arrow)" stroke-linecap="round" stroke-width="4px" stroke="#${model.colours[shape.co].hex}" d="M ${shape.x1*shape.w} ${shape.y1*shape.h} C ${shape.x3*shape.w} ${shape.y3*shape.h},${shape.x4*shape.w} ${shape.y4*shape.h}, ${shape.x2*shape.w} ${shape.y2*shape.h}"/>`
 
-		ret += `<path class='show-on-selection' stroke-width="1px" stroke="#36c" d="M ${shape.x1*shape.w} ${shape.y1*shape.h} ${shape.x3*shape.w} ${shape.y3*shape.h}"/>`
-		ret += `<path class='show-on-selection' stroke-width="1px" stroke="#36c" d="M ${shape.x2*shape.w} ${shape.y2*shape.h} ${shape.x4*shape.w} ${shape.y4*shape.h}"/>`
+		ret += `<path id="arrow-${shape.id}-1" class='show-on-selection' stroke-width="1px" stroke="#36c" d="M ${shape.x1*shape.w} ${shape.y1*shape.h} ${shape.x3*shape.w} ${shape.y3*shape.h}"/>`
+		ret += `<path id="arrow-${shape.id}-2" class='show-on-selection' stroke-width="1px" stroke="#36c" d="M ${shape.x2*shape.w} ${shape.y2*shape.h} ${shape.x4*shape.w} ${shape.y4*shape.h}"/>`
 
 		return ret
 	}
