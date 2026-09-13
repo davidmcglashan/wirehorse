@@ -5,8 +5,6 @@
   - solid, dotted/dashed styles
   - draw the drag lines in the SVG itself
 
-- Black out feature which locks and puts a rect over the selection which is black but translucent
-
 - archive is a little naughty removing other modules event listeners!
 
 - super wide tabs and rules get a space in the middle - probably need their own scribbley SVG

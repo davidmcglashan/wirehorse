@@ -647,4 +647,28 @@ var palette = {
 			model.lockShape( id )
 		}
 	},
+
+	/**
+	 * Adds a new shape to act as a lightbox overlay over the current selection
+	 */
+	lightboxSelection: () => {
+		// Our new shape is a shallow clone of the default rectangle.
+		let newShape = { ...defaults.shapes[0].model } 
+
+		// Make it cover the current selection
+		let bounds = selection.bounds()
+		newShape.x = bounds.x
+		newShape.y = bounds.y
+		newShape.w = bounds.w
+		newShape.h = bounds.h
+		
+		// Make it dark and transparent
+		newShape.bg = 'bk'
+		newShape.op = 75
+
+		// Now send that to the model
+		model.addShape( newShape )
+		selection.add( newShape.elem, {multi:true} )
+		undo.pushBulkShapes( undo.types.ADD_NEW_SHAPES, [ newShape ] )
+	},
 };
