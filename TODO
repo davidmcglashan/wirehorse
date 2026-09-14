@@ -1,4 +1,4 @@
-- A + drag to add an arrow
+- Remove all the non-delgate arrow stuff from glass.js in favour of delegate stuff
 - type to search on the icon switcher
   - make the existing adder function nice and generic?
 - Redo the alignment features to consider the DOM elems which should all have correctly formed dimensions

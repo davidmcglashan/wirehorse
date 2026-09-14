@@ -6,7 +6,8 @@ var glass = {
 	selemsubs: null,
 	queuedShapeChange: null,
 
-	// Shapes of this type 
+	// Shapes of this type defer some of their specialist drawing and model code to
+	// delegate methods, named here.
 	delegateSelection: { 
 		arr: arrow.select
 	},
@@ -34,7 +35,8 @@ var glass = {
 		CLICK: 0,
 		DRAG_RECT: 1,
 		DRAG_RULE: 2,
-		DRAG_TEXT: 3
+		DRAG_TEXT: 3,
+		DRAG_ARROW: 4
 	},
 
 	// These are the various shapes that can be added by holding a key and pressing
@@ -48,6 +50,11 @@ var glass = {
 			keyCode: 66,
 			model: defaults.shapes[1].model,
 			drag: 0 // CLICK
+		},
+		{ // A for adding arrows
+			keyCode: 65, 
+			model: defaults.shapes[21].model,
+			drag: 4 // DRAG_ARROW
 		},
 		{ // R for adding rectangles
 			keyCode: 82, 
@@ -295,6 +302,10 @@ var glass = {
 				glass.elem.setAttribute( 'class', 'ready-xhair' )
 
 				switch ( glass.drag.shape?.drag ) {
+					case glass.drawShapeModes.DRAG_ARROW:
+						glass.dragRect.setAttribute( 'class', 'hidden shape shape-arr' )
+						arrow.drawDragUpdate( glass.dragRect, event, glass.drag )
+						break;
 					case glass.drawShapeModes.DRAG_RECT:
 						glass.dragRect.setAttribute( 'class', 'hidden shape shape-rec border-bk' )
 						break;
@@ -361,6 +372,10 @@ var glass = {
 				} else {
 					glass.dragRect.style.top = `${glass.drag.y}px`
 					glass.dragRect.style.height = `${event.pageY - glass.drag.y - offset}px`
+				}
+
+				if ( glass.drag.shape?.drag === glass.drawShapeModes.DRAG_ARROW ) {
+					arrow.drawDragUpdate( glass.dragRect, event, glass.drag )
 				}
 			}
 
@@ -585,6 +600,11 @@ var glass = {
 			if ( glass.drag.shape.drag !== glass.drawShapeModes.DRAG_RULE ) {
 				newShape.h = event.pageY < glass.drag.y ? (glass.drag.y - event.pageY)/scale - 18 : (event.pageY - glass.drag.y)/scale - 18
 			}
+		}
+
+		// If we're using a delegate let it modify the model
+		if ( glass.drag.shape?.drag === glass.drawShapeModes.DRAG_ARROW ) {
+			arrow.modifyNewShape( newShape, glass.dragRect, event, glass.drag )
 		}
 
 		// Push it into the model in an undoable way.

@@ -206,5 +206,40 @@ var arrow = {
 		ret += `<path id="arrow-${shape.id}-2" class='show-on-selection' stroke-width="1px" stroke="#36c" d="M ${shape.x2*shape.w} ${shape.y2*shape.h} ${shape.x4*shape.w} ${shape.y4*shape.h}"/>`
 
 		return ret
+	},
+
+	/**
+	 * Delegate function for updating the shape's appearance during a draw drag.
+	 */
+	drawDragUpdate: ( elem, event, drag ) => {
+		let lr = event.pageX < drag.x
+		let tb = event.pageY < drag.y
+
+		let bounds = elem.getBoundingClientRect()
+		let ret = ''
+		ret += `<svg fill="transparent" width="${bounds.width}px" height="${bounds.height}px" viewBox="0 0 ${bounds.width} ${bounds.height}" xmlns="http://www.w3.org/2000/svg">`
+		ret += '<defs><marker id="arrow" viewBox="0 0 20 20" refX="10" refY="10" markerWidth="12" markerHeight="12" orient="auto-start-reverse">'
+		ret += `<path stroke-width="1.5px" stroke="#${model.colours['or'].hex}" stroke-linecap="round" fill="transparent" d="M 6 6 L 12 10 L 6 14" /></marker></defs>`
+		ret += `<path marker-end="url(#arrow)" stroke-linecap="round" stroke-width="4px" stroke="#${model.colours['or'].hex}" d="M ${lr ? bounds.width : 0} ${tb ? bounds.height : 0} ${lr ? 0 : bounds.width} ${tb ? 0 : bounds.height}"/>`
+		elem.innerHTML = ret
+	},
+
+	/**
+	 * Delegate function for modifying the shape model when it is added to the canvas
+	 * following a draw drag.
+	 */
+	modifyNewShape: ( shape, elem, event, drag ) => {
+		let lr = event.pageX < drag.x
+		let tb = event.pageY < drag.y
+
+		shape.x1 = lr ? 1 : 0
+		shape.x2 = lr ? 0 : 1
+		shape.x3 = lr ? 0.8 : 0.2
+		shape.x4 = lr ? 0.2 : 0.8
+
+		shape.y1 = tb ? 1 : 0
+		shape.y2 = tb ? 0 : 1
+		shape.y3 = tb ? 0.8 : 0.2
+		shape.y4 = tb ? 0.2 : 0.8
 	}
 };
