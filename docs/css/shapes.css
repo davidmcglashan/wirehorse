@@ -403,3 +403,8 @@ ul.dropdown,
 		overflow: initial;
 	}
 }
+
+/* Hide the guide lines on snapshots */
+.snapshot .shape-arr .show-on-selection {
+	display: none;
+}
