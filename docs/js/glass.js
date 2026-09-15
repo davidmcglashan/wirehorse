@@ -662,8 +662,9 @@ var glass = {
 		}
 
 		// Cmd+A to select everything
-		if ( event.metaKey && event.keyCode == 65 ) {
+		if ( event.metaKey && event.keyCode === 65 ) {
 			event.preventDefault()
+			event.stopPropagation()
 			selection.clear()
 
 			for ( let shape of model.sh ) {
@@ -700,7 +701,7 @@ var glass = {
 		}
 
 		// Iterate the various drawShapes and see if anything hits there
-		else {
+		else if ( !event.metaKey ) {
 			for ( let ds of glass.drawShapes ) {
 				if ( event.keyCode === ds.keyCode ) {
 					glass.selem.classList.add( 'hidden' )
