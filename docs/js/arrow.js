@@ -188,6 +188,15 @@ var arrow = {
 			changes[`x${j}`] *= factorX
 			changes[`y${j}`] *= factorY
 		}
+		
+		// There are drag conditions that can lead to negative dimensions. If we encounter
+		// one then we correct it here before inserting the model.
+		if ( changes.w < 0 ) {
+			changes.w *= -1
+		}
+		if ( changes.h < 0 ) {
+			changes.h *= -1
+		}
 
 		undo.pushShape( model.updateShape( arrow.shape.id, changes ) )
 	},
