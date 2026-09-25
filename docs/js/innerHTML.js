@@ -132,37 +132,36 @@ var innerHTML = {
 		html += '</ul>'
 		return html
 	},	
+
+	/**
+	 * Checkboxes and radios are the same, just different CSS classes
+	 */
 	chb: ( shape ) => {
-		let lines = shape.tx.split('\n')
-		let html = '<ul>'
-		for ( let i=0; i<lines.length; i++) {
-			html += '<li>'
-			let cut = 0
-			if ( lines[i].startsWith('[x]') ) {
-				html += '<div class="shape-ic icon-ckbx"></div>'
-				cut = 3
-			} else if ( lines[i].startsWith('[ ]') ) {
-				html += '<div class="shape-ic icon-chbx"></div>'
-				cut = 3
-			}
-			html += `${innerHTML.safe(lines[i].substring(cut))}</li>`
-		}
-		html += '</ul>'
-		return html
-	},	
+		return innerHTML.checkOrRadio( shape, 'ckbx', 'chbx' )
+	},
 	rad: ( shape ) => {
+		return innerHTML.checkOrRadio( shape, 'crad', 'rado' )
+	},
+	checkOrRadio: ( shape, onClass, offClass ) => {
 		let lines = shape.tx.split('\n')
 		let html = '<ul>'
 		for ( let i=0; i<lines.length; i++) {
 			html += '<li>'
 			let cut = 0
-			if ( lines[i].startsWith('(x)') ) {
-				html += '<div class="shape-ic icon-crad"></div>'
-				cut = 3
-			} else if ( lines[i].startsWith('( )') ) {
-				html += '<div class="shape-ic icon-rado"></div>'
-				cut = 3
+
+			// If the component is three chars long we can check its make up.
+			if ( lines[i].length >= 3 ) {
+				if ( [ '[', '(' ].includes( lines[i][0] ) && [ ']', ')' ].includes( lines[i][2] ) ) {
+					if ( lines[i][1] === ' ' ) {
+						html += `<div class="shape-ic icon-${offClass}"></div>`
+					} else {
+						html += `<div class="shape-ic icon-${onClass}"></div>`
+					}
+					cut = 3
+				}
 			}
+
+			// Close the <li> tag, maybe with the component cut out
 			html += `${innerHTML.safe(lines[i].substring(cut))}</li>`
 		}
 		html += '</ul>'
