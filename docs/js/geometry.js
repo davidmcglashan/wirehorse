@@ -56,10 +56,10 @@ var geometry = {
 	 */
 	bounds: ( shapes ) => {
 		let rect = {
-			x: 10000,
-			y: 10000,
-			x2: -10000,
-			y2: -10000
+			x: Number.MAX_SAFE_INTEGER,
+			y: Number.MAX_SAFE_INTEGER,
+			x2: Number.MIN_SAFE_INTEGER,
+			y2: Number.MIN_SAFE_INTEGER
 		}
 
 		// Iterate the passed in shapes.

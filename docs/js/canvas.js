@@ -64,10 +64,10 @@ var canvas = {
 		}
 		
 		// Work out scale of rectangle we want to fit in the viewport
-		let minX = 10000
-		let minY = 10000
-		let maxX = -10000
-		let maxY = -10000
+		let minX = Number.MAX_SAFE_INTEGER
+		let minY = Number.MAX_SAFE_INTEGER
+		let maxX = Number.MIN_SAFE_INTEGER
+		let maxY = Number.MIN_SAFE_INTEGER
 		for ( let id of ids ) {
 			let shape = model.shape( id )
 			

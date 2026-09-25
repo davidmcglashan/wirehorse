@@ -162,10 +162,10 @@ var arrow = {
 		// Since bezier curves are always bounded within their four points' min/max dimensions
 		// we can reduce changes{} to its smallest size and submit that instead. First calculate
 		// the min/max dimensions.
-		let minX = 10000
-		let minY = 10000
-		let maxX = -10000
-		let maxY = -10000
+		let minX = Number.MAX_SAFE_INTEGER
+		let minY = Number.MAX_SAFE_INTEGER
+		let maxX = Number.MIN_SAFE_INTEGER
+		let maxY = Number.MIN_SAFE_INTEGER
 		for ( let j=1; j<5; j++ ) {
 			minX = Math.min( minX, changes[`x${j}`] )
 			maxX = Math.max( maxX, changes[`x${j}`] )

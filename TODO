@@ -1,6 +1,6 @@
-- Far x snaps get a wide left offset
 - Arrow boxes get offset after drawing zoomed out
 - Redo the alignment features to consider the DOM elems which should all have correctly formed dimensions
+- Work out what the hanging crash is (and fix it)
 - Horizontal and vertical arrange features - space & distribute
 - Remove all the non-delgate arrow stuff from glass.js in favour of delegate stuff
 - type to search on the icon switcher
