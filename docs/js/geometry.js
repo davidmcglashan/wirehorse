@@ -104,5 +104,47 @@ var geometry = {
 		rect.h = rect.y2 - rect.y
 
 		return rect
+	},
+
+	/**
+	 * Returns the X of the given shape
+	 */
+	x: ( shape ) => {
+		// Every shape's X is reliable
+		return shape.x
+	},
+
+	/**
+	 * Returns the Y of the given shape
+	 */
+	y: ( shape ) => {
+		// Every shape's Y is reliable
+		return shape.y
+	},
+
+	/**
+	 * Returns the width of the given shape
+	 */
+	width: ( shape ) => {
+		// Not every shape's width is reliable, so we need to refer to its DOM element's width
+		// which should be.
+		let ret = shape.w
+		if ( !ret ) {
+			return shape.elem.getBoundingClientRect().width
+		}
+		return ret
+	},
+
+	/**
+	 * Returns the height of the given shape
+	 */
+	height: ( shape ) => {
+		// Not every shape's height is reliable, so we need to refer to its DOM element's height
+		// which should be.
+		let ret = shape.h
+		if ( !ret ) {
+			return shape.elem.getBoundingClientRect().height
+		}
+		return ret
 	}
 };

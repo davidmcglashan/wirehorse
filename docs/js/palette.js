@@ -558,28 +558,28 @@ var palette = {
 	align: ( alignment ) => {
 		const config = {
 			l: { op: Math.min, 
-				get: ( shape ) => { return shape.x }, 
+				get: ( shape ) => { return geometry.x( shape ) }, 
 				set: ( shape, mod, value ) => { mod.x = value } 
 			},
 			c: { op: Math.min, 
-				get: ( shape ) => { return shape.x + shape.w/2 }, 
-				set: ( shape, mod, value ) => { mod.x = value - shape.w/2 } 
+				get: ( shape ) => { return geometry.x( shape ) + geometry.width( shape )/2 }, 
+				set: ( shape, mod, value ) => { mod.x = value - geometry.width( shape )/2 } 
 			},
 			r: { op: Math.max, 
-				get: ( shape ) => { return shape.x + shape.w }, 
-				set: ( shape, mod, value ) => { mod.x = value - shape.w } 
+				get: ( shape ) => { return geometry.x( shape ) + geometry.width( shape ) }, 
+				set: ( shape, mod, value ) => { mod.x = value - geometry.width( shape ) } 
 			},
 			t: { op: Math.min, 
-				get: ( shape ) => { return shape.y }, 
+				get: ( shape ) => { return geometry.y( shape ) }, 
 				set: ( shape, mod, value ) => { mod.y = value } 
 			},
 			m: { op: Math.min, 
-				get: ( shape ) => { return shape.y + shape.h/2 }, 
-				set: ( shape, mod, value ) => { mod.y = value - shape.h/2 } 
+				get: ( shape ) => { return geometry.y( shape ) + geometry.height( shape )/2 }, 
+				set: ( shape, mod, value ) => { mod.y = value - geometry.height( shape )/2 } 
 			},
 			b: { op: Math.max, 
-				get: ( shape ) => { return shape.y + shape.h }, 
-				set: ( shape, mod, value ) => { mod.y = value - shape.h } 
+				get: ( shape ) => { return geometry.y( shape ) + geometry.height( shape ) }, 
+				set: ( shape, mod, value ) => { mod.y = value - geometry.height( shape ) } 
 			}
 		}
 
