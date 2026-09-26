@@ -499,6 +499,9 @@ var glass = {
 
 				// Object drags supply new x,y values for the shapes being moved.
 				else {
+					// If we latch the editor here it won't open if this drag gets confused for a double-click
+					editor.latch()
+
 					let dx = event.pageX - glass.drag.x
 					let dy = event.pageY - glass.drag.y
 

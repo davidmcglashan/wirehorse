@@ -1,8 +1,17 @@
 var editor = {
 	elem: null,
 	textarea: null,
-	canOpen: true,
 	shapeId: null,
+	
+	// Lock is used to disable the editor invoking e.g. during typing in other
+	// UI elements or during a drag event.
+	lock: {
+		state: 0,
+
+		OPEN: 0,
+		LATCHED: 1,
+		LOCKED: 2
+	},
 
 	// Content and function of the single 'tool' button you get on the editor.
 	tools: {
@@ -51,12 +60,36 @@ var editor = {
 	},
 
 	/**
+	 * Is the editor currently open for invocation?
+	 */
+	isOpen: () => {
+		return editor.lock.state === editor.lock.OPEN
+	},
+
+	/**
+	 * Latches the editor so it cannot be invoked for the next 500ms
+	 */
+	latch: () => {
+		editor.lock.state = editor.lock.LATCHED
+		setTimeout( 
+			() => {
+				editor.lock.state = editor.lock.OPEN
+			}, 
+			500
+		);
+	},
+
+	/**
 	 * Causes a text editing UI component to appear for a double-clicked shape
 	 */
 	invokeEditor: ( event ) => {
 		// The current state of drag operations can refuse this editor opening
-		if ( !editor.canOpen ) {
-			return
+		switch ( editor.lock.state ) {
+			case editor.lock.LOCKED:
+				return
+			case editor.lock.LATCHED:
+				editor.lock.state = editor.lock.OPEN
+				return
 		}
 		
 		// Only show an editor if there's a single shape selectede.
@@ -66,7 +99,7 @@ var editor = {
 				return
 			}
 			
-			editor.canOpen = false
+			editor.lock.state === editor.lock.LOCKED
 			editor.shapeId = shape['id']
 			lightbox.open()
 			lightbox.callback = editor.save
@@ -114,7 +147,7 @@ var editor = {
 	 */
 	removeEditor: () => {
 		editor.elem.classList.add( 'hidden' )
-		editor.canOpen = true
+		editor.lock.state = editor.lock.OPEN
 	},
 
 	/**

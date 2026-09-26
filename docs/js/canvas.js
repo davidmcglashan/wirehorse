@@ -208,7 +208,7 @@ var canvas = {
 		let changes = {}
 
 		// Enter to invoke the editor
-		if ( event.keyCode === 13 && editor.canOpen ) {
+		if ( event.keyCode === 13 && editor.isOpen() ) {
 			if ( selection.yes() === 1 ) {
 				// We can pass in an 'event' object based on the selection's location.
 				let rect = selection.first().getBoundingClientRect()
