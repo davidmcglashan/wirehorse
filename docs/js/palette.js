@@ -18,7 +18,10 @@ var palette = {
 		},
 		ic: {
 			fields: [ 'x','y','w','ic','bg' ],
-			toolbars: ['tools']
+			toolbars: ['tools'],
+			overrides: {
+				bg: 'Colour'
+			}
 		},
 		map: {
 			fields: [ 'x','y','w' ],
@@ -336,7 +339,6 @@ var palette = {
 	 */
 	singleSelection: ( id ) => {
 		let shape = model.shape( id )
-		let deflt = palette.config[shape.ty]
 
 		// Give the palette the class of the type of the selected shape!
 		let elem = document.getElementById( '-palette' )
@@ -413,13 +415,31 @@ var palette = {
 			elem?.classList.add( 'hidden' )
 		}
 
-		for ( let field of deflt.fields ) {
-			// Show the container for this field
+		// Each shape should define a configuration for what appears in the palette
+		let config = palette.config[shape.ty]
+
+		// Each field in the config has a container to be displayed
+		for ( let field of config.fields ) {
 			let container = document.getElementById( `-con-${field}` )
 			container.classList.remove( 'hidden' )
 		} 
 
-		for ( let toolbar of deflt.toolbars ) {
+		// Configs can also override the labels e.g. icon colour instead of regular colour.
+		// First reset everything back to its original label
+		for ( let input of document.querySelectorAll( `#-palette label[data-label]` ) ) {
+			input.innerHTML = input.getAttribute( 'data-label' )
+		}
+
+		// Now look through the config's overrides for text to show instead.
+		if ( config.overrides ) {
+			for ( let [ty,text] of Object.entries(config.overrides) ) {
+				let input = document.querySelector( `#-con-${ty} label[data-label]` )
+				input.innerHTML = text
+			}
+		}
+
+		// Each toolbar in the config needs to be displayed too.
+		for ( let toolbar of config.toolbars ) {
 			let elem = document.getElementById( `-toolbar-${toolbar}` )
 			elem?.classList.remove( 'hidden' )
 		}
@@ -516,7 +536,7 @@ var palette = {
 	},
 
 	/**
-	 * Spins up a icon picker on the UI
+	 * Spins up an icon picker on the UI
 	 */
 	iconPicker: ( selected ) => {
 		let picker = document.createElement( 'div' )

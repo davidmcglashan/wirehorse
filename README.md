@@ -45,6 +45,9 @@ The 'Snap Selection' feature was implemented using [Snapdom](https://snapdom.dev
 
 ## Version history
 
+### v0.6.3
+* Usability improvements to the palette when working with icons
+
 ### v0.6.2
 * New shape: Arrow - draw a bezier curved arrow between two points
 * 'A' + drag to draw an arrow onto the canvas

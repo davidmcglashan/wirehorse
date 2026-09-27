@@ -513,13 +513,13 @@ body.hide-palette #-canvas {
 				color: #333;
 				mask-size: contain !important;
 				aspect-ratio: 1;
-				height: 1.5rem;
-				width: 1.5rem;
+				height: 3rem;
+				width: 3rem;
 				border: 0;
 				
 				&:hover {
-					background-color: #fff;
-					color: #fff;
+					background-color: #99f;
+					color: #99f;
 					cursor: pointer;
 				}
 			}
