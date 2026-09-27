@@ -1,8 +1,6 @@
 - Arrow boxes get offset after drawing zoomed out (might be fixed by the MAX_INT stuff? - can't reproduce now)
 - Work out what the hanging crash is (and fix it)
 - Remove all the non-delgate arrow stuff from glass.js in favour of delegate stuff
-- type to search on the icon switcher
-  - make the existing adder function nice and generic?
 - implement a push scroll if you linger outside the glass pane during a drag (but not a selection) 
 - super wide tabs and rules get a space in the middle - probably need their own scribbley SVG
 - open dropdowns don't report their height properly to takeSnapshot (put one near the bottom of the snap)

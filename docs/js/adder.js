@@ -32,7 +32,7 @@ var adder = {
 
 			let a = document.createElement( 'a' )
 			a.setAttribute( 'href', 'javascript:void(0)' )
-			a.setAttribute( 'onclick', `javascript:adder.addFromSearch(${i})` )
+			a.setAttribute( 'onclick', `javascript:adder.select(${i})` )
 			li.appendChild( a )
 			a.innerHTML = entry.name
 			
@@ -43,6 +43,8 @@ var adder = {
 				img.setAttribute( 'src', `assets/${icon.asset}` )
 				a.innerHTML = entry.name.slice(0,-5)
 				a.appendChild( img )
+			} else {
+				li.setAttribute( 'class', 'not-an-icon' )
 			}
 		}
 	},
@@ -50,7 +52,7 @@ var adder = {
 	/**
 	 * Open the search dropdown for adding new shapes.
 	 */
-	openDropdown: () => {
+	openDropdown: ( event, icon ) => {
 		// Straighten the appearance of the options.
 		for ( let def of defaults.shapes ) {
 			def.elem.classList.remove( 'hidden' )
@@ -63,11 +65,32 @@ var adder = {
 			adder.dropdown.classList.add( 'hidden' )
 		}
 
-		let rect = document.getElementById('-search-button').getBoundingClientRect()
-		adder.dropdown.style.left = `${rect.x}px`
+		// Position the adder relative to its triggering component. If there isn't
+		// one we assume the keyboard shortcut for the search button.
+		let rect = null
+		if ( event?.target ) {
+			rect = event.target.getBoundingClientRect()
+		} else {
+			let source = document.getElementById( '-search-button' )
+			rect = source.getBoundingClientRect()
+		}
+
+		// Stop the picker going off the edges of the screen
+		if ( rect.x + 328 > document.documentElement.clientWidth ) {
+			adder.dropdown.style.left = `${document.documentElement.clientWidth - 328}px`
+		} else {
+			adder.dropdown.style.left = `${rect.x}px`
+		}
+
+		adder.dropdown.style.top = `${8 + rect.y + rect.height}px`
 
 		// Move the dropdown above our new lightbox.
-		adder.dropdown.classList.remove( 'hidden' )
+		adder.dropdown.setAttribute( 'class', icon ? 'icon' : '' )
+		if ( icon ) {
+			adder.dropdown.setAttribute( 'data-icon', icon )
+		} else {
+			adder.dropdown.removeAttribute( 'data-icon' )
+		}
 		document.body.appendChild( adder.dropdown )
 		adder.input.focus()
 	},
@@ -77,7 +100,7 @@ var adder = {
 	 */
 	hideDropdown: () => {
 		// Tidy up the UI
-		adder.dropdown.classList.add( 'hidden' )
+		adder.dropdown.setAttribute( 'class', 'hidden' )
 		adder.input.blur()
 		adder.input.value = ''
 		lightbox.close()
@@ -106,7 +129,7 @@ var adder = {
 				let def = defaults.shapes[i]
 
 				if ( def.elem.checkVisibility() && def.elem.classList.contains( 'selected' ) ) {
-					adder.addFromSearch( i )
+					adder.select( i )
 					return
 				}
 			}
@@ -177,6 +200,19 @@ var adder = {
 	},
 
 	/**
+	 * A selection is made with the adder. This either adds a new shape to the
+	 * canvas or changes an icon glyph to something else
+	 */
+	select: ( index ) => {
+		let icon = adder.dropdown.getAttribute( 'data-icon' )
+		if ( icon ) {
+			adder.changeIcon( index )
+		} else {
+			adder.addFromSearch( index )
+		}
+	},
+	
+	/**
 	 * Add a new shape to the model.
 	 */
 	addFromSearch: ( index ) => {
@@ -195,5 +231,17 @@ var adder = {
 		adder.hideDropdown()
 
 		undo.pushBulkShapes( undo.types.ADD_NEW_SHAPES, [ newShape ] )
+	},
+
+	/**
+	 * Change the glyph of an icon shape to the new selection
+	 */
+	changeIcon: ( index ) => {
+		for ( let shape of selection.ids() ) {
+			let mod = {}
+			mod['ic'] = defaults.shapes[index].model.ic
+			undo.pushShape( model.updateShape( shape, mod ) )
+		}
+		adder.hideDropdown()
 	}
 }

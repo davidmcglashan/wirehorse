@@ -398,7 +398,7 @@ var palette = {
 				input.setAttribute( 'onclick',`javascript:palette.colourPicker('${field}','${shape[field]}')` )
 				input.setAttribute( 'class', `button-${value}` )
 			} else if ( input.getAttribute( 'data-type' ) === 'icon' ) {
-				input.setAttribute( 'onclick',`javascript:palette.iconPicker('${shape[field]}')` )
+				input.setAttribute( 'onclick',`javascript:adder.openDropdown(event,'${shape[field]}')` )
 				input.setAttribute( 'class', `icon-${value}` )
 			} 
 			

@@ -292,8 +292,17 @@ body.hide-palette #-canvas {
 /* The UI used to search for and add new shpaes to the canvas. */
 #-search-dropdown {
 	position: absolute;
-	top: 2.5rem;
-	width: 20rem;
+	width: 320px;
+
+	/* When the dropdown is in icon mode it is smaller and certain options are hidden. */
+	&.icon {
+		#-search-list {
+			max-height: 20rem;
+		}
+		li.not-an-icon {
+			display:none;
+		}
+	}
 
 	/* Search list is the long list of shapes and icons. */
 	& #-search-list {
