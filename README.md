@@ -51,6 +51,7 @@ The 'Snap Selection' feature was implemented using [Snapdom](https://snapdom.dev
 * Cmd+click can select a locked shape. Selected locked shapes can then be unlocked
 * Added palette function to quickly add a 'lightbox' rectangle over a selection 
 * Radio buttons and checkboxes can accept [ ] or ( ) with any non-space character to make them checked.
+* Shapes can be distributed horizontally and vertically
 
 ### v0.6.1
 * New icon: paper plane

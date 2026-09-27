@@ -174,7 +174,7 @@ var canvas = {
 	 * tells us how to move the current selection of shapes.
 	 */
 	relayerSelection: ( event, direction ) => {
-		let sids = selection.idsInZOrder()
+		let sids = selection.idsInOrder( 'z' )
 
 		// If moving forwards we need to reverse the array to move the front-most shape
 		// first or the selected shapes will just replace each other when they're moved.
@@ -228,13 +228,13 @@ var canvas = {
 		// Cmd-C to copy to clipboard
 		else if ( event.keyCode === 67 && event.metaKey ) {
 			event.preventDefault()
-			clipboard.copy( selection.idsInZOrder() )
+			clipboard.copy( selection.idsInOrder( 'z' ) )
 		}
 
 		// Cmd-X to copy to clipboard
 		else if ( event.keyCode === 88 && event.metaKey ) {
 			event.preventDefault()
-			clipboard.cut( selection.idsInZOrder() )
+			clipboard.cut( selection.idsInOrder( 'z' ) )
 		}
 
 		// Cmd-D to duplicate!
@@ -243,7 +243,7 @@ var canvas = {
 			let clones = []
 
 			// Do the cloning, and do it in Z index order!
-			let sids = selection.idsInZOrder()
+			let sids = selection.idsInOrder( 'z' )
 			for ( let id of sids ) {
 				clones.push( model.cloneShape( id ) )
 			}

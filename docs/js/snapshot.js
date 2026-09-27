@@ -17,7 +17,7 @@ const snapshot = {
 		div.style.height = `${bounds.h+32}px`
 		
 		// Shuffle all the shapes onto the new div.
-		for ( let id of selection.idsInZOrder() ) {
+		for ( let id of selection.idsInOrder( 'z' ) ) {
 			let elem = document.getElementById( id )
 			div.appendChild( elem )
 

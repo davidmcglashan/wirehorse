@@ -147,6 +147,34 @@ var selection = {
 	},
 
 	/**
+	 * Returns the ids of the current selection in order ... 'x', 'y' (geometry), or 'z' (z-index)
+	 */
+	idsInOrder: ( factor ) => {
+		// 'z' order is called a lot and is expensive to compute so it has its own routine
+		if ( factor === 'z' ) {
+			return selection.idsInZOrder()
+		}
+
+		// First turn the selection IDs array into an array of models
+		let models = []
+		for ( let sid of selection.ids() ) {
+			models.push( model.shape( sid ) )
+		}
+
+		// Now sort that array by the value of each member's factor attr
+		models.sort( (a, b) => {
+			return a[factor] - b[factor]
+		} )
+
+		// Return the IDs in the desired order
+		let ret = []
+		for ( let mod of models ) {
+			ret.push( mod.id )
+		}
+		return ret
+	},
+
+	/**
 	 * Returns the ids of all the currently selected shapes in Z-order.
 	 */
 	idsInZOrder: () => {

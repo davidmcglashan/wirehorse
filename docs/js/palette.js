@@ -553,6 +553,43 @@ var palette = {
 	},
 
 	/**
+	 * Distribute the shapes, 'h' for horizontally, 'v' for vertically.
+	 */
+	distribute: ( direction ) => {
+		let ids = selection.idsInOrder( direction )
+
+		// Calculate the step difference between each shape by dividing the range of
+		// their differences by the number of shapes.
+		let steps = []
+		let min = model.shape(ids[0])[ direction ]
+		let max = model.shape(ids[ids.length-1])[ direction ]
+		let range = max - min
+
+		let step = range/(ids.length-1)
+		for ( let i=0; i<ids.length-1; i++ ) {
+			steps.push( step )
+		}
+
+		// All changes are relative to the first shape
+		let changes = {}
+		let value = model.shape( ids[0] )[direction]
+
+		for ( let i=0; i<ids.length; i+=1 ) {
+			// This little mod represents the change to the shape
+			let mod = {}
+			mod[direction] = value
+			changes[ ids[i] ] = model.updateShape( ids[i], mod )			
+
+			// Move value along by the size of the step
+			value += steps[i]
+		}
+
+		// Push to undo and inform the listeners!
+		undo.pushMulti( changes )
+		glass.selectionChanged( selection.ids() )
+	},
+
+	/**
 	 * Align all the shapes in the current selection
 	 */
 	align: ( alignment ) => {
