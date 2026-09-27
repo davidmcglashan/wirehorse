@@ -2,7 +2,10 @@ var editor = {
 	elem: null,
 	textarea: null,
 	shapeId: null,
-	
+		
+	// These shape types should not invoke an editor for their txt field (cos they don't have one!)
+	noEditor: [ 'hr','vr','hs','vs','sld','map','arr'],
+
 	// Lock is used to disable the editor invoking e.g. during typing in other
 	// UI elements or during a drag event.
 	lock: {
@@ -95,10 +98,16 @@ var editor = {
 		// Only show an editor if there's a single shape selectede.
 		if ( selection.yes() === 1 ) {
 			let shape = model.shape( selection.ids()[0] )
-			if ( globals.noEditor.includes( shape.ty ) ) {
+			if ( editor.noEditor.includes( shape.ty ) ) {
 				return
 			}
 			
+			// If the shape is an icon we can delegate to the adder
+			if ( shape.ty === 'ic' ) {
+				adder.openDropdown( null, shape.ic )
+				return
+			}
+
 			editor.lock.state === editor.lock.LOCKED
 			editor.shapeId = shape['id']
 			lightbox.open()
