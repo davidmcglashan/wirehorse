@@ -555,19 +555,48 @@ var palette = {
 	/**
 	 * Distribute the shapes, 'h' for horizontally, 'v' for vertically.
 	 */
-	distribute: ( direction ) => {
+	distribute: ( event, direction ) => {
 		let ids = selection.idsInOrder( direction )
+		let steps = []
 
 		// Calculate the step difference between each shape by dividing the range of
 		// their differences by the number of shapes.
-		let steps = []
-		let min = model.shape(ids[0])[ direction ]
-		let max = model.shape(ids[ids.length-1])[ direction ]
-		let range = max - min
+		if ( event.shiftKey ) {
+			let min = model.shape(ids[0])[ direction ]
+			let max = model.shape(ids[ids.length-1])[ direction ]
+			let range = max - min
+			
+			let step = range/(ids.length-1)
+			for ( let i=0; i<ids.length-1; i++ ) {
+				steps.push( step )
+			}
+		}
 
-		let step = range/(ids.length-1)
-		for ( let i=0; i<ids.length-1; i++ ) {
-			steps.push( step )
+		// Calculate the step difference between each shape by combining their widths against
+		// the span of the selection and divvying it up into the gaps between each shape.
+		else {
+			// We use the same routine for width and height distribution, so we need to 
+			// look at different props and call different functions for each
+			const config = {
+				x: { prop: 'w', func: 'width' },
+				y: { prop: 'h', func: 'height' },
+			}
+
+			// Measure the span of the selection using its bounds.
+			let span = selection.bounds()[config[direction].prop]
+			
+			// Count the total width/height of all the elements in the selection
+			let total = 0
+			for ( let id of ids ) {
+				total += geometry[config[direction].func]( model.shape( id ) )
+			}
+
+			// Divide the difference between the number of elements and incorporate their
+			// widths so we know how far to offset each subsequent shape's element.
+			let step = ( span - total ) / ( ids.length - 1 )
+			for ( let i=0; i<ids.length-1; i++ ) {
+				steps.push( step + geometry[config[direction].func]( model.shape( ids[i] ) ))
+			}
 		}
 
 		// All changes are relative to the first shape
