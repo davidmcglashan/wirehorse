@@ -238,13 +238,13 @@ var innerHTML = {
 	tableCellClass: ( cell ) => {
 		if ( cell === '[ ]' ) {
 			return 'tbl-icon unticked replace'
-		} else if ( cell === '[x]' ) {
+		} else if ( cell.length === 3 && cell[0] === '[' && cell[2] === ']' ) {
 			return 'tbl-icon ticked replace'
 		} else if ( cell === '...' ) {
 			return 'tbl-icon ellipsis replace'
 		} else if ( cell === '( )' ) {
 			return 'tbl-icon inactive replace'
-		} else if ( cell === '(x)' ) {
+		} else if ( cell.length === 3 && cell[0] === '(' && cell[2] === ')' ) {
 			return 'tbl-icon active replace'
 		} else if ( cell[0] === '>' ) {
 			return 'centred'
