@@ -133,7 +133,7 @@ var palette = {
 			let field = event.srcElement.id.substring(5)
 			let modelValue = shape[field]
 			let inputValue = event.srcElement.value | 0
-			console.log( event.srcElement )
+
 			if ( modelValue !== inputValue ) {
 				let mod = {}
 				mod[field] = inputValue 
@@ -573,7 +573,7 @@ var palette = {
 	},
 
 	/**
-	 * Distribute the shapes, 'h' for horizontally, 'v' for vertically.
+	 * Distribute the shapes, 'x' for horizontally, 'y' for vertically.
 	 */
 	distribute: ( event, direction ) => {
 		let ids = selection.idsInOrder( direction )

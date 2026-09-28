@@ -65,15 +65,15 @@ var geometry = {
 		// Iterate the passed in shapes.
 		for ( let shape of shapes ) {
 			// Find the lowest x,y co-ords.
-			rect.x = Math.min( rect.x, shape.x )
-			rect.y = Math.min( rect.y, shape.y )
+			rect.x = Math.min( rect.x, geometry.x( shape ) )
+			rect.y = Math.min( rect.y, geometry.y( shape ) )
 
 			// We may set these looking for the width so can refer to them for deriving the h.
 			let elem = null
 			let bounds = null
 
 			// Does the shape have a width? No? Then look to the DOM element? Failing that assume 100px.
-			let w = shape.w
+			let w = geometry.width( shape )
 			if ( !w ) { 
 				w = 100
 				elem = document.getElementById( shape.id )
@@ -84,7 +84,7 @@ var geometry = {
 			}
 
 			// Same for height, but fallback to 50px this time.
-			let h = shape.h
+			let h = geometry.height( shape )
 			if ( !h ) { 
 				h = 50
 				if ( !bounds ) {
@@ -96,8 +96,8 @@ var geometry = {
 				}
 			}
 
-			rect.x2 = Math.max( rect.x2, shape.x + w )
-			rect.y2 = Math.max( rect.y2, shape.y + h )
+			rect.x2 = Math.max( rect.x2, geometry.x( shape ) + w )
+			rect.y2 = Math.max( rect.y2, geometry.y( shape ) + h )
 		}
 		
 		rect.w = rect.x2 - rect.x
@@ -145,6 +145,7 @@ var geometry = {
 		if ( !ret ) {
 			return shape.elem.getBoundingClientRect().height
 		}
+		
 		return ret
 	}
 };
