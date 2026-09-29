@@ -48,6 +48,7 @@ The 'Snap Selection' feature was implemented using [Snapdom](https://snapdom.dev
 ### v0.6.3
 * Usability improvements to the palette when working with icons
 * You can double click an icon to change its glyph
+* Added a clock icon
 
 ### v0.6.2
 * New shape: Arrow - draw a bezier curved arrow between two points
