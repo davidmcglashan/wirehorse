@@ -1,6 +1,8 @@
-- UI copy. Make a selection and get a bulleted list of TX fields in a textbox
+* Some dragging sets -ve heights
+* Stop Bring to front shuffling
+- "UI copy" feature: make a selection and get a bulleted list of TX fields in a textbox
 - search by entering in the dropdown's filter - this searches in the wireframes for shapes whose tx: value matches the typed text- Arrow boxes get offset after drawing zoomed out (might be fixed by the MAX_INT stuff? - can't reproduce now)
-- Work out what the hanging crash is (and fix it)
+- Work out what the hanging crash is (and fix it) (coming back from snaps)
 - Remove all the non-delgate arrow stuff from glass.js in favour of delegate stuff
 - implement a push scroll if you linger outside the glass pane during a drag (but not a selection) 
 - super wide tabs and rules get a space in the middle - probably need their own scribbley SVG

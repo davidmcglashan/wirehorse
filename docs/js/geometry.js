@@ -129,7 +129,7 @@ var geometry = {
 		// Not every shape's width is reliable, so we need to refer to its DOM element's width
 		// which should be.
 		let ret = shape.w
-		if ( !ret ) {
+		if ( !ret && shape.elem?.getBoundingClientRect ) {
 			return shape.elem.getBoundingClientRect().width
 		}
 		return ret
@@ -142,7 +142,7 @@ var geometry = {
 		// Not every shape's height is reliable, so we need to refer to its DOM element's height
 		// which should be.
 		let ret = shape.h
-		if ( !ret ) {
+		if ( !ret && shape.elem?.getBoundingClientRect ) {
 			return shape.elem.getBoundingClientRect().height
 		}
 		
