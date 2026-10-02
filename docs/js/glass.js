@@ -6,12 +6,6 @@ var glass = {
 	selemsubs: null,
 	queuedShapeChange: null,
 
-	// Shapes of this type defer some of their specialist drawing and model code to
-	// delegate methods, named here.
-	delegateSelection: { 
-		arr: arrow.select
-	},
-
 	// There are ten things a drag operation can do ...
 	dragmodes: {
 		MOVE_CANVAS:	0,
@@ -84,6 +78,12 @@ var glass = {
 	 * Initialise the glass pane that sits on top of the UI.
 	 */
 	init: () => {
+		// Shapes of this type defer some of their specialist drawing and model code to
+		// delegate methods, named here.
+		glass.delegateSelection = { 
+			arr: arrow.select
+		},
+
 		// Wire everything up.
 		glass.elem = document.getElementById( '-glass' )
 		glass.dragRect = document.getElementById( '-drag-rect' )
