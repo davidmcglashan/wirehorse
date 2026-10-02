@@ -18,6 +18,7 @@ ul.dropdown,
 .shape-hs,
 .shape-cmb,
 .shape-tbl,
+.shape-prg,
 .shape-rec {
 	border-style: solid;
 	border-width: 8px;
@@ -386,6 +387,18 @@ ul.dropdown,
 	background-color: #fff;
 	background-image: url('../assets/street-map.svg');
 	background-size: cover;
+}
+
+.shape-prg {
+	background-color: #fff;
+
+	& .progress {
+		position: absolute;
+		top: -4px;
+		left: -4px;
+		bottom: -3px;
+		border-radius: 5px;
+	}
 }
 
 /* ==================================================== */

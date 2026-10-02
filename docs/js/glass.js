@@ -47,7 +47,7 @@ var glass = {
 		},
 		{ // A for adding arrows
 			keyCode: 65, 
-			model: defaults.shapes[21].model,
+			model: defaults.shapes[22].model,
 			drag: 4 // DRAG_ARROW
 		},
 		{ // R for adding rectangles

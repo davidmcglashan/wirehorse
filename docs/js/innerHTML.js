@@ -119,6 +119,21 @@ var innerHTML = {
 		let val = shape.val ? shape.val : 30
 		return `<div class="slider" style="left:${val}%;"></div>`
 	},
+	prg: ( shape ) => {
+		let width = ''
+		if ( shape.val ) {
+			if ( shape.val === 100 ) {
+				width = 'unset;right:-4px;'
+			} else {
+				width = `${shape.val}%`
+			}
+		} else {
+			width = '30%'
+		}
+		let hex = model.colours[shape.co].hex
+
+		return `<div class="progress" style="width:${width};background-color:#${hex};"></div>`
+	},
 	tab: ( shape ) => {
 		let lines = shape.tx.split('\n')
 		let html = '<ul>'

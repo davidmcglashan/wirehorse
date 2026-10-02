@@ -182,6 +182,16 @@ var defaults = {
 				val: 30
 			}
 		},{   
+			name: 'Progress bar',
+			model: {
+				ty: 'prg',
+				w: 256,
+				h: 13,
+				val: 30,
+				co: 'bl',
+				bo: 'g5'
+			}
+		},{   
 			name: 'Tabs',
 			model: {
 				ty: 'tab',

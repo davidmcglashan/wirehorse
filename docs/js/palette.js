@@ -55,6 +55,13 @@ var palette = {
 			fields: [ 'x','y','w','val' ],
 			toolbars: ['tools']
 		},
+		prg: {
+			fields: [ 'x','y','w','h','val','co','bo' ],
+			toolbars: ['tools'],
+			overrides: {
+				co: 'Bar Colour'
+			}
+		},
 		tbl: {
 			fields: [ 'x','y','w' ],
 			toolbars: ['tools','font']
