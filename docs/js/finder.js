@@ -1,14 +1,19 @@
 var finder = {
-	frames: [],
+	wireframes: [],
 	input: null,
 
 	init: () => {
 		finder.input = document.getElementById( '-wire-finder' )
 		
 		// Gather input without backspace, etc. removing shapes!
-		finder.input.addEventListener( 'input', finder.searching )
+		finder.input.addEventListener( 'input', finder.filtering )
 		finder.input.addEventListener( 'keydown', ( event ) => {
 			event.stopPropagation()
+
+			// Enter turns the filter into a search!
+			if ( event.keyCode === 13 ) {
+				finder.search()
+			}
 		} );
 
 		finder.update()
@@ -71,9 +76,8 @@ var finder = {
 	 * The user is searching for a wireframe in the picker list. We change the list 
 	 * to only show the options matching their search term.
 	 */
-	searching: ( event ) => {
+	filtering: ( event ) => {
 		let term = finder.input.value.toLowerCase()
-		let first = null
 
 		for ( let wf of finder.wireframes ) {
 			let elem = document.getElementById( `-wf-wh_${wf}` )
@@ -85,4 +89,28 @@ var finder = {
 			}
 		}
 	},
+
+	/**
+	 * Search for a wireframe. This 
+	 */
+	search: () => {
+		let term = finder.input.value.toLowerCase()
+
+		for ( let wf of finder.wireframes ) {
+			let elem = document.getElementById( `-wf-wh_${wf}` )
+			elem.classList.add( 'hidden' )
+			
+			// Check localstorage for a frame (which we absolutely should get!) 
+			// and turn it into a JSON model, then check its shapes' tx for our term.
+			let json = localStorage[`wh_${wf}`]
+			if ( json ) {
+				json = JSON.parse( json )
+				for ( let shape of json.sh ) {
+					if ( shape.tx && shape.tx.toLowerCase().indexOf( term ) != -1 ) {
+						elem.classList.remove( 'hidden' )				
+					}
+				}
+			}
+		}
+	}
 };
