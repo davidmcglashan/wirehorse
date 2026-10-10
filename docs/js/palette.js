@@ -24,11 +24,11 @@ var palette = {
 			}
 		},
 		map: {
-			fields: [ 'x','y','w' ],
+			fields: [ 'x','y','w','h' ],
 			toolbars: ['tools']
 		},
 		arr: {
-			fields: [ 'x','y','w','co' ],
+			fields: [ 'x','y','w','h','co' ],
 			toolbars: ['tools']
 		},
 		lbl: {
