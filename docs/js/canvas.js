@@ -170,15 +170,16 @@ var canvas = {
 	},
 
 	/**
-	 * General purpose re-layering function. The value of direction (f,b,2f,2b) 
-	 * tells us how to move the current selection of shapes.
+	 * General purpose re-layering function. The value of direction (f/b) tells us
+	 * how to move the current selection of shapes. Holding shift moves a single layer
+	 * otherwise the selection is moved all the way to the front/back.
 	 */
 	relayerSelection: ( event, direction ) => {
+		// Sort the shapes in to z-index order so that we can cleanly move them
+		// through the model layers. If we're moving them backwards this has to be
+		// done in reverse or the shapes will replace each other.
 		let sids = selection.idsInOrder( 'z' )
-
-		// If moving forwards we need to reverse the array to move the front-most shape
-		// first or the selected shapes will just replace each other when they're moved.
-		if ( direction === 'f' ) {
+		if ( direction === 'b' ) {
 			sids.reverse()
 		}
 
@@ -189,11 +190,9 @@ var canvas = {
 			changes.push( model.relayerShape( sid, (event.shiftKey ? '' : '2') + direction ) )
 		}
 
-		// If moving forwards we need to again reverse the changes so the undo manager
-		// executes them in the right order.
-		if ( direction === 'f' ) {
-			changes.reverse()
-		}
+		// Again, reverse the changes since the undo will apply them backwards and
+		// they'll simply relayer around each other.
+		changes.reverse()
 		undo.pushBulkShapes( undo.types.RELAYER_SHAPES, changes )
 	},
 

@@ -45,6 +45,11 @@ The 'Snap Selection' feature was implemented using [Snapdom](https://snapdom.dev
 
 ## Version history
 
+### v0.6.4
+* Improved relayering shapes
+* Added a height field to maps and arrows
+* Improved stability when reloading the page
+
 ### v0.6.3
 * Usability improvements to the palette when working with icons
 * You can double click an icon to change its glyph
