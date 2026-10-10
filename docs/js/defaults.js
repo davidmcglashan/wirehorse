@@ -15,7 +15,8 @@ var defaults = {
 				tx: '',
 				w: 300,
 				h: 100
-			}
+			},
+
 		},{
 			name: 'Blue button',
 			model: {
@@ -232,6 +233,17 @@ var defaults = {
 			}
 		}
 	],
+
+	/**
+	 * Find a default model by its UI name
+	 */
+	findModelByName: ( name ) => {
+		for ( let shape of defaults.shapes ) {
+			if ( shape.name === name ) {
+				return shape.model
+			}
+		}
+	},
 
 	/**
 	 * Init the defaults. This adds some entries to the above structure.

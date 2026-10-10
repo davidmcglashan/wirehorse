@@ -35,38 +35,8 @@ var glass = {
 
 	// These are the various shapes that can be added by holding a key and pressing
 	// or moving the mouse.
-	drawShapes: [
-		{ // L for adding labels
-			keyCode: 76,
-			model: defaults.shapes[6].model,
-			drag: 0 // CLICK
-		},{ // B for buttons
-			keyCode: 66,
-			model: defaults.shapes[1].model,
-			drag: 0 // CLICK
-		},
-		{ // A for adding arrows
-			keyCode: 65, 
-			model: defaults.shapes[22].model,
-			drag: 4 // DRAG_ARROW
-		},
-		{ // R for adding rectangles
-			keyCode: 82, 
-			model: defaults.shapes[0].model,
-			drag: 1 // DRAG_RECT
-		},
-		{ // H for horizontal rules
-			keyCode: 72,
-			model: defaults.shapes[13].model,
-			drag: 2 // DRAG_RULE
-		},
-		{ // T for adding text paragraphs
-			keyCode: 84,
-			model: defaults.shapes[8].model,
-			drag: 3 // DRAG_TEXT
-		}
-	],
-
+	drawShapes: [],
+	
 	// Glass is responsible for scroll drags, which we track with this object.
 	drag: {
 		pressed: false,
@@ -83,6 +53,38 @@ var glass = {
 		glass.delegateSelection = { 
 			arr: arrow.select
 		},
+
+		glass.drawShapes = [
+			{ // L for adding labels
+				keyCode: 76,
+				model: defaults.findModelByName( 'Label' ),
+				drag: 0 // CLICK
+			},{ // B for buttons
+				keyCode: 66,
+				model: defaults.findModelByName( 'Blue button' ),
+				drag: 0 // CLICK
+			},
+			{ // A for adding arrows
+				keyCode: 65, 
+				model: defaults.findModelByName( 'Arrow' ),
+				drag: 4 // DRAG_ARROW
+			},
+			{ // R for adding rectangles
+				keyCode: 82, 
+				model: defaults.findModelByName( 'Rectangle' ),
+				drag: 1 // DRAG_RECT
+			},
+			{ // H for horizontal rules
+				keyCode: 72,
+				model: defaults.findModelByName( 'Horizontal rule' ),
+				drag: 2 // DRAG_RULE
+			},
+			{ // T for adding text paragraphs
+				keyCode: 84,
+				model: defaults.findModelByName( 'Paragraph' ),
+				drag: 3 // DRAG_TEXT
+			}
+		]
 
 		// Wire everything up.
 		glass.elem = document.getElementById( '-glass' )

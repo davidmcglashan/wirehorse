@@ -1,4 +1,3 @@
-* Some dragging sets -ve heights
 * Stop Bring to front shuffling
 - "UI copy" feature: make a selection and get a bulleted list of TX fields in a textbox
 - search by entering in the dropdown's filter - this searches in the wireframes for shapes whose tx: value matches the typed text- Arrow boxes get offset after drawing zoomed out (might be fixed by the MAX_INT stuff? - can't reproduce now)
