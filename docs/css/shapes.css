@@ -168,12 +168,11 @@ ul.dropdown,
 .shape-hr {
 	border-style: solid;
 	border-width: 0px 0px 5px 0px;
-	border-image-repeat: round;
+	border-image-repeat: initial;
 	border-image-slice: 0 6 6 6;
 	border-image-width: 0 0 5px 0;
-	border-image-outset: 0 20px 0 20px;
+	border-image-outset: 0 40px 0 40px;
 }
-
 .shape-vr {
 	border-style: solid;
 	border-width: 0px 5px 0px 0px;
