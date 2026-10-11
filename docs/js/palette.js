@@ -543,43 +543,6 @@ var palette = {
 	},
 
 	/**
-	 * Spins up an icon picker on the UI
-	 */
-	iconPicker: ( selected ) => {
-		let picker = document.createElement( 'div' )
-		document.body.appendChild( picker )
-		picker.setAttribute( 'class', 'picker icon-picker' )
-		picker.addEventListener( 'mouseup', function( event ) {
-			event.stopPropagation()
-		} )
-		
-		lightbox.open()
-		lightbox.callback = function() {
-			picker.remove()
-		}
-
-		let input = document.getElementById( `-fld-ic` ).getBoundingClientRect()
-		picker.style.top = `${input.y + input.height+3}px`
-		picker.style.right = '0.5rem'
-
-		for ( let [key,icon] of Object.entries(model.icons) ) {
-			let button = document.createElement( 'a' )
-			button.setAttribute( 'class', `button-${key} ${key === selected ? 'selected' : ''}` )
-			button.innerHTML = `<img src="assets/${icon.asset}"> ${icon.name}`
-			picker.appendChild( button )
-
-			button.addEventListener( 'click', function( event ) {
-				for ( let shape of selection.ids() ) {
-					let mod = {}
-					mod['ic'] = key
-					undo.pushShape( model.updateShape( shape, mod ) )
-				}
-				lightbox.close()
-			} )
-		}
-	},
-
-	/**
 	 * Distribute the shapes, 'x' for horizontally, 'y' for vertically.
 	 */
 	distribute: ( event, direction ) => {
@@ -764,4 +727,46 @@ var palette = {
 		selection.add( newShape.elem, {multi:true} )
 		undo.pushBulkShapes( undo.types.ADD_NEW_SHAPES, [ newShape ] )
 	},
+
+	/**
+	 * Extracts all the UI copy from the shape selection so the user can take it somewhere
+	 * else quicklty
+	 */
+	extractUICopy: () => {
+		if ( !selection.yes() ) {
+			return
+		}
+
+		// Get all the UI copy from the current selection in Y-order, and HTML parse it
+		// since the destination might be handle the formatting.
+		let ret = 0
+		for ( let id of selection.idsInOrder( 'y' ) ) {
+			let shape = model.shape( id )
+			if ( shape.tx ) {
+				if ( ret ) {
+					ret += `\n\n${shape.tx}`
+				} else {
+					ret = shape.tx
+				}
+			}
+		}
+		ret = innerHTML.parse( ret )
+
+		// Build a simple UI for it
+		let div = document.createElement( 'div' )
+		div.setAttribute( 'class', 'ui-copy' )
+		div.innerHTML = ret
+		document.body.appendChild( div )
+
+		// Open the lightbox
+		lightbox.open()
+		lightbox.callback = () => { div.remove() }
+
+		// Force the newly-extracted copy to be selected (saves an awkawrd drag)
+		let sel = window.getSelection();
+    	sel.removeAllRanges();
+        let range = document.createRange();
+    	range.selectNodeContents(div);
+        sel.addRange(range);
+	}
 };

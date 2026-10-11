@@ -1,6 +1,5 @@
-- "UI copy" feature: make a selection and get a bulleted list of TX fields in a textbox
+- super wide tabs and rules get a space in the middle - probably need their own scribbley SVG
 - implement a push scroll if you linger outside the glass pane during a drag (but not a selection) 
 - Remove all the non-delegate arrow stuff from glass.js in favour of delegate stuff
-- super wide tabs and rules get a space in the middle - probably need their own scribbley SVG
 - open dropdowns don't report their height properly to takeSnapshot (put one near the bottom of the snap)
 - archive is a little naughty removing other modules event listeners!

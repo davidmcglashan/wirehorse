@@ -50,6 +50,7 @@ The 'Snap Selection' feature was implemented using [Snapdom](https://snapdom.dev
 * Added a height field to maps and arrows
 * Improved stability when reloading the page
 * Simple search by pressing Enter the wireframe filter box searches in the text values of shapes in all wireframes
+* New feature to extract UI copy text from the selection into a single window
 
 ### v0.6.3
 * Usability improvements to the palette when working with icons
