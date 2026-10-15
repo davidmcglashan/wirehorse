@@ -4,7 +4,7 @@ var editor = {
 	shapeId: null,
 		
 	// These shape types should not invoke an editor for their txt field (cos they don't have one!)
-	noEditor: [ 'hr','vr','hs','vs','sld','map','arr'],
+	noEditor: [ 'hr','vr','hs','vs','sld','map','arr','prg'],
 
 	// Lock is used to disable the editor invoking e.g. during typing in other
 	// UI elements or during a drag event.
