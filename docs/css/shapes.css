@@ -169,9 +169,9 @@ ul.dropdown,
 	border-style: solid;
 	border-width: 0px 0px 5px 0px;
 	border-image-repeat: initial;
-	border-image-slice: 0 6 6 6;
+	border-image-slice: 0 32 6 32;
 	border-image-width: 0 0 5px 0;
-	border-image-outset: 0 40px 0 40px;
+	border-image-outset: 0px;
 }
 .shape-vr {
 	border-style: solid;
@@ -179,7 +179,7 @@ ul.dropdown,
 	border-image-repeat: round;
 	border-image-slice: 6 6 6 0;
 	border-image-width: 0 5px 0 0;
-	border-image-outset: 0;
+	border-image-outset: 0px;
 }
 
 /* ==================================================== */
