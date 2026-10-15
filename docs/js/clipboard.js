@@ -66,13 +66,19 @@ var clipboard = {
 			console.log( err )
 		}
 	},
+
+	/**
+	 * Easily copy text into the clipboard
+	 */
+	copyText: ( text ) => {
+		setClipboard( text, "text/html" )
+	}
 };
 
 /**
  * Special function for putting text in the clipboard.
  */
-async function setClipboard( text ) {
-	const type = "text/plain"
+async function setClipboard( text, type = "text/plain" ) {
 	const clipboardItemData = { [type]: text }
 	const clipboardItem = new ClipboardItem( clipboardItemData )
 

@@ -737,36 +737,21 @@ var palette = {
 			return
 		}
 
-		// Get all the UI copy from the current selection in Y-order, and HTML parse it
-		// since the destination might be handle the formatting.
+		// Get all the UI copy from the current selection in Y-order ... 
 		let ret = 0
 		for ( let id of selection.idsInOrder( 'y' ) ) {
 			let shape = model.shape( id )
 			if ( shape.tx ) {
 				if ( ret ) {
-					ret += `\n\n${shape.tx}`
+					ret += `<p>${shape.tx}</p>`
 				} else {
-					ret = shape.tx
+					ret = `<p>${shape.tx}</p>`
 				}
 			}
 		}
-		ret = innerHTML.parse( ret )
 
-		// Build a simple UI for it
-		let div = document.createElement( 'div' )
-		div.setAttribute( 'class', 'ui-copy' )
-		div.innerHTML = ret
-		document.body.appendChild( div )
-
-		// Open the lightbox
-		lightbox.open()
-		lightbox.callback = () => { div.remove() }
-
-		// Force the newly-extracted copy to be selected (saves an awkawrd drag)
-		let sel = window.getSelection();
-    	sel.removeAllRanges();
-        let range = document.createRange();
-    	range.selectNodeContents(div);
-        sel.addRange(range);
+		// HTML parse it since the destination might be handle the formatting, and
+		// stuff it into the clipboard.
+		clipboard.copyText( innerHTML.parse( ret ) )
 	}
 };
