@@ -132,6 +132,21 @@ var model = {
 		xxxx: { name: 'X / close / times', asset: 'x-svgrepo-com.svg' },
 	},
 
+	// This object defines illegal mappings for shapes (e.g. colour on an icon - icons
+	// use background color) and maps them to a different property most likely to be the
+	// recipient. This is useful in defending against multiselection changes from the 
+	// palette where UI might be out of kilter with the selection state.
+	illegalMappings: {
+		// Icons use background colour so intercpt calls to change the foreground colour
+		ic: {
+			co: 'bg',
+		},
+		// Labels do not have background colour so set the foreground colour instead
+		lbl: {
+			bg: 'co'
+		}
+	},
+
 	/**
 	 * Register a listener for the model's metadata. If any value changes the
 	 * listener will have its passed in function invoked.
@@ -420,11 +435,21 @@ var model = {
 
 		let shape = model.shapeCache[id]
 		if ( shape ) {
-			for ( const [key, value] of Object.entries( params ) ) {
-				// There's a handbrake here to stop key values getting blasted by bad code
-				// elsewhere
+			for ( let [key, value] of Object.entries( params ) ) {
+				// If there's a substitute key in the illegalMappings object we should use that
+				// instead ...
+				let mapping = model.illegalMappings[ shape.ty ]
+				if ( mapping ) {
+					let newKey = mapping[key]
+					if ( newKey ) {
+						key = newKey
+					}
+				}
+				// There's a handbrake here to stop key values getting blasted by bad code trying to 
+				// set a null value.
 				if ( ['x','y','w','h'].includes(key) && isNaN( value ) ) {
-					// The only override of a handbrake is a label setting its width ...
+					// The only override of a handbrake is a label setting its width. This can be null
+					// so wave it through.
 					if ( shape.ty !== 'lbl' || key !== 'w' ) {
 						continue
 					}
