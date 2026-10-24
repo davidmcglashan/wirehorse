@@ -24,6 +24,12 @@ var editor = {
 		}
 	},
 
+	// These strings are inserted on new lines for certain shapes.
+	insertOnNewLine: {
+		chb: '[x] ',
+		rad: '( ) ',
+	},
+
 	/**
 	 * Initialise the editor, and its listeners
 	 */
@@ -46,9 +52,14 @@ var editor = {
 			editor.removeEditor()
 		}
 
-		// Shift + Enter will submit the current editor's value.
-		else if ( event.shiftKey && event.keyCode === 13 ) {
-			lightbox.close()
+		// Enter has listeners.
+		else if ( event.keyCode === 13 ) {
+			// Shift + Enter will submit the current editor's value.
+			if ( event.shiftKey ) {
+				lightbox.close()
+			} else {
+				editor.shouldFireNewLine = true
+			}
 		}
 	},
 
@@ -59,6 +70,21 @@ var editor = {
 	userEdit: ( event ) => {
 		if ( editor.textarea.value === 'lorem' ) {
 			editor.textarea.value = globals.lorem
+		}
+		if ( editor.shouldFireNewLine ) {
+			editor.newLine()
+		}
+	},
+
+	// When Enter is pressed sometimes we do special things with the input, i.e. a
+	// checkbox editor will insert [x] so the new line gets a checkbox glyph.
+	newLine: () => {
+		editor.shouldFireNewLine = false
+		let insert = editor.insertOnNewLine[ model.shape( editor.shapeId ).ty ]
+		if ( insert ) {
+			let elem = editor.textarea
+  			elem.setRangeText( insert, elem.selectionStart, elem.selectionEnd )
+			elem.setSelectionRange( elem.selectionEnd+insert.length, elem.selectionEnd+4 )
 		}
 	},
 
