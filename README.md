@@ -45,6 +45,10 @@ The 'Snap Selection' feature was implemented using [Snapdom](https://snapdom.dev
 
 ## Version history
 
+### 1.0-rc1
+* Radio and Checkboxes insert a helpful [x] or ( ) glyph on new lines
+* Cmd-0 now behaves the same as the compass button: (zoom to selection/zoom to canvas)
+
 ### v0.6.4
 * Improved relayering shapes
 * Added a height field to maps and arrows

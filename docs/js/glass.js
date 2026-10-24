@@ -695,9 +695,12 @@ var glass = {
 			model.updateMeta( { sc: scale } )
 		}
 
-		// Zero to reset the zoom/scale.
+		// Zero to behave as the 'compass' keyboard shortcut
 		else if ( event.metaKey && event.keyCode === 48 ) {
-			model.updateMeta( { sc: 1 } )
+			// Fabricate an 'event' object for scale to use that carries
+			// the appropriate key accelerators.
+			let obj = { metaKey: false, shiftKey: event.shiftKey }
+			canvas.scale( obj )
 		}
 
 		// Cmd+V to paste from the clipboard

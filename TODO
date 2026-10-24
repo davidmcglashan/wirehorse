@@ -1,4 +1,3 @@
-- Cmd 0 to centre on selection with shift and opt
 - Do something about text and icon colour changes with a multiselection i.e. both change colour
 
 - implement a push scroll if you linger outside the glass pane during a drag (but not a selection) 
