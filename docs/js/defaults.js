@@ -29,7 +29,7 @@ var defaults = {
 				va: 'm',
 				fz: 11,
 				w: 100,
-				h: 13
+				h: 12
 			}
 		},{
 			name: 'Outline button',
@@ -43,7 +43,7 @@ var defaults = {
 				va: 'm',
 				fz: 11,
 				w: 100,
-				h: 13
+				h: 12
 			}
 		},{
 			name: 'Combobox / dropdown',
@@ -54,7 +54,7 @@ var defaults = {
 				co: 'bk',
 				bo: 'g4',
 				w: 200,
-				h: 13
+				h: 12
 			}
 		},{
 			name: 'Call to action',
@@ -124,7 +124,7 @@ var defaults = {
 				va: 'm',
 				fz: 11,
 				w: 200,
-				h: 16
+				h: 12
 			}
 		},{
 			name: 'Text area',
@@ -187,7 +187,7 @@ var defaults = {
 			model: {
 				ty: 'prg',
 				w: 256,
-				h: 13,
+				h: 12,
 				val: 30,
 				co: 'bl',
 				bo: 'g5'
