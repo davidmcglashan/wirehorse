@@ -693,9 +693,15 @@ var palette = {
 	 * Locks the selected shapes, preventing them from being edited or moved until
 	 * unlock is pressed.
 	 */
-	lockSelection: () => {
+	lockSelection: ( event = { shiftKey: false } ) => {
 		if ( !selection.yes() ) {
 			return
+		}
+
+		// If Shift was held when this button was pressed then we lock everything
+		// underneath the first shape in the selection as well.
+		if ( event.shiftKey ) {
+			model.lockUpToShape( selection.storage[0].id )
 		}
 
 		for ( let elem of selection.storage ) {

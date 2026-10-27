@@ -47,6 +47,7 @@ The 'Snap Selection' feature was implemented using [Snapdom](https://snapdom.dev
 
 ### 1.0-rc2
 * Buttons, inputs, and dropdowns are all 12 pixels high by default
+* Holding Shift and pressing lock will also lock every shape on a lower layer than the selection
 
 ### 1.0-rc1
 * Radio and Checkboxes insert a helpful [x] or ( ) glyph on new lines

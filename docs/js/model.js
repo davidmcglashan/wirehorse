@@ -255,6 +255,27 @@ var model = {
 	},
 
 	/**
+	 * Locks all shapes from the bottom of the canvas up to the selected id. Note
+	 * that this function is designed to be complementary to lockShape() and doesn't
+	 * fire listeners or save the model.
+	 */
+	lockUpToShape: ( id ) => {
+		// Make sure we have a lock array
+		if ( !model.mt.lx ) {
+			model.mt.lx = []
+		}
+
+		// Fill it with shape IDs
+		for ( let shape of model.sh ) {
+			if ( shape.id === id ) {
+				break
+			} else {
+				model.mt.lx.push( shape.id ) 
+			}
+		}
+	},
+
+	/**
 	 * Returns true if the shape is locked.
 	 */
 	isLocked: ( id ) => {
